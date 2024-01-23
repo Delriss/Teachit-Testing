@@ -14,10 +14,11 @@ if (session_status() === PHP_SESSION_NONE) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0" author="SEF">
-    <title>Template - TeachIt Testing</title>
+    <title>Test Management</title>
 
     <!-- Stylesheets -->
     <link rel="stylesheet" href="/content/css/style.css">
+    <link rel="stylesheet" href="/content/css/testManagement.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -25,7 +26,6 @@ if (session_status() === PHP_SESSION_NONE) {
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" />
     <link rel="stylesheet" href="https://unpkg.com/flickity@2/dist/flickity.min.css">
     <!-- End Stylesheets -->
-
 </head>
 
 <body>
@@ -73,7 +73,8 @@ if (session_status() === PHP_SESSION_NONE) {
 
     <!-- Main Content -->
     <div class="area">
-        <main class="d-flex justify-content-center">
+        <div class="titleWrapper"><h3>Available Tests</h3></div>
+            <div class="tableWrap tests-carousel" id="tests">
                 <?php
                     foreach ($testArray as $test){
 
@@ -87,7 +88,7 @@ if (session_status() === PHP_SESSION_NONE) {
                         echo "<p class='card-text'>Number of Questions: " . sizeof($test->questions) . "</p>";
                 
                         //adds modify button to end of table with ID the same as the current testID of the test
-                        echo "<a href='#' class='modifyTestButton btn' id='" . $test->testID . "'>Modify</a>";
+                        echo "<a href='#' class='modifyTestButton btn btn-primary' id='" . $test->testID . "'>Modify</a>";
                 
                         //adds cancel button to end of table with ID the same as the current testID of the test
                         echo "<a href='#' class='cancelTestButton btn btn-danger' id='" . $test->testID . "'>Cancel</a>";
@@ -96,6 +97,7 @@ if (session_status() === PHP_SESSION_NONE) {
                         echo "</div>";
                     }
                     ?>
+                </div>
             </div>
         </main>
         <!-- End Main Content -->
@@ -137,4 +139,9 @@ if (session_status() === PHP_SESSION_NONE) {
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
 <script src="https://unpkg.com/flickity@2/dist/flickity.pkgd.min.js"></script>
 
+<script>
+$('.tests-carousel').flickity({});
+</script>
+
 </html>
+
