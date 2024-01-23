@@ -18,6 +18,7 @@ session_start();
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" />
     <!-- End Stylesheets -->
 
 </head>
@@ -27,7 +28,7 @@ session_start();
         <!-- Navigation -->
         <nav class="navbar navbar-expand-lg primaryBG">
             <div class="container-fluid text-white">
-                <img src="imgs/logo-side.png" alt="TeachIt Logo" class="logo ps-5" width="350">
+                <a href="index.php"><img src="imgs/logo-side.png" alt="TeachIt Logo" class="logo ps-5" width="350"></a>
 
                 <!-- Page Navigation -->
                 <div class="container">
@@ -64,23 +65,47 @@ session_start();
         </nav>
         <!-- End Navigation -->
     </header>
-    <main class="d-flex justify-content-center">
-        <div class="container d-flex justify-content-center pt-2">
-            <div class="row">
-                <div class="col-12">
-                    <h1>Main Content Area / Title</h1>
-                    <p>Content Goes Here</p>
+
+    <!-- Main Content -->
+    <div class="area">
+        <main class="d-flex flex-column align-items-center">
+            <div class="container d-flex justify-content-center pt-2">
+                <h1>Main Content Area / Title</h1>
+                <p>Content Goes Here</p>
+            </div>
+        </main>
+        <!-- End Main Content -->
+
+        <footer class="container-fluid primaryBG w-100">
+            <div class="footerContainer container-fluid d-flex justify-content-center align-items-center h-100 text-center subtitle text-white">
+                <div class="container-fluid d-flex justify-content-evenly">
+                    <span>TeachIt Testing &copy; 2021</span>
+                    <a id="privPolicy" href="./">Privacy Policy</a>
+                </div>
+                <div class="container-fluid d-flex justify-content-evenly">
+                    <a href="https://www.facebook.com/"><i class="fab fa-facebook-square fa-2x"></i></a>
+                    <a href="https://www.instagram.com/"><i class="fab fa-instagram-square fa-2x"></i></a>
+                    <a href="https://www.twitter.com/"><i class="fab fa-twitter-square fa-2x"></i></a>
                 </div>
             </div>
-        </div>
-    </main>
-    <footer class="container-fluid primaryBG">
-        <div class="container-fluid">
-            TeachIt Testing
-        </div>
+        </footer>
+    </div>
 
-    </footer>
 
+    <!-- Background Circles -->
+    <ul class="circles">
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+    </ul>
+    <!-- End Background Circles -->
 </body>
 <!-- JS -->
 <script src="js/scripts.js"></script>
