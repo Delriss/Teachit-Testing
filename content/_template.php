@@ -68,8 +68,8 @@ session_start();
 
     <!-- Main Content -->
     <div class="area">
-        <main class="d-flex flex-column align-items-center">
-            <div class="container d-flex justify-content-center pt-2">
+        <main class="d-flex justify-content-center">
+            <div class="container d-flex flex-column align-items-center pt-5">
                 <h1>Main Content Area / Title</h1>
                 <p>Content Goes Here</p>
             </div>
