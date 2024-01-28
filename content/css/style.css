@@ -37,6 +37,19 @@ footer{
     border-radius: 50%;
 }
 
+/* Index Page */
+
+.index-title 
+{
+    font-family: 'Montserrat', sans-serif;
+    font-size: 5em;
+    color: black;
+    text-align: center;
+    margin-top: 10%;
+}
+
+/* End of Index Page */
+
 .area {
     background: -webkit-linear-gradient(to left, #8f94fb, #4e54c8);
     width: 100%;
