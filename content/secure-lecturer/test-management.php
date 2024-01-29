@@ -100,6 +100,48 @@ if (session_status() === PHP_SESSION_NONE) {
                 </div>
             </div>
         </main>
+        
+        <!-- Modal -->
+        <div class="container" style="max-width: 600px;">
+            <form id="createTestModal">
+                <div class="mb-3">
+                    <label for="testName" class="form-label">Test Name</label>
+                    <input type="text" class="form-control" id="testName">
+                </div>
+                <div class="mb-3">
+                    <label for="testName" class="form-label">Question Name</label>
+                    <input type="text" class="form-control answers" id="questionName">
+                </div>
+                <div class="mb-3">
+                    <label for="answer1" class="form-label">Answer 1</label>
+                    <input type="text" class="form-control answers" id="answer1">
+                </div>
+                <div class="mb-3">
+                    <label for="answer2" class="form-label">Answer 2</label>
+                    <input type="text" class="form-control answers" id="answer2">
+                </div>
+                <div class="mb-3">
+                    <label for="answer3" class="form-label">Answer 3</label>
+                    <input type="text" class="form-control answers" id="answer3">
+                </div>
+                <div class="mb-3">
+                    <label for="answer4" class="form-label">Answer 4</label>
+                    <input type="text" class="form-control answers" id="answer4">
+                </div>
+
+                <input class="form-check-input" type="radio" name="isCorrect" id="answerRadio1">
+                <label class="form-check-label" for="answerRadio1 isCorrect">Answer 1</label>
+                <input class="form-check-input" type="radio" name="isCorrect" id="answerRadio2">
+                <label class="form-check-label" for="answerRadio2 isCorrect">Answer 2</label>
+                <input class="form-check-input" type="radio" name="isCorrect" id="answerRadio3">
+                <label class="form-check-label" for="answerRadio3 isCorrect">Answer 3</label>
+                <input class="form-check-input" type="radio" name="isCorrect" id="answerRadio4">
+                <label class="form-check-label" for="answerRadio4 isCorrect">Answer 4</label>
+
+                <button type="submit" id="submitForm" class="btn btn-primary">Submit</button>
+            </form>
+        </div>
+
         <!-- End Main Content -->
 
         <footer class="container-fluid primaryBG w-100">
@@ -117,7 +159,6 @@ if (session_status() === PHP_SESSION_NONE) {
         </footer>
     </div>
 
-
     <!-- Background Circles -->
     <ul class="circles">
         <li></li>
@@ -133,6 +174,7 @@ if (session_status() === PHP_SESSION_NONE) {
     </ul>
     <!-- End Background Circles -->
 </body>
+</html>
 <!-- JS -->
 <script src="/content/js/scripts.js"></script>
 <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
@@ -140,8 +182,58 @@ if (session_status() === PHP_SESSION_NONE) {
 <script src="https://unpkg.com/flickity@2/dist/flickity.pkgd.min.js"></script>
 
 <script>
-$('.tests-carousel').flickity({});
+    $('.tests-carousel').flickity({});
+
+        //When the Form is submitted
+        $("#submitForm").click(function(e) {
+            e.preventDefault();
+
+            //Get the test title from the form
+            var testTitle = $("#testName").val();
+            //Get array of question texts from the form
+            var questionText = [
+                //FIX More questions should be added here when dynamic form is implemented 
+                $("#questionName").val()
+                ];
+
+            //Get array of answers from the form
+            var answerText = [
+                $("#answer1").val(),
+                $("#answer2").val(),
+                $("#answer3").val(),
+                $("#answer4").val()
+                ];
+
+            //which answer is correct
+            var correctAnswer = 0;
+            if($("#answerRadio1").is(":checked")) {
+                correctAnswer = 0;
+            } else if($("#answerRadio2").is(":checked")) {
+                correctAnswer = 1;
+            } else if($("#answerRadio3").is(":checked")) {
+                correctAnswer = 2;
+            } else if($("#answerRadio4").is(":checked")) {
+                correctAnswer = 3;
+            }
+
+            //Create the test in the database
+            $.ajax({
+                url: "/php/createTest.php",
+                type: "POST",
+                data: {
+                    testTitle: testTitle,
+                    questionText: questionText,
+                    answerText: answerText,
+                    correctAnswer: correctAnswer
+                },
+                success: function(data) {
+                    console.log(data);
+                }
+            });
+    });
+
+
 </script>
 
-</html>
+
 
