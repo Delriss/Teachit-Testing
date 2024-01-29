@@ -68,8 +68,8 @@ session_start();
 
     <!-- Main Content -->
     <div class="area">
-        <main class="d-flex justify-content-center">
-            <div class="container d-flex flex-column align-items-center justify-content-center pt-1 w-25">
+        <main class="d-flex justify-content-center p-2">
+            <div class="container d-flex flex-column align-items-center justify-content-center w-25">
                 <div class="registrationContainer container-fluid">
                     <div class="regHeader subtitle text-center">
                         <img src="imgs/logo-transparent.png" alt="TeachIt Logo" class="logo" width="200">
