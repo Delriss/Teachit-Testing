@@ -33,10 +33,10 @@ footer{
 .registrationContainer
 {
   background-color: #f79f7949;
-  border-radius: 10px;
+  border-radius: 25px;
   padding: 10px;
+  font-size: 10pt;
 }
-
 
 .fab
 {

@@ -69,44 +69,43 @@ session_start();
     <!-- Main Content -->
     <div class="area">
         <main class="d-flex justify-content-center">
-            <div class="container d-flex flex-column align-items-center justify-content-center pt-1">
-                <div class="registrationContainer container">
-                    <h1>Registration</h1>
+            <div class="container d-flex flex-column align-items-center justify-content-center pt-1 w-25">
+                <div class="registrationContainer container-fluid">
+                    <div class="regHeader subtitle text-center">
+                        <img src="imgs/logo-transparent.png" alt="TeachIt Logo" class="logo" width="200">
+                        <h3>Registration</h3>
+                    </div>
                     <form action="registration.php" method="post">
                         <div class="mb-3">
-                            <label for="studentNum" class="form-label">Student Number</label>
+                            <label for="studentNum" class="form-label">Student Number:</label>
                             <input type="text" name="studentNum" class="form-control" id="studentNum" aria-describedby="studentNumHelp">
                         </div>
-                        <div class="mb-3">
-                            <label for="firstName" class="form-label">First Name</label>
+                        <div class="mb-2">
+                            <label for="firstName" class="form-label">First Name:</label>
                             <input type="text" name="firstName" class="form-control" id="firstName" aria-describedby="firstNameHelp">
                         </div>
-                        <div class="mb-3">
-                            <label for="lastName" class="form-label">Last Name</label>
+                        <div class="mb-2">
+                            <label for="lastName" class="form-label">Last Name:</label>
                             <input type="text" name="lastName" class="form-control" id="lastName" aria-describedby="lastNameHelp">
                         </div>
-                        <div class="mb-3">
-                            <label for="courseTitle" class="form-label">Course Title</label>
+                        <div class="mb-2">
+                            <label for="courseTitle" class="form-label">Course Title:</label>
                             <input type="text" name="courseTitle" class="form-control" id="courseTitle" aria-describedby="courseTitleHelp">
                         </div>
-                        <div class="mb-3">
-                            <label for="password" class="form-label">Password</label>
-                            <input type="text" name="password" class="form-control" id="password" aria-describedby="passwordHelp">
-                        </div>
-                        <div class="mb-3">
-                            <label for="passwordConfirm" class="form-label">Confirm Password</label>
-                            <input type="text" name="passwordConfirm" class="form-control" id="passwordConfirm" aria-describedby="passwordConfirmHelp">
-                        </div>
-                        <div class="mb-3">
-                            <label for="email" class="form-label">Email Address</label>
+                        <div class="mb-2">
+                            <label for="email" class="form-label">Email Address:</label>
                             <input type="email" name="email" class="form-control" id="email" aria-describedby="emailHelp">
                         </div>
-                        <div class="mb-3">
-                            <label for="emailConfirm" class="form-label">Confirm Email Address</label>
-                            <input type="email" name="emailConfirm" class="form-control" id="emailConfirm" aria-describedby="emailConfirmHelp">
+                        <div class="mb-2">
+                            <label for="password" class="form-label">Password:</label>
+                            <input type="text" name="password" class="form-control" id="password" aria-describedby="passwordHelp">
                         </div>
-                        <div class="buttonContainer">
-                            <button type="submit" name="register" class="btn btn-primary">Register</button>
+                        <div class="mb-2">
+                            <label for="passwordConfirm" class="form-label">Confirm Password:</label>
+                            <input type="text" name="passwordConfirm" class="form-control" id="passwordConfirm" aria-describedby="passwordConfirmHelp">
+                        </div>
+                        <div class="buttonContainer d-flex justify-content-center">
+                            <button type="submit" name="submit" class="btn btn-dark text-white">Submit</button>
                         </div>
                 </div>
             </div>
