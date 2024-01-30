@@ -36,6 +36,18 @@ footer {
   color: white;
 }
 
+/* HOME PAGE CSS */
+
+.index-title {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 5em;
+  color: black;
+  text-align: center;
+  margin-top: 10%;
+}
+
+/* END OF HOME PAGE CSS */
+
 .registrationContainer {
   background-color: #f79f7949;
   border-radius: 25px;
