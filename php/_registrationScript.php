@@ -1,5 +1,4 @@
 <?php
-
 //Check if data has been submitted correctly
 if(empty($_POST['studentNum']) || 
    empty($_POST['firstName']) || 
@@ -38,16 +37,16 @@ $password = $_POST['password'];
 $password = password_hash($password, PASSWORD_BCRYPT);
 
 //Data Sanitization
-$studentNum = mysqli_real_escape_string($connect, $studentNum);
-$firstName = mysqli_real_escape_string($connect, $firstName);
-$lastName = mysqli_real_escape_string($connect, $lastName);
-$courseTitle = mysqli_real_escape_string($connect, $courseTitle);
-$email = mysqli_real_escape_string($connect, $email);
-$password = mysqli_real_escape_string($connect, $password);
+$studentNum = mysqli_real_escape_string($db_connect, $studentNum);
+$firstName = mysqli_real_escape_string($db_connect, $firstName);
+$lastName = mysqli_real_escape_string($db_connect, $lastName);
+$courseTitle = mysqli_real_escape_string($db_connect, $courseTitle);
+$email = mysqli_real_escape_string($db_connect, $email);
+$password = mysqli_real_escape_string($db_connect, $password);
 
 //Check to see if Student ID is already in use
-$sql = "SELECT * FROM users WHERE studentNum = '$studentNum'";
-$stmt = mysqli_prepare($connect, $sql); //Prepare SQL statement
+$sql = "SELECT * FROM `users` WHERE `ID` = ?";
+$stmt = mysqli_prepare($db_connect, $sql); //Prepare SQL statement
 mysqli_stmt_bind_param($stmt, "s", $studentNum); //Bind parameters
 mysqli_stmt_execute($stmt); //Execute prepared statement
 $result = mysqli_stmt_get_result($stmt); //Get results from prepared statement
@@ -58,8 +57,8 @@ if(mysqli_num_rows($result) > 0)
 }
 
 //Check to see if email is already in use
-$sql = "SELECT * FROM users WHERE email = '$email'";
-$stmt = mysqli_prepare($connect, $sql); //Prepare SQL statement
+$sql = "SELECT * FROM `users` WHERE `email` = ?";
+$stmt = mysqli_prepare($db_connect, $sql); //Prepare SQL statement
 mysqli_stmt_bind_param($stmt, "s", $email); //Bind parameters
 mysqli_stmt_execute($stmt); //Execute prepared statement
 $result = mysqli_stmt_get_result($stmt); //Get results from prepared statement
@@ -82,10 +81,10 @@ $sql = "INSERT INTO `users` (`ID`,
                            `accessLevel`,
                            `accountLock`,
                            `TIMESTAMP`)
-        VALUES (NULL, ?, ?, ?, ?, ?, ?, ?, CURRENT_TIMESTAMP);";
+        VALUES (?, ?, ?, ?, ?, ?, ?, ?, CURRENT_TIMESTAMP);";
 
-$stmt = mysqli_prepare($connect, $sql); //Prepare SQL statement
-mysqli_stmt_bind_param($stmt, "sssssss", $firstName, $lastName, $email, $password, $courseTitle, $accessLevel, $accountLock); //Bind parameters
+$stmt = mysqli_prepare($db_connect, $sql); //Prepare SQL statement
+mysqli_stmt_bind_param($stmt, "ssssssis", $studentNum, $firstName, $lastName, $email, $password, $courseTitle, $accessLevel, $accountLock); //Bind parameters
 
 if(mysqli_stmt_execute($stmt)) //Execute prepared statement
 {
@@ -93,7 +92,7 @@ if(mysqli_stmt_execute($stmt)) //Execute prepared statement
 }
 else
 {
-    echo "Registration failed:" . mysqli_error($connect);
+    echo "Registration failed:" . mysqli_error($db_connect);
 }
 
 

@@ -1,4 +1,4 @@
-$("#accountCreation").submit(function (e) {
+$("#registrationForm").submit(function (e) {
   e.preventDefault();
 
   $.ajax({
@@ -6,8 +6,9 @@ $("#accountCreation").submit(function (e) {
     url: "/php/_registrationScript.php",
     data: $("#registrationForm").serialize(),
 
-    success: function (response) {
-      if (data.includes("You have successfully logged in.")) {
+    success: function (data) {
+      if (data.includes("Registration successful")) {
+        console.log(data)
         //Output
         Swal.fire({
           title: "Registration Successful",

@@ -78,7 +78,7 @@ session_start();
                     <img src="imgs/logo-transparent.png" alt="TeachIt Logo" class="logo" width="200">
                     <h3>Registration</h3>
                 </div>
-                <form id="registrationForm" method="post">
+                <form id="registrationForm">
                     <div class="mb-3">
                         <label for="studentNum" class="form-label">Student Number:</label>
                         <input type="text" name="studentNum" class="form-control" id="studentNum" aria-describedby="studentNumHelp">
@@ -105,10 +105,10 @@ session_start();
                     </div>
                     <div class="mb-2">
                         <label for="passwordConfirm" class="form-label">Confirm Password:</label>
-                        <input type="password" name="passwordConfirm" class="form-control" id="passwordConfirm" aria-describedby="passwordConfirmHelp">
+                        <input type="password" name="confirmPassword" class="form-control" id="confirmPassword" aria-describedby="passwordConfirmHelp">
                     </div>
                     <div class="buttonContainer d-flex justify-content-center">
-                        <button type="submit" name="submit" class="btn btn-dark text-white">Submit</button>
+                        <button type="submit" class="btn btn-dark text-white">Submit</button>
                     </div>
             </div>
         </main>
