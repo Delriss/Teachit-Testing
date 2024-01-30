@@ -9,8 +9,10 @@ session_start();
 
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" author="SEF">
-    <title>Template - TeachIt Testing</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="author" content="SEF">
+
+    <title>Registration - TeachIt Testing</title>
 
     <!-- Stylesheets -->
     <link rel="stylesheet" href="css/style.css">
@@ -76,7 +78,7 @@ session_start();
                     <img src="imgs/logo-transparent.png" alt="TeachIt Logo" class="logo" width="200">
                     <h3>Registration</h3>
                 </div>
-                <form action="registration.php" method="post">
+                <form id="registrationForm" method="post">
                     <div class="mb-3">
                         <label for="studentNum" class="form-label">Student Number:</label>
                         <input type="text" name="studentNum" class="form-control" id="studentNum" aria-describedby="studentNumHelp">
@@ -99,11 +101,11 @@ session_start();
                     </div>
                     <div class="mb-2">
                         <label for="password" class="form-label">Password:</label>
-                        <input type="text" name="password" class="form-control" id="password" aria-describedby="passwordHelp">
+                        <input type="password" name="password" class="form-control" id="password" aria-describedby="passwordHelp">
                     </div>
                     <div class="mb-2">
                         <label for="passwordConfirm" class="form-label">Confirm Password:</label>
-                        <input type="text" name="passwordConfirm" class="form-control" id="passwordConfirm" aria-describedby="passwordConfirmHelp">
+                        <input type="password" name="passwordConfirm" class="form-control" id="passwordConfirm" aria-describedby="passwordConfirmHelp">
                     </div>
                     <div class="buttonContainer d-flex justify-content-center">
                         <button type="submit" name="submit" class="btn btn-dark text-white">Submit</button>
