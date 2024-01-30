@@ -14,4 +14,7 @@ $jRoute->Route(["get"], "/", function() {
 //Create currency Route
 $jRoute->Route(["get"], "/", "content/login.php");
 
+//(fix) NEEDS AUTH WHEN IT HAS BEEN BUILT
+$jRoute->Route(["get"], "/test-management", "content/secure-lecturer/test-management.php");
+
 echo $jRoute->Dispatch($_SERVER['REQUEST_METHOD'], $_SERVER['REQUEST_URI']);
