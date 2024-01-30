@@ -1,11 +1,7 @@
 <?php 
-
-include_once($_SERVER['DOCUMENT_ROOT'].'/php/retrieveTests.php'); 
-
 if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
-
 ?>
 
 <!DOCTYPE html>
@@ -75,30 +71,9 @@ if (session_status() === PHP_SESSION_NONE) {
     <div class="area">
         <div class="titleWrapper"><h3>Available Tests</h3></div>
             <div class="tableWrap tests-carousel" id="tests">
-                <?php
-                    foreach ($testArray as $test){
-
-                        echo "<div id='card' class='card'>";
-                        echo "<div id='card-body' class='card-body'>";
-                    
-                        //Shows the title of the test
-                        echo "<h5 class='card-title'>" . $test->title . "</h5>"; 
-                
-                        //Shows the number of questions in the test
-                        echo "<p class='card-text'>Number of Questions: " . sizeof($test->questions) . "</p>";
-                
-                        //adds modify button to end of table with ID the same as the current testID of the test
-                        echo "<a href='#' class='modifyTestButton btn btn-primary' id='" . $test->testID . "'>Modify</a>";
-                
-                        //adds cancel button to end of table with ID the same as the current testID of the test
-                        echo "<a href='#' class='cancelTestButton btn btn-danger' id='" . $test->testID . "'>Cancel</a>";
-                
-                        echo "</div>";
-                        echo "</div>";
-                    }
-                    ?>
-                </div>
+                <?php include_once($_SERVER['DOCUMENT_ROOT'].'/php/outputTests.php'); ?>
             </div>
+        </div>
         </main>
         
         <!-- Modal -->
@@ -180,60 +155,7 @@ if (session_status() === PHP_SESSION_NONE) {
 <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
 <script src="https://unpkg.com/flickity@2/dist/flickity.pkgd.min.js"></script>
-
-<script>
-    $('.tests-carousel').flickity({});
-
-        //When the Form is submitted
-        $("#submitForm").click(function(e) {
-            e.preventDefault();
-
-            //Get the test title from the form
-            var testTitle = $("#testName").val();
-            //Get array of question texts from the form
-            var questionText = [
-                //FIX More questions should be added here when dynamic form is implemented 
-                $("#questionName").val()
-                ];
-
-            //Get array of answers from the form
-            var answerText = [
-                $("#answer1").val(),
-                $("#answer2").val(),
-                $("#answer3").val(),
-                $("#answer4").val()
-                ];
-
-            //which answer is correct
-            var correctAnswer = 0;
-            if($("#answerRadio1").is(":checked")) {
-                correctAnswer = 0;
-            } else if($("#answerRadio2").is(":checked")) {
-                correctAnswer = 1;
-            } else if($("#answerRadio3").is(":checked")) {
-                correctAnswer = 2;
-            } else if($("#answerRadio4").is(":checked")) {
-                correctAnswer = 3;
-            }
-
-            //Create the test in the database
-            $.ajax({
-                url: "/php/createTest.php",
-                type: "POST",
-                data: {
-                    testTitle: testTitle,
-                    questionText: questionText,
-                    answerText: answerText,
-                    correctAnswer: correctAnswer
-                },
-                success: function(data) {
-                    console.log(data);
-                }
-            });
-    });
-
-
-</script>
+<script src="/content/js/test-management.js"></script>
 
 
 
