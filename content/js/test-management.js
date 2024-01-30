@@ -53,21 +53,39 @@ $("#submitForm").click(function(e) {
 });
 
 //When Delete Test button is clicked, delete the test from the database, update the DOM asynchronously so it reflects the change
-$(document).on("click", ".deleteTestButton", function(){
-    var thisObject = this
-    var id = this.id;
+$(document).on("click", ".deleteTestButton", function() {
+    //Ask the user if they are sure they want to delete the test using sweetalert
+    Swal.fire({
+        title: 'Are you sure?',
+        text: "You won't be able to recover this Test!",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#d33',
+        cancelButtonColor: '#3085d6',
+        confirmButtonText: 'Yes, Delete',
+        reverseButtons: true
+    }).then((result) => {
+        //If the user confirms they want to delete the test
+        if (result.isConfirmed) {
+            //Get the test id from the button
+            var thisObject = this;
+            var id = this.id;
 
-    $.ajax({
-        type: "POST",
-        url: "/php/deleteTest.php",
-        data: {
-            testID: id
-        },
-        success: function() {
-            updateTestCarousel();
-        },
-        error: function() {
-            //Swal.fire("Error", "There was an error deleteing the test", "error");
+            //Delete the test from the database
+            $.ajax({
+                type: "POST",
+                url: "/php/deleteTest.php",
+                data: {
+                    testID: id
+                },
+                success: function() {
+                    //Update the DOM asynchronously so it reflects the change
+                    updateTestCarousel();
+                },
+                error: function() {
+                    Swal.fire("Error", "There was an error deleting the test", "error");
+                }
+            });
         }
     });
 });
