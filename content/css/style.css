@@ -28,8 +28,6 @@ main{
 footer {
   height: 50px;
   background-color: #f79f79;
-  bottom: 0;
-  position: absolute;
 }
 
 #privPolicy {
@@ -44,6 +42,32 @@ footer {
   color: black;
   text-align: center;
   margin-top: 10%;
+}
+
+.homeContainer {
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: 100vh 100vh;
+  grid-template-areas: 'homeCover'
+                       'homeParallax';
+  box-sizing: border-box;
+  flex-direction: column;
+  padding: 0;
+}
+
+.homeCover {
+  grid-area: homeCover;
+  min-height: 100vh;
+}
+
+.homeParallax {
+  grid-area: homeParallax;
+  min-height: 100vh;
+  background-image: url('../imgs/temp.jpg');
+  background-repeat: no-repeat;
+  background-size: cover;
+  margin: 0;
+  padding: 0;
 }
 
 /* END OF HOME PAGE CSS */

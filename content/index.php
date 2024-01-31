@@ -68,24 +68,21 @@ session_start();
 
     <!-- Main Content -->
     <div class="area">
-        <main class="d-flex justify-content-center">
-            <div class="container d-flex flex-column align-items-center pt-5">
+        <main class="d-flex justify-content-center homeContainer">
+            <div class="d-flex flex-column align-items-center homeCover">
                 <h1 class="index-title">Welcome to TeachIt Testing</h1>
                 <p>TeachIt Testing is an online testing program which utilises reinforcement testing to help you learn in a fun and competitive manner!</p>
-<!-- the button below is temporary for now, I will likely change how it looks depending on if the user is logged in -->
                 <a class="nav-link text-black subtitle fs-4" href="login.php">Click here to get started today!</a>
             </div>
-        </main>
-        <main class="mainHomeParallax">
-<!-- the image is temporary, I am just using it for now while I set up the structure of the page, it will be replaced with a more fitting image later. -->
-            <div class="parallax" style="background-image: url('imgs/temp.jpg')">
-                <div class="container d-flex flex-column align-items-center pt-5">
-                    <h1 class="index-title">Welcome to TeachIt Testing</h1>
-                    <p>Content Goes Here</p>
-                </div>
+
+            
+            <div class="d-flex flex-column align-items-center homeParallax">
+                <h1 class="index-title">TEMPORARYWelcome to TeachIt Testing</h1>
+                <p>TEMPORARYContent Goes Here</p>
             </div>
             
         </main>
+
         <!-- End Main Content -->
 
         <footer class="container-fluid primaryBG w-100">
