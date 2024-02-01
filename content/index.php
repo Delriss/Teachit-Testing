@@ -102,7 +102,7 @@ session_start();
 
 
     <!-- Background Circles -->
-    <ul class="circles">
+    <ul class="circles indexCircles">
         <li></li>
         <li></li>
         <li></li>
