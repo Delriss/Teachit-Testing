@@ -110,9 +110,10 @@ footer {
 .homeParallax {
   grid-area: homeParallax;
   min-height: 100vh;
-  background-image: url('../imgs/temp.jpg');
+  background-image: url('../imgs/indexBackground.jpg');
   background-repeat: no-repeat;
   background-size: cover;
+  color: white;
   margin: 0;
   padding: 0;
   z-index: +1;

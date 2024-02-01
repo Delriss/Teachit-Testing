@@ -75,7 +75,7 @@ session_start();
                     <p>TeachIt Testing is an online testing program which utilises reinforcement testing to help you learn in a fun and competitive manner!</p>
                     <a class="nav-link text-black subtitle fs-4" href="login.php">Click here to get started today!</a>
                 </span>
-                <div class="indexScrollDown">
+                <div class="d-flex flex-column align-items-center justify-content-end indexScrollDown">
                     <p>Scroll Down</p>
                     <i class="fas fa-chevron-down fa-2x"></i>
                 </div>
