@@ -70,9 +70,15 @@ session_start();
     <div class="area">
         <main class="d-flex justify-content-center homeContainer">
             <div class="d-flex flex-column align-items-center homeCover">
-                <h1 class="index-title">Welcome to TeachIt Testing</h1>
-                <p>TeachIt Testing is an online testing program which utilises reinforcement testing to help you learn in a fun and competitive manner!</p>
-                <a class="nav-link text-black subtitle fs-4" href="login.php">Click here to get started today!</a>
+                <h1 class="indexTitle">Welcome to TeachIt Testing</h1>
+                <span class="indexDescription">
+                    <p>TeachIt Testing is an online testing program which utilises reinforcement testing to help you learn in a fun and competitive manner!</p>
+                    <a class="nav-link text-black subtitle fs-4" href="login.php">Click here to get started today!</a>
+                </span>
+                <div class="indexScrollDown">
+                    <p>Scroll Down</p>
+                    <i class="fas fa-chevron-down fa-2x"></i>
+                </div>
             </div>
 
             

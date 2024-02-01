@@ -34,15 +34,8 @@ footer {
   color: white;
 }
 
+/* ============= */
 /* HOME PAGE CSS */
-
-.index-title {
-  font-family: 'Montserrat', sans-serif;
-  font-size: 5em;
-  color: black;
-  text-align: center;
-  margin-top: 10%;
-}
 
 .homeContainer {
   display: grid;
@@ -55,6 +48,60 @@ footer {
   padding: 0;
 }
 
+/* This is the first section in the container */
+.indexTitle {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 6em;
+  color: black;
+  text-align: center;
+  margin-top: 10%;
+}
+
+.indexDescription {
+  text-align: center;
+  margin: 0;
+  padding: 20px;
+}
+
+.indexDescription p {
+  font-family: 'Roboto', sans-serif;
+  font-size: 1.75em;
+  color: black;
+  margin-left: 10%;
+  margin-right: 10%;
+  padding: 0;
+}
+
+.indexScrollDown {
+  margin: 0;
+  position: absolute;
+  top: 93%;
+  left: 50%;
+  transform: translate(-50%, -10%);
+  color: black;
+  font-family: 'Roboto', sans-serif;
+  font-weight: 500;
+  font-size: 20px;
+  letter-spacing: 3px;
+  animation: fadeInScrollDown 3s;
+}
+
+.indexScrollDown p {
+  margin-bottom: 0;
+}
+
+@keyframes fadeInScrollDown {
+  from {
+      top: 120%;
+      opacity: 0;
+  }
+  to {
+      top: 93%;
+      opacity: 1;
+  }
+}
+
+/* This is the second section in the container */
 .homeCover {
   grid-area: homeCover;
   min-height: 100vh;
@@ -68,9 +115,11 @@ footer {
   background-size: cover;
   margin: 0;
   padding: 0;
+  z-index: +1;
 }
 
 /* END OF HOME PAGE CSS */
+/* ==================== */
 
 .registrationContainer {
   background-color: #f79f7949;
