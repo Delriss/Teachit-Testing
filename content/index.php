@@ -81,11 +81,29 @@ session_start();
                 </div>
             </div>
 
+            <div class="d-flex flex-column align-items-center homeFeaturesContainer">
+                <h1 class="indexFeaturesTitle">Features</h1>
+                <div class="row row-cols-2">
+                    <div class="col-6">
+                        <div class="homeFeature">Feature 1</div>
+                    </div>
+                    <div class="col-6">
+                        <div class="homeFeature">Feature 1</div>
+                    </div>
+                    <div class="col-6">
+                        <div class="homeFeature">Feature 1</div>
+                    </div>
+                    <div class="col-6">
+                        <div class="homeFeature">Feature 1</div>
+                    </div>
+                </div>
+            </div>
+
             
-            <div class="d-flex flex-column align-items-center homeParallax">
+            <!-- <div class="d-flex flex-column align-items-center homeParallax">
                 <h1 class="index-title">TEMPORARYWelcome to TeachIt Testing</h1>
                 <p>TEMPORARYContent Goes Here</p>
-            </div>
+            </div> -->
             
         </main>
 

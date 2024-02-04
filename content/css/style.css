@@ -107,7 +107,15 @@ footer {
   min-height: 100vh;
 }
 
-.homeParallax {
+.indexFeaturesTitle {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 6em;
+  color: white;
+  text-align: center;
+  margin-top: 10%;
+}
+
+.homeFeaturesContainer {
   grid-area: homeParallax;
   min-height: 100vh;
   background-image: url('../imgs/indexBackground.jpg');
@@ -117,6 +125,17 @@ footer {
   margin: 0;
   padding: 0;
   z-index: +1;
+}
+
+.homeFeature {
+  display: flex;
+  background-color: #E3F2FD;
+  color: black;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 25px;
+  margin: 25px;
 }
 
 /* END OF HOME PAGE CSS */
