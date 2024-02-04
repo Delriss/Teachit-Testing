@@ -9,6 +9,8 @@ if (session_status() === PHP_SESSION_NONE) {
 
 include_once($_SERVER['DOCUMENT_ROOT'].'/php/_connect.php');
 
+//FIX none of these post values are being validated as non null and within parameters, it's being done in the front end but should be done here as well
+
 //Get the test title from the form
 $testTitle = $_POST['testTitle'];
 //Get an array of question texts from the form
