@@ -110,6 +110,7 @@ session_start();
                     <div class="buttonContainer d-flex justify-content-center">
                         <button type="submit" class="btn btn-dark text-white">Submit</button>
                     </div>
+                </form>
             </div>
         </main>
     </div>

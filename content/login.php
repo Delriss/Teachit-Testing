@@ -12,7 +12,7 @@ session_start();
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="author" content="SEF">
 
-    <title>Registration - TeachIt Testing</title>
+    <title>Login - TeachIt Testing</title>
 
     <!-- Stylesheets -->
     <link rel="stylesheet" href="css/style.css">
@@ -90,6 +90,7 @@ session_start();
                     <div class="buttonContainer d-flex justify-content-center">
                         <button type="submit" class="btn btn-dark text-white">Submit</button>
                     </div>
+                </form>
             </div>
         </main>
     </div>
