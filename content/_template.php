@@ -26,72 +26,71 @@ session_start();
 </head>
 
 <body>
-    <header>
-        <!-- Navigation -->
-        <nav class="navbar navbar-expand-lg primaryBG">
-            <div class="container-fluid text-white">
-                <a href="index.php"><img src="imgs/logo-side.png" alt="TeachIt Logo" class="logo ps-5" width="350"></a>
 
-                <!-- Page Navigation -->
-                <div class="container">
-                    <div class="row">
-                        <div class="col-12">
-                            <ul class="nav justify-content-end">
-                                <li class="nav-item">
-                                    <a class="nav-link text-white fs-4 subtitle active" href="index.php">Home</a>
-                                </li>
-
-                                <!-- Check if user is logged in -->
-                                <?php if (isset($_SESSION)) : ?>
-                                    <li class="nav-item">
-                                        <a class="nav-link text-white subtitle fs-4" href="logout.php">Test Management</a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a class="nav-link text-white subtitle fs-4" href="logout.php">Logout</a>
-                                    </li>
-                                <?php endif; ?>
-
-                                <?php if (!isset($_SESSION)) : ?>
-                                    <li class="nav-item">
-                                        <a class="nav-link text-white subtitle fs-4" href="login.php">Login</a>
-                                    </li>
-                                <?php endif; ?>
-
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-                <!-- End Page Navigation -->
-
-            </div>
-        </nav>
-        <!-- End Navigation -->
-    </header>
 
     <!-- Main Content -->
     <div class="area">
-        <main class="d-flex justify-content-center">
-            <div class="container d-flex flex-column align-items-center pt-5">
-                <h1>Main Content Area / Title</h1>
-                <p>Content Goes Here</p>
-            </div>
-        </main>
-        <!-- End Main Content -->
+        <header>
+            <!-- Navigation -->
+            <nav class="navbar navbar-expand-lg primaryBG">
+                <div class="container-fluid text-white">
+                    <a href="index.php"><img src="imgs/logo-side.png" alt="TeachIt Logo" class="logo ps-5" width="350"></a>
 
-        <footer class="container-fluid primaryBG w-100">
-            <div class="footerContainer container-fluid d-flex justify-content-center align-items-center h-100 text-center subtitle text-white">
-                <div class="container-fluid d-flex justify-content-evenly">
-                    <span>TeachIt Testing &copy; 2021</span>
-                    <a id="privPolicy" href="./">Privacy Policy</a>
+                    <!-- Page Navigation -->
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-12">
+                                <ul class="nav justify-content-end">
+                                    <li class="nav-item">
+                                        <a class="nav-link text-white fs-4 subtitle active" href="index.php">Home</a>
+                                    </li>
+
+                                    <!-- Check if user is logged in -->
+                                    <?php if (isset($_SESSION)) : ?>
+                                        <li class="nav-item">
+                                            <a class="nav-link text-white subtitle fs-4" href="logout.php">Test Management</a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a class="nav-link text-white subtitle fs-4" href="logout.php">Logout</a>
+                                        </li>
+                                    <?php endif; ?>
+
+                                    <?php if (!isset($_SESSION)) : ?>
+                                        <li class="nav-item">
+                                            <a class="nav-link text-white subtitle fs-4" href="login.php">Login</a>
+                                        </li>
+                                    <?php endif; ?>
+
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- End Page Navigation -->
+
                 </div>
-                <div class="container-fluid d-flex justify-content-evenly">
-                    <a href="https://www.facebook.com/"><i class="fab fa-facebook-square fa-2x"></i></a>
-                    <a href="https://www.instagram.com/"><i class="fab fa-instagram-square fa-2x"></i></a>
-                    <a href="https://www.twitter.com/"><i class="fab fa-twitter-square fa-2x"></i></a>
-                </div>
-            </div>
-        </footer>
+            </nav>
+            <!-- End Navigation -->
+        </header>
+
+        <main class="d-flex justify-content-center align-items-center">
+            <h1>Content Here!</h1>
+        </main>
     </div>
+
+    <!-- End Main Content -->
+    <footer class="container-fluid primaryBG w-100">
+        <div class="footerContainer container-fluid d-flex justify-content-center align-items-center h-100 text-center subtitle text-white">
+            <div class="container-fluid d-flex justify-content-evenly">
+                <span>TeachIt Testing &copy; 2021</span>
+                <a id="privPolicy" href="./">Privacy Policy</a>
+            </div>
+            <div class="container-fluid d-flex justify-content-evenly">
+                <a href="https://www.facebook.com/"><i class="fab fa-facebook-square fa-2x"></i></a>
+                <a href="https://www.instagram.com/"><i class="fab fa-instagram-square fa-2x"></i></a>
+                <a href="https://www.twitter.com/"><i class="fab fa-twitter-square fa-2x"></i></a>
+            </div>
+        </div>
+    </footer>
 
 
     <!-- Background Circles -->
