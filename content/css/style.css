@@ -127,16 +127,29 @@ footer {
   z-index: +1;
 }
 
+/* .homeFeatureSegment {
+  
+  padding: 0px !important;
+  width: 30%
+} */
+
+.homeRow {
+  max-width: 90%;
+}
+
 .homeFeature {
-  display: flex;
+  /* display: flex; */
   background-color: #E3F2FD;
   border-radius: 20px;
   color: black;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  padding: 25px;
-  margin: 25px;
+  /* flex-direction: column; */
+  /* align-items: center; */
+  /* justify-content: center; */
+  padding: 15px;
+  margin: 15px;
+  text-wrap: balance;
+  text-align: center;
+  
 }
 
 /* END OF HOME PAGE CSS */

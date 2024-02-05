@@ -83,7 +83,7 @@ session_start();
 
             <div class="d-flex flex-column align-items-center homeFeaturesContainer">
                 <h1 class="indexFeaturesTitle">Features</h1>
-                <div class="row row-cols-2">
+                <div class="row row-cols-2 homeFeaturesRow">
                     <div class="col-6">
                         <div class="homeFeature">
                             <h3>Track Your Progress</h3>
