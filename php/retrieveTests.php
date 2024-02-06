@@ -19,6 +19,7 @@ class Question {
 
 class Test {
     public $testID;
+    public $relativeTestID;
     public $title;
     public $questions = array();
     //Needs Functionality
@@ -38,6 +39,7 @@ $tests = mysqli_query($db_connect, $sql);
 
 //loop through each test in the database
 foreach ($tests as $test) {
+    //Create a test object
     $testObject = new test;
 
     //Define the test object's attributes
@@ -49,6 +51,7 @@ foreach ($tests as $test) {
     $questions = mysqli_query($db_connect, $sql);
 
     foreach ($questions as $question) {
+        //Create a question object
         $questionObject = new question;
 
         //Define the question object's attributes
@@ -58,16 +61,16 @@ foreach ($tests as $test) {
         $questionObject->correctAnswerID = $question['correctAnswerID'];
 
         //Get the answers for the question
-        $sql = "SELECT answerID, questionID, answerText, isCorrect FROM answers WHERE questionID = " . $question['questionID'];
+        $sql = "SELECT answerID, relativeAnswerID, questionID, answerText, isCorrect FROM answers WHERE questionID = " . $question['questionID'];
         $answers = mysqli_query($db_connect, $sql);
 
         foreach ($answers as $answer) {
+            //Create an answer object
             $answerObject = new answer;
-            
-            //(FIX) probably needs relative answer id in context of the range of answers for the questions, etc 1-4. This needs to be done in the database as well
 
             //Define the answer object's attributes
             $answerObject->answerID = $answer['answerID'];
+            $answerObject->relativeAnswerID = $answer['relativeAnswerID'];
             $answerObject->questionID = $answer['questionID'];
             $answerObject->answerText = $answer['answerText'];
             $answerObject->isCorrect = $answer['isCorrect'];

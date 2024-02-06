@@ -40,14 +40,14 @@ foreach($questionTexts as $questionText) {
     for($i = 0; $i < count($answerTexts); $i++) {
         //Create the answer in the database
         if($i == $isCorrect) {
-            $sql = "INSERT INTO answers (questionID, answerText, isCorrect) VALUES (" . $questionID . ", '" . $answerTexts[$i] . "', 1)";
+            $sql = "INSERT INTO answers (questionID, relativeAnswerID, answerText, isCorrect) VALUES (" . $questionID . ", " . $i . ", '" . $answerTexts[$i] . "', 1)";
             $result = mysqli_query($db_connect, $sql);
 
             //modify the question to have the correct answer
-            $sql = "UPDATE questions SET correctAnswer = " . $i . " WHERE questionID = " . $questionID;
+            $sql = "UPDATE questions SET correctAnswerID = " . $i . " WHERE questionID = " . $questionID;
             $result = mysqli_query($db_connect, $sql);
         } else {
-            $sql = "INSERT INTO answers (questionID, answerText, isCorrect) VALUES (" . $questionID . ", '" . $answerTexts[$i] . "', 0)";
+            $sql = "INSERT INTO answers (questionID, relativeAnswerID, answerText, isCorrect) VALUES (" . $questionID . ", " . $i . ", '" . $answerTexts[$i] . "', 0)";
             $result = mysqli_query($db_connect, $sql);
         }
     }

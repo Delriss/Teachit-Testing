@@ -81,15 +81,14 @@ $("#submitForm").click(function(e) {
 
     //If the form is valid, continue
     else{
-
-        //if the test is being edited
         if ($("#createTestForm").attr("data-mode") === "edit") {
-            // Editing an existing test
-            // Add your code here
+            //we are editing an existing test
+            
+
         } 
         
         else {
-            //We are creating a new test
+            //we are creating a new test
 
             //Get the test title from the form
             var testTitle = $("#testName").val();
@@ -228,7 +227,6 @@ $(document).on('show.bs.modal', '#createTestModal', function(e) {
                     } else if(question.answers[3].isCorrect == 1) {
                         $("#answerRadio4").prop("checked", true);
                     }
-
                 }
             },
             error: function() {
