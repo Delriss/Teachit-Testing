@@ -63,7 +63,39 @@ session_start();
         <!-- End Nav Container -->
     </nav>
     <!-- End Navbar -->
-
+    <!-- Main Content -->
+    <div class="col-lg-6 mt-auto mx-auto p-3 py-md-5 rounded bgColourFaded">
+        <form id="registrationForm">
+            <div class="mb-3">
+                <label for="firstName" class="form-label">First Name: </label>
+                <input type="text" class="form-control" id="firstName" name="firstName" required>
+            </div>
+            <div class="mb-3">
+                <label for="lastName" class="form-label">Last Name: </label>
+                <input type="text" class="form-control" id="lastName" name="lastName" required>
+            </div>
+            <div class="mb-3">
+                <label for="email" class="form-label">Email: </label>
+                <input type="email" class="form-control" id="email" name="email" required>
+            </div>
+            <div class="mb-3">
+                <label for="course" class="form-label">Course: </label>
+                <select class="form-select" id="course" name="course" required>
+                    <option value="1">Fill this with PHP/JS</option>
+                </select>
+            </div>
+            <div class="mb-3">
+                <label for="password" class="form-label">Password: </label>
+                <input type="password" class="form-control" id="password" name="password" required>
+            </div>
+            <div class="mb-3">
+                <label for="confirmPassword" class="form-label">Confirm Password: </label>
+                <input type="password" class="form-control" id="confirmPassword" name="confirmPassword" required>
+            </div>
+            <button type="submit" class="btn btn-primary">Register</button>
+        </form>
+    </div>
+    <!-- End Main Content -->
     <!-- Footer -->
     <footer class="footer mt-auto py-3 bgColour">
         <div class="container">
