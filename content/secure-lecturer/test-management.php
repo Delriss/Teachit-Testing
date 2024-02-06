@@ -71,7 +71,7 @@ if (session_status() === PHP_SESSION_NONE) {
         <main>
             <div class="area">
                 <!-- Button trigger modal -->
-                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#newTestModal">
+                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#createTestModal">
                     New Test
                 </button>
                 <div class="titleWrapper">
@@ -84,15 +84,15 @@ if (session_status() === PHP_SESSION_NONE) {
         </main>
 
         <!-- Modal -->
-        <div class="modal fade" id="newTestModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal fade" id="createTestModal" tabindex="-1" aria-labelledby="testNameLabel" aria-hidden="true">
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h1 class="modal-title fs-5" id="exampleModalLabel">New Test</h1>
+                        <h1 class="modal-title fs-5" id="testNameLabel">New Test</h1>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
-                        <form id="createTestModal">
+                        <form id="createTestForm">
                             <div class="mb-3">
                                 <label for="testName" class="form-label">Test Name</label>
                                 <input type="text" class="form-control" id="testName" name="testName" required>

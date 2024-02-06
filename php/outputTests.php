@@ -15,7 +15,7 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/php/retrieveTests.php');
         echo "<p class='card-text'>Number of Questions: " . sizeof($test->questions) . "</p>";
     
         //adds modify button to end of table with ID the same as the current testID of the test
-        echo "<a href='#' class='modifyTestButton btn btn-primary' id='" . $test->testID . "'>Modify</a>";
+        echo "<a href='#' class='modifyTestButton btn btn-primary' data-bs-toggle='modal' data-bs-target='#createTestModal' id='" . $test->testID . "'>Modify</a>";
     
         //adds Delete button to end of table with ID the same as the current testID of the test
         echo "<a href='#' class='deleteTestButton btn btn-danger' id='" . $test->testID . "'>Delete</a>";

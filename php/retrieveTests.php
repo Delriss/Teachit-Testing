@@ -64,7 +64,7 @@ foreach ($tests as $test) {
         foreach ($answers as $answer) {
             $answerObject = new answer;
             
-            //(FIX) needs relative answer id in context of the range of answers for the questions, etc 1-4. This needs to be done in the database as well
+            //(FIX) probably needs relative answer id in context of the range of answers for the questions, etc 1-4. This needs to be done in the database as well
 
             //Define the answer object's attributes
             $answerObject->answerID = $answer['answerID'];
@@ -84,6 +84,21 @@ foreach ($tests as $test) {
 
 //for testing
 //echo $testArray[0]->questions[0]->answers[2]->answerText;
+
+//function for returning a test related to a testID
+function getTest($testID){
+    global $testArray;
+    foreach ($testArray as $test){
+        if ($test->testID == $testID){
+            return $test;
+        }
+    }
+}
+
+//if ajax request is made to retrieveTests.php with specific testID, return the test object
+if (isset($_POST['testID'])){
+    echo json_encode(getTest($_POST['testID']));
+}
 
 ?>
 
