@@ -63,47 +63,65 @@ session_start();
         <!-- End Nav Container -->
     </nav>
     <!-- End Navbar -->
+
     <!-- Main Content -->
-    <div class="col-lg-6 mt-auto mx-auto p-3 py-md-5 rounded bgColourFaded">
+    <div class="col-lg-6 mt-auto mx-auto p-3 py-md-3 text-center rounded bgColourFaded">
+        <div class="text-center">
+            <img src="imgs/logo-transparent.png" alt="TeachIt Testing" width="150" height="150">
+            <h1 class="display-5 fw-bold">TeachIt Registration</h1>
+        </div>
         <form id="registrationForm">
-            <div class="mb-3">
-                <label for="firstName" class="form-label">First Name: </label>
-                <input type="text" class="form-control" id="firstName" name="firstName" required>
+            <div class="mb-2 d-flex">
+                <input type="text" class="form-control m-1" id="studentNum" name="studentNum" placeholder="Student Number" required>
+                <input type="email" class="form-control m-1" id="email" name="email" placeholder="Email" required>
             </div>
-            <div class="mb-3">
-                <label for="lastName" class="form-label">Last Name: </label>
-                <input type="text" class="form-control" id="lastName" name="lastName" required>
+            <div class="mb-2 d-flex">
+                <input type="text" class="form-control m-1" id="firstName" name="firstName" placeholder="First Name" required>
+                <input type="text" class="form-control m-1" id="lastName" name="lastName" placeholder="Last Name" required>
             </div>
-            <div class="mb-3">
-                <label for="email" class="form-label">Email: </label>
-                <input type="email" class="form-control" id="email" name="email" required>
-            </div>
-            <div class="mb-3">
-                <label for="course" class="form-label">Course: </label>
-                <select class="form-select" id="course" name="course" required>
+            <div class="mb-2">
+                <select class="form-select m-1" id="course" name="course" placeholder="Course" required>
                     <option value="1">Fill this with PHP/JS</option>
                 </select>
             </div>
-            <div class="mb-3">
-                <label for="password" class="form-label">Password: </label>
-                <input type="password" class="form-control" id="password" name="password" required>
+            <div class="mb-2">
+                <input type="password" class="form-control m-1" id="password" name="password" placeholder="Password" required>
             </div>
-            <div class="mb-3">
-                <label for="confirmPassword" class="form-label">Confirm Password: </label>
-                <input type="password" class="form-control" id="confirmPassword" name="confirmPassword" required>
+            <div class="form-text">
+                Password must be at least 8 characters long and contain at least one number and one special character.
             </div>
-            <button type="submit" class="btn btn-primary">Register</button>
+            <div class="mb-2">
+                <input type="password" class="form-control m-1" id="confirmPassword" name="confirmPassword" placeholder="Confirm Password" required>
+            </div>
+            <button type="submit" class="btn btn-dark rounded-pill">Register</button>
+            <hr>
+            <p>Already have an account? <a id="loginText" href="login.php">Login Here!</a></p>
         </form>
     </div>
     <!-- End Main Content -->
+
     <!-- Footer -->
-    <footer class="footer mt-auto py-3 bgColour">
-        <div class="container">
+    <footer class="footer mt-auto py-3 rounded-top bgColour">
+        <div class="container text-center">
             <span class="text-muted">TeachIt Testing &copy; 2021</span>
         </div>
     </footer>
     <!-- End Footer -->
 
+    <!-- Background Circles -->
+    <ul class="circles">
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+    </ul>
+    <!-- End Background Circles -->
 
 
 

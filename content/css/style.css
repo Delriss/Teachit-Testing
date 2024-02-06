@@ -11,6 +11,9 @@ body
   background-color: #f79f7934;
 }
 
+#loginText {
+  color: black;
+}
 
 /*BACKGROUND ANIMATION*/
 .circles {
