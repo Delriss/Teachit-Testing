@@ -5,14 +5,14 @@ session_start();
 ?>
 
 <!DOCTYPE html>
-<html lang="en">
+<html class="h-100" lang="en">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="author" content="SEF">
-    
-    <title>Template - TeachIt Testing</title>
+
+    <title>TEMPLATE - TeachIt Testing</title>
 
     <!-- Stylesheets -->
     <link rel="stylesheet" href="css/style.css">
@@ -22,76 +22,61 @@ session_start();
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" />
     <!-- End Stylesheets -->
-
 </head>
 
-<body>
-
-
-    <!-- Main Content -->
-    <div class="area">
-        <header>
-            <!-- Navigation -->
-            <nav class="navbar navbar-expand-lg primaryBG">
-                <div class="container-fluid text-white">
-                    <a href="index.php"><img src="imgs/logo-side.png" alt="TeachIt Logo" class="logo ps-5" width="350"></a>
-
-                    <!-- Page Navigation -->
-                    <div class="container">
-                        <div class="row">
-                            <div class="col-12">
-                                <ul class="nav justify-content-end">
-                                    <li class="nav-item">
-                                        <a class="nav-link text-white fs-4 subtitle active" href="index.php">Home</a>
-                                    </li>
-
-                                    <!-- Check if user is logged in -->
-                                    <?php if (isset($_SESSION)) : ?>
-                                        <li class="nav-item">
-                                            <a class="nav-link text-white subtitle fs-4" href="logout.php">Test Management</a>
-                                        </li>
-                                        <li class="nav-item">
-                                            <a class="nav-link text-white subtitle fs-4" href="logout.php">Logout</a>
-                                        </li>
-                                    <?php endif; ?>
-
-                                    <?php if (!isset($_SESSION)) : ?>
-                                        <li class="nav-item">
-                                            <a class="nav-link text-white subtitle fs-4" href="login.php">Login</a>
-                                        </li>
-                                    <?php endif; ?>
-
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- End Page Navigation -->
-
-                </div>
-            </nav>
-            <!-- End Navigation -->
-        </header>
-
-        <main class="d-flex justify-content-center align-items-center">
-            <h1>Content Here!</h1>
-        </main>
-    </div>
-
-    <!-- End Main Content -->
-    <footer class="container-fluid primaryBG w-100">
-        <div class="footerContainer container-fluid d-flex justify-content-center align-items-center h-100 text-center subtitle text-white">
-            <div class="container-fluid d-flex justify-content-evenly">
-                <span>TeachIt Testing &copy; 2021</span>
-                <a id="privPolicy" href="./">Privacy Policy</a>
-            </div>
-            <div class="container-fluid d-flex justify-content-evenly">
-                <a href="https://www.facebook.com/"><i class="fab fa-facebook-square fa-2x"></i></a>
-                <a href="https://www.instagram.com/"><i class="fab fa-instagram-square fa-2x"></i></a>
-                <a href="https://www.twitter.com/"><i class="fab fa-twitter-square fa-2x"></i></a>
+<body class="d-flex flex-column h-100">
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark bgColour">
+        <!-- Nav Container - adapt to screen size -->
+        <div class="container-fluid">
+            <a class="navbar-brand" href="../index.php">
+                <img src="imgs/logo-side.png" alt="TeachIt Testing" width="200" height="50">
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapsable" aria-controls="navbarCollapsable" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarCollapsable">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="#">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Test Selection</a>
+                    </li>
+                    <li class="nav-item dropdown bgColour">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            Admin Dashboard
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <li><a class="dropdown-item" href="#">Student Management</a></li>
+                            <li><a class="dropdown-item" href="#">Test Management</a></li>
+                            <li><a class="dropdown-item" href="#">Lecturer Management</a></li>
+                            <li><a class="dropdown-item" href="#">Statistics</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Logout</a>
+                    </li>
+                </ul>
             </div>
         </div>
-    </footer>
+        <!-- End Nav Container -->
+    </nav>
+    <!-- End Navbar -->
 
+    <!-- Main Content -->
+    <div class="container-fluid text-center">
+        CONTENT HERE!
+    </div>
+    <!-- End Main Content -->
+
+    <!-- Footer -->
+    <footer class="footer mt-auto py-3 rounded-top bgColour">
+        <div class="container text-center">
+            <span class="text-muted">TeachIt Testing &copy; 2021</span>
+        </div>
+    </footer>
+    <!-- End Footer -->
 
     <!-- Background Circles -->
     <ul class="circles">
@@ -107,10 +92,14 @@ session_start();
         <li></li>
     </ul>
     <!-- End Background Circles -->
+
+
+
 </body>
 <!-- JS -->
 <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
 <script src="js/scripts.js"></script>
+
 </html>

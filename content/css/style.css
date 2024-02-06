@@ -1,54 +1,21 @@
-.title {
-  font-family: "Montserrat", sans-serif;
+body
+{
+  font-family: "Montserrat", sans-serif !important;
 }
 
-.subtitle {
-  font-family: "Roboto", sans-serif;
-}
-
-.primaryBG {
+.bgColour {
   background-color: #f79f79;
 }
 
-html, body {
-  margin: 0;
-  padding: 0;
-  height: 100%;
+.bgColourFaded {
+  background-color: #f79f7934;
 }
 
-.area{
-  min-height: 100vh;
+#loginText {
+  color: black;
 }
 
-main{
-  padding-top: 40px;
-  height: 100%;
-}
-
-footer {
-  height: 50px;
-  background-color: #f79f79;
-  bottom: 0;
-  position: absolute;
-}
-
-#privPolicy {
-  color: white;
-}
-
-.registrationContainer {
-  background-color: #f79f7949;
-  border-radius: 25px;
-  padding: 10px;
-  font-size: 10pt;
-}
-
-.fab {
-  background-color: #f79f79;
-  color: white;
-  border-radius: 50%;
-}
-
+/*BACKGROUND ANIMATION*/
 .circles {
   position: absolute;
   pointer-events: none;
@@ -175,53 +142,6 @@ footer {
   animation-duration: 11s;
 }
 
-.aniButton {
-  -webkit-animation: aniButtonOut 0.25s forwards;
-  animation: aniButtonOut 0.25s forwards;
-}
-
-.aniButton:hover {
-  -webkit-animation: aniButtonIn 0.5s forwards;
-  animation: aniButtonIn 0.5s forwards;
-}
-
-@-webkit-keyframes aniButtonOut {
-  0% {
-    transform: translateY(-10px) rotate(8deg);
-    opacity: 1;
-  }
-  100% {
-    transform: translateY(0px) rotate(0deg);
-  }
-}
-
-@keyframes aniButtonOut {
-  0% {
-    transform: translateY(-10px) rotate(8deg);
-    opacity: 1;
-  }
-  100% {
-    transform: translateY(0px) rotate(0deg);
-  }
-}
-@-webkit-keyframes aniButtonIn {
-  0% {
-    transform: translateY(0) rotate(0deg);
-    opacity: 1;
-  }
-  100% {
-    transform: translateY(-10px) rotate(8deg);
-  }
-}
-@keyframes aniButtonIn {
-  0% {
-    transform: translateY(0) rotate(0deg);
-    opacity: 1;
-  }
-  100% {
-    transform: translateY(-10px) rotate(8deg);
-  }
-}
 @-webkit-keyframes animate {
   0% {
     transform: translateY(0) rotate(0deg);
@@ -246,3 +166,5 @@ footer {
     border-radius: 50%;
   }
 }
+
+/*END BACKGROUND ANIMATION*/
