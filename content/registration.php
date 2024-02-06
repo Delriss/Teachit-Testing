@@ -5,7 +5,7 @@ session_start();
 ?>
 
 <!DOCTYPE html>
-<html lang="en">
+<html class="h-100" lang="en">
 
 <head>
     <meta charset="UTF-8">
@@ -24,10 +24,12 @@ session_start();
     <!-- End Stylesheets -->
 </head>
 
-<body>
+<body class="d-flex flex-column h-100">
+    <!-- Navbar -->
     <nav class="navbar navbar-expand-lg navbar-dark bgColour">
+        <!-- Nav Container - adapt to screen size -->
         <div class="container-fluid">
-            <a class="navbar-brand" href="#">
+            <a class="navbar-brand" href="../index.php">
                 <img src="imgs/logo-side.png" alt="TeachIt Testing" width="200" height="50">
             </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapsable" aria-controls="navbarCollapsable" aria-expanded="false" aria-label="Toggle navigation">
@@ -58,7 +60,21 @@ session_start();
                 </ul>
             </div>
         </div>
+        <!-- End Nav Container -->
     </nav>
+    <!-- End Navbar -->
+
+    <!-- Footer -->
+    <footer class="footer mt-auto py-3 bgColour">
+        <div class="container">
+            <span class="text-muted">TeachIt Testing &copy; 2021</span>
+        </div>
+    </footer>
+    <!-- End Footer -->
+
+
+
+
 </body>
 <!-- JS -->
 <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>

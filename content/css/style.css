@@ -1,5 +1,14 @@
+body
+{
+  font-family: "Montserrat", sans-serif !important;
+}
+
 .bgColour {
   background-color: #f79f79;
+}
+
+.bgColourFaded {
+  background-color: #f79f7934;
 }
 
 
