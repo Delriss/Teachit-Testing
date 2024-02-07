@@ -15,9 +15,131 @@ body
   color: black;
 }
 
+/* ============= */
+/* HOME PAGE CSS */
+
+.homeContainer {
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: 95vh 100vh;
+  grid-template-areas: 'homeCover'
+                       'homeParallax';
+  box-sizing: border-box;
+  flex-direction: column;
+  padding: 0;
+}
+
+/* This is the first section in the container */
+.homeCover {
+  grid-area: homeCover;
+  min-height: 95vh;
+}
+
+.indexTitle {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 6em;
+  color: black;
+  text-align: center;
+  margin-top: 10%;
+}
+
+.indexDescription {
+  text-align: center;
+  margin: 0;
+  padding: 20px;
+}
+
+.indexDescription p {
+  font-family: 'Roboto', sans-serif;
+  font-size: 1.75em;
+  color: black;
+  margin-left: 10%;
+  margin-right: 10%;
+  padding: 0;
+}
+
+.indexScrollDown {
+  margin: 0;
+  position: absolute;
+  top: 93%;
+  left: 50%;
+  transform: translate(-50%, -10%);
+  color: black;
+  font-family: 'Roboto', sans-serif;
+  font-weight: 500;
+  font-size: 20px;
+  letter-spacing: 3px;
+  animation: fadeInScrollDown 3s;
+}
+
+.indexScrollDown p {
+  margin-bottom: 0;
+}
+
+@keyframes fadeInScrollDown {
+  from {
+      top: 120%;
+      opacity: 0;
+  }
+  to {
+      top: 93%;
+      opacity: 1;
+  }
+}
+
+/* This is the second section in the container */
+
+.indexFeaturesTitle {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 6em;
+  color: white;
+  text-align: center;
+  margin-top: 10%;
+}
+
+.homeFeaturesContainer {
+  grid-area: homeParallax;
+  min-height: 100vh;
+  background-image: url('../imgs/indexBackground.jpg');
+  background-repeat: no-repeat;
+  background-size: cover;
+  color: white;
+  margin: 0;
+  padding: 0;
+  z-index: +1;
+}
+
+/* .homeFeatureSegment {
+  
+  padding: 0px !important;
+  width: 30%
+} */
+
+.homeFeaturesRow {
+  max-width: 90%;
+}
+
+.homeFeature {
+  /* display: flex; */
+  background-color: #E3F2FD;
+  border-radius: 20px;
+  color: black;
+  /* flex-direction: column; */
+  /* align-items: center; */
+  /* justify-content: center; */
+  padding: 15px;
+  margin: 15px;
+  text-wrap: balance;
+  text-align: center;
+  
+}
+
+/* END OF HOME PAGE CSS */
+/* ==================== */
+
 /*BACKGROUND ANIMATION*/
 .circles {
-  position: absolute;
+  position: fixed;
   pointer-events: none;
   top: 0;
   left: 0;
