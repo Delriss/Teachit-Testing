@@ -23,7 +23,7 @@ if(!filter_var($_POST['email'], FILTER_VALIDATE_EMAIL))
 }
 
 //Connect to DB
-require_once("./_connect.php");
+include_once($_SERVER['DOCUMENT_ROOT'].'/php/_connect.php');
 
 //Retrieve info from POST
 $studentNum = $_POST['studentNum'];
