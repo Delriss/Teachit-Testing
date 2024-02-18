@@ -71,3 +71,19 @@ $(document).ready(function () {
     console.log("Not on registration page");
   }
 });
+
+// Login Form
+$("#loginForm").submit(function (e) {
+  e.preventDefault(); //Prevent the default form submission
+
+  //Ajax request to the server for asynchronous processing
+  $.ajax({
+    type: "POST",
+    url: "./php/auth.php",
+    data: {
+      email: $("#email").val(),
+      password: $("#password").val(),
+    }
+  });
+
+});
