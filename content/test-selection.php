@@ -66,8 +66,62 @@ session_start();
 
     <!-- Main Content -->
     <div class="container-fluid text-center">
-        CONTENT HERE!
+        <div class="row">
+            <div class="col-12">
+                <h1 class="display-4 mt-5">Test Selection</h1>
+                <p class="lead">Please select a test to take</p>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-sm-4">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Test 1</h5>
+                        <p class="card-text">Test Description</p>
+                    </div>
+                    <div class="card-footer">
+                        <a href="test.php" class="btn btn-primary">Start Test</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-4">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Test 1</h5>
+                        <p class="card-text">Test Description</p>
+                    </div>
+                    <div class="card-footer">
+                        <a href="test.php" class="btn btn-primary">Start Test</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-4">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Test 1</h5>
+                        <p class="card-text">Test Description</p>
+                    </div>
+                    <div class="card-footer">
+                        <a href="test.php" class="btn btn-primary">Start Test</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-4">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Test 1</h5>
+                        <p class="card-text">Test Description</p>
+                    </div>
+                    <div class="card-footer">
+                        <a href="test.php" class="btn btn-primary">Start Test</a>
+                    </div>
+                </div>
+            </div>
+            
+        </div>
     </div>
+
     <!-- End Main Content -->
 
     <!-- Footer -->
