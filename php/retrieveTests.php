@@ -45,8 +45,16 @@ foreach ($tests as $test) {
     //Define the test object's attributes
     $testObject->testID = $test['testID'];
     $testObject->title = $test['title'];
-    $testObject->title = $test['testDesc'];
-    $testObject->title = $test['subject'];
+    $testObject->testDesc = $test['testDesc'];
+    $testObject->subject = $test['subject'];
+
+    //Get the subjects belonging to the test
+    $sql = "SELECT `subjectName` FROM `subjects` WHERE `SID` = ?";
+    $stmt = mysqli_prepare($db_connect, $sql);
+    mysqli_stmt_bind_param($stmt, "i", $test['subject']);
+    mysqli_stmt_execute($stmt);
+    $result = mysqli_stmt_get_result($stmt);
+    $testObject->subject = mysqli_fetch_assoc($result)['subjectName'];
 
     //Get the questions belonging to the test
     $sql = "SELECT questionID, testID, questionText, correctAnswerID FROM questions WHERE testID = " . $test['testID'];
