@@ -66,6 +66,7 @@ session_start();
 
     <!-- Main Content -->
     <div class="container-fluid text-center">
+        <!-- New Test Selection Area -->
         <div class="row">
             <div class="col-12">
                 <h1 class="display-4 mt-5">Test Selection</h1>
@@ -90,11 +91,29 @@ session_start();
                 </div>
             </div> -->
             <!-- END BASIC TEST CARD TEMPLATE -->
+
+            <!-- PHP GENERATED TEST CARDS WILL BE POPULATED HERE. 
+            AJAX request queries retrieveTests.php to retrieve custom test cards -->
             
+        </div>
+
+        <!-- Completed Test Cards -->
+        <div class="row">
+            <div class="col-12">
+                <h1 class="display-4 mt-5">Completed Tests</h1>
+                <p class="lead">View your completed tests</p>
+            </div>
+        </div>
+
+        <hr class="my-4">
+
+        <div id="completedTestContainer" class="row">
+
+        <!--PHP GENERATED COMPLETED TEST CARDS WILL BE POPULATED HERE.
+        AJAX request queries retrieveCompletedTests.php to retrieve custom test cards -->
 
         </div>
     </div>
-
     <!-- End Main Content -->
 
     <!-- Footer -->
