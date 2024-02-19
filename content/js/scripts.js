@@ -8,7 +8,7 @@ $("#registrationForm").submit(function (e) {
 
     success: function (data) {
       if (data.includes("Registration successful")) {
-        console.log(data)
+        console.log(data);
         //Output
         Swal.fire({
           title: "Registration Successful",
@@ -37,11 +37,12 @@ $("#registrationForm").submit(function (e) {
 //Run the test selection display script on the test selection page load
 $(document).ready(function () {
   //Only run on the test selection page
-  if (window.location.href.includes("test-selection") == false){
-    console.log("Not on test selection page")
+  if (window.location.href.includes("test-selection") == false) {
+    console.log("Not on test selection page");
     return;
   }
 
+  //Run the test selection display script
   $.ajax({
     type: "POST",
     url: "/php/outputStudentTests.php",
@@ -50,6 +51,18 @@ $(document).ready(function () {
     success: function (data) {
       //Inject custom HTML into the page
       $("#testContainer").html(data);
-    }
+    },
+  });
+
+  //Run the completed test selection display script
+  $.ajax({
+    type: "POST",
+    url: "/php/outputCompletedStudentTests.php",
+    data: $("#completedTestContainer").serialize(),
+
+    success: function (data) {
+      //Inject custom HTML into the page
+      $("#completedTestContainer").html(data);
+    },
   });
 });
