@@ -44,7 +44,7 @@ $(document).ready(function () {
 
   $.ajax({
     type: "POST",
-    url: "/php/testSelectionDisplay.php",
+    url: "/php/outputStudentTests.php",
     data: $("#testContainer").serialize(),
 
     success: function (data) {
