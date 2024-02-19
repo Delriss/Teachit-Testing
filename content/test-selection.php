@@ -73,8 +73,12 @@ session_start();
             </div>
         </div>
 
-        <div class="row">
-            <div class="col-sm-4">
+        <hr class="my-4">
+
+        <!-- Test Cards -->
+        <div id="testContainer" class="row">
+            <!-- BASIC TEST CARD TEMPLATE -->
+            <!-- <div class="col-sm-4">
                 <div class="card">
                     <div class="card-body">
                         <h5 class="card-title">Test 1</h5>
@@ -84,41 +88,10 @@ session_start();
                         <a href="test.php" class="btn btn-primary">Start Test</a>
                     </div>
                 </div>
-            </div>
-            <div class="col-sm-4">
-                <div class="card">
-                    <div class="card-body">
-                        <h5 class="card-title">Test 1</h5>
-                        <p class="card-text">Test Description</p>
-                    </div>
-                    <div class="card-footer">
-                        <a href="test.php" class="btn btn-primary">Start Test</a>
-                    </div>
-                </div>
-            </div>
-            <div class="col-sm-4">
-                <div class="card">
-                    <div class="card-body">
-                        <h5 class="card-title">Test 1</h5>
-                        <p class="card-text">Test Description</p>
-                    </div>
-                    <div class="card-footer">
-                        <a href="test.php" class="btn btn-primary">Start Test</a>
-                    </div>
-                </div>
-            </div>
-            <div class="col-sm-4">
-                <div class="card">
-                    <div class="card-body">
-                        <h5 class="card-title">Test 1</h5>
-                        <p class="card-text">Test Description</p>
-                    </div>
-                    <div class="card-footer">
-                        <a href="test.php" class="btn btn-primary">Start Test</a>
-                    </div>
-                </div>
-            </div>
+            </div> -->
+            <!-- END BASIC TEST CARD TEMPLATE -->
             
+
         </div>
     </div>
 

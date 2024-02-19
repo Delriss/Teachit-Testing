@@ -33,3 +33,23 @@ $("#registrationForm").submit(function (e) {
     },
   });
 });
+
+//Run the test selection display script on the test selection page load
+$(document).ready(function () {
+  //Only run on the test selection page
+  if (window.location.href.includes("test-selection") == false){
+    console.log("Not on test selection page")
+    return;
+  }
+
+  $.ajax({
+    type: "POST",
+    url: "/php/testSelectionDisplay.php",
+    data: $("#testContainer").serialize(),
+
+    success: function (data) {
+      //Inject custom HTML into the page
+      $("#testContainer").html(data);
+    }
+  });
+});
