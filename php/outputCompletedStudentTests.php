@@ -47,8 +47,8 @@ if (mysqli_num_rows($result) == 0) {
 
     //Output the completed tests
     foreach ($completedTests as $test) {
-        echo ('<div class="col-sm-4">
-            <div class="card m-4">
+        echo ('<div class="col-sm-4 mb-4">
+            <div class="card h-100">
                 <div class="card-body">
                     <h5 class="card-title">' . $test->title . '</h5>
                     <p class="card-text">' . $test->subject . ' - ' . $test->timestamp . ' Questions</p>

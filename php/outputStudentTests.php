@@ -4,8 +4,8 @@ require_once("./_connect.php");
 require_once("./retrieveTests.php");
 
 foreach ($testArray as $test) {
-    echo ('<div class="col-sm-4">
-            <div class="card m-4">
+    echo ('<div class="col-sm-4 mb-4">
+            <div class="card h-100">
                 <div class="card-body">
                     <h5 class="card-title">' . $test->title . '</h5>
                     <p class="card-text">' . $test->subject . ' - ' . count($test->questions) . ' Questions</p>
