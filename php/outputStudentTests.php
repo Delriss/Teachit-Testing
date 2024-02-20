@@ -1,4 +1,9 @@
 <?php
+//File Security Check to avoid direct access
+if (!isset($_SESSION)) {
+    die('<p class="lead">User is not logged in.</p>');
+}
+
 
 require_once("./_connect.php");
 require_once("./retrieveTests.php");

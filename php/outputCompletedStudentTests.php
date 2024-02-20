@@ -1,5 +1,8 @@
 <?php
-session_start();
+//File Security Check to avoid direct access
+if (!isset($_SESSION)) {
+    die('<p class="lead">User is not logged in.</p>');
+}
 
 include_once($_SERVER['DOCUMENT_ROOT'] . '/php/_connect.php');
 
@@ -55,7 +58,7 @@ if (mysqli_num_rows($result) == 0) {
             <div class="card h-100">
                 <div class="card-body">
                     <h5 class="card-title">' . $test['title'] . '</h5>
-                    <p class="card-text">' . $test['subject'] . ' - ' . $test['timestamp'] . ' Questions</p>
+                    <p class="card-text">' . $test['subject'] . ' - ' . $test['timestamp'] . '</p>
                     <hr>
                     <p class="card-text">' . $test['testDesc'] . '</p>
                 </div>
