@@ -40,9 +40,39 @@ $("#registrationForm").submit(function (e) {
   });
 });
 
-// Registration Form - Populate Subjects
+//Run the test selection display script on the test selection page load
 $(document).ready(function () {
-  //Ensure registration form is loaded
+  //Only run on the test selection page
+  if (window.location.href.includes("test-selection") == false) {
+    console.log("Not on test selection page");
+    return;
+  }
+
+  //Run the test selection display script
+  $.ajax({
+    type: "POST",
+    url: "/php/outputStudentTests.php",
+    data: $("#testContainer").serialize(),
+
+    success: function (data) {
+      //Inject custom HTML into the page
+      $("#testContainer").html(data);
+    },
+  });
+
+  //REGISTRATION PAGE
+  //Run the completed test selection display script
+  $.ajax({
+    type: "POST",
+    url: "/php/outputCompletedStudentTests.php",
+    data: $("#completedTestContainer").serialize(),
+
+    success: function (data) {
+      //Inject custom HTML into the page
+      $("#completedTestContainer").html(data);
+    },
+    
+      //Ensure registration form is loaded
   if ($("#courses").length > 0) {
     //Send AJAX request to the server for asynchronous processing
     $.ajax({
@@ -70,4 +100,4 @@ $(document).ready(function () {
   {
     console.log("Not on registration page");
   }
-});
+  });

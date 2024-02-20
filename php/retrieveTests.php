@@ -21,6 +21,8 @@ class Test {
     public $testID;
     public $title;
     public $questions = array();
+    public $testDesc;
+    public $subject;
     //Needs Functionality
 }
 
@@ -33,7 +35,7 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/php/_connect.php');
 $testArray = array();
 
 //Get all tests from the database
-$sql = "SELECT testID, title FROM tests";
+$sql = "SELECT `testID`, `title`, `testDesc`, `subject` FROM tests";
 $tests = mysqli_query($db_connect, $sql);
 
 //loop through each test in the database
@@ -43,6 +45,16 @@ foreach ($tests as $test) {
     //Define the test object's attributes
     $testObject->testID = $test['testID'];
     $testObject->title = $test['title'];
+    $testObject->testDesc = $test['testDesc'];
+    $testObject->subject = $test['subject'];
+
+    //Get the subjects belonging to the test
+    $sql = "SELECT `subjectName` FROM `subjects` WHERE `SID` = ?";
+    $stmt = mysqli_prepare($db_connect, $sql);
+    mysqli_stmt_bind_param($stmt, "i", $test['subject']);
+    mysqli_stmt_execute($stmt);
+    $result = mysqli_stmt_get_result($stmt);
+    $testObject->subject = mysqli_fetch_assoc($result)['subjectName'];
 
     //Get the questions belonging to the test
     $sql = "SELECT questionID, testID, questionText, correctAnswerID FROM questions WHERE testID = " . $test['testID'];
