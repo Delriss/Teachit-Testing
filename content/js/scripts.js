@@ -71,8 +71,9 @@ $(document).ready(function () {
       //Inject custom HTML into the page
       $("#completedTestContainer").html(data);
     },
-    
-      //Ensure registration form is loaded
+  });
+
+  //Ensure registration form is loaded
   if ($("#courses").length > 0) {
     //Send AJAX request to the server for asynchronous processing
     $.ajax({
@@ -84,7 +85,12 @@ $(document).ready(function () {
       success: function (data) {
         //Output
         for (var i = 0; i < data.length; i++) {
-          $("#courses").append("<option value=" + data[i].SID +">" + data[i].subjectName + "</option>"
+          $("#courses").append(
+            "<option value=" +
+              data[i].SID +
+              ">" +
+              data[i].subjectName +
+              "</option>"
           );
         }
       },
@@ -96,8 +102,8 @@ $(document).ready(function () {
     });
   }
   //Debugging
-  else 
-  {
+  else {
     console.log("Not on registration page");
   }
-  });
+});
+
