@@ -1,9 +1,3 @@
-<?php
-// Start session
-session_start();
-
-?>
-
 <!DOCTYPE html>
 <html class="h-100" lang="en">
 
@@ -15,7 +9,7 @@ session_start();
     <title>Test Selection - TeachIt Testing</title>
 
     <!-- Stylesheets -->
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="../content/css/style.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -29,8 +23,8 @@ session_start();
     <nav class="navbar navbar-expand-lg navbar-dark bgColour">
         <!-- Nav Container - adapt to screen size -->
         <div class="container-fluid">
-            <a class="navbar-brand" href="../index.php">
-                <img src="imgs/logo-side.png" alt="TeachIt Testing" width="200" height="50">
+            <a class="navbar-brand" href="/">
+                <img src="../content/imgs/logo-side.png" alt="TeachIt Testing" width="200" height="50">
             </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapsable" aria-controls="navbarCollapsable" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
@@ -38,10 +32,10 @@ session_start();
             <div class="collapse navbar-collapse" id="navbarCollapsable">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                     <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="#">Home</a>
+                        <a class="nav-link" aria-current="page" href="/">Home</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Test Selection</a>
+                        <a class="nav-link active" href="/test-selection">Test Selection</a>
                     </li>
                     <li class="nav-item dropdown bgColour">
                         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -107,7 +101,7 @@ session_start();
 
         <hr class="my-4">
 
-        <div id="completedTestContainer" class="row">
+        <div id="completedTestContainer" class="row mb-5">
 
         <!--PHP GENERATED COMPLETED TEST CARDS WILL BE POPULATED HERE.
         AJAX request queries retrieveCompletedTests.php to retrieve custom test cards -->
@@ -146,6 +140,6 @@ session_start();
 <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
-<script src="js/scripts.js"></script>
+<script src="../content/js/scripts.js"></script>
 
 </html>
