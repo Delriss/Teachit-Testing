@@ -74,8 +74,8 @@
                 <input type="text" class="form-control m-1" id="lastName" name="lastName" placeholder="Last Name" required>
             </div>
             <div class="mb-2">
-                <select class="form-select m-1" id="course" name="course" placeholder="Course" required>
-                    <option value="1">Fill this with PHP/JS</option>
+                <select class="form-select m-1" id="courses" name="courses" placeholder="Select Course" required>
+                    <!-- <option value="1">Fill this with PHP/JS</option> -->
                 </select>
             </div>
             <div class="mb-2">
