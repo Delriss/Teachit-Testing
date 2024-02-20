@@ -1,3 +1,9 @@
+<?php
+// DEBUGGING - Start Session and set UID to 1
+$_SESSION['UID'] = 1;
+?>
+
+
 <!DOCTYPE html>
 <html class="h-100" lang="en">
 
@@ -88,7 +94,7 @@
 
             <!-- PHP GENERATED TEST CARDS WILL BE POPULATED HERE. 
             AJAX request queries retrieveTests.php to retrieve custom test cards -->
-            
+
         </div>
 
         <!-- Completed Test Cards -->
@@ -103,7 +109,7 @@
 
         <div id="completedTestContainer" class="row mb-5">
 
-        <!--PHP GENERATED COMPLETED TEST CARDS WILL BE POPULATED HERE.
+            <!--PHP GENERATED COMPLETED TEST CARDS WILL BE POPULATED HERE.
         AJAX request queries retrieveCompletedTests.php to retrieve custom test cards -->
 
         </div>
