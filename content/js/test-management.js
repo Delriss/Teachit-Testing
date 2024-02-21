@@ -5,7 +5,100 @@ var $testsCarousel = $('.tests-carousel').flickity();
 $(document).on('hidden.bs.modal', '#createTestModal', function() {
     $("#createTestForm").trigger("reset");
     $("#testNameLabel").text("Create Test");
+    //FIX this literally does nothing, it should reset the form to its original state
 });
+
+//function, passed a question number, returns the html for a question accordion item with updated attributes to uniquely identify them
+function updateQuestionData(question, questionNumber) {
+    //change the text of the question number to the new question number
+    question.find(".accordion-button").text("Question " + questionNumber);
+
+    //change the question attribute on any children inputs to the new question number
+    question.find("input").each(function() {
+        $(this).attr("data-question", questionNumber);
+    });
+
+    //change the delete question button data-question attribute to the new question number
+    question.find(".deleteQuestion").attr("data-question", questionNumber);
+
+    //change the name attribute of the radio buttons to isCorrect + question number
+    question.find("input[type='radio']").each(function() {
+        var name = $(this).attr("name");
+        $(this).attr("name", "isCorrect" + questionNumber);
+    });
+
+    //change the radio button labels for attribute from isCorrect1 to isCorrect + question number
+    question.find("label[for^='isCorrect']").each(function() {
+        var forAttribute = $(this).attr("for");
+        $(this).attr("for", "isCorrect" + questionNumber);
+    });
+
+    //change the accordion-button data-bs-target to #question + question number
+    question.find(".accordion-button").attr("data-bs-target", "#flush-collapse" + questionNumber);
+
+    //change all id flush-collapse to flush-collapse + question number
+    question.find("[id^='flush-collapse']").each(function() {
+        $(this).attr("id", "flush-collapse" + questionNumber);
+    });
+
+    //change all elements with aria-controls attribute to #question + question number
+    question.find("[aria-controls]").each(function() {
+        $(this).attr("aria-controls", "flush-collapse" + questionNumber);
+    });
+
+    //change any element with id flush-heading1 to flush-heading + question number
+    question.find("[id^='flush-heading']").each(function() {
+        $(this).attr("id", "flush-heading" + questionNumber);
+    });
+
+    return question;
+}
+
+
+//when the user clicks the add question button, clone the question accordion element and append it to the accordion
+//on click add question button
+$(document).on("click", "#addQuestion", function() {
+    //calculate the new question number
+    var questionNumber = ($("#accordionFlush").children().length + 1);
+
+    //clone the first question element
+    var question = $("#questionAccordionItem").clone();
+
+    //run the function to change all the attributes to the new question number
+    newQuestion = updateQuestionData(question, questionNumber);
+
+    //add a button to delete the question
+    var deleteButton = $("<button class='btn btn-danger deleteQuestion' data-question='" + questionNumber + "'>Delete Question</button>");
+    newQuestion.append(deleteButton);
+
+    //append the question to the accordion
+    $("#accordionFlush").append(newQuestion);
+});
+
+//when the user clicks the delete question button, remove the question from the accordion and update the question numbers for the questions that come after it
+$(document).on("click", ".deleteQuestion", function() {
+
+    //get the question number from the button
+    var questionNumber = $(this).attr("data-question");
+
+    //remove the question from the accordion
+    $(this).parent().remove();
+
+    //get all the questions that come after the deleted question
+    var questions = $("#accordionFlush").children().slice(questionNumber - 1);
+
+    //loop through questions and update the question
+    questions.each(function() {
+        var newQuestionNumber = $(this).index() + 1;
+        var question = $(this);
+        question = updateQuestionData(question, newQuestionNumber);
+    });
+
+
+
+    
+});
+
 
 //function for validating the form
 function validateForm(form) {

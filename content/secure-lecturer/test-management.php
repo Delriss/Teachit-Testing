@@ -97,35 +97,50 @@ if (session_status() === PHP_SESSION_NONE) {
                                 <label for="testName" class="form-label">Test Name</label>
                                 <input type="text" class="form-control" id="testName" name="testName" required>
                             </div>
-                            <div class="mb-3">
-                                <label for="testName" class="form-label">Question Name</label>
-                                <input type="text" class="form-control answers" id="questionName" name="questionName" required>
-                            </div>
-                            <div class="mb-3">
-                                <label for="answer1" class="form-label">Answer 1</label>
-                                <input type="text" class="form-control answers" id="answer1" name="answer1" required>
-                            </div>
-                            <div class="mb-3">
-                                <label for="answer2" class="form-label">Answer 2</label>
-                                <input type="text" class="form-control answers" id="answer2" name="answer2" required>
-                            </div>
-                            <div class="mb-3">
-                                <label for="answer3" class="form-label">Answer 3</label>
-                                <input type="text" class="form-control answers" id="answer3" name="answer3" required>
-                            </div>
-                            <div class="mb-3">
-                                <label for="answer4" class="form-label">Answer 4</label>
-                                <input type="text" class="form-control answers" id="answer4" name="answer4" required>
-                            </div>
 
-                            <input class="form-check-input" type="radio" name="isCorrect" id="answerRadio1" checked>
-                            <label class="form-check-label" for="answerRadio1 isCorrect">Answer 1</label>
-                            <input class="form-check-input" type="radio" name="isCorrect" id="answerRadio2">
-                            <label class="form-check-label" for="answerRadio2 isCorrect">Answer 2</label>
-                            <input class="form-check-input" type="radio" name="isCorrect" id="answerRadio3">
-                            <label class="form-check-label" for="answerRadio3 isCorrect">Answer 3</label>
-                            <input class="form-check-input" type="radio" name="isCorrect" id="answerRadio4">
-                            <label class="form-check-label" for="answerRadio4 isCorrect">Answer 4</label>
+                            <div class="accordion accordion-flush" id="accordionFlush">
+                                <div class="accordion-item" id="questionAccordionItem">
+                                    <h2 class="accordion-header" id="flush-heading1">
+                                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapse1" aria-expanded="false" aria-controls="flush-collapse1">
+                                        Question 1
+                                        </button>
+                                    </h2>
+                                    <div id="flush-collapse1" class="accordion-collapse collapse" aria-labelledby="flush-heading1" data-bs-parent="#accordionFlush">
+                                        <div class="accordion-body">
+                                            <div class="mb-3">
+                                                <label class="form-label">Question</label>
+                                                <input type="text" class="form-control questions" data-question="1" name="question" required>
+                                            </div>
+                                            <div class="mb-3">
+                                                <label  class="form-label">Answer 1</label>
+                                                <input type="text" class="form-control answers" data-question="1" name="answer" required>
+                                            </div>
+                                            <div class="mb-3">
+                                                <label class="form-label">Answer 2</label>
+                                                <input type="text" class="form-control answers" data-question="1" name="answer" required>
+                                            </div>
+                                            <div class="mb-3">
+                                                <label class="form-label">Answer 3</label>
+                                                <input type="text" class="form-control answers" data-question="1" name="answer" required>
+                                            </div>
+                                            <div class="mb-3">
+                                                <label class="form-label">Answer 4</label>
+                                                <input type="text" class="form-control answers" data-question="1" name="answer" required>
+                                            </div>
+                                            <input class="form-check-input answerRadio1" type="radio" name="isCorrect1" data-question="1" checked>
+                                            <label class="form-check-label" for="isCorrect1">Answer 1</label>
+                                            <input class="form-check-input answerRadio2" type="radio" name="isCorrect1" data-question="1">
+                                            <label class="form-check-label" for="isCorrect1">Answer 2</label>
+                                            <input class="form-check-input answerRadio3" type="radio" name="isCorrect1" data-question="1">
+                                            <label class="form-check-label" for="isCorrect1">Answer 3</label>
+                                            <input class="form-check-input answerRadio4" type="radio" name="isCorrect1" data-question="1">
+                                            <label class="form-check-label" for="isCorrect1">Answer 4</label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- allow the user to add more questions -->
+                            <button type="button" class="btn btn-primary" id="addQuestion">Add Question</button>
                         </form>
                     </div>
                     <div class="modal-footer">
