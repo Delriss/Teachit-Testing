@@ -64,6 +64,11 @@ $(document).on("click", "#addQuestion", function() {
     //clone the first question element
     var question = $("#questionAccordionItem").clone();
 
+    //remove any values in the inputs
+    question.find("input").val("");
+    //select the first radio button
+    question.find("input[type='radio']").first().prop("checked", true);
+
     //run the function to change all the attributes to the new question number
     newQuestion = updateQuestionData(question, questionNumber);
 
