@@ -36,7 +36,6 @@ body
 }
 
 .indexTitle {
-  font-family: 'Montserrat', sans-serif;
   font-size: 6em;
   color: black;
   text-align: center;
@@ -53,8 +52,7 @@ body
   font-family: 'Roboto', sans-serif;
   font-size: 1.75em;
   color: black;
-  margin-left: 10%;
-  margin-right: 10%;
+  margin: 0% 10%;
   padding: 0;
 }
 
@@ -105,7 +103,6 @@ body
 /* This is the second section in the container */
 
 .indexFeaturesTitle {
-  font-family: 'Montserrat', sans-serif;
   font-size: 6em;
   color: white;
   text-align: center;
