@@ -3,6 +3,7 @@
 class Answer {
     public $answerID;
     public $questionID;
+    public $relativeAnswerID;
     public $answerText;
     public $isCorrect;
     //Needs Functionality
@@ -20,8 +21,8 @@ class Question {
 class Test {
     public $testID;
     public $title;
-    public $questions = array();
     public $testDesc;
+    public $questions = array();
     public $subject;
     //Needs Functionality
 }
@@ -61,6 +62,7 @@ foreach ($tests as $test) {
     $questions = mysqli_query($db_connect, $sql);
 
     foreach ($questions as $question) {
+        //Create a question object
         $questionObject = new question;
 
         //Define the question object's attributes
@@ -70,7 +72,7 @@ foreach ($tests as $test) {
         $questionObject->correctAnswerID = $question['correctAnswerID'];
 
         //Get the answers for the question
-        $sql = "SELECT answerID, questionID, answerText, isCorrect FROM answers WHERE questionID = " . $question['questionID'];
+        $sql = "SELECT answerID, relativeAnswerID, questionID, answerText, isCorrect FROM answers WHERE questionID = " . $question['questionID'];
         $answers = mysqli_query($db_connect, $sql);
 
         foreach ($answers as $answer) {
@@ -80,6 +82,7 @@ foreach ($tests as $test) {
 
             //Define the answer object's attributes
             $answerObject->answerID = $answer['answerID'];
+            $answerObject->relativeAnswerID = $answer['relativeAnswerID'];
             $answerObject->questionID = $answer['questionID'];
             $answerObject->answerText = $answer['answerText'];
             $answerObject->isCorrect = $answer['isCorrect'];
@@ -94,8 +97,24 @@ foreach ($tests as $test) {
     $testArray[] = $testObject;
 }
 
+
 //for testing
 //echo $testArray[0]->questions[0]->answers[2]->answerText;
+
+//function for returning a test related to a testID
+function getTest($testID){
+    global $testArray;
+    foreach ($testArray as $test){
+        if ($test->testID == $testID){
+            return $test;
+        }
+    }
+}
+
+//if ajax request is made to retrieveTests.php with specific testID, return the test object
+if (isset($_POST['testID'])){
+    echo json_encode(getTest($_POST['testID']));
+}
 
 ?>
 
