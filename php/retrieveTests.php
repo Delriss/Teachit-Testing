@@ -3,6 +3,7 @@
 class Answer {
     public $answerID;
     public $questionID;
+    public $relativeAnswerID;
     public $answerText;
     public $isCorrect;
     //Needs Functionality
@@ -19,9 +20,10 @@ class Question {
 
 class Test {
     public $testID;
-    public $relativeTestID;
     public $title;
+    public $testDesc;
     public $questions = array();
+    public $subject;
     //Needs Functionality
 }
 
@@ -34,17 +36,26 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/php/_connect.php');
 $testArray = array();
 
 //Get all tests from the database
-$sql = "SELECT testID, title FROM tests";
+$sql = "SELECT `testID`, `title`, `testDesc`, `subject` FROM tests";
 $tests = mysqli_query($db_connect, $sql);
 
 //loop through each test in the database
 foreach ($tests as $test) {
-    //Create a test object
     $testObject = new test;
 
     //Define the test object's attributes
     $testObject->testID = $test['testID'];
     $testObject->title = $test['title'];
+    $testObject->testDesc = $test['testDesc'];
+    $testObject->subject = $test['subject'];
+
+    //Get the subjects belonging to the test
+    $sql = "SELECT `subjectName` FROM `subjects` WHERE `SID` = ?";
+    $stmt = mysqli_prepare($db_connect, $sql);
+    mysqli_stmt_bind_param($stmt, "i", $test['subject']);
+    mysqli_stmt_execute($stmt);
+    $result = mysqli_stmt_get_result($stmt);
+    $testObject->subject = mysqli_fetch_assoc($result)['subjectName'];
 
     //Get the questions belonging to the test
     $sql = "SELECT questionID, testID, questionText, correctAnswerID FROM questions WHERE testID = " . $test['testID'];
@@ -65,8 +76,9 @@ foreach ($tests as $test) {
         $answers = mysqli_query($db_connect, $sql);
 
         foreach ($answers as $answer) {
-            //Create an answer object
             $answerObject = new answer;
+            
+            //(FIX) needs relative answer id in context of the range of answers for the questions, etc 1-4. This needs to be done in the database as well
 
             //Define the answer object's attributes
             $answerObject->answerID = $answer['answerID'];
@@ -84,6 +96,7 @@ foreach ($tests as $test) {
     //Add the test object to the array of tests
     $testArray[] = $testObject;
 }
+
 
 //for testing
 //echo $testArray[0]->questions[0]->answers[2]->answerText;

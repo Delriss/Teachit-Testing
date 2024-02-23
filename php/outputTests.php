@@ -10,6 +10,12 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/php/retrieveTests.php');
     
         //Shows the title of the test
         echo "<h5 class='card-title'>" . $test->title . "</h5>"; 
+
+        //Shows the subject of the test
+        echo "<p class='card-text'>Subject: " . $test->subject . "</p>";
+
+        //Shows the Description of the test
+        echo "<p class='card-text'>" . $test->testDesc . "</p>";
     
         //Shows the number of questions in the test
         echo "<p class='card-text'>Number of Questions: " . sizeof($test->questions) . "</p>";

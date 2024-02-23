@@ -5,7 +5,9 @@ var $testsCarousel = $('.tests-carousel').flickity();
 $(document).on('hidden.bs.modal', '#createTestModal', function() {
     $("#createTestForm").trigger("reset");
     $("#testNameLabel").text("Create Test");
-    //FIX this literally does nothing, it should reset the form to its original state
+    $("#submitForm").text("Create Test");
+    //remove all questions from the accordion
+    $("#accordionFlush").children().slice(1).remove();
 });
 
 //function, passed a question number, returns the html for a question accordion item with updated attributes to uniquely identify them
@@ -236,7 +238,7 @@ $("#submitForm").click(function(e) {
                     }
                 });
 
-                //push the question, answer and correct answer arrays to the questions array
+                //push the questionText and answer arrays to the questions array as well as the correct answer index for the question
                 questions.push({
                     questionText: questionText,
                     answers: answerText,
@@ -335,24 +337,48 @@ $(document).on('show.bs.modal', '#createTestModal', function(e) {
             success: function(test) {
                 //populate the modal with the test information
                 $("#testNameLabel").text("Modifying: " + test.title);
+                //change add test button to update test button
+                $("#submitForm").text("Update Test");
                 $("#testName").val(test.title);
-                for (var question of test.questions){
-                    $("#questionName").val(question.questionText);
-                    $("#answer1").val(question.answers[0].answerText);
-                    $("#answer2").val(question.answers[1].answerText);
-                    $("#answer3").val(question.answers[2].answerText);
-                    $("#answer4").val(question.answers[3].answerText);
-                    
-                    //check radio button for correct answer
-                    if(question.answers[0].isCorrect == 1) {
-                        $("#answerRadio1").prop("checked", true);
-                    } else if(question.answers[1].isCorrect == 1) {
-                        $("#answerRadio2").prop("checked", true);
-                    } else if(question.answers[2].isCorrect == 1) {
-                        $("#answerRadio3").prop("checked", true);
-                    } else if(question.answers[3].isCorrect == 1) {
-                        $("#answerRadio4").prop("checked", true);
+                $("#testDescription").val(test.testDesc);
+
+                //for each question in the test, add a question to the modal
+                for(var i = 0; i < test.questions.length; i++) {
+                    //if this is the first question, we don't need to clone it
+                    if(i == 0) {
+                        var question = $("#questionAccordionItem");
                     }
+                    else {
+                        //clone the first question element
+                        var question = $("#questionAccordionItem").clone();
+                        //run the question object through the updateQuestionData function to update the question number
+                        newQuestion = updateQuestionData(question, i + 1);
+                        //add a button to delete the question
+                        var deleteButton = $("<button class='btn btn-danger deleteQuestion ms-2' data-question='" + i + 1 + "'>Delete</button>");
+                        //append the delete button to questionAccordionButtonContainer
+                        newQuestion.find(".questionAccordionButtonContainer").append(deleteButton);
+                        //append the question to the accordion
+                        $("#accordionFlush").append(newQuestion);
+                    }
+
+                    //use the updatedQuestionData function to update the question number
+                    var question = $("#accordionFlush").children().eq(i);
+                    question = updateQuestionData(question, i + 1);
+
+                    //populate the question with the question text
+                    question.find("input[name='question']").val(test.questions[i].questionText);
+
+                    //loop through each input in the form with name answer and populate it with the correct answer
+                    question.find("input[name='answer']").each(function(index) {
+                        $(this).val(test.questions[i].answers[index].answerText);
+                    });
+
+                    //loop through each radio button with name starting with isCorrect in the question and if it's the correct answer, check it
+                    question.find("input[name^='isCorrect']").each(function(index) {
+                        if(test.questions[i].answers[index].isCorrect == 1) {
+                            $(this).prop("checked", true);
+                        }
+                    });
                 }
             },
             error: function() {
