@@ -66,10 +66,6 @@ foreach($question as $q){
     //for size of the answers array, create the answers in the database using a prepared statement, inserting the relativeAnswerID, the questionID, the answerText
     for($i = 0; $i < sizeof($q['answers']); $i++){
 
-        echo $q['answers'][$i];
-        echo $q['correctAnswer'];
-        echo $i;
-
         //if the answer is correct, set the isCorrect value to 1, else set it to 0
         if($i == $q['correctAnswer']){
             $correct = 1;

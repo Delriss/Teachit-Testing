@@ -107,9 +107,79 @@ $(document).on("click", ".deleteQuestion", function() {
 
 //function for validating the form
 function validateForm(form) {
-    //FIX this function should be updated to validate the form properly
     //return true if the form is valid, false if it is not
-    return form.valid();
+
+    //make variable "valid" to store the validity of the form, set to true by default
+    var valid = true;
+
+    //loop through the form and check if it is valid
+    while (valid) {     
+        //check if the test name is empty
+        if($("#testName").val() === "") {
+            //if it is empty, fire an error message
+            Swal.fire("Error", "Please fill in the test name", "error");
+            valid = false;
+        }
+        else if($("#testName").val().length > 50) {
+            //if it is longer than 50 characters, fire an error message
+            Swal.fire("Error", "Test name must be less than 50 characters", "error");
+            valid = false;
+        }
+    
+        //check if the test description is empty and check if it is longer than 255 characters
+        if($("#testDescription").val() === "") {
+            //if it is empty, fire an error message
+            Swal.fire("Error", "Please fill in the test description", "error");
+            valid = false;
+        }
+        else if($("#testDescription").val().length > 255) {
+            //if it is longer than 255 characters, fire an error message
+            Swal.fire("Error", "Test description must be less than 255 characters", "error");
+            valid = false;
+        }
+    
+        //for each input in the form with name "question", check if it is empty
+        form.find("input[name='question']").each(function() {
+            if($(this).val() === "") {
+                //if it is empty, fire an error message
+                Swal.fire("Error", "Please fill in all the questions", "error");
+                valid = false;
+            }
+            else if($(this).val().length > 1000) {
+                //if the question is longer than supported in the database, fire an error message
+                Swal.fire("Error", "Questions must be less than 100 characters", "error");
+                return false;
+            }
+        });
+    
+        //for each input in the form with name "answer", check if it is empty
+        form.find("input[name='answer']").each(function() {
+            if($(this).val() === "") {
+                //if it is empty, fire an error message
+                Swal.fire("Error", "Please fill in all the answers", "error");
+                valid = false;
+            }
+            else if($(this).val().length > 1000) {
+                //if the answer is longer than supported in the database, fire an error message
+                Swal.fire("Error", "Answers must be less than 1000 characters", "error");
+                return false;
+            }
+        });
+
+        //make sure at least one radio button is checked per data-question attribute. This should technically be impossible to fail, but it's here just in case the form is modified
+        form.find("input[type='radio']").each(function() {
+            if($("input[name='isCorrect" + $(this).attr("data-question") + "']:checked").length == 0) {
+                //if no radio button is checked, fire an error message
+                Swal.fire("Error", "Please select a correct answer for each question", "error");
+                valid = false;
+            }
+        });
+
+        //if we have reached this point, the form is valid so break out of the loop
+        break;
+    }
+    //return the validity of the form
+    return valid;
 }
 
 //When the Form is submitted
@@ -120,20 +190,9 @@ $("#submitForm").click(function(e) {
     var form = $("#createTestForm");
 
     //If the form is not valid, do nothing
-    if(validateForm(form) === false) {
-        return;
-    }
-
-    //If the form is valid, continue
-    else{
-        if ($("#createTestForm").attr("data-mode") === "edit") {
-            //we are editing an existing test
-            
-
-        } 
-        
-        else {
+    if(validateForm(form) == true) {
             //we are creating a new test
+            console.log("Creating a new test");
 
             //get the test title
             var testTitle = $("#testName").val();
@@ -171,7 +230,6 @@ $("#submitForm").click(function(e) {
 
                 //loop through the correctRadios and push them to the correctAnswer array
                 correctRadios.each(function(index) {
-                    console.log(index);
                     //if this radio button is checked, store the index of the radio button in the correctAnswer array
                     if($(this).is(":checked")) {
                         correctAnswer = index;
@@ -185,8 +243,6 @@ $("#submitForm").click(function(e) {
                     correctAnswer: correctAnswer
                 });
             });
-
-            console.log(questions);
 
             $.ajax({
                 url: "/php/createTest.php",
@@ -208,11 +264,12 @@ $("#submitForm").click(function(e) {
                     Swal.fire("Error", "There was an error creating the test", "error");
                 }
             });
-            
-        }
     }
 
-
+    //otherwise, the form must be invalid so break out of the function
+    else{
+        return;
+    }
 });
 
 //When Delete Test button is clicked, delete the test from the database, update the DOM asynchronously so it reflects the change
