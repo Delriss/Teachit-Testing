@@ -1,18 +1,19 @@
-<?php 
-if (session_status() === PHP_SESSION_NONE) {
-    session_start();
-}
+<?php
+// DEBUGGING - Start Session and set UID to 1
+$_SESSION['UID'] = 1;
 ?>
 
 <!DOCTYPE html>
-<html lang="en">
+<html class="h-100" lang="en">
 
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" author="SEF">
-        <title>Test Management</title>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="author" content="SEF">
 
-        <!-- Stylesheets -->
+    <title>Test Selection - TeachIt Testing</title>
+
+    <!-- Stylesheets -->
         <link rel="stylesheet" href="/content/css/style.css">
         <link rel="stylesheet" href="/content/css/testManagement.css">
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
@@ -21,67 +22,62 @@ if (session_status() === PHP_SESSION_NONE) {
         <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" />
         <link rel="stylesheet" href="https://unpkg.com/flickity@2/dist/flickity.min.css">
-        <!-- End Stylesheets -->
-    </head>
+    <!-- End Stylesheets -->
+</head>
 
-    <body>
-        <header>
-            <!-- Navigation -->
-            <nav class="navbar navbar-expand-lg primaryBG">
-                <div class="container-fluid text-white">
-                    <a href="index.php"><img src="/content/imgs/logo-side.png" alt="TeachIt Logo" class="logo ps-5" width="350"></a>
-
-                    <!-- Page Navigation -->
-                    <div class="container">
-                        <div class="row">
-                            <div class="col-12">
-                                <ul class="nav justify-content-end">
-                                    <li class="nav-item">
-                                        <a class="nav-link text-white fs-4 subtitle active" href="index.php">Home</a>
-                                    </li>
-
-                                    <!-- Check if user is logged in -->
-                                    <?php if (isset($_SESSION)) : ?>
-                                        <li class="nav-item">
-                                            <a class="nav-link text-white subtitle fs-4" href="logout.php">Test Management</a>
-                                        </li>
-                                        <li class="nav-item">
-                                            <a class="nav-link text-white subtitle fs-4" href="logout.php">Logout</a>
-                                        </li>
-                                    <?php endif; ?>
-
-                                    <?php if (!isset($_SESSION)) : ?>
-                                        <li class="nav-item">
-                                            <a class="nav-link text-white subtitle fs-4" href="login.php">Login</a>
-                                        </li>
-                                    <?php endif; ?>
-
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- End Page Navigation -->
-
-                </div>
-            </nav>
-            <!-- End Navigation -->
-        </header>
-
-        <!-- Main Content -->
-        <main>
-            <div class="area">
-                <!-- Button trigger modal -->
-                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#createTestModal">
-                    New Test
-                </button>
-                <div class="titleWrapper">
-                    <h3>Available Tests</h3>
-                </div>
-                <div class="tableWrap tests-carousel" id="tests">
-                    <?php include_once($_SERVER['DOCUMENT_ROOT'].'/php/outputTests.php'); ?>
-                </div>
+<body class="d-flex flex-column h-100">
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark bgColour">
+        <!-- Nav Container - adapt to screen size -->
+        <div class="container-fluid">
+            <a class="navbar-brand" href="/">
+                <img src="../content/imgs/logo-side.png" alt="TeachIt Testing" width="200" height="50">
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapsable" aria-controls="navbarCollapsable" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarCollapsable">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link" aria-current="page" href="/">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="/test-selection">Test Selection</a>
+                    </li>
+                    <li class="nav-item dropdown bgColour">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            Admin Dashboard
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <li><a class="dropdown-item" href="#">Student Management</a></li>
+                            <li><a class="dropdown-item" href="#">Test Management</a></li>
+                            <li><a class="dropdown-item" href="#">Lecturer Management</a></li>
+                            <li><a class="dropdown-item" href="#">Statistics</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Logout</a>
+                    </li>
+                </ul>
             </div>
-        </main>
+        </div>
+        <!-- End Nav Container -->
+    </nav>
+    <!-- End Navbar -->
+
+    <!-- Main Content -->
+    <div class="area">
+        <!-- Button trigger modal -->
+        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#createTestModal">
+            New Test
+        </button>
+        <div class="titleWrapper">
+            <h3>Available Tests</h3>
+        </div>
+        <div class="tableWrap tests-carousel" id="tests">
+            <?php include_once($_SERVER['DOCUMENT_ROOT'].'/php/outputTests.php'); ?>
+        </div>
+    
 
         <!-- Modal -->
         <div class="modal fade" id="createTestModal" tabindex="-1" aria-labelledby="testNameLabel" aria-hidden="true">
@@ -156,40 +152,34 @@ if (session_status() === PHP_SESSION_NONE) {
                 </div>
             </div>
         </div>
-        </main>
-        <!-- End Main Content -->
+    </div>
+    <!-- End Main Content -->
 
-        <footer class="container-fluid primaryBG w-100">
-            <div class="footerContainer container-fluid d-flex justify-content-center align-items-center h-100 text-center subtitle text-white">
-                <div class="container-fluid d-flex justify-content-evenly">
-                    <span>TeachIt Testing &copy; 2021</span>
-                    <a id="privPolicy" href="./">Privacy Policy</a>
-                </div>
-                <div class="container-fluid d-flex justify-content-evenly">
-                    <a href="https://www.facebook.com/"><i class="fab fa-facebook-square fa-2x"></i></a>
-                    <a href="https://www.instagram.com/"><i class="fab fa-instagram-square fa-2x"></i></a>
-                    <a href="https://www.twitter.com/"><i class="fab fa-twitter-square fa-2x"></i></a>
-                </div>
-            </div>
-        </footer>
+    <!-- Footer -->
+    <footer class="footer mt-auto py-3 rounded-top bgColour">
+        <div class="container text-center">
+            <span class="text-muted">TeachIt Testing &copy; 2021</span>
         </div>
+    </footer>
+    <!-- End Footer -->
 
-        <!-- Background Circles -->
-        <ul class="circles">
-            <li></li>
-            <li></li>
-            <li></li>
-            <li></li>
-            <li></li>
-            <li></li>
-            <li></li>
-            <li></li>
-            <li></li>
-            <li></li>
-        </ul>
-        <!-- End Background Circles -->
-    </body>
-</html>
+    <!-- Background Circles -->
+    <ul class="circles">
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+    </ul>
+    <!-- End Background Circles -->
+</body>
+
+
 <!-- JS -->
 <script src="/content/js/scripts.js"></script>
 <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
