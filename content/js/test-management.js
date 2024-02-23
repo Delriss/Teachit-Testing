@@ -51,9 +51,9 @@ function updateQuestionData(question, questionNumber) {
         $(this).attr("id", "flush-heading" + questionNumber);
     });
 
+    //return the updated question element
     return question;
 }
-
 
 //when the user clicks the add question button, clone the question accordion element and append it to the accordion
 //on click add question button
@@ -64,6 +64,9 @@ $(document).on("click", "#addQuestion", function() {
     //clone the first question element
     var question = $("#questionAccordionItem").clone();
 
+    //remove the id attribute from the cloned question
+    question.removeAttr("id");
+
     //remove any values in the inputs
     question.find("input").val("");
     //select the first radio button
@@ -73,8 +76,9 @@ $(document).on("click", "#addQuestion", function() {
     newQuestion = updateQuestionData(question, questionNumber);
 
     //add a button to delete the question
-    var deleteButton = $("<button class='btn btn-danger deleteQuestion' data-question='" + questionNumber + "'>Delete Question</button>");
-    newQuestion.append(deleteButton);
+    var deleteButton = $("<button class='btn btn-danger deleteQuestion ms-2' data-question='" + questionNumber + "'>Delete</button>");
+    //append the delete button to questionAccordionButtonContainer
+    newQuestion.find(".questionAccordionButtonContainer").append(deleteButton);
 
     //append the question to the accordion
     $("#accordionFlush").append(newQuestion);
@@ -86,8 +90,8 @@ $(document).on("click", ".deleteQuestion", function() {
     //get the question number from the button
     var questionNumber = $(this).attr("data-question");
 
-    //remove the question from the accordion
-    $(this).parent().remove();
+    //remove the question with the question number from the accordion
+    $("#accordionFlush").children().eq(questionNumber - 1).remove();
 
     //get all the questions that come after the deleted question
     var questions = $("#accordionFlush").children().slice(questionNumber - 1);
@@ -98,69 +102,12 @@ $(document).on("click", ".deleteQuestion", function() {
         var question = $(this);
         question = updateQuestionData(question, newQuestionNumber);
     });
-
-
-
-    
 });
 
 
 //function for validating the form
 function validateForm(form) {
-    form.validate({
-        rules: {
-            testName: {
-                required: true,
-                minlength: 3
-            },
-            questionName: {
-                required: true,
-                minlength: 3
-            },
-            answer1: {
-                required: true,
-                minlength: 1
-            },
-            answer2: {
-                required: true,
-                minlength: 1
-            },
-            answer3: {
-                required: true,
-                minlength: 1
-            },
-            answer4: {
-                required: true,
-                minlength: 1
-            }
-        },
-        messages: {
-            testName: {
-                required: "Please enter a test name",
-                minlength: "Test name must be at least 3 characters long"
-            },
-            questionName: {
-                required: "Please enter a question",
-                minlength: "Question must be at least 3 characters long"
-            },
-            answer1: {
-                required: "Please enter an answer",
-                minlength: "Answer must be at least 1 character long"
-            },
-            answer2: {
-                required: "Please enter an answer",
-                minlength: "Answer must be at least 1 character long"
-            },
-            answer3: {
-                required: "Please enter an answer",
-                minlength: "Answer must be at least 1 character long"
-            },
-            answer4: {
-                required: "Please enter an answer",
-                minlength: "Answer must be at least 1 character long"
-            }
-        }
-    });
+    //FIX this function should be updated to validate the form properly
     //return true if the form is valid, false if it is not
     return form.valid();
 }
@@ -188,44 +135,67 @@ $("#submitForm").click(function(e) {
         else {
             //we are creating a new test
 
-            //Get the test title from the form
+            //get the test title
             var testTitle = $("#testName").val();
-            //Get array of question texts from the form
-            var questionText = [
-                //FIX More questions should be added here when dynamic form is implemented 
-                $("#questionName").val()
-                ];
 
-            //Get array of answers from the form
-            var answerText = [
-                //FIX varied numbers of answers should be added here when dynamic form is implemented
-                $("#answer1").val(),
-                $("#answer2").val(),
-                $("#answer3").val(),
-                $("#answer4").val()
-                ];
+            //get the test description
+            var testDescription = $("#testDescription").val();
 
-            //which answer is correct
-            var correctAnswer = 0;
-            if($("#answerRadio1").is(":checked")) {
-                correctAnswer = 0;
-            } else if($("#answerRadio2").is(":checked")) {
-                correctAnswer = 1;
-            } else if($("#answerRadio3").is(":checked")) {
-                correctAnswer = 2;
-            } else if($("#answerRadio4").is(":checked")) {
-                correctAnswer = 3;
-            }
+            //set test subject to 1 for now FIX this should be a dropdown
+            var testSubject = 1;
+            
+            //define an array to store questions
+            var questions = [];
 
-            //Create the test in the database
+            //define arrays to store the question text, answer text and correct answers
+            var questionText;
+
+            //loop through each html element in class accordion-item
+            $(".accordion-item").each(function() {
+                var answerText = [];
+                var correctAnswer = 0;
+
+                //get the input with the name question
+                questionText = $(this).find("input[name='question']").val();
+
+                //get all inputs with name answer
+                var answers = $(this).find("input[name^='answer']");
+
+                //get all inputs with name isCorrect
+                var correctRadios = $(this).find("input[name^='isCorrect']");
+
+                //loop through the answers and push them to the answerText array
+                answers.each(function() {
+                    answerText.push($(this).val());
+                });
+
+                //loop through the correctRadios and push them to the correctAnswer array
+                correctRadios.each(function(index) {
+                    console.log(index);
+                    //if this radio button is checked, store the index of the radio button in the correctAnswer array
+                    if($(this).is(":checked")) {
+                        correctAnswer = index;
+                    }
+                });
+
+                //push the question, answer and correct answer arrays to the questions array
+                questions.push({
+                    questionText: questionText,
+                    answers: answerText,
+                    correctAnswer: correctAnswer
+                });
+            });
+
+            console.log(questions);
+
             $.ajax({
                 url: "/php/createTest.php",
                 type: "POST",
                 data: {
                     testTitle: testTitle,
-                    questionText: questionText,
-                    answerText: answerText,
-                    correctAnswer: correctAnswer
+                    testDescription: testDescription,
+                    testSubject: testSubject,
+                    questions: questions
                 },
                 success: function() {
                     updateTestCarousel();
@@ -238,6 +208,7 @@ $("#submitForm").click(function(e) {
                     Swal.fire("Error", "There was an error creating the test", "error");
                 }
             });
+            
         }
     }
 

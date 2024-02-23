@@ -97,13 +97,19 @@ if (session_status() === PHP_SESSION_NONE) {
                                 <label for="testName" class="form-label">Test Name</label>
                                 <input type="text" class="form-control" id="testName" name="testName" required>
                             </div>
+                            <div class="mb-3">
+                                <label for="testDescription" class="form-label">Test Description</label>
+                                <textarea class="form-control" id="testDescription" name="testDescription" required></textarea>
+                            </div>
 
                             <div class="accordion accordion-flush" id="accordionFlush">
                                 <div class="accordion-item" id="questionAccordionItem">
                                     <h2 class="accordion-header" id="flush-heading1">
-                                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapse1" aria-expanded="false" aria-controls="flush-collapse1">
-                                        Question 1
-                                        </button>
+                                        <div class="d-flex align-items-center questionAccordionButtonContainer">
+                                            <button class="accordion-button collapsed flex-grow-1" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapse1" aria-expanded="false" aria-controls="flush-collapse1">
+                                                Question 1
+                                            </button>
+                                        </div>
                                     </h2>
                                     <div id="flush-collapse1" class="accordion-collapse collapse" aria-labelledby="flush-heading1" data-bs-parent="#accordionFlush">
                                         <div class="accordion-body">
