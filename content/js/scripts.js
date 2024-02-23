@@ -1,16 +1,20 @@
+// Registration Form - User Registration
 $("#registrationForm").submit(function (e) {
-  e.preventDefault();
+  e.preventDefault(); //Prevent the default form submission
 
+  //Ajax request to the server for asynchronous processing
   $.ajax({
     type: "POST",
-    url: "/php/_registrationScript.php",
+    url: "/php/createUser.php",
     data: $("#registrationForm").serialize(),
 
+    //If the request is successful
     success: function (data) {
       if (data.includes("Registration successful")) {
-        console.log(data)
+        console.log(data);
         //Output
         Swal.fire({
+          //Alert the user with a success message
           title: "Registration Successful",
           text: "You have successfully registered.",
           icon: "success",
@@ -23,8 +27,10 @@ $("#registrationForm").submit(function (e) {
             window.location = "./index";
           }
         });
+        //If the request is not successful
       } else {
         Swal.fire({
+          //Alert the user with an error message
           title: "Registration Failed",
           text: "Registration Failed: ".data,
           icon: "error",
@@ -33,3 +39,65 @@ $("#registrationForm").submit(function (e) {
     },
   });
 });
+
+//Run the test selection display script on the test selection page load
+$(document).ready(function () {
+  //Only run on the test selection page
+  if (window.location.href.includes("test-selection") == false) {
+    console.log("Not on test selection page");
+    return;
+  }
+
+  //Run the test selection display script
+  $.ajax({
+    type: "POST",
+    url: "/php/outputStudentTests.php",
+    data: $("#testContainer").serialize(),
+
+    success: function (data) {
+      //Inject custom HTML into the page
+      $("#testContainer").html(data);
+    },
+  });
+
+  //REGISTRATION PAGE
+  //Run the completed test selection display script
+  $.ajax({
+    type: "POST",
+    url: "/php/outputCompletedStudentTests.php",
+    data: $("#completedTestContainer").serialize(),
+
+    success: function (data) {
+      //Inject custom HTML into the page
+      $("#completedTestContainer").html(data);
+    },
+    
+      //Ensure registration form is loaded
+  if ($("#courses").length > 0) {
+    //Send AJAX request to the server for asynchronous processing
+    $.ajax({
+      type: "POST",
+      url: "/php/retrieveSubjects.php",
+      dataType: "json",
+
+      //If the request is successful
+      success: function (data) {
+        //Output
+        for (var i = 0; i < data.length; i++) {
+          $("#courses").append("<option value=" + data[i].SID +">" + data[i].subjectName + "</option>"
+          );
+        }
+      },
+      //Debugging - If the request is not successful
+      error: function (data) {
+        //If the request is not successful
+        console.log("Error: " + data);
+      },
+    });
+  }
+  //Debugging
+  else 
+  {
+    console.log("Not on registration page");
+  }
+  });

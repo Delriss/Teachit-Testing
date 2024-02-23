@@ -1,3 +1,9 @@
+<?php
+// DEBUGGING - Start Session and set UID to 1
+$_SESSION['UID'] = 1;
+?>
+
+
 <!DOCTYPE html>
 <html class="h-100" lang="en">
 
@@ -6,7 +12,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="author" content="SEF">
 
-    <title>Registration - TeachIt Testing</title>
+    <title>Test Selection - TeachIt Testing</title>
 
     <!-- Stylesheets -->
     <link rel="stylesheet" href="../content/css/style.css">
@@ -32,10 +38,10 @@
             <div class="collapse navbar-collapse" id="navbarCollapsable">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                     <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="/">Home</a>
+                        <a class="nav-link" aria-current="page" href="/">Home</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="/test-selection">Test Selection</a>
+                        <a class="nav-link active" href="/test-selection">Test Selection</a>
                     </li>
                     <li class="nav-item dropdown bgColour">
                         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -59,38 +65,54 @@
     <!-- End Navbar -->
 
     <!-- Main Content -->
-    <div class="col-lg-6 mt-auto mx-auto p-3 py-md-3 text-center rounded bgColourFaded">
-        <div class="text-center">
-            <img src="../content/imgs/logo-transparent.png" alt="TeachIt Testing" width="150" height="150">
-            <h1 class="display-5 fw-bold">TeachIt Registration</h1>
+    <div class="container-fluid text-center">
+        <!-- New Test Selection Area -->
+        <div class="row">
+            <div class="col-12">
+                <h1 class="display-4 mt-5">Test Selection</h1>
+                <p class="lead">Please select a test to take</p>
+            </div>
         </div>
-        <form id="registrationForm">
-            <div class="mb-2 d-flex">
-                <input type="text" class="form-control m-1" id="studentNum" name="studentNum" placeholder="Student Number" required>
-                <input type="email" class="form-control m-1" id="email" name="email" placeholder="Email" required>
+
+        <hr class="my-4">
+
+        <!-- Test Cards -->
+        <div id="testContainer" class="row">
+            <!-- BASIC TEST CARD TEMPLATE -->
+            <!-- <div class="col-sm-4">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Test 1</h5>
+                        <p class="card-text">Test Description</p>
+                    </div>
+                    <div class="card-footer">
+                        <a href="test.php" class="btn btn-primary">Start Test</a>
+                    </div>
+                </div>
+            </div> -->
+            <!-- END BASIC TEST CARD TEMPLATE -->
+
+            <!-- PHP GENERATED TEST CARDS WILL BE POPULATED HERE. 
+            AJAX request queries retrieveTests.php to retrieve custom test cards -->
+
+        </div>
+
+        <!-- Completed Test Cards -->
+        <div class="row">
+            <div class="col-12">
+                <h1 class="display-4 mt-5">Completed Tests</h1>
+                <p class="lead">View your completed tests</p>
             </div>
-            <div class="mb-2 d-flex">
-                <input type="text" class="form-control m-1" id="firstName" name="firstName" placeholder="First Name" required>
-                <input type="text" class="form-control m-1" id="lastName" name="lastName" placeholder="Last Name" required>
-            </div>
-            <div class="mb-2">
-                <select class="form-select m-1" id="courses" name="courses" placeholder="Select Course" required>
-                    <!-- <option value="1">Fill this with PHP/JS</option> -->
-                </select>
-            </div>
-            <div class="mb-2">
-                <input type="password" class="form-control m-1" id="password" name="password" placeholder="Password" required>
-            </div>
-            <div class="form-text">
-                Password must be at least 8 characters long and contain at least one number and one special character.
-            </div>
-            <div class="mb-2">
-                <input type="password" class="form-control m-1" id="confirmPassword" name="confirmPassword" placeholder="Confirm Password" required>
-            </div>
-            <button type="submit" class="btn btn-dark rounded-pill">Register</button>
-            <hr>
-            <p>Already have an account? <a id="loginText" href="login.php">Login Here!</a></p>
-        </form>
+        </div>
+
+        <hr class="my-4">
+
+        <div id="completedTestContainer" class="row mb-5">
+
+            <!--PHP GENERATED COMPLETED TEST CARDS WILL BE POPULATED HERE.
+        AJAX request queries retrieveCompletedTests.php to retrieve custom test cards -->
+
+        </div>
     </div>
     <!-- End Main Content -->
 

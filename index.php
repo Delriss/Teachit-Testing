@@ -11,8 +11,14 @@ $jRoute->Route(["get"], "/", function() {
 });
 
 
-//Create currency Route
+//Create login Route
 $jRoute->Route(["get"], "/", "content/login.php");
+
+//Create register Route
+$jRoute->Route(["get"], "/register", "content/registration.php");
+
+//Create Test Selection Route
+$jRoute->Route(["get"], "/test-selection", "content/test-selection.php");
 
 //(fix) NEEDS AUTH WHEN IT HAS BEEN BUILT
 $jRoute->Route(["get"], "/test-management", "content/secure-lecturer/test-management.php");
