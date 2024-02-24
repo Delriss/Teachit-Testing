@@ -24,6 +24,7 @@ class Test {
     public $testDesc;
     public $questions = array();
     public $subject;
+    public $subjectID;
     //Needs Functionality
 }
 
@@ -47,7 +48,7 @@ foreach ($tests as $test) {
     $testObject->testID = $test['testID'];
     $testObject->title = $test['title'];
     $testObject->testDesc = $test['testDesc'];
-    $testObject->subject = $test['subject'];
+    $testObject->subjectID = $test['subject'];
 
     //Get the subjects belonging to the test
     $sql = "SELECT `subjectName` FROM `subjects` WHERE `SID` = ?";

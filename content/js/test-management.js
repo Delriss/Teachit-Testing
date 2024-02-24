@@ -1,6 +1,11 @@
 $('.tests-carousel').flickity({});
 var $testsCarousel = $('.tests-carousel').flickity();
 
+//on document ready, get the subjects for the dropdown
+$(document).ready(function() {
+    getSubjects();
+});
+
 //when the modal is hidden, reset the form
 $(document).on('hidden.bs.modal', '#createTestModal', function() {
     $("#createTestForm").trigger("reset");
@@ -9,6 +14,25 @@ $(document).on('hidden.bs.modal', '#createTestModal', function() {
     //remove all questions from the accordion
     $("#accordionFlush").children().slice(1).remove();
 });
+
+function getSubjects() {
+    $.ajax({
+        type: "POST",
+        url: "/php/retrieveSubjects.php",
+        dataType: 'json',
+        success: function(data) {
+            //populate the dropdown with the subjects
+            for(var i = 0; i < data.length; i++) {
+                var option = $("<option value='" + data[i].SID + "'>" + data[i].subjectName + "</option>");
+                $("#testSubject").append(option);
+            }
+        },
+        error: function() {
+            Swal.fire("Error", "There was an error getting the subjects", "error");
+        }
+    });
+}
+
 
 //function, passed a question number, returns the html for a question accordion item with updated attributes to uniquely identify them
 function updateQuestionData(question, questionNumber) {
@@ -191,61 +215,65 @@ $("#submitForm").click(function(e) {
     //validate the form
     var form = $("#createTestForm");
 
-    //If the form is not valid, do nothing
+    //If the form is valid, continue
     if(validateForm(form) == true) {
-            //we are creating a new test
-            console.log("Creating a new test");
 
-            //get the test title
-            var testTitle = $("#testName").val();
+        //get the test title
+        var testTitle = $("#testName").val();
 
-            //get the test description
-            var testDescription = $("#testDescription").val();
+        //get the test description
+        var testDescription = $("#testDescription").val();
 
-            //set test subject to 1 for now FIX this should be a dropdown
-            var testSubject = 1;
-            
-            //define an array to store questions
-            var questions = [];
+        //get the test subject
+        var testSubject = $("#testSubject").val();
+        
+        //define an array to store questions
+        var questions = [];
 
-            //define arrays to store the question text, answer text and correct answers
-            var questionText;
+        //define arrays to store the question text, answer text and correct answers
+        var questionText;
 
-            //loop through each html element in class accordion-item
-            $(".accordion-item").each(function() {
-                var answerText = [];
-                var correctAnswer = 0;
+        //loop through each html element in class accordion-item
+        $(".accordion-item").each(function() {
+            var answerText = [];
+            var correctAnswer = 0;
 
-                //get the input with the name question
-                questionText = $(this).find("input[name='question']").val();
+            //get the input with the name question
+            questionText = $(this).find("input[name='question']").val();
 
-                //get all inputs with name answer
-                var answers = $(this).find("input[name^='answer']");
+            //get all inputs with name answer
+            var answers = $(this).find("input[name^='answer']");
 
-                //get all inputs with name isCorrect
-                var correctRadios = $(this).find("input[name^='isCorrect']");
+            //get all inputs with name isCorrect
+            var correctRadios = $(this).find("input[name^='isCorrect']");
 
-                //loop through the answers and push them to the answerText array
-                answers.each(function() {
-                    answerText.push($(this).val());
-                });
-
-                //loop through the correctRadios and push them to the correctAnswer array
-                correctRadios.each(function(index) {
-                    //if this radio button is checked, store the index of the radio button in the correctAnswer array
-                    if($(this).is(":checked")) {
-                        correctAnswer = index;
-                    }
-                });
-
-                //push the questionText and answer arrays to the questions array as well as the correct answer index for the question
-                questions.push({
-                    questionText: questionText,
-                    answers: answerText,
-                    correctAnswer: correctAnswer
-                });
+            //loop through the answers and push them to the answerText array
+            answers.each(function() {
+                answerText.push($(this).val());
             });
 
+            //loop through the correctRadios and push them to the correctAnswer array
+            correctRadios.each(function(index) {
+                //if this radio button is checked, store the index of the radio button in the correctAnswer array
+                if($(this).is(":checked")) {
+                    correctAnswer = index;
+                }
+            });
+
+            //push the questionText and answer arrays to the questions array as well as the correct answer index for the question
+            questions.push({
+                questionText: questionText,
+                answers: answerText,
+                correctAnswer: correctAnswer
+            });
+        });
+
+        //if the form is in create mode, we are creating a test.
+        if(form.attr("data-mode") == "edit") {
+            console.log("submitting edit form");
+
+        }
+        else{
             $.ajax({
                 url: "/php/createTest.php",
                 type: "POST",
@@ -266,6 +294,9 @@ $("#submitForm").click(function(e) {
                     Swal.fire("Error", "There was an error creating the test", "error");
                 }
             });
+        }
+
+
     }
 
     //otherwise, the form must be invalid so break out of the function
@@ -341,6 +372,8 @@ $(document).on('show.bs.modal', '#createTestModal', function(e) {
                 $("#submitForm").text("Update Test");
                 $("#testName").val(test.title);
                 $("#testDescription").val(test.testDesc);
+                $("#testSubject").val(test.subjectID);
+
 
                 //for each question in the test, add a question to the modal
                 for(var i = 0; i < test.questions.length; i++) {

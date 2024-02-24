@@ -97,7 +97,12 @@ $_SESSION['UID'] = 1;
                                 <label for="testDescription" class="form-label">Test Description</label>
                                 <textarea class="form-control" id="testDescription" name="testDescription" required></textarea>
                             </div>
-
+                            <div class="mb-3">
+                                <label for="testSubject" class="form-label">Subject</label>
+                                <select class="form-select" id="testSubject" name="testSubject" required>
+                                    <option value="" selected disabled>Select a Subject</option>
+                                </select>
+                            </div>
                             <div class="accordion accordion-flush" id="accordionFlush">
                                 <div class="accordion-item" id="questionAccordionItem">
                                     <h2 class="accordion-header" id="flush-heading1">
