@@ -13,6 +13,10 @@ $(document).on('hidden.bs.modal', '#createTestModal', function() {
     $("#submitForm").text("Create Test");
     //remove all questions from the accordion
     $("#accordionFlush").children().slice(1).remove();
+    //set the form to create mode
+    $("#createTestForm").attr("data-mode", "create");
+    //remove the test id attribute from the modal
+    $("#createTestForm").removeAttr("data-test-id");
 });
 
 function getSubjects() {
@@ -110,24 +114,73 @@ $(document).on("click", "#addQuestion", function() {
     $("#accordionFlush").append(newQuestion);
 });
 
-//when the user clicks the delete question button, remove the question from the accordion and update the question numbers for the questions that come after it
-$(document).on("click", ".deleteQuestion", function() {
-
-    //get the question number from the button
-    var questionNumber = $(this).attr("data-question");
-
+function deleteQuestion(questionNumber) {
+    //the form is in create mode, so we can just delete the question from the accordion as we don't need to delete it from the database
     //remove the question with the question number from the accordion
     $("#accordionFlush").children().eq(questionNumber - 1).remove();
 
     //get all the questions that come after the deleted question
     var questions = $("#accordionFlush").children().slice(questionNumber - 1);
-
+    
     //loop through questions and update the question
     questions.each(function() {
         var newQuestionNumber = $(this).index() + 1;
         var question = $(this);
         question = updateQuestionData(question, newQuestionNumber);
     });
+}
+
+//when the user clicks the delete question button, remove the question from the accordion and update the question numbers for the questions that come after it
+$(document).on("click", ".deleteQuestion", function(e) {
+    //prevent the default action of the button
+    e.preventDefault();
+
+    //get the question number from the button
+        var questionNumber = $(this).attr("data-question");
+
+        //we need to check if the form is in create mode or edit mode
+        if($("#createTestForm").attr("data-mode") == "edit") {
+            //we need confirmation from the user if they want to delete the question from the database
+            Swal.fire({
+                title: 'Are you sure?',
+                text: "You won't be able to recover this question!",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#d33',
+                cancelButtonColor: '#3085d6',
+                confirmButtonText: 'Yes, Delete',
+                reverseButtons: true
+            }).then((result) => {
+                //If the user confirms they want to delete the question
+                if (result.isConfirmed) {
+                    //get the test id from the modal
+                    var testID = $("#createTestForm").attr("data-test-id");
+
+                    console.log("deleting question " + questionNumber + " from test " + testID + " in edit mode");
+
+                    //delete the question from the database
+                    $.ajax({
+                        type: "POST",
+                        url: "/php/deleteQuestion.php",
+                        data: {
+                            testID: testID,
+                            questionIndex: questionNumber
+                        },
+                        success: function() {
+                            deleteQuestion(questionNumber);
+                        },
+                        error: function() {
+                            Swal.fire("Error", "There was an error deleting the question", "error");
+                        }
+                    });
+                }
+            });
+        }
+        else{
+            //if the form is in create mode, we can just delete the question from the accordion as we don't need to delete it from the database
+            deleteQuestion(questionNumber);
+        }
+        
 });
 
 
@@ -356,6 +409,8 @@ $(document).on('show.bs.modal', '#createTestModal', function(e) {
     if(testID != null) {
         //set the form to edit mode
         $("#createTestForm").attr("data-mode", "edit");
+        //set the test id attribute of the modal to the test id
+        $("#createTestForm").attr("data-test-id", testID);
 
         //get the test information from the database
         $.ajax({
