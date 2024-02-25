@@ -20,14 +20,32 @@ if (isset($_POST["email"]) and isset($_POST["password"])) { //if username and pa
 	$count = mysqli_num_rows($run);
 
 	if ($count === 0) {
-
-		die($count);
-		header("Location: ../content/registration.php?e=1");
-		die($count);
+		//If the email does not match any users in the database		
+		header("Location: ../content/login.php?e=1");
+		die("User does not exist");
 	}
 	else {
-		die($count);
+		//If the email does match a user in the database
+		$result = mysqli_fetch_assoc($run);
+
+		if (password_verify($password, $result["password"])) {
+			$_SESSION["ID"] = $result["ID"];
+			$_SESSION["email"] = $result["email"];
+
+			//will likely change this to the accessLevel in the database later on for admin purposes
+			$_SESSION["auth"] = true;
+
+			die("Login successful");
+
+		} else {
+			//If the password does not match the email
+			//header("Location: ../content/login.php?e=2");
+			die("Password does not match");
+		}
+
+
 		header("Location: ../content/login.php?e=2");
+		die("User exists");
 	}
 }
 
