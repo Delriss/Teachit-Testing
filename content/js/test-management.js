@@ -11,7 +11,7 @@ $(document).on('hidden.bs.modal', '#createTestModal', function() {
     $("#createTestForm").trigger("reset");
     $("#testNameLabel").text("Create Test");
     $("#submitForm").text("Create Test");
-    //remove all questions from the accordion
+    //remove all questions from the accordion except the first one
     $("#accordionFlush").children().slice(1).remove();
     //set the form to create mode
     $("#createTestForm").attr("data-mode", "create");
@@ -63,7 +63,7 @@ function updateQuestionData(question, questionNumber) {
         $(this).attr("for", "isCorrect" + questionNumber);
     });
 
-    //change the accordion-button data-bs-target to #question + question number
+    //change the accordion-button data-bs-target to data-bs-target + question number
     question.find(".accordion-button").attr("data-bs-target", "#flush-collapse" + questionNumber);
 
     //change all id flush-collapse to flush-collapse + question number
@@ -71,12 +71,12 @@ function updateQuestionData(question, questionNumber) {
         $(this).attr("id", "flush-collapse" + questionNumber);
     });
 
-    //change all elements with aria-controls attribute to #question + question number
+    //change all elements with aria-controls attribute to aria-controls + question number
     question.find("[aria-controls]").each(function() {
         $(this).attr("aria-controls", "flush-collapse" + questionNumber);
     });
 
-    //change any element with id flush-heading1 to flush-heading + question number
+    //change any element with id containing flush-heading to flush-heading + question number
     question.find("[id^='flush-heading']").each(function() {
         $(this).attr("id", "flush-heading" + questionNumber);
     });
@@ -136,51 +136,26 @@ $(document).on("click", ".deleteQuestion", function(e) {
     e.preventDefault();
 
     //get the question number from the button
-        var questionNumber = $(this).attr("data-question");
+    var questionNumber = $(this).attr("data-question");
 
-        //we need to check if the form is in create mode or edit mode
-        if($("#createTestForm").attr("data-mode") == "edit") {
-            //we need confirmation from the user if they want to delete the question from the database
-            Swal.fire({
-                title: 'Are you sure?',
-                text: "You won't be able to recover this question!",
-                icon: 'warning',
-                showCancelButton: true,
-                confirmButtonColor: '#d33',
-                cancelButtonColor: '#3085d6',
-                confirmButtonText: 'Yes, Delete',
-                reverseButtons: true
-            }).then((result) => {
-                //If the user confirms they want to delete the question
-                if (result.isConfirmed) {
-                    //get the test id from the modal
-                    var testID = $("#createTestForm").attr("data-test-id");
-
-                    console.log("deleting question " + questionNumber + " from test " + testID + " in edit mode");
-
-                    //delete the question from the database
-                    $.ajax({
-                        type: "POST",
-                        url: "/php/deleteQuestion.php",
-                        data: {
-                            testID: testID,
-                            questionIndex: questionNumber
-                        },
-                        success: function() {
-                            deleteQuestion(questionNumber);
-                        },
-                        error: function() {
-                            Swal.fire("Error", "There was an error deleting the question", "error");
-                        }
-                    });
-                }
-            });
+    //we need to check if the form is in create mode or edit mode
+    //we need confirmation from the user if they want to delete the question from the database
+    Swal.fire({
+        title: 'Are you sure?',
+        text: "You won't be able to recover this question!",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#d33',
+        cancelButtonColor: '#3085d6',
+        confirmButtonText: 'Yes, Delete',
+        reverseButtons: true
+    }).then((result) => {
+        //If the user confirms they want to delete the question
+        if (result.isConfirmed) {
+            //get the test id from the modal
+            var testID = $("#createTestForm").attr("data-test-id");
         }
-        else{
-            //if the form is in create mode, we can just delete the question from the accordion as we don't need to delete it from the database
-            deleteQuestion(questionNumber);
-        }
-        
+    });
 });
 
 
@@ -323,7 +298,31 @@ $("#submitForm").click(function(e) {
 
         //if the form is in create mode, we are creating a test.
         if(form.attr("data-mode") == "edit") {
-            console.log("submitting edit form");
+            //get the test id from the modal
+            var testID = form.attr("data-test-id");
+
+            //update the test in the database
+            $.ajax({
+                url: "/php/modifyTest.php",
+                type: "POST",
+                data: {
+                    testID: testID,
+                    testTitle: testTitle,
+                    testDescription: testDescription,
+                    testSubject: testSubject,
+                    questions: questions
+                },
+                success: function() {
+                    updateTestCarousel();
+                    //close modal
+                    $('#createTestModal').modal('hide');
+                    //fire success message
+                    Swal.fire("Success", "Test Updated Successfully", "success");
+                },
+                error: function() {
+                    Swal.fire("Error", "There was an error updating the test", "error");
+                }
+            });
 
         }
         else{
