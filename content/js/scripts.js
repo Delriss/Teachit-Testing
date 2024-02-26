@@ -86,43 +86,44 @@ $("#loginForm").submit(function (e) {
     },
 
     success: function(data) {
-      if (data.includes("e1-No_User_Found")) {
+      if (data.includes("e1") || data.includes("e2")) {
         console.log(data);
         //OUTPUT
         Swal.fire({
           //Alert the user with an error message
-          title: "Account not found",
-          text: "You have inputted an incorrect email.",
+          title: "Email or Password Incorrect",
+          text: "Please check that you have entered the correct email and password.",
           icon: "error",
           showCancelButton: false,
           confirmButtonColor: "#3085d6",
-          cancelButtonColor: "#d33",
           confirmButtonText: "Continue",
         });
-      } else if (data.includes("e2-Password_Incorrect")) {
+      } else if (data.includes("e3")) {
         console.log(data);
         //OUTPUT
         Swal.fire({
           //Alert the user with an error message
-          title: "Password Incorrect",
-          text: "You have inputted the wrong password.",
-          icon: "error",
+          title: "Successfully Logged In",
+          text: "Please click continue to proceed to the testing page.",
+          icon: "success",
           showCancelButton: false,
           confirmButtonColor: "#3085d6",
-          cancelButtonColor: "#d33",
           confirmButtonText: "Continue",
-        });
-      } else if (data.includes("e3-Login_Successful")) {
+        }).then((result) => {
+          if (result.isConfirmed) {
+            window.location = "./index";
+          }
+        });        
+      } else if (data.includes("e4")) {
         console.log(data);
         //OUTPUT
         Swal.fire({
           //Alert the user with an error message
-          title: "Password Incorrect",
-          text: "You have inputted the wrong password.",
+          title: "Details Missing",
+          text: "Please ensure that you have entered the email and password.",
           icon: "error",
           showCancelButton: false,
           confirmButtonColor: "#3085d6",
-          cancelButtonColor: "#d33",
           confirmButtonText: "Continue",
         });
       }
