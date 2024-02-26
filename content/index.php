@@ -65,81 +65,83 @@ session_start();
     <!-- End Navbar -->
 
     <!-- Main Content -->
-    <main class="d-flex justify-content-center homeContainer">
-        <!-- This is the first section of the index page, it shows a title and a short description while prompting the user to login or scroll down for more info -->
-        <div class="d-flex flex-column align-items-center homeCover">
-            <h1 class="indexTitle">Welcome to TeachIt Testing</h1>
-            <span class="indexDescription">
-                <p>TeachIt Testing is an online testing program which utilises reinforcement testing to help you learn in a fun and competitive manner!</p>
+    <div class="container-fluid text-center">
+        <div class="row homeContainer mb-5">
+            <div class="col-12 d-flex flex-column justify-content-center">
+                <h1 class="display-1">Welcome to TeachIt Testing</h1>
+                <p class="indexDescription fs-4 mt-5">TeachIt Testing is an online testing program which utilises reinforcement testing to help you learn in a fun and competitive manner!</p>
                 <a class="text-black subtitle fs-4 indexLoginButton" href="registration.php">Click here to get started today!</a>
-            </span>
-            <!-- This is tied to an animation where it drifts up from the bottom of the page and then it pulses infinitely -->
-            <div class="d-flex flex-column align-items-center justify-content-end indexScrollDown">
-                <p>Scroll Down</p>
-                <i class="fas fa-chevron-down fa-2x"></i>
             </div>
         </div>
 
-        <!-- This is the second section, it explains some of the features that TeachIt Testing has -->
-        <div class="d-flex flex-column align-items-center homeFeaturesContainer">
-            <h1 class="indexFeaturesTitle">Features</h1>
-            <div class="row row-cols-2 homeFeaturesRow">
-                <!-- Feature 1 -->
-                <div class="col-md-6">
-                    <div class="homeFeature">
-                        <h3>Track Your Progress</h3>
-                        <p>You can track your progress on the different subjects since all test results are saved to the student dashboard. This can help students figure out what they need to revise.</p>
-                    </div>
-                </div>
-                <!-- Feature 2 -->
-                <div class="col-md-6">
-                    <div class="homeFeature">
-                        <h3>Support For Additional Subjects</h3>
-                        <p>Lecturers can add additional subjects to TeachIT Testing, as well as adding questions onto previous subjects. This will keep each topic up to date and allow students to further test their knowledge.</p>
-                    </div>
-                </div>
-                <!-- Feature 3 -->
-                <div class="col-md-6">
-                    <div class="homeFeature">
-                        <h3>Leaderboards For Each Subject</h3>
-                        <p>Each subject has a leaderboard which will show the top 5 students. Excel in your learning and aim for the top!</p>
-                    </div>
-                </div>
-                <!-- Feature 4 -->
-                <div class="col-md-6">
-                    <div class="homeFeature">
-                        <h3>Instant Results</h3>
-                        <p>You will recieve your test results as soon as you have finished the test, it does not require lecturers to mark it. You will be able to see which questions you got right or wrong to help you revise for that topic.</p>
-                    </div>
+        <div class="row">
+            <div class="col-12">
+                <div class="d-flex flex-column align-items-center justify-content-end indexScrollDown">
+                    <p>Scroll Down</p>
+                    <i class="fas fa-chevron-down fa-2x"></i>
                 </div>
             </div>
         </div>
-    </main>
-    <!-- End Main Content -->
 
-    <!-- Footer -->
-    <footer class="footer mt-auto py-3 rounded-top bgColour">
-        <div class="container text-center">
-            <span class="text-muted">Contact us at: SEF@ucw.ac.uk - 07123 123123</span> <br>
-            <span class="text-muted">TeachIt Testing &copy; 2021</span>
+        <div class="row homeFeaturesContainer mt-5">
+            <div class="col-12">
+                <h1 class="display-3 py-3">Features</h1>
+            </div>
+            <!-- Features Section -->
+            <div class="col-6">
+                <div class="homeFeature">
+                    <h3>Track Your Progress</h3>
+                    <p>You can track your progress on the different subjects since all test results are saved to the student dashboard. This can help students figure out what they need to revise.</p>
+                </div>
+            </div>
+
+            <div class="col-6">
+                <div class="homeFeature">
+                    <h3>Support For Additional Subjects</h3>
+                    <p>Lecturers can add additional subjects to TeachIT Testing, as well as adding questions onto previous subjects. This will keep each topic up to date and allow students to further test their knowledge.</p>
+                </div>
+            </div>
+
+            <div class="col-6">
+                <div class="homeFeature">
+                    <h3>Leaderboards For Each Subject</h3>
+                    <p>Each subject has a leaderboard which will show the top 5 students. Excel in your learning and aim for the top!</p>
+                </div>
+            </div>
+
+            <div class="col-6">
+                <div class="homeFeature">
+                    <h3>Instant Results</h3>
+                    <p>You will recieve your test results as soon as you have finished the test, it does not require lecturers to mark it. You will be able to see which questions you got right or wrong to help you revise for that topic.</p>
+                </div>
+            </div>
         </div>
-    </footer>
-    <!-- End Footer -->
+    </div>
+        <!-- End Main Content -->
 
-    <!-- Background Circles -->
-    <ul class="circles">
-        <li></li>
-        <li></li>
-        <li></li>
-        <li></li>
-        <li></li>
-        <li></li>
-        <li></li>
-        <li></li>
-        <li></li>
-        <li></li>
-    </ul>
-    <!-- End Background Circles -->
+        <!-- Footer -->
+        <footer class="footer mt-auto py-3 rounded-top bgColour">
+            <div class="container text-center">
+                <span class="text-muted">Contact us at: SEF@ucw.ac.uk - 07123 123123</span> <br>
+                <span class="text-muted">TeachIt Testing &copy; 2021</span>
+            </div>
+        </footer>
+        <!-- End Footer -->
+
+        <!-- Background Circles -->
+        <ul class="circles">
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+        </ul>
+        <!-- End Background Circles -->
 </body>
 <!-- JS -->
 <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>

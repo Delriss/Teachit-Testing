@@ -19,41 +19,12 @@ body
 /* HOME PAGE CSS */
 
 .homeContainer {
-  display: grid;
-  grid-template-columns: 1fr;
-  grid-template-rows: 95vh 100vh;
-  grid-template-areas: 'homeCover'
-                       'homeParallax';
-  box-sizing: border-box;
-  flex-direction: column;
-  padding: 0;
+  min-height:85vh;
+  overflow: hidden;
 }
 
-/* This is the first section in the container */
-.homeCover {
-  grid-area: homeCover;
-  min-height: 95vh;
-}
-
-.indexTitle {
-  font-size: 6em;
-  color: black;
-  text-align: center;
-  margin-top: 10%;
-}
-
-.indexDescription {
-  text-align: center;
-  margin: 0;
-  padding: 20px;
-}
-
-.indexDescription p {
+.indexDescription{
   font-family: 'Roboto', sans-serif;
-  font-size: 1.75em;
-  color: black;
-  margin: 0% 10%;
-  padding: 0;
 }
 
 .indexLoginButton {
@@ -63,7 +34,6 @@ body
 
 .indexScrollDown {
   margin: 0;
-  position: absolute;
   top: 93%;
   color: black;
   font-family: 'Roboto', sans-serif;
@@ -71,10 +41,16 @@ body
   font-size: 20px;
   letter-spacing: 3px;
   animation: fadeInScrollDown 3s, pulse 3s infinite;
+  overflow: hidden;
+  position: absolute;
+  text-align: center;
+  width: 100%;
+  z-index: 1;
 }
 
 .indexScrollDown p {
   margin-bottom: 0;
+  overflow: hidden;
 }
 
 @keyframes fadeInScrollDown {
@@ -100,30 +76,11 @@ body
   }
 }
 
-/* This is the second section in the container */
-
-.indexFeaturesTitle {
-  font-size: 6em;
-  color: white;
-  text-align: center;
-  margin-top: 5%;
-  margin-bottom: 5%;
-}
-
 .homeFeaturesContainer {
-  grid-area: homeParallax;
-  min-height: 100vh;
   background-image: url('../imgs/indexBackground.jpg');
   background-repeat: no-repeat;
   background-size: cover;
   color: white;
-  margin: 0;
-  padding: 0;
-  z-index: +1;
-}
-
-.homeFeaturesRow {
-  max-width: 90%;
 }
 
 .homeFeature {
