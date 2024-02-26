@@ -27,11 +27,6 @@ body
   font-family: 'Roboto', sans-serif;
 }
 
-.indexLoginButton {
-  margin-top: 25px;
-  text-decoration: underline;
-}
-
 .indexScrollDown {
   margin: 0;
   top: 93%;
@@ -88,10 +83,9 @@ body
   border-radius: 20px;
   color: black;
   padding: 15px;
-  margin: 15px;
   text-wrap: balance;
   text-align: center;
-  height: 90%;
+  height: 100%;
 }
 
 /* END OF HOME PAGE CSS */

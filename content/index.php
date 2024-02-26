@@ -70,7 +70,7 @@ session_start();
             <div class="col-12 d-flex flex-column justify-content-center">
                 <h1 class="display-1">Welcome to TeachIt Testing</h1>
                 <p class="indexDescription fs-4 mt-5">TeachIt Testing is an online testing program which utilises reinforcement testing to help you learn in a fun and competitive manner!</p>
-                <a class="text-black subtitle fs-4 indexLoginButton" href="registration.php">Click here to get started today!</a>
+                <a class="text-black subtitle fs-4 text-decoration-underline mt-1" href="registration.php">Click here to get started today!</a>
             </div>
         </div>
 
@@ -88,28 +88,28 @@ session_start();
                 <h1 class="display-3 py-3">Features</h1>
             </div>
             <!-- Features Section -->
-            <div class="col-6">
+            <div class="col-sm-6 mb-5">
                 <div class="homeFeature">
                     <h3>Track Your Progress</h3>
                     <p>You can track your progress on the different subjects since all test results are saved to the student dashboard. This can help students figure out what they need to revise.</p>
                 </div>
             </div>
 
-            <div class="col-6">
+            <div class="col-sm-6 mb-5">
                 <div class="homeFeature">
                     <h3>Support For Additional Subjects</h3>
                     <p>Lecturers can add additional subjects to TeachIT Testing, as well as adding questions onto previous subjects. This will keep each topic up to date and allow students to further test their knowledge.</p>
                 </div>
             </div>
 
-            <div class="col-6">
+            <div class="col-sm-6 mb-5">
                 <div class="homeFeature">
                     <h3>Leaderboards For Each Subject</h3>
                     <p>Each subject has a leaderboard which will show the top 5 students. Excel in your learning and aim for the top!</p>
                 </div>
             </div>
 
-            <div class="col-6">
+            <div class="col-sm-6 mb-5">
                 <div class="homeFeature">
                     <h3>Instant Results</h3>
                     <p>You will recieve your test results as soon as you have finished the test, it does not require lecturers to mark it. You will be able to see which questions you got right or wrong to help you revise for that topic.</p>
