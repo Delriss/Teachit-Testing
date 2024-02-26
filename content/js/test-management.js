@@ -154,6 +154,9 @@ $(document).on("click", ".deleteQuestion", function(e) {
         if (result.isConfirmed) {
             //get the test id from the modal
             var testID = $("#createTestForm").attr("data-test-id");
+
+            //delete the question from the dom
+            deleteQuestion(questionNumber);
         }
     });
 });
