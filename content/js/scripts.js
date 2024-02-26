@@ -83,8 +83,49 @@ $("#loginForm").submit(function (e) {
     data: {
       email: $("#email").val(),
       password: $("#password").val(),
-    }
-  });
-  
+    },
 
+    success: function(data) {
+      if (data.includes("e1-No_User_Found")) {
+        console.log(data);
+        //OUTPUT
+        Swal.fire({
+          //Alert the user with an error message
+          title: "Account not found",
+          text: "You have inputted an incorrect email.",
+          icon: "error",
+          showCancelButton: false,
+          confirmButtonColor: "#3085d6",
+          cancelButtonColor: "#d33",
+          confirmButtonText: "Continue",
+        });
+      } else if (data.includes("e2-Password_Incorrect")) {
+        console.log(data);
+        //OUTPUT
+        Swal.fire({
+          //Alert the user with an error message
+          title: "Password Incorrect",
+          text: "You have inputted the wrong password.",
+          icon: "error",
+          showCancelButton: false,
+          confirmButtonColor: "#3085d6",
+          cancelButtonColor: "#d33",
+          confirmButtonText: "Continue",
+        });
+      } else if (data.includes("e3-Login_Successful")) {
+        console.log(data);
+        //OUTPUT
+        Swal.fire({
+          //Alert the user with an error message
+          title: "Password Incorrect",
+          text: "You have inputted the wrong password.",
+          icon: "error",
+          showCancelButton: false,
+          confirmButtonColor: "#3085d6",
+          cancelButtonColor: "#d33",
+          confirmButtonText: "Continue",
+        });
+      }
+    }
+  })
 });

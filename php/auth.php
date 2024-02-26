@@ -20,9 +20,8 @@ if (isset($_POST["email"]) and isset($_POST["password"])) { //if username and pa
 	$count = mysqli_num_rows($run);
 
 	if ($count === 0) {
-		//If the email does not match any users in the database		
-		header("Location: ../content/login.php?e=1");
-		die("User does not exist");
+		//if the email does not match any users in the database
+		echo "e1-No_User_Found";
 	}
 	else {
 		//If the email does match a user in the database
@@ -35,17 +34,12 @@ if (isset($_POST["email"]) and isset($_POST["password"])) { //if username and pa
 			//will likely change this to the accessLevel in the database later on for admin purposes
 			$_SESSION["auth"] = true;
 
-			die("Login successful");
+			echo "e3-Login_Successful";
 
 		} else {
 			//If the password does not match the email
-			//header("Location: ../content/login.php?e=2");
-			die("Password does not match");
+			echo "e2-Password_Incorrect";
 		}
-
-
-		header("Location: ../content/login.php?e=2");
-		die("User exists");
 	}
 }
 
