@@ -12,7 +12,17 @@ if (isset($_POST["email"]) and isset($_POST["password"])) { //if username and pa
 
 	//connects to the database to verify login
 	//Connect to DB
-	include_once($_SERVER['DOCUMENT_ROOT'].'/php/_connect.php');
+	include_once($_SERVER['DOCUMENT_ROOT'] . '/php/_connect.php');
+
+	//Check reCAPTCHA score
+	require_once($_SERVER['DOCUMENT_ROOT'] . '/php/readEnvVars.php'); //Reads the environment variables from the .env file
+	$captcha = $_POST['recapToken']; //Get the reCAPTCHA token from the POST request
+	$secretKey = $_ENV["CAPTCHA_PRIVATE"]; //Get the reCAPTCHA secret key from the environment variables
+	$reCAPTCHA = json_decode(file_get_contents('https://www.google.com/recaptcha/api/siteverify?secret=' . urlencode($secretKey) .  '&response=' . urlencode($captcha))); //Send a GET request to the reCAPTCHA API
+	//Check if the reCAPTCHA score is less than 0.6 (60%)
+	if ($reCAPTCHA->score <= 0.6) {
+		die("Captcha Failed.");
+	}
 
 	//setting the username and password variables from the login form to use in verification
 	$email = $_POST["email"];
@@ -28,8 +38,7 @@ if (isset($_POST["email"]) and isset($_POST["password"])) { //if username and pa
 	if ($count === 0) {
 		//if the email does not match any users in the database, this will send a sweet alert to inform the user
 		echo "e1";
-	}
-	else {
+	} else {
 		//If the email does match a user in the database
 		$result = mysqli_fetch_assoc($run);
 
@@ -59,6 +68,3 @@ if (isset($_POST["email"]) and isset($_POST["password"])) { //if username and pa
 	//If the username and password have not been entered, sends a sweet alert to inform the user
 	echo "e4";
 }
-
-
-?>
