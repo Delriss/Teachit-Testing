@@ -103,3 +103,62 @@ $(document).ready(function () {
     console.log("Not on registration page");
   }
 });
+
+// Login Form
+$("#loginForm").submit(function (e) {
+  e.preventDefault(); //Prevent the default form submission
+
+  //Ajax request to the server for asynchronous processing
+  $.ajax({
+    type: "POST",
+    url: "../php/auth.php",
+    data: {
+      email: $("#email").val(),
+      password: $("#password").val(),
+    },
+
+    success: function(data) {
+      if (data.includes("e1") || data.includes("e2")) {
+        console.log(data);
+        //OUTPUT
+        Swal.fire({
+          //Alert the user with an error message
+          title: "Email or Password Incorrect",
+          text: "Please check that you have entered the correct email and password.",
+          icon: "error",
+          showCancelButton: false,
+          confirmButtonColor: "#3085d6",
+          confirmButtonText: "Continue",
+        });
+      } else if (data.includes("e3")) {
+        console.log(data);
+        //OUTPUT
+        Swal.fire({
+          //Alert the user with an error message
+          title: "Successfully Logged In",
+          text: "Please click continue to proceed to the testing page.",
+          icon: "success",
+          showCancelButton: false,
+          confirmButtonColor: "#3085d6",
+          confirmButtonText: "Continue",
+        }).then((result) => {
+          if (result.isConfirmed) {
+            window.location = "./index";
+          }
+        });        
+      } else if (data.includes("e4")) {
+        console.log(data);
+        //OUTPUT
+        Swal.fire({
+          //Alert the user with an error message
+          title: "Details Missing",
+          text: "Please ensure that you have entered the email and password.",
+          icon: "error",
+          showCancelButton: false,
+          confirmButtonColor: "#3085d6",
+          confirmButtonText: "Continue",
+        });
+      }
+    }
+  })
+});
