@@ -1,12 +1,5 @@
 <?php
 
-//If not accessed via POST, refuse access - POST will only be via router/JS
-if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
-	//If the request is not a POST request, the user will be redirected to the login page
-	header("Location: /");
-	die();
-}
-
 //this is going to create a new test in the database. It will use lastInsertID to get the testID of the test that was just created, and create the questions for it.
 //it will then use lastInsertID again to get the questionID of the question that was just created, and create the answers for it.
 
