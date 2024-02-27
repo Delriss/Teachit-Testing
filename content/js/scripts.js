@@ -71,7 +71,7 @@ $(document).ready(function () {
   }
 
   //Ensure registration form is loaded
-  if ($("#courses").length > 0) {
+  if ($("#courseTitle").length > 0) {
     //Send AJAX request to the server for asynchronous processing
     $.ajax({
       type: "POST",
@@ -82,7 +82,7 @@ $(document).ready(function () {
       success: function (data) {
         //Output
         for (var i = 0; i < data.length; i++) {
-          $("#courses").append(
+          $("#courseTitle").append(
             "<option value=" +
               data[i].SID +
               ">" +
@@ -99,9 +99,9 @@ $(document).ready(function () {
     });
   }
   //Debugging
-  else {
-    console.log("Not on registration page");
-  }
+  // else {
+  //   console.log("Not on registration page");
+  // }
 });
 
 // Login Form
