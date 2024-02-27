@@ -1,6 +1,8 @@
 <?php 
-if (session_status() === PHP_SESSION_NONE) {
-    session_start();
+//Remove direct access to the file and require login
+if ($_SESSION['LoggedIn'] == false) {
+    header("Location: /login");
+    die();
 }
 ?>
 

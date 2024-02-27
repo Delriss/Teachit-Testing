@@ -1,4 +1,5 @@
 <?php
+
 //Check if data has been submitted correctly
 if(empty($_POST['studentNum']) || 
    empty($_POST['firstName']) || 
@@ -53,7 +54,8 @@ $result = mysqli_stmt_get_result($stmt); //Get results from prepared statement
 
 if(mysqli_num_rows($result) > 0)
 {
-    die("Student ID already in use");
+    echo("Student ID already in use");
+    die();
 }
 
 //Check to see if email is already in use
@@ -65,7 +67,8 @@ $result = mysqli_stmt_get_result($stmt); //Get results from prepared statement
 
 if(mysqli_num_rows($result) > 0)
 {
-    die("Email already in use");
+    echo("Email already in use");
+    die();
 }
 
 //Create Database User

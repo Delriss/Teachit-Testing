@@ -24,7 +24,7 @@ $("#registrationForm").submit(function (e) {
           confirmButtonText: "Continue",
         }).then((result) => {
           if (result.isConfirmed) {
-            window.location = "./index";
+            window.location = "/test-selection";
           }
         });
         //If the request is not successful
@@ -71,7 +71,7 @@ $(document).ready(function () {
   }
 
   //Ensure registration form is loaded
-  if ($("#courses").length > 0) {
+  if ($("#courseTitle").length > 0) {
     //Send AJAX request to the server for asynchronous processing
     $.ajax({
       type: "POST",
@@ -82,7 +82,7 @@ $(document).ready(function () {
       success: function (data) {
         //Output
         for (var i = 0; i < data.length; i++) {
-          $("#courses").append(
+          $("#courseTitle").append(
             "<option value=" +
               data[i].SID +
               ">" +
@@ -143,7 +143,7 @@ $("#loginForm").submit(function (e) {
           confirmButtonText: "Continue",
         }).then((result) => {
           if (result.isConfirmed) {
-            window.location = "./index";
+            window.location = "/test-selection";
           }
         });        
       } else if (data.includes("e4")) {

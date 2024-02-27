@@ -1,4 +1,9 @@
 <?php
+//Remove direct access to the file and require login
+if ($_SESSION['LoggedIn'] == false) {
+    header("Location: /login");
+    die();
+}
 
 include_once($_SERVER['DOCUMENT_ROOT'].'/php/retrieveTests.php');
 

@@ -1,17 +1,19 @@
 <?php
-    if(isset($_POST["testID"]))
-    {
-        include_once($_SERVER['DOCUMENT_ROOT'].'/php/_connect.php'); 
-        $testID = mysqli_real_escape_string($db_connect,$_POST["testID"]);
+//Remove direct access to the file and require login
+if ($_SESSION['LoggedIn'] == false) {
+    header("Location: /login");
+    die();
+}
 
-        $sql = "DELETE FROM tests WHERE testID = ?";
+if (isset($_POST["testID"])) {
+    include_once($_SERVER['DOCUMENT_ROOT'] . '/php/_connect.php');
+    $testID = mysqli_real_escape_string($db_connect, $_POST["testID"]);
 
-        $stmt = $db_connect->prepare($sql); 
-        $stmt->bind_param("i", $testID);
-        $stmt->execute();
-    }
-    else
-    {
-        die("Error: Test ID not set");
-    }
-?>
+    $sql = "DELETE FROM tests WHERE testID = ?";
+
+    $stmt = $db_connect->prepare($sql);
+    $stmt->bind_param("i", $testID);
+    $stmt->execute();
+} else {
+    die("Error: Test ID not set");
+}
