@@ -39,10 +39,10 @@ $jRoute->Route(["post"], "/php/connect", "php/_connect.php");
 $jRoute->Route(["post"], "/php/auth", "php/auth.php");
 
 //Create outputStudentsTests route
-$jRoute->Route(["post"], "/php/outputStudentsTests", "php/outputStudentsTests.php");
+$jRoute->Route(["post"], "/php/outputStudentTests", "php/outputStudentTests.php");
 
 //Create outputCompletedStudentsTests route
-$jRoute->Route(["post"], "/php/outputCompletedStudentsTests", "php/outputCompletedStudentsTests.php");
+$jRoute->Route(["post"], "/php/outputCompletedStudentTests", "php/outputCompletedStudentTests.php");
 
 //Create outputTests route
 $jRoute->Route(["post"], "/php/outputTests", "php/outputTests.php");
