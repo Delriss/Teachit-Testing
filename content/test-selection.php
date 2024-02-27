@@ -1,6 +1,8 @@
 <?php
-// DEBUGGING - Start Session and set UID to 1
-$_SESSION['UID'] = 1;
+if ($_SESSION['LoggedIn'] == false) {
+    header("Location: /login");
+    die();
+}
 ?>
 
 
@@ -55,7 +57,7 @@ $_SESSION['UID'] = 1;
                         </ul>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Logout</a>
+                        <a class="nav-link" href="/logout">Logout</a>
                     </li>
                 </ul>
             </div>
