@@ -17,21 +17,27 @@ if(!isset($_POST['testTitle']) || !isset($_POST['testDescription']) || !isset($_
 }
 
 //Get the test title from the form
-$testTitle = $_POST['testTitle'];
+$testTitle = mysqli_real_escape_string($db_connect, $_POST['testTitle']);
 //Get the test description from the form
-$testDescription = $_POST['testDescription'];
+$testDescription = mysqli_real_escape_string($db_connect, $_POST['testDescription']);
 //Get the subject from the form
-$subject = $_POST['testSubject'];
+$subject = mysqli_real_escape_string($db_connect, $_POST['testSubject']);
+//get the date/time of the test from the form
+$dateTime = mysqli_real_escape_string($db_connect, $_POST['testDateTime']);
+if ($dateTime == "") {
+    $dateTime = null;
+}
 //this array contains questions, an array of their answers, and an array of the correct answers.
 $question = $_POST['questions'];
 
 $sql = "INSERT INTO `tests` (`title`, 
                            `testDesc`, 
-                           `subject`)
-        VALUES (?, ?, ?);";
+                           `subject`,
+                           `testDateTime`)
+        VALUES (?, ?, ?, ?);";
 
 $stmt = mysqli_prepare($db_connect, $sql); //Prepare SQL statement
-mysqli_stmt_bind_param($stmt, "ssi", $testTitle, $testDescription, $subject); //Bind parameters
+mysqli_stmt_bind_param($stmt, "ssis", $testTitle, $testDescription, $subject, $dateTime); //Bind parameters
 
 if(!mysqli_stmt_execute($stmt)) //Execute prepared statement
 {

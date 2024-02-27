@@ -25,6 +25,7 @@ class Test {
     public $questions = array();
     public $subject;
     public $subjectID;
+    public $testDateTime;
     //Needs Functionality
 }
 
@@ -37,7 +38,7 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/php/_connect.php');
 $testArray = array();
 
 //Get all tests from the database
-$sql = "SELECT `testID`, `title`, `testDesc`, `subject` FROM tests";
+$sql = "SELECT `testID`, `title`, `testDesc`, `subject`, `testDateTime` FROM tests";
 $tests = mysqli_query($db_connect, $sql);
 
 //loop through each test in the database
@@ -49,6 +50,7 @@ foreach ($tests as $test) {
     $testObject->title = $test['title'];
     $testObject->testDesc = $test['testDesc'];
     $testObject->subjectID = $test['subject'];
+    $testObject->testDateTime = $test['testDateTime'];
 
     //Get the subjects belonging to the test
     $sql = "SELECT `subjectName` FROM `subjects` WHERE `SID` = ?";

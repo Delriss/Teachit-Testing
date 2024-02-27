@@ -1,3 +1,4 @@
+//initialise the flickity carousel and store it in a variable for later use
 $('.tests-carousel').flickity({});
 var $testsCarousel = $('.tests-carousel').flickity();
 
@@ -5,6 +6,17 @@ var $testsCarousel = $('.tests-carousel').flickity();
 $(document).ready(function() {
     getSubjects();
 });
+
+//date&time togggles it's disabled attribute when the checkbox is clicked
+$("#enableDateTime").click(function() {
+    if($(this).is(":checked")) {
+        $("#testDateTime").prop("disabled", false);
+    }
+    else {
+        $("#testDateTime").prop("disabled", true);
+    }
+});
+
 
 //when the modal is hidden, reset the form
 $(document).on('hidden.bs.modal', '#createTestModal', function() {
@@ -17,9 +29,14 @@ $(document).on('hidden.bs.modal', '#createTestModal', function() {
     $("#createTestForm").attr("data-mode", "create");
     //remove the test id attribute from the modal
     $("#createTestForm").removeAttr("data-test-id");
+    //reset the date and time input
+    $("#testDateTime").prop("disabled", true);
+    $("#enableDateTime").prop("checked", false);
+    $("#testDateTime").val("");
 });
 
 function getSubjects() {
+    //get the subjects from the database
     $.ajax({
         type: "POST",
         url: "/php/retrieveSubjects.php",
@@ -27,6 +44,7 @@ function getSubjects() {
         success: function(data) {
             //populate the dropdown with the subjects
             for(var i = 0; i < data.length; i++) {
+                //create an option element for each subject and append it to the dropdown
                 var option = $("<option value='" + data[i].SID + "'>" + data[i].subjectName + "</option>");
                 $("#testSubject").append(option);
             }
@@ -36,7 +54,6 @@ function getSubjects() {
         }
     });
 }
-
 
 //function, passed a question number, returns the html for a question accordion item with updated attributes to uniquely identify them
 function updateQuestionData(question, questionNumber) {
@@ -152,15 +169,11 @@ $(document).on("click", ".deleteQuestion", function(e) {
     }).then((result) => {
         //If the user confirms they want to delete the question
         if (result.isConfirmed) {
-            //get the test id from the modal
-            var testID = $("#createTestForm").attr("data-test-id");
-
             //delete the question from the dom
             deleteQuestion(questionNumber);
         }
     });
 });
-
 
 //function for validating the form
 function validateForm(form) {
@@ -194,20 +207,33 @@ function validateForm(form) {
             Swal.fire("Error", "Test description must be less than 255 characters", "error");
             valid = false;
         }
-    
-        //for each input in the form with name "question", check if it is empty
-        form.find("input[name='question']").each(function() {
-            if($(this).val() === "") {
+
+        //if the test date and time is enabled, check if it is empty
+        if($("#enableDateTime").is(":checked")) {
+            if($("#testDateTime").val() === "") {
                 //if it is empty, fire an error message
-                Swal.fire("Error", "Please fill in all the questions", "error");
+                Swal.fire("Error", "Please fill in the test date and time", "error");
                 valid = false;
             }
-            else if($(this).val().length > 1000) {
-                //if the question is longer than supported in the database, fire an error message
-                Swal.fire("Error", "Questions must be less than 100 characters", "error");
-                return false;
+        }
+
+        //if test date and time input is enabled, check if it is empty
+        if($("#testDateTime").prop("disabled") == false) {
+            if($("#testDateTime").val() === "") {
+                //if it is empty, fire an error message
+                Swal.fire("Error", "Please fill in the test date and time", "error");
+                valid = false;
             }
-        });
+            //check if the test date and time is in the past
+            var testDateTime = new Date($("#testDateTime").val());
+            var now = new Date();
+            if(testDateTime < now) {
+                //if it is in the past, fire an error message
+                Swal.fire("Error", "Test date and time must be in the future", "error");
+                valid = false;
+            }
+        }
+
     
         //for each input in the form with name "answer", check if it is empty
         form.find("input[name='answer']").each(function() {
@@ -248,7 +274,6 @@ $("#submitForm").click(function(e) {
 
     //If the form is valid, continue
     if(validateForm(form) == true) {
-
         //get the test title
         var testTitle = $("#testName").val();
 
@@ -257,6 +282,16 @@ $("#submitForm").click(function(e) {
 
         //get the test subject
         var testSubject = $("#testSubject").val();
+
+        //get the test date and time. if the date and time input is disabled, set the value to null
+
+        if($("#testDateTime").prop("disabled") == true) {
+            var testDateTime = null;
+        }
+        else {
+            var testDateTime = $("#testDateTime").val();
+        }
+
         
         //define an array to store questions
         var questions = [];
@@ -313,6 +348,7 @@ $("#submitForm").click(function(e) {
                     testTitle: testTitle,
                     testDescription: testDescription,
                     testSubject: testSubject,
+                    testDateTime: testDateTime,
                     questions: questions
                 },
                 success: function() {
@@ -326,9 +362,9 @@ $("#submitForm").click(function(e) {
                     Swal.fire("Error", "There was an error updating the test", "error");
                 }
             });
-
         }
         else{
+            //create the test in the database
             $.ajax({
                 url: "/php/createTest.php",
                 type: "POST",
@@ -336,9 +372,11 @@ $("#submitForm").click(function(e) {
                     testTitle: testTitle,
                     testDescription: testDescription,
                     testSubject: testSubject,
+                    testDateTime: testDateTime,
                     questions: questions
                 },
                 success: function() {
+                    //update the DOM asynchronously so it reflects the change
                     updateTestCarousel();
                     //close modal
                     $('#createTestModal').modal('hide');
@@ -350,8 +388,6 @@ $("#submitForm").click(function(e) {
                 }
             });
         }
-
-
     }
 
     //otherwise, the form must be invalid so break out of the function
@@ -431,7 +467,6 @@ $(document).on('show.bs.modal', '#createTestModal', function(e) {
                 $("#testDescription").val(test.testDesc);
                 $("#testSubject").val(test.subjectID);
 
-
                 //for each question in the test, add a question to the modal
                 for(var i = 0; i < test.questions.length; i++) {
                     //if this is the first question, we don't need to clone it
@@ -475,7 +510,6 @@ $(document).on('show.bs.modal', '#createTestModal', function(e) {
                 Swal.fire("Error", "There was an error getting the test", "error");
             }
         });
-
     }
     else{
         //set the form to create mode
@@ -501,5 +535,5 @@ function updateTestCarousel() {
             //reload the page as a last resort
             window.location.reload();
         }
-  });
+    });
 }

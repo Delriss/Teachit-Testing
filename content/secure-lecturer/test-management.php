@@ -103,6 +103,16 @@ $_SESSION['UID'] = 1;
                                     <option value="" selected disabled>Select a Subject</option>
                                 </select>
                             </div>
+                            <!-- add a date/time section which can be enabled and disabled through a tickbox, the tickbox is inline with the date/time input -->
+                            <div class="mb-3">
+                                <label for="testDateTime" class="form-label">Test Date & Time</label>
+                                <input type="datetime-local" class="form-control" id="testDateTime" name="testDateTime" required disabled>
+                                <div class="form-check form-switch">
+                                    <input class="form-check-input" type="checkbox" id="enableDateTime" name="enableDateTime">
+                                    <label class="form-check-label" for="enableDateTime">Enable Date & Time</label>
+                                </div>
+                            </div>
+
                             <div class="accordion accordion-flush" id="accordionFlush">
                                 <div class="accordion-item" id="questionAccordionItem">
                                     <h2 class="accordion-header" id="flush-heading1">
