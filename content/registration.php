@@ -89,7 +89,7 @@
             </div>
             <button type="submit" class="btn btn-dark rounded-pill">Register</button>
             <hr>
-            <p>Already have an account? <a id="loginText" href="login.php">Login Here!</a></p>
+            <p>Already have an account? <a id="loginText" href="/login">Login Here!</a></p>
         </form>
     </div>
     <!-- End Main Content -->
