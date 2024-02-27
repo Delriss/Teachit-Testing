@@ -67,12 +67,12 @@ $_SESSION['UID'] = 1;
 
     <!-- Main Content -->
     <div class="area">
-        <!-- Button trigger modal -->
-        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#createTestModal">
-            New Test
-        </button>
-        <div class="titleWrapper">
-            <h3>Available Tests</h3>
+        <div class="titleWrapper d-flex align-items-center pt-4 justify-content-center">
+            <h3 class="mb-0 mx-3">Available Tests</h3>
+            <!-- Button trigger modal -->
+            <button type="button" class="btn btn-primary mx-3" data-bs-toggle="modal" data-bs-target="#createTestModal">
+                New Test
+            </button>
         </div>
         <div class="tableWrap tests-carousel" id="tests">
             <?php include_once($_SERVER['DOCUMENT_ROOT'].'/php/outputTests.php'); ?>

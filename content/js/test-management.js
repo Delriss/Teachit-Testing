@@ -1,6 +1,14 @@
 //initialise the flickity carousel and store it in a variable for later use
-$('.tests-carousel').flickity({});
-var $testsCarousel = $('.tests-carousel').flickity();
+var $testsCarousel = $('.tests-carousel').flickity({
+    //flickity options
+    contain: true,
+    wrapAround: true,
+    draggable: true,
+    freeScroll: true,
+    groupCells: '80%',
+    adaptiveHeight: false,
+    friction: 0.5
+});
 
 //on document ready, get the subjects for the dropdown
 $(document).ready(function() {
@@ -16,7 +24,6 @@ $("#enableDateTime").click(function() {
         $("#testDateTime").prop("disabled", true);
     }
 });
-
 
 //when the modal is hidden, reset the form
 $(document).on('hidden.bs.modal', '#createTestModal', function() {
@@ -529,7 +536,15 @@ function updateTestCarousel() {
           //destroy current flickity carousel, change elements of cards, then rebuild flickity afterwards with new values
           $testsCarousel.flickity('destroy');
           $('#tests').html(newState);
-          $testsCarousel.flickity();
+          $testsCarousel.flickity({
+            contain: true,
+            wrapAround: true,
+            draggable: true,
+            freeScroll: true,
+            groupCells: '80%',
+            adaptiveHeight: false,
+            friction: 0.5
+          });
         },
         error: function() {
             //reload the page as a last resort
