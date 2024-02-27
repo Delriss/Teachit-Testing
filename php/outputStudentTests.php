@@ -1,9 +1,9 @@
 <?php
-//File Security Check to avoid direct access
-if (!isset($_SESSION)) {
-    header("Location: /login");
-    die('<p class="lead">User is not logged in.</p>');
-}
+// //File Security Check to avoid direct access
+// if (!isset($_SESSION)) {
+//     header("Location: /login");
+//     die('<p class="lead">User is not logged in.</p>');
+// }
 
 
 require_once("./_connect.php");
