@@ -11,8 +11,11 @@ $jRoute->Route(["get"], "/", function() {
 });
 
 
-//Create login Route
-$jRoute->Route(["get"], "/", "content/login.php");
+//Create Index Route
+$jRoute->Route(["get"], "/", "content/index.php");
+
+//Create Login Route
+$jRoute->Route(["get"], "/login", "content/login.php");
 
 //Create register Route
 $jRoute->Route(["get"], "/register", "content/registration.php");
