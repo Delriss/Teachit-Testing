@@ -1,6 +1,13 @@
 <?php
 session_start();
 
+//If not accessed via POST, refuse access - POST will only be via router/JS
+if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
+	//If the request is not a POST request, the user will be redirected to the login page
+	header("Location: /");
+	die();
+}
+
 if (isset($_POST["email"]) and isset($_POST["password"])) { //if username and password have been enterred
 
 	//connects to the database to verify login
@@ -31,6 +38,16 @@ if (isset($_POST["email"]) and isset($_POST["password"])) { //if username and pa
 			$_SESSION["ID"] = $result["ID"];
 			$_SESSION["auth"] = $result["accessLevel"];
 			$_SESSION["LoggedIn"] = true;
+
+			//Adds the user's role to the session for use in routing
+			if ($_SESSION["auth"] == 2) {
+				$_SESSION["role"] = "admin";
+			} else if ($_SESSION["auth"] == 1) {
+				$_SESSION["role"] = "lecturer";
+			} else {
+				$_SESSION["role"] = "student";
+			}
+
 			//sends a sweet alert to the user to let them know they have logged in
 			echo "e3";
 		} else {

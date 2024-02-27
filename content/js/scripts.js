@@ -5,7 +5,7 @@ $("#registrationForm").submit(function (e) {
   //Ajax request to the server for asynchronous processing
   $.ajax({
     type: "POST",
-    url: "/php/createUser.php",
+    url: "/php/createUser",
     data: $("#registrationForm").serialize(),
 
     //If the request is successful
@@ -24,7 +24,7 @@ $("#registrationForm").submit(function (e) {
           confirmButtonText: "Continue",
         }).then((result) => {
           if (result.isConfirmed) {
-            window.location = "./index";
+            window.location = "/test-selection";
           }
         });
         //If the request is not successful
@@ -47,7 +47,7 @@ $(document).ready(function () {
     //Run the test selection display script
     $.ajax({
       type: "POST",
-      url: "/php/outputStudentTests.php",
+      url: "/php/outputStudentTests",
       data: $("#testContainer").serialize(),
 
       success: function (data) {
@@ -60,7 +60,7 @@ $(document).ready(function () {
     //Run the completed test selection display script
     $.ajax({
       type: "POST",
-      url: "/php/outputCompletedStudentTests.php",
+      url: "/php/outputCompletedStudentTests",
       data: $("#completedTestContainer").serialize(),
 
       success: function (data) {
@@ -75,7 +75,7 @@ $(document).ready(function () {
     //Send AJAX request to the server for asynchronous processing
     $.ajax({
       type: "POST",
-      url: "/php/retrieveSubjects.php",
+      url: "/php/retrieveSubjects",
       dataType: "json",
 
       //If the request is successful
@@ -111,7 +111,7 @@ $("#loginForm").submit(function (e) {
   //Ajax request to the server for asynchronous processing
   $.ajax({
     type: "POST",
-    url: "../php/auth.php",
+    url: "/php/auth",
     data: {
       email: $("#email").val(),
       password: $("#password").val(),
@@ -143,7 +143,7 @@ $("#loginForm").submit(function (e) {
           confirmButtonText: "Continue",
         }).then((result) => {
           if (result.isConfirmed) {
-            window.location = "./index";
+            window.location = "/test-selection";
           }
         });        
       } else if (data.includes("e4")) {

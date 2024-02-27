@@ -49,7 +49,7 @@
                         </ul>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Logout</a>
+                        <a class="nav-link" href="/logout">Logout</a>
                     </li>
                 </ul>
             </div>
@@ -64,7 +64,7 @@
             <div class="col-12 d-flex flex-column justify-content-center">
                 <h1 class="display-1">Welcome to TeachIt Testing</h1>
                 <p class="indexDescription fs-4 mt-5">TeachIt Testing is an online testing program which utilises reinforcement testing to help you learn in a fun and competitive manner!</p>
-                <a class="text-black subtitle fs-4 text-decoration-underline mt-1" href="registration.php">Click here to get started today!</a>
+                <a class="text-black subtitle fs-4 text-decoration-underline mt-1" href="/register">Click here to get started today!</a>
             </div>
         </div>
 
