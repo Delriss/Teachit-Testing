@@ -15,6 +15,82 @@ body
   color: black;
 }
 
+/* ============= */
+/* HOME PAGE CSS */
+
+.homeContainer {
+  min-height:85vh;
+  overflow: hidden;
+}
+
+.indexDescription{
+  font-family: 'Roboto', sans-serif;
+}
+
+.indexScrollDown {
+  margin: 0;
+  top: 93%;
+  color: black;
+  font-family: 'Roboto', sans-serif;
+  font-weight: 500;
+  font-size: 20px;
+  letter-spacing: 3px;
+  animation: fadeInScrollDown 3s, pulse 3s infinite;
+  overflow: hidden;
+  position: absolute;
+  text-align: center;
+  width: 100%;
+  z-index: 1;
+}
+
+.indexScrollDown p {
+  margin-bottom: 0;
+  overflow: hidden;
+}
+
+@keyframes fadeInScrollDown {
+  from {
+      top: 120%;
+      opacity: 0;
+  }
+  to {
+      top: 93%;
+      opacity: 1;
+  }
+}
+
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.1);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+.homeFeaturesContainer {
+  background-image: url('../imgs/indexBackground.jpg');
+  background-repeat: no-repeat;
+  background-size: cover;
+  color: white;
+}
+
+.homeFeature {
+  background-color: #E3F2FD;
+  border-radius: 20px;
+  color: black;
+  padding: 15px;
+  text-wrap: balance;
+  text-align: center;
+  height: 100%;
+}
+
+/* END OF HOME PAGE CSS */
+/* ==================== */
+
 /*BACKGROUND ANIMATION*/
 .circles {
   position: fixed;

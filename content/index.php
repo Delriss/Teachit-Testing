@@ -1,11 +1,3 @@
-<?php
-if ($_SESSION['LoggedIn'] == false) {
-    header("Location: /login");
-    die();
-}
-?>
-
-
 <!DOCTYPE html>
 <html class="h-100" lang="en">
 
@@ -14,7 +6,7 @@ if ($_SESSION['LoggedIn'] == false) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="author" content="SEF">
 
-    <title>Test Selection - TeachIt Testing</title>
+    <title>TeachIt Testing</title>
 
     <!-- Stylesheets -->
     <link rel="stylesheet" href="../content/css/style.css">
@@ -40,10 +32,10 @@ if ($_SESSION['LoggedIn'] == false) {
             <div class="collapse navbar-collapse" id="navbarCollapsable">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                     <li class="nav-item">
-                        <a class="nav-link" aria-current="page" href="/">Home</a>
+                        <a class="nav-link active" aria-current="page" href="/">Home</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link active" href="/test-selection">Test Selection</a>
+                        <a class="nav-link" href="/test-selection">Test Selection</a>
                     </li>
                     <li class="nav-item dropdown bgColour">
                         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -68,81 +60,82 @@ if ($_SESSION['LoggedIn'] == false) {
 
     <!-- Main Content -->
     <div class="container-fluid text-center">
-        <!-- New Test Selection Area -->
-        <div class="row">
-            <div class="col-12">
-                <h1 class="display-4 mt-5">Test Selection</h1>
-                <p class="lead">Please select a test to take</p>
+        <div class="row homeContainer mb-5">
+            <div class="col-12 d-flex flex-column justify-content-center">
+                <h1 class="display-1">Welcome to TeachIt Testing</h1>
+                <p class="indexDescription fs-4 mt-5">TeachIt Testing is an online testing program which utilises reinforcement testing to help you learn in a fun and competitive manner!</p>
+                <a class="text-black subtitle fs-4 text-decoration-underline mt-1" href="/register">Click here to get started today!</a>
             </div>
         </div>
 
-        <hr class="my-4">
-
-        <!-- Test Cards -->
-        <div id="testContainer" class="row">
-            <!-- BASIC TEST CARD TEMPLATE -->
-            <!-- <div class="col-sm-4">
-                <div class="card">
-                    <div class="card-body">
-                        <h5 class="card-title">Test 1</h5>
-                        <p class="card-text">Test Description</p>
-                    </div>
-                    <div class="card-footer">
-                        <a href="test.php" class="btn btn-primary">Start Test</a>
-                    </div>
+        <div class="row">
+            <div class="col-12">
+                <div class="d-flex flex-column align-items-center justify-content-end indexScrollDown">
+                    <p>Scroll Down</p>
+                    <i class="fas fa-chevron-down fa-2x"></i>
                 </div>
-            </div> -->
-            <!-- END BASIC TEST CARD TEMPLATE -->
-
-            <!-- PHP GENERATED TEST CARDS WILL BE POPULATED HERE. 
-            AJAX request queries retrieveTests.php to retrieve custom test cards -->
-
-        </div>
-
-        <!-- Completed Test Cards -->
-        <div class="row">
-            <div class="col-12">
-                <h1 class="display-4 mt-5">Completed Tests</h1>
-                <p class="lead">View your completed tests</p>
             </div>
         </div>
 
-        <hr class="my-4">
+        <div class="row homeFeaturesContainer mt-5">
+            <div class="col-12">
+                <h1 class="display-3 py-3">Features</h1>
+            </div>
+            <!-- Features Section -->
+            <div class="col-sm-6 mb-5">
+                <div class="homeFeature">
+                    <h3>Track Your Progress</h3>
+                    <p>You can track your progress on the different subjects since all test results are saved to the student dashboard. This can help students figure out what they need to revise.</p>
+                </div>
+            </div>
 
-        <div id="completedTestContainer" class="row mb-5">
+            <div class="col-sm-6 mb-5">
+                <div class="homeFeature">
+                    <h3>Support For Additional Subjects</h3>
+                    <p>Lecturers can add additional subjects to TeachIT Testing, as well as adding questions onto previous subjects. This will keep each topic up to date and allow students to further test their knowledge.</p>
+                </div>
+            </div>
 
-            <!--PHP GENERATED COMPLETED TEST CARDS WILL BE POPULATED HERE.
-        AJAX request queries retrieveCompletedTests.php to retrieve custom test cards -->
+            <div class="col-sm-6 mb-5">
+                <div class="homeFeature">
+                    <h3>Leaderboards For Each Subject</h3>
+                    <p>Each subject has a leaderboard which will show the top 5 students. Excel in your learning and aim for the top!</p>
+                </div>
+            </div>
 
+            <div class="col-sm-6 mb-5">
+                <div class="homeFeature">
+                    <h3>Instant Results</h3>
+                    <p>You will recieve your test results as soon as you have finished the test, it does not require lecturers to mark it. You will be able to see which questions you got right or wrong to help you revise for that topic.</p>
+                </div>
+            </div>
         </div>
     </div>
-    <!-- End Main Content -->
+        <!-- End Main Content -->
 
-    <!-- Footer -->
-    <footer class="footer mt-auto py-3 rounded-top bgColour">
-        <div class="container text-center">
-            <span class="text-muted">TeachIt Testing &copy; 2021</span>
-        </div>
-    </footer>
-    <!-- End Footer -->
+        <!-- Footer -->
+        <footer class="footer mt-auto py-3 rounded-top bgColour">
+            <div class="container text-center">
+                <span class="text-muted">Contact us at: SEF@ucw.ac.uk - 07123 123123</span> <br>
+                <span class="text-muted">TeachIt Testing &copy; 2021</span>
+            </div>
+        </footer>
+        <!-- End Footer -->
 
-    <!-- Background Circles -->
-    <ul class="circles">
-        <li></li>
-        <li></li>
-        <li></li>
-        <li></li>
-        <li></li>
-        <li></li>
-        <li></li>
-        <li></li>
-        <li></li>
-        <li></li>
-    </ul>
-    <!-- End Background Circles -->
-
-
-
+        <!-- Background Circles -->
+        <ul class="circles">
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+        </ul>
+        <!-- End Background Circles -->
 </body>
 <!-- JS -->
 <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>

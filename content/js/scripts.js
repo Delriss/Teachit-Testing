@@ -5,7 +5,7 @@ $("#registrationForm").submit(function (e) {
   //Ajax request to the server for asynchronous processing
   $.ajax({
     type: "POST",
-    url: "/php/createUser.php",
+    url: "/php/createUser",
     data: $("#registrationForm").serialize(),
 
     //If the request is successful
@@ -24,7 +24,7 @@ $("#registrationForm").submit(function (e) {
           confirmButtonText: "Continue",
         }).then((result) => {
           if (result.isConfirmed) {
-            window.location = "./index";
+            window.location = "/test-selection";
           }
         });
         //If the request is not successful
@@ -43,48 +43,51 @@ $("#registrationForm").submit(function (e) {
 //Run the test selection display script on the test selection page load
 $(document).ready(function () {
   //Only run on the test selection page
-  if (window.location.href.includes("test-selection") == false) {
-    console.log("Not on test selection page");
-    return;
+  if (window.location.href.includes("test-selection") == true) {
+    //Run the test selection display script
+    $.ajax({
+      type: "POST",
+      url: "/php/outputStudentTests",
+      data: $("#testContainer").serialize(),
+
+      success: function (data) {
+        //Inject custom HTML into the page
+        $("#testContainer").html(data);
+      },
+    });
+
+    //REGISTRATION PAGE
+    //Run the completed test selection display script
+    $.ajax({
+      type: "POST",
+      url: "/php/outputCompletedStudentTests",
+      data: $("#completedTestContainer").serialize(),
+
+      success: function (data) {
+        //Inject custom HTML into the page
+        $("#completedTestContainer").html(data);
+      },
+    });
   }
 
-  //Run the test selection display script
-  $.ajax({
-    type: "POST",
-    url: "/php/outputStudentTests.php",
-    data: $("#testContainer").serialize(),
-
-    success: function (data) {
-      //Inject custom HTML into the page
-      $("#testContainer").html(data);
-    },
-  });
-
-  //REGISTRATION PAGE
-  //Run the completed test selection display script
-  $.ajax({
-    type: "POST",
-    url: "/php/outputCompletedStudentTests.php",
-    data: $("#completedTestContainer").serialize(),
-
-    success: function (data) {
-      //Inject custom HTML into the page
-      $("#completedTestContainer").html(data);
-    },
-    
-      //Ensure registration form is loaded
+  //Ensure registration form is loaded
   if ($("#courses").length > 0) {
     //Send AJAX request to the server for asynchronous processing
     $.ajax({
       type: "POST",
-      url: "/php/retrieveSubjects.php",
+      url: "/php/retrieveSubjects",
       dataType: "json",
 
       //If the request is successful
       success: function (data) {
         //Output
         for (var i = 0; i < data.length; i++) {
-          $("#courses").append("<option value=" + data[i].SID +">" + data[i].subjectName + "</option>"
+          $("#courses").append(
+            "<option value=" +
+              data[i].SID +
+              ">" +
+              data[i].subjectName +
+              "</option>"
           );
         }
       },
@@ -96,8 +99,66 @@ $(document).ready(function () {
     });
   }
   //Debugging
-  else 
-  {
+  else {
     console.log("Not on registration page");
   }
-  });
+});
+
+// Login Form
+$("#loginForm").submit(function (e) {
+  e.preventDefault(); //Prevent the default form submission
+
+  //Ajax request to the server for asynchronous processing
+  $.ajax({
+    type: "POST",
+    url: "/php/auth",
+    data: {
+      email: $("#email").val(),
+      password: $("#password").val(),
+    },
+
+    success: function(data) {
+      if (data.includes("e1") || data.includes("e2")) {
+        console.log(data);
+        //OUTPUT
+        Swal.fire({
+          //Alert the user with an error message
+          title: "Email or Password Incorrect",
+          text: "Please check that you have entered the correct email and password.",
+          icon: "error",
+          showCancelButton: false,
+          confirmButtonColor: "#3085d6",
+          confirmButtonText: "Continue",
+        });
+      } else if (data.includes("e3")) {
+        console.log(data);
+        //OUTPUT
+        Swal.fire({
+          //Alert the user with an error message
+          title: "Successfully Logged In",
+          text: "Please click continue to proceed to the testing page.",
+          icon: "success",
+          showCancelButton: false,
+          confirmButtonColor: "#3085d6",
+          confirmButtonText: "Continue",
+        }).then((result) => {
+          if (result.isConfirmed) {
+            window.location = "/test-selection";
+          }
+        });        
+      } else if (data.includes("e4")) {
+        console.log(data);
+        //OUTPUT
+        Swal.fire({
+          //Alert the user with an error message
+          title: "Details Missing",
+          text: "Please ensure that you have entered the email and password.",
+          icon: "error",
+          showCancelButton: false,
+          confirmButtonColor: "#3085d6",
+          confirmButtonText: "Continue",
+        });
+      }
+    }
+  })
+});
