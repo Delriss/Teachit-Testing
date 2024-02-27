@@ -1,11 +1,3 @@
-<!-- <?php include_once($_SERVER['DOCUMENT_ROOT'].'/php/_connect.php'); ?>
-
-<?php
-// Start session
-session_start();
-
-?> -->
-
 <!DOCTYPE html>
 <html class="h-100" lang="en">
 

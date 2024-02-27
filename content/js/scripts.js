@@ -111,7 +111,7 @@ $("#loginForm").submit(function (e) {
   //Ajax request to the server for asynchronous processing
   $.ajax({
     type: "POST",
-    url: "../php/auth.php",
+    url: "/php/auth",
     data: {
       email: $("#email").val(),
       password: $("#password").val(),

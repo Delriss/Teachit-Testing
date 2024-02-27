@@ -1,6 +1,13 @@
 <?php
 session_start();
 
+//If not accessed via POST, refuse access - POST will only be via router/JS
+if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
+	//If the request is not a POST request, the user will be redirected to the login page
+	header("Location: /");
+	die();
+}
+
 if (isset($_POST["email"]) and isset($_POST["password"])) { //if username and password have been enterred
 
 	//connects to the database to verify login

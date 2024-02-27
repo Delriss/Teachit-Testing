@@ -1,4 +1,10 @@
 <?php
+//If not accessed via POST, refuse access - POST will only be via router/JS
+if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
+	//If the request is not a POST request, the user will be redirected to the login page
+	header("Location: /");
+	die();
+}
 //Remove direct access to the file and require login
 if ($_SESSION['LoggedIn'] == false) {
     header("Location: /login");
