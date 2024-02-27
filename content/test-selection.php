@@ -1,6 +1,8 @@
 <?php
-// DEBUGGING - Start Session and set UID to 1
-$_SESSION['UID'] = 1;
+if ($_SESSION['LoggedIn'] == false) {
+    header("Location: /login");
+    die();
+}
 ?>
 
 
