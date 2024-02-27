@@ -39,6 +39,23 @@ $courseTitle = $_POST['courseTitle'];
 $email = $_POST['email'];
 $password = $_POST['password'];
 
+//
+//Data Validation START
+//Check if student number is a number
+if (!is_numeric($studentNum)) {
+    die("Student number must be numerical characters only.");
+}
+//Check if password is at least 8 characters long and contains at least one number and one special character
+if (!preg_match('/^(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{8,}$/', $password)) {
+    die("Password must be at least 8 characters long and contain at least one number and one special character.");
+}
+//Check if email is valid
+if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+    die("Invalid email address");
+}
+//Data Validation END
+//
+
 //Encrypt password
 $password = password_hash($password, PASSWORD_BCRYPT);
 
@@ -108,7 +125,7 @@ if (mysqli_stmt_execute($stmt)) //Execute prepared statement
     } else {
         $_SESSION["role"] = "student";
     }
-    
+
 } else {
     echo "Registration failed:" . mysqli_error($db_connect);
 }

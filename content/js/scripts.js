@@ -32,7 +32,7 @@ $("#registrationForm").submit(function (e) {
         Swal.fire({
           //Alert the user with an error message
           title: "Registration Failed",
-          text: "Registration Failed: ".data,
+          text: data,
           icon: "error",
         });
       }
