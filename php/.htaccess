@@ -1,4 +1,2 @@
-Options -Indexes
-RewriteEngine On 
-RewriteCond %{REQUEST_URI}!^/content/js/scripts.js 
-RewriteRule ^.*$ - [F,L]
+Order Deny, Allow
+Deny from all

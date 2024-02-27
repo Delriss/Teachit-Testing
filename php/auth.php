@@ -31,6 +31,16 @@ if (isset($_POST["email"]) and isset($_POST["password"])) { //if username and pa
 			$_SESSION["ID"] = $result["ID"];
 			$_SESSION["auth"] = $result["accessLevel"];
 			$_SESSION["LoggedIn"] = true;
+
+			//Adds the user's role to the session for use in routing
+			if ($_SESSION["auth"] == 2) {
+				$_SESSION["role"] = "admin";
+			} else if ($_SESSION["auth"] == 1) {
+				$_SESSION["role"] = "lecturer";
+			} else {
+				$_SESSION["role"] = "student";
+			}
+			
 			//sends a sweet alert to the user to let them know they have logged in
 			echo "e3";
 		} else {
