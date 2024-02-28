@@ -54,10 +54,10 @@ $jRoute->Route(["post"], "/php/retrieveTests", "php/retrieveTests.php");
 $jRoute->Route(["post"], "/php/retrieveSubjects", "php/retrieveSubjects.php");
 
 //Create createTest route
-$jRoute->Route(["post"], "/php/createTest", "php/createTest.php");
+$jRoute->Route(["post"], "/php/createTest", "php/createTest.php", requiredRole: "admin");
 
 //Create createUser route
-$jRoute->Route(["post"], "/php/createUser", "php/createUser.php", requiredRole: "admin");
+$jRoute->Route(["post"], "/php/createUser", "php/createUser.php");
 
 //Create deleteTest route
 $jRoute->Route(["post"], "/php/deleteTest", "php/deleteTest.php", requiredRole: "admin");
