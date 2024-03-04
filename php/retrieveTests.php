@@ -104,20 +104,5 @@ foreach ($tests as $test) {
 //for testing
 //echo $testArray[0]->questions[0]->answers[2]->answerText;
 
-//function for returning a test related to a testID
-function getTest($testID){
-    global $testArray;
-    foreach ($testArray as $test){
-        if ($test->testID == $testID){
-            return $test;
-        }
-    }
-}
-
-//if ajax request is made to retrieveTests.php with specific testID, return the test object
-if (isset($_POST['testID'])){
-    echo json_encode(getTest($_POST['testID']));
-}
-
 ?>
 

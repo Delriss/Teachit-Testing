@@ -46,7 +46,7 @@ function getSubjects() {
     //get the subjects from the database
     $.ajax({
         type: "POST",
-        url: "/php/retrieveSubjects.php",
+        url: "/php/retrieveSubjects",
         dataType: 'json',
         success: function(data) {
             //populate the dropdown with the subjects
@@ -348,7 +348,7 @@ $("#submitForm").click(function(e) {
 
             //update the test in the database
             $.ajax({
-                url: "/php/modifyTest.php",
+                url: "/php/modifyTest",
                 type: "POST",
                 data: {
                     testID: testID,
@@ -373,7 +373,7 @@ $("#submitForm").click(function(e) {
         else{
             //create the test in the database
             $.ajax({
-                url: "/php/createTest.php",
+                url: "/php/createTest",
                 type: "POST",
                 data: {
                     testTitle: testTitle,
@@ -425,7 +425,7 @@ $(document).on("click", ".deleteTestButton", function() {
             //Delete the test from the database
             $.ajax({
                 type: "POST",
-                url: "/php/deleteTest.php",
+                url: "/php/deleteTest",
                 data: {
                     testID: id
                 },
@@ -460,7 +460,7 @@ $(document).on('show.bs.modal', '#createTestModal', function(e) {
         //get the test information from the database
         $.ajax({
             type: "POST",
-            url: "/php/retrieveTests.php",
+            url: "/php/retrieveTestData",
             data: {
                 testID: testID
             },
@@ -528,7 +528,7 @@ $(document).on('show.bs.modal', '#createTestModal', function(e) {
 function updateTestCarousel() {
     $.ajax({
         type: "POST",
-        url: "/php/outputTests.php",
+        url: "/php/outputTests",
         dataType: 'html',
 
         success: function(data) {

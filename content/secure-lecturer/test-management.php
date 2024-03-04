@@ -1,6 +1,20 @@
 <?php
-// DEBUGGING - Start Session and set UID to 1
-$_SESSION['UID'] = 1;
+//if session "role" isn't set to lecturer or admin, redirect to login
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
+
+//setting session role to lecturer for testing
+$_SESSION["role"] = "lecturer";
+
+//if the user isn't logged in, redirect to login (THIS IS BREAKING DUE TO INCOMPLETE AUTH ON THIS BRANCH, COMMENTED OUT FOR NOW)
+/*
+if (!isset($_SESSION["role"]) || ($_SESSION["role"] !== "lecturer" && $_SESSION["role"] !== "admin")) {
+    echo "You do not have permission to access this page.";
+    header("Location: /");
+    die();
+}
+*/
 ?>
 
 <!DOCTYPE html>
