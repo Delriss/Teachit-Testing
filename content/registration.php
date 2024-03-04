@@ -49,7 +49,7 @@
                         </ul>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Logout</a>
+                        <a class="nav-link" href="/logout">Logout</a>
                     </li>
                 </ul>
             </div>
@@ -90,7 +90,7 @@
             </div>
             <button type="submit" class="btn btn-dark rounded-pill">Register</button>
             <hr>
-            <p>Already have an account? <a id="loginText" href="login.php">Login Here!</a></p>
+            <p>Already have an account? <a id="loginText" href="/login">Login Here!</a></p>
         </form>
     </div>
     <!-- End Main Content -->
@@ -117,8 +117,6 @@
         <li></li>
     </ul>
     <!-- End Background Circles -->
-
-
 
 </body>
 <!-- JS -->

@@ -6,10 +6,7 @@ require_once("jRoute/_load.php");
 $jRoute = new jRoute();
 
 //Add index route
-$jRoute->Route(["get"], "/", function() {
-    echo "Hello World!";
-});
-
+$jRoute->Route(["get"], "/", "content/index.php");
 
 //Create login Route
 $jRoute->Route(["get"], "/", "content/login.php");
@@ -26,6 +23,7 @@ $jRoute->Route(["get"], "/test-management", "content/secure-lecturer/test-manage
 //
 //PRIVATE PHP ROUTES
 //
+
 //Create readEnvVars route
 $jRoute->Route(["post"], "/php/readEnvVars", "php/readEnvVars.php");
 
