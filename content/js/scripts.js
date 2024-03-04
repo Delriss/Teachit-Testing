@@ -51,25 +51,29 @@ $("#registrationForm").submit(function (e) {
 //Run the test selection display script on the test selection page load
 $(document).ready(function () {
   //Only run on the test selection page
-  if (window.location.href.includes("test-selection") == true) {
-    //Run the test selection display script
-    $.ajax({
-      type: "POST",
-      url: "/php/outputStudentTests",
-      data: $("#testContainer").serialize(),
+  if (window.location.href.includes("test-selection") == false) {
+    console.log("Not on test selection page");
+    return;
+  }
 
-      success: function (data) {
-        //Inject custom HTML into the page
-        $("#testContainer").html(data);
-      },
-    });
+  //Run the test selection display script
+  $.ajax({
+    type: "POST",
+    url: "/php/outputStudentTests.php",
+    data: $("#testContainer").serialize(),
 
-    //REGISTRATION PAGE
-    //Run the completed test selection display script
-    $.ajax({
-      type: "POST",
-      url: "/php/outputCompletedStudentTests",
-      data: $("#completedTestContainer").serialize(),
+    success: function (data) {
+      //Inject custom HTML into the page
+      $("#testContainer").html(data);
+    },
+  });
+
+  //REGISTRATION PAGE
+  //Run the completed test selection display script
+  $.ajax({
+    type: "POST",
+    url: "/php/outputCompletedStudentTests.php",
+    data: $("#completedTestContainer").serialize(),
 
       success: function (data) {
         //Inject custom HTML into the page
@@ -83,7 +87,7 @@ $(document).ready(function () {
     //Send AJAX request to the server for asynchronous processing
     $.ajax({
       type: "POST",
-      url: "/php/retrieveSubjects",
+      url: "/php/retrieveSubjects.php",
       dataType: "json",
 
       //If the request is successful
