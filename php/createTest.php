@@ -10,7 +10,7 @@ if (session_status() === PHP_SESSION_NONE) {
 
 include_once($_SERVER['DOCUMENT_ROOT'].'/php/_connect.php');
 
-//validate post data
+//check if all required data has been POSTed
 if(!isset($_POST['testTitle']) || !isset($_POST['testDescription']) || !isset($_POST['testSubject']) || !isset($_POST['questions'])){
     echo "Test Creation Failed: Missing Data";
     exit();
@@ -21,7 +21,7 @@ $testTitle = mysqli_real_escape_string($db_connect, $_POST['testTitle']);
 //Get the test description from the form
 $testDescription = mysqli_real_escape_string($db_connect, $_POST['testDescription']);
 //Get the subject from the form
-$subject = mysqli_real_escape_string($db_connect, $_POST['testSubject']);
+$subject = $_POST['testSubject'];
 //get the date/time of the test from the form
 $dateTime = mysqli_real_escape_string($db_connect, $_POST['testDateTime']);
 if ($dateTime == "") {
@@ -29,6 +29,47 @@ if ($dateTime == "") {
 }
 //this array contains questions, an array of their answers, and an array of the correct answers.
 $question = $_POST['questions'];
+
+//VALIDATION
+//validate all variables against the database constraints
+if(empty($testTitle) || empty($testDescription) || empty($subject)){
+    echo "Test Creation Failed: Missing Data";
+    exit();
+}
+
+//validate testSubject can be cast to an integer
+if(!is_numeric($subject)){
+    echo "Test Creation Failed: Invalid Data";
+    exit();
+}
+else{
+    $subject = (int)$subject;
+}
+
+
+//check each variable's length against the database constraints
+if(strlen($testTitle) > 50 || strlen($testDescription) > 255){
+    echo "Test Creation Failed: Data too long";
+    exit();
+}
+
+//for each question in the array, check the question text and the answers against the database constraints
+foreach($question as $q){
+    if(sizeof($q['answers']) !=4){
+        echo "Test Creation Failed: not using 4 questions";
+        exit();
+    }
+    if(strlen($q['questionText']) > 255){
+        echo "Test Creation Failed: Data too long";
+        exit();
+    }
+    foreach($q['answers'] as $a){
+        if(strlen($a) > 1000){
+            echo "Test Creation Failed: Data too long";
+            exit();
+        }
+    }
+}
 
 $sql = "INSERT INTO `tests` (`title`, 
                            `testDesc`, 

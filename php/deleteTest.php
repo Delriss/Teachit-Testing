@@ -1,4 +1,11 @@
 <?php
+    //ensure the user is logged in
+    if (session_status() === PHP_SESSION_NONE) {
+        //exit if the user is not logged in
+        echo "Error: User not logged in";
+        exit();
+    }
+
     if(isset($_POST["testID"]))
     {
         include_once($_SERVER['DOCUMENT_ROOT'].'/php/_connect.php'); 
