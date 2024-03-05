@@ -1,14 +1,9 @@
 <?php
-//If not accessed via POST, refuse access - POST will only be via router/JS
-if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
-	//If the request is not a POST request, the user will be redirected to the login page
-	header("Location: /");
-	die();
-}
 
 class Answer {
     public $answerID;
     public $questionID;
+    public $relativeAnswerID;
     public $answerText;
     public $isCorrect;
     //Needs Functionality
@@ -26,9 +21,11 @@ class Question {
 class Test {
     public $testID;
     public $title;
-    public $questions = array();
     public $testDesc;
+    public $questions = array();
     public $subject;
+    public $subjectID;
+    public $testDateTime;
     //Needs Functionality
 }
 
@@ -41,7 +38,7 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/php/_connect.php');
 $testArray = array();
 
 //Get all tests from the database
-$sql = "SELECT `testID`, `title`, `testDesc`, `subject` FROM tests";
+$sql = "SELECT `testID`, `title`, `testDesc`, `subject`, `testDateTime` FROM tests";
 $tests = mysqli_query($db_connect, $sql);
 
 //loop through each test in the database
@@ -52,7 +49,8 @@ foreach ($tests as $test) {
     $testObject->testID = $test['testID'];
     $testObject->title = $test['title'];
     $testObject->testDesc = $test['testDesc'];
-    $testObject->subject = $test['subject'];
+    $testObject->subjectID = $test['subject'];
+    $testObject->testDateTime = $test['testDateTime'];
 
     //Get the subjects belonging to the test
     $sql = "SELECT `subjectName` FROM `subjects` WHERE `SID` = ?";
@@ -67,6 +65,7 @@ foreach ($tests as $test) {
     $questions = mysqli_query($db_connect, $sql);
 
     foreach ($questions as $question) {
+        //Create a question object
         $questionObject = new question;
 
         //Define the question object's attributes
@@ -76,7 +75,7 @@ foreach ($tests as $test) {
         $questionObject->correctAnswerID = $question['correctAnswerID'];
 
         //Get the answers for the question
-        $sql = "SELECT answerID, questionID, answerText, isCorrect FROM answers WHERE questionID = " . $question['questionID'];
+        $sql = "SELECT answerID, relativeAnswerID, questionID, answerText, isCorrect FROM answers WHERE questionID = " . $question['questionID'];
         $answers = mysqli_query($db_connect, $sql);
 
         foreach ($answers as $answer) {
@@ -86,6 +85,7 @@ foreach ($tests as $test) {
 
             //Define the answer object's attributes
             $answerObject->answerID = $answer['answerID'];
+            $answerObject->relativeAnswerID = $answer['relativeAnswerID'];
             $answerObject->questionID = $answer['questionID'];
             $answerObject->answerText = $answer['answerText'];
             $answerObject->isCorrect = $answer['isCorrect'];
@@ -99,6 +99,7 @@ foreach ($tests as $test) {
     //Add the test object to the array of tests
     $testArray[] = $testObject;
 }
+
 
 //for testing
 //echo $testArray[0]->questions[0]->answers[2]->answerText;

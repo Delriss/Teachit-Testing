@@ -1,138 +1,196 @@
-<?php 
+<?php
+//if session "role" isn't set to lecturer or admin, redirect to login
 if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
+
+//setting session role to lecturer for testing
+$_SESSION["role"] = "lecturer";
+
+//if the user isn't logged in, redirect to login (THIS IS BREAKING DUE TO INCOMPLETE AUTH ON THIS BRANCH, COMMENTED OUT FOR NOW)
+/*
+if (!isset($_SESSION["role"]) || ($_SESSION["role"] !== "lecturer" && $_SESSION["role"] !== "admin")) {
+    echo "You do not have permission to access this page.";
+    header("Location: /");
+    die();
+}
+*/
 ?>
 
 <!DOCTYPE html>
-<html lang="en">
+<html class="h-100" lang="en">
 
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" author="SEF">
-    <title>Test Management</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="author" content="SEF">
+
+    <title>Test Selection - TeachIt Testing</title>
 
     <!-- Stylesheets -->
-    <link rel="stylesheet" href="/content/css/style.css">
-    <link rel="stylesheet" href="/content/css/testManagement.css">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" />
-    <link rel="stylesheet" href="https://unpkg.com/flickity@2/dist/flickity.min.css">
+        <link rel="stylesheet" href="/content/css/style.css">
+        <link rel="stylesheet" href="/content/css/testManagement.css">
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" />
+        <link rel="stylesheet" href="https://unpkg.com/flickity@2/dist/flickity.min.css">
     <!-- End Stylesheets -->
 </head>
 
-<body>
-    <header>
-        <!-- Navigation -->
-        <nav class="navbar navbar-expand-lg primaryBG">
-            <div class="container-fluid text-white">
-                <a href="index.php"><img src="/content/imgs/logo-side.png" alt="TeachIt Logo" class="logo ps-5" width="350"></a>
-
-                <!-- Page Navigation -->
-                <div class="container">
-                    <div class="row">
-                        <div class="col-12">
-                            <ul class="nav justify-content-end">
-                                <li class="nav-item">
-                                    <a class="nav-link text-white fs-4 subtitle active" href="index.php">Home</a>
-                                </li>
-
-                                <!-- Check if user is logged in -->
-                                <?php if (isset($_SESSION)) : ?>
-                                    <li class="nav-item">
-                                        <a class="nav-link text-white subtitle fs-4" href="logout.php">Test Management</a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a class="nav-link text-white subtitle fs-4" href="logout.php">Logout</a>
-                                    </li>
-                                <?php endif; ?>
-
-                                <?php if (!isset($_SESSION)) : ?>
-                                    <li class="nav-item">
-                                        <a class="nav-link text-white subtitle fs-4" href="login.php">Login</a>
-                                    </li>
-                                <?php endif; ?>
-
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-                <!-- End Page Navigation -->
-
+<body class="d-flex flex-column h-100">
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark bgColour">
+        <!-- Nav Container - adapt to screen size -->
+        <div class="container-fluid">
+            <a class="navbar-brand" href="/">
+                <img src="../content/imgs/logo-side.png" alt="TeachIt Testing" width="200" height="50">
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapsable" aria-controls="navbarCollapsable" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarCollapsable">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link" aria-current="page" href="/">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="/test-selection">Test Selection</a>
+                    </li>
+                    <li class="nav-item dropdown bgColour">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            Admin Dashboard
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <li><a class="dropdown-item" href="#">Student Management</a></li>
+                            <li><a class="dropdown-item" href="#">Test Management</a></li>
+                            <li><a class="dropdown-item" href="#">Lecturer Management</a></li>
+                            <li><a class="dropdown-item" href="#">Statistics</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Logout</a>
+                    </li>
+                </ul>
             </div>
-        </nav>
-        <!-- End Navigation -->
-    </header>
+        </div>
+        <!-- End Nav Container -->
+    </nav>
+    <!-- End Navbar -->
 
     <!-- Main Content -->
     <div class="area">
-        <div class="titleWrapper"><h3>Available Tests</h3></div>
-            <div class="tableWrap tests-carousel" id="tests">
-                <?php include_once($_SERVER['DOCUMENT_ROOT'].'/php/outputTests.php'); ?>
-            </div>
+        <div class="titleWrapper d-flex align-items-center pt-4 justify-content-center">
+            <h3 class="mb-0 mx-3">Available Tests</h3>
+            <!-- Button trigger modal -->
+            <button type="button" class="btn btn-primary mx-3" data-bs-toggle="modal" data-bs-target="#createTestModal">
+                New Test
+            </button>
         </div>
-        </main>
-        
+        <div class="tableWrap tests-carousel" id="tests">
+            <?php include_once($_SERVER['DOCUMENT_ROOT'].'/php/outputTests.php'); ?>
+        </div>
+    
+
         <!-- Modal -->
-        <div class="container" style="max-width: 600px;">
-            <form id="createTestModal">
-                <div class="mb-3">
-                    <label for="testName" class="form-label">Test Name</label>
-                    <input type="text" class="form-control" id="testName">
-                </div>
-                <div class="mb-3">
-                    <label for="testName" class="form-label">Question Name</label>
-                    <input type="text" class="form-control answers" id="questionName">
-                </div>
-                <div class="mb-3">
-                    <label for="answer1" class="form-label">Answer 1</label>
-                    <input type="text" class="form-control answers" id="answer1">
-                </div>
-                <div class="mb-3">
-                    <label for="answer2" class="form-label">Answer 2</label>
-                    <input type="text" class="form-control answers" id="answer2">
-                </div>
-                <div class="mb-3">
-                    <label for="answer3" class="form-label">Answer 3</label>
-                    <input type="text" class="form-control answers" id="answer3">
-                </div>
-                <div class="mb-3">
-                    <label for="answer4" class="form-label">Answer 4</label>
-                    <input type="text" class="form-control answers" id="answer4">
-                </div>
+        <div class="modal fade" id="createTestModal" tabindex="-1" aria-labelledby="testNameLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h1 class="modal-title fs-5" id="testNameLabel">New Test</h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <form id="createTestForm">
+                            <div class="mb-3">
+                                <label for="testName" class="form-label">Test Name</label>
+                                <input type="text" class="form-control" id="testName" name="testName" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="testDescription" class="form-label">Test Description</label>
+                                <textarea class="form-control" id="testDescription" name="testDescription" required></textarea>
+                            </div>
+                            <div class="mb-3">
+                                <label for="testSubject" class="form-label">Subject</label>
+                                <select class="form-select" id="testSubject" name="testSubject" required>
+                                    <option value="" selected disabled>Select a Subject</option>
+                                </select>
+                            </div>
+                            <!-- add a date/time section which can be enabled and disabled through a tickbox, the tickbox is inline with the date/time input -->
+                            <div class="mb-3">
+                                <label for="testDateTime" class="form-label">Test Date & Time</label>
+                                <input type="datetime-local" class="form-control" id="testDateTime" name="testDateTime" required disabled>
+                                <div class="form-check form-switch">
+                                    <input class="form-check-input" type="checkbox" id="enableDateTime" name="enableDateTime">
+                                    <label class="form-check-label" for="enableDateTime">Enable Date & Time</label>
+                                </div>
+                            </div>
 
-                <input class="form-check-input" type="radio" name="isCorrect" id="answerRadio1">
-                <label class="form-check-label" for="answerRadio1 isCorrect">Answer 1</label>
-                <input class="form-check-input" type="radio" name="isCorrect" id="answerRadio2">
-                <label class="form-check-label" for="answerRadio2 isCorrect">Answer 2</label>
-                <input class="form-check-input" type="radio" name="isCorrect" id="answerRadio3">
-                <label class="form-check-label" for="answerRadio3 isCorrect">Answer 3</label>
-                <input class="form-check-input" type="radio" name="isCorrect" id="answerRadio4">
-                <label class="form-check-label" for="answerRadio4 isCorrect">Answer 4</label>
-
-                <button type="submit" id="submitForm" class="btn btn-primary">Submit</button>
-            </form>
-        </div>
-
-        <!-- End Main Content -->
-
-        <footer class="container-fluid primaryBG w-100">
-            <div class="footerContainer container-fluid d-flex justify-content-center align-items-center h-100 text-center subtitle text-white">
-                <div class="container-fluid d-flex justify-content-evenly">
-                    <span>TeachIt Testing &copy; 2021</span>
-                    <a id="privPolicy" href="./">Privacy Policy</a>
-                </div>
-                <div class="container-fluid d-flex justify-content-evenly">
-                    <a href="https://www.facebook.com/"><i class="fab fa-facebook-square fa-2x"></i></a>
-                    <a href="https://www.instagram.com/"><i class="fab fa-instagram-square fa-2x"></i></a>
-                    <a href="https://www.twitter.com/"><i class="fab fa-twitter-square fa-2x"></i></a>
+                            <div class="accordion accordion-flush" id="accordionFlush">
+                                <div class="accordion-item" id="questionAccordionItem">
+                                    <h2 class="accordion-header" id="flush-heading1">
+                                        <div class="d-flex align-items-center questionAccordionButtonContainer">
+                                            <button class="accordion-button collapsed flex-grow-1" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapse1" aria-expanded="false" aria-controls="flush-collapse1">
+                                                Question 1
+                                            </button>
+                                        </div>
+                                    </h2>
+                                    <div id="flush-collapse1" class="accordion-collapse collapse" aria-labelledby="flush-heading1" data-bs-parent="#accordionFlush">
+                                        <div class="accordion-body">
+                                            <div class="mb-3">
+                                                <label class="form-label">Question</label>
+                                                <input type="text" class="form-control questions" data-question="1" name="question" required>
+                                            </div>
+                                            <div class="mb-3">
+                                                <label  class="form-label">Answer 1</label>
+                                                <input type="text" class="form-control answers" data-question="1" name="answer" required>
+                                            </div>
+                                            <div class="mb-3">
+                                                <label class="form-label">Answer 2</label>
+                                                <input type="text" class="form-control answers" data-question="1" name="answer" required>
+                                            </div>
+                                            <div class="mb-3">
+                                                <label class="form-label">Answer 3</label>
+                                                <input type="text" class="form-control answers" data-question="1" name="answer" required>
+                                            </div>
+                                            <div class="mb-3">
+                                                <label class="form-label">Answer 4</label>
+                                                <input type="text" class="form-control answers" data-question="1" name="answer" required>
+                                            </div>
+                                            <input class="form-check-input answerRadio1" type="radio" name="isCorrect1" data-question="1" checked>
+                                            <label class="form-check-label" for="isCorrect1">Answer 1</label>
+                                            <input class="form-check-input answerRadio2" type="radio" name="isCorrect1" data-question="1">
+                                            <label class="form-check-label" for="isCorrect1">Answer 2</label>
+                                            <input class="form-check-input answerRadio3" type="radio" name="isCorrect1" data-question="1">
+                                            <label class="form-check-label" for="isCorrect1">Answer 3</label>
+                                            <input class="form-check-input answerRadio4" type="radio" name="isCorrect1" data-question="1">
+                                            <label class="form-check-label" for="isCorrect1">Answer 4</label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- allow the user to add more questions -->
+                            <button type="button" class="btn btn-primary" id="addQuestion">Add Question</button>
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-primary" id="submitForm">Add Test</button>
+                    </div>
                 </div>
             </div>
-        </footer>
+        </div>
     </div>
+    <!-- End Main Content -->
+
+    <!-- Footer -->
+    <footer class="footer mt-auto py-3 rounded-top bgColour">
+        <div class="container text-center">
+            <span class="text-muted">TeachIt Testing &copy; 2021</span>
+        </div>
+    </footer>
+    <!-- End Footer -->
 
     <!-- Background Circles -->
     <ul class="circles">
@@ -149,7 +207,8 @@ if (session_status() === PHP_SESSION_NONE) {
     </ul>
     <!-- End Background Circles -->
 </body>
-</html>
+
+
 <!-- JS -->
 <script src="/content/js/scripts.js"></script>
 <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>

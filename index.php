@@ -5,17 +5,14 @@ require_once("jRoute/_load.php");
 //Create jRoute instance
 $jRoute = new jRoute();
 
-//
-//WEBPAGE ROUTES
-//
-//Create Index Route
+//Add index route
 $jRoute->Route(["get"], "/", "content/index.php");
 
-//Create Login Route
+//Create login Route
 $jRoute->Route(["get"], "/login", "content/login.php");
 
 //Create Logout Route
-$jRoute->Route(["get"], "/logout", "content/logout.php");
+$jRoute->Route(["get"], "/logout", "php/logout.php");
 
 //Create register Route
 $jRoute->Route(["get"], "/register", "content/registration.php");
@@ -29,6 +26,7 @@ $jRoute->Route(["get"], "/test-management", "content/secure-lecturer/test-manage
 //
 //PRIVATE PHP ROUTES
 //
+
 //Create readEnvVars route
 $jRoute->Route(["post"], "/php/readEnvVars", "php/readEnvVars.php");
 
@@ -50,18 +48,23 @@ $jRoute->Route(["post"], "/php/outputTests", "php/outputTests.php");
 //Create retrieveTests route
 $jRoute->Route(["post"], "/php/retrieveTests", "php/retrieveTests.php");
 
+//Create retrieveTestData route
+$jRoute->Route(["post"], "/php/retrieveTestData", "php/retrieveTestData.php");
+
 //Create retrieveSubjects route
 $jRoute->Route(["post"], "/php/retrieveSubjects", "php/retrieveSubjects.php");
 
 //Create createTest route
-$jRoute->Route(["post"], "/php/createTest", "php/createTest.php", requiredRole: "admin");
+$jRoute->Route(["post"], "/php/createTest", "php/createTest.php", requiredRole: "authorisedUser");
+
+//Create modifyTest route
+$jRoute->Route(["post"], "/php/modifyTest", "php/modifyTest.php", requiredRole: "authorisedUser");
 
 //Create createUser route
 $jRoute->Route(["post"], "/php/createUser", "php/createUser.php");
 
 //Create deleteTest route
-$jRoute->Route(["post"], "/php/deleteTest", "php/deleteTest.php", requiredRole: "admin");
+$jRoute->Route(["post"], "/php/deleteTest", "php/deleteTest.php", requiredRole: "authorisedUser");
 
 //Dispatch the route
-
 echo $jRoute->Dispatch($_SERVER['REQUEST_METHOD'], $_SERVER['REQUEST_URI']);

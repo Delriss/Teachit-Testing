@@ -6,12 +6,11 @@
   }
   
   #card{
-    width: 60%;
+    width: 40%;
     min-height: 60vh;
     height:fit-content;
     position: relative;
     padding:25px;
-    background-color: #F79F79;
     border-radius: 15px;
     margin-right:25px;
     margin-left:25px;
@@ -58,4 +57,14 @@
       padding:7px;
     }
   
+  }
+
+  .activeTest{
+    background-color: #F79F79 !important;
+  }
+
+  .upcomingTest{
+
+    background-color: #686963 !important;
+
   }
