@@ -112,6 +112,22 @@ $(document).ready(function () {
   // }
 });
 
+//Rerun test selection display script on modal close
+$("#testSelectionModal").on("hidden.bs.modal", function () {
+  //Run the test selection display script
+  $.ajax({
+    type: "POST",
+    url: "/php/outputStudentTests",
+    data: $("#testContainer").serialize(),
+
+    success: function (data) {
+      //Inject custom HTML into the page
+      $("#testContainer").html(data);
+    },
+  });
+});
+
+
 // Login Form
 $("#loginForm").submit(function (e) {
   e.preventDefault(); //Prevent the default form submission

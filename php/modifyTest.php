@@ -11,7 +11,6 @@ if ($_SESSION["role"] !== "authorisedUser") {
     exit();
 }
 
-
 //check if all needed post data is set
 //validate post data
 if (!isset($_POST['testID']) || !isset($_POST['testTitle']) || !isset($_POST['testDescription']) || !isset($_POST['testSubject']) || !isset($_POST['questions'])) {

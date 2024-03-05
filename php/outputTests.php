@@ -22,9 +22,17 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/php/retrieveTests.php');
             if($testDateTime > $currentDateTime)
             {
                 $upcoming = true;
-            }
+            } 
+        }
 
-            
+        //if test has an assignedID, it is a personal test, and we need to display it as such
+        if($test->assignedID != null)
+        {
+            $personalMsg = "(Self-Assigned by: " . $test->assignedID . ") ";
+        }
+        else
+        {
+            $personalMsg = "";
         }
 
         //if upcoming, give card upcomingTest class
@@ -42,11 +50,11 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/php/retrieveTests.php');
 
         if($upcoming)
         {
-            echo "<h5 class='card-title'>Upcoming Test: " . $test->title . "</h5>";
+            echo "<h5 class='card-title'>" . $personalMsg  . "Upcoming Test: " . $test->title . "</h5>";
         }
         else
         {
-            echo "<h5 class='card-title'>" . $test->title . "</h5>";
+            echo "<h5 class='card-title'>" . $personalMsg  . $test->title . "</h5>";
         }
 
         //Shows the subject of the test

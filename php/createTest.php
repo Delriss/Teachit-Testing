@@ -16,6 +16,22 @@ if(!isset($_POST['testTitle']) || !isset($_POST['testDescription']) || !isset($_
     exit();
 }
 
+//is auth equal to 0? this means it is a "user" level account and their tests need to be assigned to a userID
+if($_SESSION["auth"] == 0){
+    //if the userID is not set, we don't need to set the userID in the database
+    if(!isset($_SESSION["ID"])){
+        echo "Test Creation Failed: Missing Data";
+        exit();
+    }
+    else{
+        $userID = $_SESSION["ID"];
+    
+    }
+}
+else{
+    $userID = null;
+}
+
 //Get the test title from the form
 $testTitle = mysqli_real_escape_string($db_connect, $_POST['testTitle']);
 //Get the test description from the form
@@ -46,7 +62,6 @@ else{
     $subject = (int)$subject;
 }
 
-
 //check each variable's length against the database constraints
 if(strlen($testTitle) > 50 || strlen($testDescription) > 255){
     echo "Test Creation Failed: Data too long";
@@ -71,14 +86,28 @@ foreach($question as $q){
     }
 }
 
-$sql = "INSERT INTO `tests` (`title`, 
+//if userID is set, we need to insert the test into the database with the userID
+if($userID != null){
+    $sql = "INSERT INTO `tests` (`title`, 
+                        `testDesc`, 
+                        `subject`,
+                        `assignedID`,
+                        `testDateTime`)
+    VALUES (?, ?, ?, ?, ?);";
+
+    $stmt = mysqli_prepare($db_connect, $sql); //Prepare SQL statement
+    mysqli_stmt_bind_param($stmt, "ssiis", $testTitle, $testDescription, $subject, $userID, $dateTime); //Bind parameters
+}
+else{
+    $sql = "INSERT INTO `tests` (`title`, 
                            `testDesc`, 
                            `subject`,
                            `testDateTime`)
         VALUES (?, ?, ?, ?);";
 
-$stmt = mysqli_prepare($db_connect, $sql); //Prepare SQL statement
-mysqli_stmt_bind_param($stmt, "ssis", $testTitle, $testDescription, $subject, $dateTime); //Bind parameters
+    $stmt = mysqli_prepare($db_connect, $sql); //Prepare SQL statement
+    mysqli_stmt_bind_param($stmt, "ssis", $testTitle, $testDescription, $subject, $dateTime); //Bind parameters 
+}
 
 if(!mysqli_stmt_execute($stmt)) //Execute prepared statement
 {
