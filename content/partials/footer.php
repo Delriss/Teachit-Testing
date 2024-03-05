@@ -1,6 +1,9 @@
     <!-- Footer -->
     <footer class="footer mt-auto py-3 rounded-top bgColour">
         <div class="container text-center">
+            <?php if($activatedPage == "Home") { ?>
+                <span class="text-muted">Contact us at: SEF@ucw.ac.uk - 07123 123123</span> <br>
+            <?php } ?>
             <span class="text-muted">TeachIt Testing &copy; 2021</span>
         </div>
     </footer>
