@@ -5,8 +5,8 @@ if (!isset($_SESSION)) {
 }
 
 
-require_once("./_connect.php");
-require_once("./retrieveTests.php");
+include_once($_SERVER['DOCUMENT_ROOT'] . '/php/_connect.php');
+include_once($_SERVER['DOCUMENT_ROOT'] . '/php/retrieveTests.php');
 
 foreach ($testArray as $test) {
     echo ('<div class="col-sm-4 mb-4">

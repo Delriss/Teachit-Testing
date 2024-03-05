@@ -6,7 +6,7 @@
         exit();
     }
     //exit if the user is not authorised
-    if ($_SESSION["auth"] !== "authorisedUser") {
+    if ($_SESSION["role"] !== "authorisedUser") {
         echo "Error: User not authorised";
         exit();
     }
