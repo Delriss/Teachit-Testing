@@ -57,7 +57,13 @@ function getSubjects() {
             }
         },
         error: function() {
-            Swal.fire("Error", "There was an error getting the subjects", "error");
+            //swal fire with autoheight disabled
+            Swal.fire({
+                title: "Error",
+                text: "There was an error getting the subjects",
+                icon: "error",
+                heightAuto: false
+            });
         }
     });
 }
@@ -172,7 +178,8 @@ $(document).on("click", ".deleteQuestion", function(e) {
         confirmButtonColor: '#d33',
         cancelButtonColor: '#3085d6',
         confirmButtonText: 'Yes, Delete',
-        reverseButtons: true
+        reverseButtons: true,
+        heightAuto: false
     }).then((result) => {
         //If the user confirms they want to delete the question
         if (result.isConfirmed) {
@@ -193,33 +200,58 @@ function validateForm(form) {
     while (valid) {     
         //check if the test name is empty
         if($("#testName").val() === "") {
-            //if it is empty, fire an error message
-            Swal.fire("Error", "Please fill in the test name", "error");
+            //if it is empty, fire an error message with heightAuto set to false
+            Swal.fire({
+                title: "Error",
+                text: "Please fill in the test name",
+                icon: "error",
+                heightAuto: false
+            });
             valid = false;
         }
         else if($("#testName").val().length > 50) {
-            //if it is longer than 50 characters, fire an error message
-            Swal.fire("Error", "Test name must be less than 50 characters", "error");
+            //if it is longer than 50 characters, fire an error message with heightAuto set to false
+            Swal.fire({
+                title: "Error",
+                text: "Test name must be less than 50 characters",
+                icon: "error",
+                heightAuto: false
+            });
             valid = false;
         }
     
         //check if the test description is empty and check if it is longer than 255 characters
         if($("#testDescription").val() === "") {
-            //if it is empty, fire an error message
-            Swal.fire("Error", "Please fill in the test description", "error");
+            //if it is empty, fire an error message with heightAuto set to false
+            Swal.fire({
+                title: "Error",
+                text: "Please fill in the test description",
+                icon: "error",
+                heightAuto: false
+            })
             valid = false;
         }
         else if($("#testDescription").val().length > 255) {
             //if it is longer than 255 characters, fire an error message
-            Swal.fire("Error", "Test description must be less than 255 characters", "error");
+            Swal.fire({
+                title: "Error",
+                text: "Test description must be less than 255 characters",
+                icon: "error",
+                heightAuto: false
+            });
             valid = false;
         }
 
         //if the test date and time is enabled, check if it is empty
         if($("#enableDateTime").is(":checked")) {
             if($("#testDateTime").val() === "") {
-                //if it is empty, fire an error message
-                Swal.fire("Error", "Please fill in the test date and time", "error");
+                //if it is empty, fire an error message with heightAuto set to false
+                Swal.fire({
+                    title: "Error",
+                    text: "Please fill in the test date and time",
+                    icon: "error",
+                    heightAuto: false
+                });
                 valid = false;
             }
         }
@@ -227,31 +259,50 @@ function validateForm(form) {
         //if test date and time input is enabled, check if it is empty
         if($("#testDateTime").prop("disabled") == false) {
             if($("#testDateTime").val() === "") {
-                //if it is empty, fire an error message
-                Swal.fire("Error", "Please fill in the test date and time", "error");
+                //if it is empty, fire an error message with heightAuto set to false
+                Swal.fire({
+                    title: "Error",
+                    text: "Please fill in the test date and time",
+                    icon: "error",
+                    heightAuto: false
+                });
                 valid = false;
             }
             //check if the test date and time is in the past
             var testDateTime = new Date($("#testDateTime").val());
             var now = new Date();
             if(testDateTime < now) {
-                //if it is in the past, fire an error message
-                Swal.fire("Error", "Test date and time must be in the future", "error");
+                //if it is in the past, fire an error message with heightAuto set to false
+                Swal.fire({
+                    title: "Error",
+                    text: "Test date and time must be in the future",
+                    icon: "error",
+                    heightAuto: false
+                });
                 valid = false;
             }
         }
-
     
         //for each input in the form with name "answer", check if it is empty
         form.find("input[name='answer']").each(function() {
             if($(this).val() === "") {
-                //if it is empty, fire an error message
-                Swal.fire("Error", "Please fill in all the answers", "error");
+                //if it is empty, fire an error message with heightAuto set to false
+                Swal.fire({
+                    title: "Error",
+                    text: "Please fill in all the answers",
+                    icon: "error",
+                    heightAuto: false
+                });
                 valid = false;
             }
             else if($(this).val().length > 1000) {
                 //if the answer is longer than supported in the database, fire an error message
-                Swal.fire("Error", "Answers must be less than 1000 characters", "error");
+                Swal.fire({
+                    title: "Error",
+                    text: "Answer must be less than 1000 characters",
+                    icon: "error",
+                    heightAuto: false
+                });
                 return false;
             }
         });
@@ -260,7 +311,12 @@ function validateForm(form) {
         form.find("input[type='radio']").each(function() {
             if($("input[name='isCorrect" + $(this).attr("data-question") + "']:checked").length == 0) {
                 //if no radio button is checked, fire an error message
-                Swal.fire("Error", "Please select a correct answer for each question", "error");
+                Swal.fire({
+                    title: "Error",
+                    text: "Please select a correct answer for each question",
+                    icon: "error",
+                    heightAuto: false
+                });
                 valid = false;
             }
         });
@@ -362,11 +418,21 @@ $("#submitForm").click(function(e) {
                     updateTestCarousel();
                     //close modal
                     $('#createTestModal').modal('hide');
-                    //fire success message
-                    Swal.fire("Success", "Test Updated Successfully", "success");
+                    //fire success message with heightAuto set to false
+                    Swal.fire({
+                        title: "Success",
+                        text: "Test Updated Successfully",
+                        icon: "success",
+                        heightAuto: false
+                    });
                 },
                 error: function() {
-                    Swal.fire("Error", "There was an error updating the test", "error");
+                    Swal.fire({
+                        title: "Error",
+                        text: "There was an error updating the test",
+                        icon: "error",
+                        heightAuto: false
+                    });
                 }
             });
         }
@@ -387,11 +453,21 @@ $("#submitForm").click(function(e) {
                     updateTestCarousel();
                     //close modal
                     $('#createTestModal').modal('hide');
-                    //fire success message
-                    Swal.fire("Success", "Test Created Successfully", "success");
+                    //fire success message with heightAuto set to false
+                    Swal.fire({
+                        title: "Success",
+                        text: "Test Created Successfully",
+                        icon: "success",
+                        heightAuto: false
+                    }); 
                 },
                 error: function() {
-                    Swal.fire("Error", "There was an error creating the test", "error");
+                    Swal.fire({
+                        title: "Error",
+                        text: "There was an error creating the test",
+                        icon: "error",
+                        heightAuto: false
+                    });
                 }
             });
         }
@@ -432,11 +508,21 @@ $(document).on("click", ".deleteTestButton", function() {
                 success: function() {
                     //Update the DOM asynchronously so it reflects the change
                     updateTestCarousel();
-                    //fire success message
-                    Swal.fire("Success", "Test Deleted Successfully", "success");
+                    //fire success message with heightAuto set to false
+                    Swal.fire({
+                        title: "Success",
+                        text: "Test Deleted Successfully",
+                        icon: "success",
+                        heightAuto: false
+                    });
                 },
                 error: function() {
-                    Swal.fire("Error", "There was an error deleting the test", "error");
+                    Swal.fire({
+                        title: "Error",
+                        text: "There was an error deleting the test",
+                        icon: "error",
+                        heightAuto: false
+                    });
                 }
             });
         }
@@ -520,7 +606,12 @@ $(document).on('show.bs.modal', '#createTestModal', function(e) {
                 }
             },
             error: function() {
-                Swal.fire("Error", "There was an error getting the test", "error");
+                Swal.fire({
+                    title: "Error",
+                    text: "There was an error getting the test",
+                    icon: "error",
+                    heightAuto: false
+                });
             }
         });
     }
