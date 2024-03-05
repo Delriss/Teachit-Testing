@@ -473,6 +473,12 @@ $(document).on('show.bs.modal', '#createTestModal', function(e) {
                 $("#testName").val(test.title);
                 $("#testDescription").val(test.testDesc);
                 $("#testSubject").val(test.subjectID);
+                if(test.testDateTime != null) {
+                    console.log("running");
+                    $("#testDateTime").val(test.testDateTime);
+                    $("#testDateTime").prop("disabled", false);
+                    $("#enableDateTime").prop("checked", true);
+                }
 
                 //for each question in the test, add a question to the modal
                 for(var i = 0; i < test.questions.length; i++) {
