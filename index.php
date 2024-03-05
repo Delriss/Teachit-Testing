@@ -52,16 +52,16 @@ $jRoute->Route(["post"], "/php/retrieveTestData", "php/retrieveTestData.php");
 $jRoute->Route(["post"], "/php/retrieveSubjects", "php/retrieveSubjects.php");
 
 //Create createTest route
-$jRoute->Route(["post"], "/php/createTest", "php/createTest.php", requiredRole: "lecturer");
+$jRoute->Route(["post"], "/php/createTest", "php/createTest.php", requiredRole: "authorisedUser");
 
 //Create modifyTest route
-$jRoute->Route(["post"], "/php/modifyTest", "php/modifyTest.php", requiredRole: "lecturer");
+$jRoute->Route(["post"], "/php/modifyTest", "php/modifyTest.php", requiredRole: "authorisedUser");
 
 //Create createUser route
 $jRoute->Route(["post"], "/php/createUser", "php/createUser.php");
 
 //Create deleteTest route
-$jRoute->Route(["post"], "/php/deleteTest", "php/deleteTest.php", requiredRole: "lecturer");
+$jRoute->Route(["post"], "/php/deleteTest", "php/deleteTest.php", requiredRole: "authorisedUser");
 
 //Dispatch the route
 echo $jRoute->Dispatch($_SERVER['REQUEST_METHOD'], $_SERVER['REQUEST_URI']);

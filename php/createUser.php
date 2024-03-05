@@ -32,12 +32,12 @@ if (!filter_var($_POST['email'], FILTER_VALIDATE_EMAIL)) {
 include_once($_SERVER['DOCUMENT_ROOT'] . '/php/_connect.php');
 
 //Check reCAPTCHA score
-require_once($_SERVER['DOCUMENT_ROOT'].'/php/readEnvVars.php'); //Reads the environment variables from the .env file
+require_once($_SERVER['DOCUMENT_ROOT'] . '/php/readEnvVars.php'); //Reads the environment variables from the .env file
 $captcha = $_POST['recapToken']; //Get the reCAPTCHA token from the POST request
 $secretKey = $_ENV["CAPTCHA_PRIVATE"]; //Get the reCAPTCHA secret key from the environment variables
-$reCAPTCHA = json_decode(file_get_contents('https://www.google.com/recaptcha/api/siteverify?secret='. urlencode($secretKey) .  '&response=' . urlencode($captcha))); //Send a GET request to the reCAPTCHA API
+$reCAPTCHA = json_decode(file_get_contents('https://www.google.com/recaptcha/api/siteverify?secret=' . urlencode($secretKey) .  '&response=' . urlencode($captcha))); //Send a GET request to the reCAPTCHA API
 //Check if the reCAPTCHA score is less than 0.6 (60%)
-if ($reCAPTCHA->score <= 0.6){
+if ($reCAPTCHA->score <= 0.6) {
     die("Captcha Failed.");
 }
 
@@ -130,14 +130,12 @@ if (mysqli_stmt_execute($stmt)) //Execute prepared statement
     $_SESSION["LoggedIn"] = true;
 
     //Adds the user's role to the session for use in routing
-    if ($_SESSION["auth"] == 2) {
-        $_SESSION["role"] = "admin";
-    } else if ($_SESSION["auth"] == 1) {
-        $_SESSION["role"] = "lecturer";
+    if ($_SESSION["auth"] >= 1) {
+        $_SESSION["role"] = "authorisedUser";
     } else {
         $_SESSION["role"] = "student";
     }
-
+    
 } else {
     echo "Registration failed:" . mysqli_error($db_connect);
 }
