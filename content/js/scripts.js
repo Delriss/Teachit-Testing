@@ -28,6 +28,7 @@ $("#registrationForm").submit(function (e) {
                 confirmButtonColor: "#3085d6",
                 cancelButtonColor: "#d33",
                 confirmButtonText: "Continue",
+                heightAuto: false,
               }).then((result) => {
                 if (result.isConfirmed) {
                   window.location = "/test-selection";
@@ -40,6 +41,7 @@ $("#registrationForm").submit(function (e) {
                 title: "Registration Failed",
                 text: data,
                 icon: "error",
+                heightAuto: false,
               });
             }
           },
@@ -156,6 +158,7 @@ $("#loginForm").submit(function (e) {
                 showCancelButton: false,
                 confirmButtonColor: "#3085d6",
                 confirmButtonText: "Continue",
+                heightAuto: false,
               });
             } else if (data.includes("e3")) {
               console.log(data);
@@ -168,6 +171,7 @@ $("#loginForm").submit(function (e) {
                 showCancelButton: false,
                 confirmButtonColor: "#3085d6",
                 confirmButtonText: "Continue",
+                heightAuto: false,
               }).then((result) => {
                 if (result.isConfirmed) {
                   window.location = "/test-selection";
@@ -184,6 +188,7 @@ $("#loginForm").submit(function (e) {
                 showCancelButton: false,
                 confirmButtonColor: "#3085d6",
                 confirmButtonText: "Continue",
+                heightAuto: false,
               });
             }
           },
