@@ -11,6 +11,9 @@ $jRoute->Route(["get"], "/", "content/index.php");
 //Create login Route
 $jRoute->Route(["get"], "/login", "content/login.php");
 
+//Create Logout Route
+$jRoute->Route(["get"], "/logout", "php/logout.php");
+
 //Create register Route
 $jRoute->Route(["get"], "/register", "content/registration.php");
 
