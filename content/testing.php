@@ -12,7 +12,7 @@ session_start();
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="author" content="SEF">
 
-    <title>TEMPLATE - TeachIt Testing</title>
+    <title>Testing - TeachIt Testing</title>
 
     <!-- Stylesheets -->
     <link rel="stylesheet" href="../content/css/style.css">
@@ -65,8 +65,12 @@ session_start();
     <!-- End Navbar -->
 
     <!-- Main Content -->
-    <div class="container-fluid text-center">
-        CONTENT HERE!
+    <div class="col-lg-6 mt-auto mx-auto p-3 py-md-3 text-center rounded bgColourFaded">
+        <div class="text-center">
+            <div class="homeFeature">
+                <h3>Temporary question text which is an example on how a question will look like on the testing page.</h3>
+            </div>
+        </div>
     </div>
     <!-- End Main Content -->
 

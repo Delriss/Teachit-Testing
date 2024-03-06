@@ -15,7 +15,6 @@ body
   color: black;
 }
 
-/* ============= */
 /* HOME PAGE CSS */
 
 .homeContainer {
@@ -89,7 +88,19 @@ body
 }
 
 /* END OF HOME PAGE CSS */
-/* ==================== */
+
+/* TESTING PAGE CSS */
+
+.testingQuestion {
+  background-color: #E3F2FD;
+  border-radius: 20px;
+  color: black;
+  padding: 15px;
+  text-wrap: balance;
+  text-align: center;
+}
+
+/* END OF TESTING PAGE CSS */
 
 /*BACKGROUND ANIMATION*/
 .circles {
