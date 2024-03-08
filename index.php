@@ -23,6 +23,9 @@ $jRoute->Route(["get"], "/register", "content/registration.php");
 //Create Test Selection Route
 $jRoute->Route(["get"], "/test-selection", "content/test-selection.php");
 
+//Create Testing Page Route
+$jRoute->Route(["get"], "/testing", "content/testing.php");
+
 //(fix) NEEDS AUTH WHEN IT HAS BEEN BUILT
 $jRoute->Route(["get"], "/test-management", "content/secure-lecturer/test-management.php");
 

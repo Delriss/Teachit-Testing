@@ -25,7 +25,10 @@ foreach ($testArray as $test) {
                     <p class="card-text">' . $test->testDesc . '</p>
                 </div>
                 <div class="card-footer">
-                    <a href="test.php" class="btn btn-primary">Start Test</a>
+                    <form id="testForm">
+                        <input type="hidden" id="testID" value="' . $test->testID . '">
+                        <button type="submit" class="btn btn-primary">Start Test</button>
+                    </form>
                 </div>
             </div>
         </div>

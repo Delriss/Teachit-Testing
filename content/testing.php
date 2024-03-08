@@ -1,7 +1,8 @@
 <?php
-// Start session
-session_start();
-
+if ($_SESSION['LoggedIn'] == false) {
+    header("Location: /login");
+    die();
+}
 ?>
 
 <!DOCTYPE html>
@@ -67,7 +68,7 @@ session_start();
     <!-- Main Content -->
     <div class="col-lg-6 mt-auto mx-auto p-3 py-md-3 text-center rounded bgColourFaded">
         <div class="text-center">
-            <div class="homeFeature">
+            <div class="testingQuestion">
                 <h3>Temporary question text which is an example on how a question will look like on the testing page.</h3>
             </div>
             <hr>
@@ -84,6 +85,12 @@ session_start();
             <button type="submit" class="btn btn-dark rounded-pill">This is an example of how an answer to a question will look on the testing page.</button>
         </div>
     </div>
+
+    <!-- this is tempoary as I am currently trying to pass the testID to this page -->
+    <div id="tempTestID" class="row">
+
+    </div>
+
     <!-- End Main Content -->
 
     <!-- Footer -->

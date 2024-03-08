@@ -112,6 +112,20 @@ $(document).ready(function () {
   // }
 });
 
+//currently testing out code to get the testID onto the testing page
+$("#testForm").submit(function (e) {
+  $.ajax({
+    type: "POST",
+    url: "/testing",
+    data: $("#testForm").serialize(),
+
+    success: function (data) {
+      //show that the testID is being passed to the testing page
+      console.log(data);
+    },
+  });
+});
+
 // Login Form
 $("#loginForm").submit(function (e) {
   e.preventDefault(); //Prevent the default form submission
