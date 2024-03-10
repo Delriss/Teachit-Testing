@@ -24,11 +24,8 @@ foreach ($testArray as $test) {
                     <hr>
                     <p class="card-text">' . $test->testDesc . '</p>
                 </div>
-                <div class="card-footer">
-                    <form id="testForm">
-                        <input type="hidden" id="testID" value="' . $test->testID . '">
-                        <button type="submit" class="btn btn-primary">Start Test</button>
-                    </form>
+                <div class="card-footer">                  
+                    <button class="btn btn-primary" bs-data-id="<?php echo $test->id; ?>" id="testIDButton">Start Test</button>
                 </div>
             </div>
         </div>
