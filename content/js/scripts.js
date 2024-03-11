@@ -112,31 +112,15 @@ $(document).ready(function () {
   // }
 });
 
-//currently testing out code to get the testID onto the testing page
-$("#testIDButton").click(function (e) {
-  window.location = "/testing" + $testID;
+//
+//TESTING PAGE - Test Selection
+//
+$(document).on("click", ".btn.btn-primary", function (e) {
+  e.preventDefault();
+
+  let testID = $(this).data("id");
+  window.location.href = "/testing?testID=" + testID;
 });
-
-//=======================================================================================================
-//UNSURE IF THIS IS NEEDED ANYMORE, KEEPING JUST INCASE. CODE ABOVE SHOULD BE WHAT IS NEEDED.
-//=======================================================================================================
-
-// $("#testIDButton").click(function (e) {
-//   // e.preventDefault()
-//   alert("testForm submitted");
-
-
-//   // $.ajax({
-//   //   type: "POST",
-//   //   url: "/testing",
-//   //   data: $("#testForm").serialize(),
-
-//   //   success: function (data) {
-//   //     //show that the testID is being passed to the testing page
-//   //     console.log(data);
-//   //   },
-//   // });
-// });
 
 // Login Form
 $("#loginForm").submit(function (e) {
