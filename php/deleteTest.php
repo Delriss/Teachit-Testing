@@ -5,11 +5,6 @@
         echo "Error: User not logged in";
         exit();
     }
-    //exit if the user is not authorised
-    if ($_SESSION["role"] !== "authorisedUser") {
-        echo "Error: User not authorised";
-        exit();
-    }
 
     if(isset($_POST["testID"]))
     {

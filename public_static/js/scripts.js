@@ -11,7 +11,7 @@ $("#registrationForm").submit(function (e) {
         //Ajax request to the server for asynchronous processing
         $.ajax({
           type: "POST",
-          url: "/php/createUser",
+          url: "/includes/createUser",
           data: $("#registrationForm").serialize(),
 
           //If the request is successful
@@ -57,7 +57,7 @@ $(document).ready(function () {
     //Run the test selection display script
     $.ajax({
       type: "POST",
-      url: "/php/outputStudentTests",
+      url: "/includes/outputStudentTests",
       data: $("#testContainer").serialize(),
 
       success: function (data) {
@@ -70,7 +70,7 @@ $(document).ready(function () {
     //Run the completed test selection display script
     $.ajax({
       type: "POST",
-      url: "/php/outputCompletedStudentTests",
+      url: "/includes/outputCompletedStudentTests",
       data: $("#completedTestContainer").serialize(),
 
       success: function (data) {
@@ -85,7 +85,7 @@ $(document).ready(function () {
     //Send AJAX request to the server for asynchronous processing
     $.ajax({
       type: "POST",
-      url: "/php/retrieveSubjects",
+      url: "/includes/retrieveSubjects",
       dataType: "json",
 
       //If the request is successful
@@ -119,7 +119,7 @@ $("#testSelectionModal").on("hidden.bs.modal", function () {
   //Run the test selection display script
   $.ajax({
     type: "POST",
-    url: "/php/outputStudentTests",
+    url: "/includes/outputStudentTests",
     data: $("#testContainer").serialize(),
 
     success: function (data) {
@@ -143,7 +143,7 @@ $("#loginForm").submit(function (e) {
         //Ajax request to the server for asynchronous processing
         $.ajax({
           type: "POST",
-          url: "/php/auth",
+          url: "/includes/auth",
           data: $("#loginForm").serialize(),
 
           success: function (data) {

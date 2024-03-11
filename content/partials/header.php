@@ -9,8 +9,9 @@
     <title><?php echo($activatedPage)?></title>
 
     <!-- Stylesheets -->
-    <link rel="stylesheet" href="/content/css/style.css">
-    <link rel="stylesheet" href="/content/css/testManagement.css">
+    <!-- linking css using routing wrapper -->
+    <link rel="stylesheet" href="/public_static/css/style.css">
+    <link rel="stylesheet" href="/public_static/css/testManagement.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -24,7 +25,7 @@
         <!-- Nav Container - adapt to screen size -->
         <div class="container-fluid">
             <a class="navbar-brand" href="/">
-                <img src="/content/imgs/logo-side.png" alt="TeachIt Testing" width="200" height="50">
+                <img src="/public_static/imgs/logo-side.png" alt="TeachIt Testing" width="200" height="50">
             </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapsable" aria-controls="navbarCollapsable" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
