@@ -85,12 +85,6 @@ if ($_SESSION['LoggedIn'] == false) {
             <button type="submit" class="btn btn-dark rounded-pill">This is an example of how an answer to a question will look on the testing page.</button>
         </div>
     </div>
-
-    <!-- this is tempoary as I am currently trying to pass the testID to this page -->
-    <div id="tempTestID" class="row">
-
-    </div>
-
     <!-- End Main Content -->
 
     <!-- Footer -->

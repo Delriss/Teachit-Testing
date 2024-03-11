@@ -65,6 +65,9 @@ $jRoute->Route(["post"], "/php/createUser", "php/createUser.php");
 //Create deleteTest route
 $jRoute->Route(["post"], "/php/deleteTest", "php/deleteTest.php", requiredRole: "admin");
 
+//Create deleteTest route
+$jRoute->Route(["post"], "/php/assignTestID", "php/assignTestID.php");
+
 //Dispatch the route
 
 echo $jRoute->Dispatch($_SERVER['REQUEST_METHOD'], $_SERVER['REQUEST_URI']);

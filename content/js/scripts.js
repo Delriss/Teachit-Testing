@@ -117,9 +117,19 @@ $(document).ready(function () {
 //
 $(document).on("click", ".btn.btn-primary", function (e) {
   e.preventDefault();
-
   let testID = $(this).data("id");
-  window.location.href = "/testing?testID=" + testID;
+  //AJAX request to set the testID in a SESSION variable to access on testing.php.
+  //This will allow the user to return to the test if they have not completed it.
+  //Furthermore the testID will be wiped once the test is completed or the user logs out.
+  $.ajax({
+    type: "POST",
+    url: "/php/assignTestID",
+    data: { testID: testID },
+
+    success: function (data) {
+      window.location.href = "/testing";
+    },
+  });
 });
 
 // Login Form
