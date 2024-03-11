@@ -40,15 +40,23 @@
                     </li>
                     <li class="nav-item dropdown bgColour">
                         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                            Admin Dashboard
+                            Lecturer Dashboard
                         </a>
                         <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                             <li><a class="dropdown-item<?php if($activatedPage == "Student Management"){echo(" active");}?>" href="/student-management">Student Management</a></li>
                             <li><a class="dropdown-item<?php if($activatedPage == "Test Management"){echo(" active");}?>" href="/test-management">Test Management</a></li>
-                            <li><a class="dropdown-item<?php if($activatedPage == "Lecturer Management"){echo(" active");}?>" href="/lecturer-management">Lecturer Management</a></li>
                             <li><a class="dropdown-item<?php if($activatedPage == "Statistics"){echo(" active");}?>" href="/statistics">Statistics</a></li>
                         </ul>
                     </li>
+                    <li class="nav-item dropdown bgColour">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            Admin Dashboard
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <li><a class="dropdown-item<?php if($activatedPage == "Lecturer Management"){echo(" active");}?>" href="/lecturer-management">Lecturer Management</a></li>
+                        </ul>
+                    </li>
+            
 
                     <li class="nav-item">
                         <?php //if the session loggedin is set, show the logout button
