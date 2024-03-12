@@ -219,6 +219,19 @@ $("#loginForm").submit(function (e) {
                 confirmButtonText: "Continue",
                 heightAuto: false
               });
+            } else if (data.includes("e5")) {
+              console.log(data);
+              //OUTPUT
+              Swal.fire({
+                //Alert the user with an error message
+                title: "Account Locked",
+                text: "Your account has been locked. Please contact your administrator.",
+                icon: "error",
+                showCancelButton: false,
+                confirmButtonColor: "#3085d6",
+                confirmButtonText: "Continue",
+                heightAuto: false
+              });
             }
           },
         });
