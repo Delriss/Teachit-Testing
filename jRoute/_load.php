@@ -79,26 +79,38 @@ class jRoute
                 // Remove the full match from the matches
                 array_shift($matches);
 
-                if (isset($_SESSION['user'])) {
-                    $user = unserialize($_SESSION['user']);
-                    $accessLevel = intval($user->accessLevel);
-                }
-
                 //Here, we need to check FOR EACH role in the array of routeInfo['role'] against the current session role to check if any of them are valid.
-                //is session role set and does the route have a required role?
-                if (isset($user->accessLevel) && $routeInfo['role'] !== null) {
+                //does the route have a required role?
+                if ($routeInfo['role'] !== null) {
 
-                    //is routeInfo['role'] an array?
+                    //because there is a required role we need to check if the user is logged in by checking if there is a user object in the session data
+                    if (!isset($_SESSION['user'])) {
+                        //serve the 403 page if the user is not logged in
+                        $_GET['error_uri'] = $method . ' ' . $uri;
+                        require dirname(__FILE__) . '/errorPages/403.php';
+                        return;
+                    }
+
+                    //because session data exists, we can assume that the user is logged in.
+                    //we can make a user object from the session data
+                    $user = unserialize($_SESSION['user']);
+                    
+
+                    //is routeInfo['role'] an array? Meaning that there are multiple roles that can access the route
                     if(is_array($routeInfo['role'])){
                         //loop through each required role array index and check if the user has any of the roles
                         $authorized = false;
                         foreach($routeInfo['role'] as $role){
+                            //otherwise, the user has one of the required roles
                             if ($user->accessLevel == $role) {
+                                //set authorized to true and break the loop
                                 $authorized = true;
                                 break;
                             }
                         }
+                        //if the user has none of the required roles, they are not authorized
                         if(!$authorized){
+                            //serve the 403 page if the user doesn't have one of the authorized roles
                             $_GET['error_uri'] = $method . ' ' . $uri;
                             require dirname(__FILE__) . '/errorPages/403.php';
                             return;
@@ -107,6 +119,7 @@ class jRoute
                     else{
                         //we know it is not an array so it must be a single role able to be checked against the session role
                         if ($user->accessLevel !== $routeInfo['role']) {
+                            //serve the 403 page if the user doesn't have the correct role
                             $_GET['error_uri'] = $method . ' ' . $uri;
                             require dirname(__FILE__) . '/errorPages/403.php';
                             return;
