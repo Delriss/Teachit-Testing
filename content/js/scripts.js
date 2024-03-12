@@ -285,3 +285,125 @@ $(document).on('click', '#btnDelete', function (e) {
     }
   });
 });
+
+//Student Management - Lock Student
+$(document).on('click', '#btnLock', function (e) {
+  e.preventDefault(); //Prevent the default form submission
+
+  //Send Confirmation SWAL
+  Swal.fire({
+    title: 'Are you sure?',
+    text: "This will lock the user's account. They will not be able to log in.",
+    icon: 'warning',
+    showCancelButton: true,
+    confirmButtonColor: '#3085d6',
+    cancelButtonColor: '#d33',
+    confirmButtonText: 'Yes, lock it!',
+    cancelButtonText: 'No, cancel!',
+    heightAuto: false
+  }).then((result) => {
+    if (result.isConfirmed) {
+      //Ajax request to the server for asynchronous processing
+      $.ajax({
+        type: "POST",
+        url: "/php/lockUser",
+        data: {
+          UID: $(this).data('id'),
+          lock: $(this).data('lock')
+        },
+        success: function (data) {
+          if (data.includes("User lock changed")) {
+            //OUTPUT
+            Swal.fire({
+              //Alert the user with a success message
+              title: "Student Locked",
+              text: "The student has been successfully locked.",
+              icon: "success",
+              showCancelButton: false,
+              confirmButtonColor: "#3085d6",
+              confirmButtonText: "Continue",
+              heightAuto: false
+            }).then((result) => {
+              if (result.isConfirmed) {
+                window.location = "/student-management";
+              }
+            });
+          } else {
+            //OUTPUT
+            Swal.fire({
+              //Alert the user with an error message
+              title: "Error",
+              text: "An error has occurred. Please try again.",
+              icon: "error",
+              showCancelButton: false,
+              confirmButtonColor: "#3085d6",
+              confirmButtonText: "Continue",
+              heightAuto: false
+            });
+          }
+        },
+      });
+    }
+  });
+});
+
+//Student Management - Unlock Student
+$(document).on('click', '#btnUnlock', function (e) {
+  e.preventDefault(); //Prevent the default form submission
+
+  //Send Confirmation SWAL
+  Swal.fire({
+    title: 'Are you sure?',
+    text: "This will unlock the user's account. They will be able to log in.",
+    icon: 'warning',
+    showCancelButton: true,
+    confirmButtonColor: '#3085d6',
+    cancelButtonColor: '#d33',
+    confirmButtonText: 'Yes, unlock it!',
+    cancelButtonText: 'No, cancel!',
+    heightAuto: false
+  }).then((result) => {
+    if (result.isConfirmed) {
+      //Ajax request to the server for asynchronous processing
+      $.ajax({
+        type: "POST",
+        url: "/php/lockUser",
+        data: {
+          UID: $(this).data('id'),
+          lock: $(this).data('lock')
+        },
+        success: function (data) {
+          if (data.includes("User lock changed")) {
+            //OUTPUT
+            Swal.fire({
+              //Alert the user with a success message
+              title: "Student Unlocked",
+              text: "The student has been successfully unlocked.",
+              icon: "success",
+              showCancelButton: false,
+              confirmButtonColor: "#3085d6",
+              confirmButtonText: "Continue",
+              heightAuto: false
+            }).then((result) => {
+              if (result.isConfirmed) {
+                window.location = "/student-management";
+              }
+            });
+          } else {
+            //OUTPUT
+            Swal.fire({
+              //Alert the user with an error message
+              title: "Error",
+              text: "An error has occurred. Please try again.",
+              icon: "error",
+              showCancelButton: false,
+              confirmButtonColor: "#3085d6",
+              confirmButtonText: "Continue",
+              heightAuto: false
+            });
+          }
+        },
+      });
+    }
+  });
+});
