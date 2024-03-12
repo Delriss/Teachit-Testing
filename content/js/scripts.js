@@ -52,7 +52,9 @@ $("#registrationForm").submit(function (e) {
 
 //Run the test selection display script on the test selection page load
 $(document).ready(function () {
-  //Only run on the test selection page
+  //
+  //TEST SELECTION PAGE
+  //
   if (window.location.href.includes("test-selection") == true) {
     //Run the test selection display script
     $.ajax({
@@ -66,8 +68,6 @@ $(document).ready(function () {
       },
     });
 
-    //REGISTRATION PAGE
-    //Run the completed test selection display script
     $.ajax({
       type: "POST",
       url: "/php/outputCompletedStudentTests",
@@ -79,7 +79,13 @@ $(document).ready(function () {
       },
     });
   }
+  //
+  //TEST SELECTION END
+  //
 
+  //
+  //REGISTRATION PAGE
+  //
   //Ensure registration form is loaded
   if ($("#courseTitle").length > 0) {
     //Send AJAX request to the server for asynchronous processing
@@ -108,10 +114,27 @@ $(document).ready(function () {
       },
     });
   }
-  //Debugging
-  // else {
-  //   console.log("Not on registration page");
-  // }
+  //
+  //REGISTRATION PAGE END
+  //
+
+  //
+  //STUDENT MANAGEMENT PAGE
+  //
+  //Fill the student management table
+  if (window.location.href.includes("student-management") == true) {
+    //Run the student management display script
+    $.ajax({
+      type: "POST",
+      url: "/php/outputStudents",
+      data: $("#studentTable").serialize(),
+
+      success: function (data) {
+        //Inject custom HTML into the page
+        $("#studentTable").html(data);
+      },
+    });
+  }
 });
 
 //Rerun test selection display script on modal close
@@ -195,4 +218,9 @@ $("#loginForm").submit(function (e) {
         });
       });
   });
+});
+
+//Student Management - Fulfil Datatable
+$(document).ready(function () {
+  
 });

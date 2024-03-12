@@ -21,33 +21,8 @@ include($_SERVER['DOCUMENT_ROOT'] . '/content/partials/header.php');
 
         <!--Implement DataTables-->
         <div class="container-fluid">
-            <table id="studentTable" class="w-100 display">
-                <thead>
-                    <tr>
-                        <th>Student ID</th>
-                        <th>First Name</th>
-                        <th>Last Name</th>
-                        <th>Email</th>
-                        <th>Course</th>
-                        <th>Year</th>
-                        <th>Actions</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <!-- Template row for DataTables -->
-                    <tr>
-                        <td>000000</td>
-                        <td>John</td>
-                        <td>Doe</td>
-                        <td>Email</td>
-                        <td>Course</td>
-                        <td>Year</td>
-                        <td>
-                            <button type="button" class="btn btn-primary">View</button>
-                            <button type="button" class="btn btn-danger">Delete</button>
-                        </td>
-                    </tr>
-                </tbody>
+            <table id="studentTable" class="w-100 table table-striped table-hover dataTable">
+                <!-- Fullfill with AJAX -->
             </table>
         </div>
     </div>
