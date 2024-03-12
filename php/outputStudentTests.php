@@ -1,7 +1,8 @@
 <?php
-//File Security Check to avoid direct access
-if (!isset($_SESSION)) {
-    die('<p class="lead">User is not logged in.</p>');
+//check if there is user session
+if (!isset($_SESSION['user'])){
+    //if not, return to the login page
+    header("Location: /login");
 }
 
 

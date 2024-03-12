@@ -2,6 +2,8 @@
 
 require_once("jRoute/_load.php");
 
+//Students = 0, Lecturers = 1, Admins = 2 
+
 //Create jRoute instance
 $jRoute = new jRoute();
 
