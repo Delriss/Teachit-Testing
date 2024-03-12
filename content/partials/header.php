@@ -1,3 +1,14 @@
+<?php
+//FIX this is hacky, should be done with autoloading or using extends I think
+require_once("php/userClass.php");
+
+//retrieve object from session to get the user's access level
+if (isset($_SESSION['user'])) {
+    $user = unserialize($_SESSION['user']);
+    $accessLevel = intval($user->accessLevel);
+}
+?>
+
 <!DOCTYPE html>
 <html class="h-100" lang="en">
 
@@ -39,25 +50,56 @@
                     <li class="nav-item">
                         <a class="nav-link<?php if($activatedPage == "Test Selection"){echo(" active");}?>" href="/test-selection">Test Selection</a>
                     </li>
-                    <li class="nav-item dropdown bgColour">
-                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                            Lecturer Dashboard
-                        </a>
-                        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <li><a class="dropdown-item<?php if($activatedPage == "Student Management"){echo(" active");}?>" href="/student-management">Student Management</a></li>
-                            <li><a class="dropdown-item<?php if($activatedPage == "Test Management"){echo(" active");}?>" href="/test-management">Test Management</a></li>
-                            <li><a class="dropdown-item<?php if($activatedPage == "Statistics"){echo(" active");}?>" href="/statistics">Statistics</a></li>
-                        </ul>
-                    </li>
-                    <li class="nav-item dropdown bgColour">
-                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                            Admin Dashboard
-                        </a>
-                        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <li><a class="dropdown-item<?php if($activatedPage == "Lecturer Management"){echo(" active");}?>" href="/lecturer-management">Lecturer Management</a></li>
-                        </ul>
-                    </li>
-            
+                    <?php
+                    //if the session role is lecturer, show the lecturer dashboard link
+                    //THIS NEEDS TO BE UPDATED WHEN AUTH IS USING A CLASS OBJECT WITH AN ARRAY OF ROLES AS AN ATTRIBUTE (FIX)
+                    if (isset($_SESSION['user']) && $accessLevel == 1) {
+                        if($activatedPage == "Statistics" || $activatedPage == "Student Management" || $activatedPage == "Test Management"){
+                            $lecturerActive = " active";
+                        }
+                        else{
+                            $lecturerActive = "";
+                        }
+                        echo(
+                        <<<HERE
+                        <li class="nav-item dropdown bgColour">
+                            <a class="nav-link dropdown-toggle$lecturerActive" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                Lecturer Dashboard
+                            </a>
+                            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <li><a class="dropdown-item" href="/student-management">Student Management</a></li>
+                                <li><a class="dropdown-item" href="/test-management">Test Management</a></li>
+                                <li><a class="dropdown-item" href="/statistics">Statistics</a></li>
+                            </ul>
+                        </li>
+                        HERE
+                        );
+                    }
+                    //if the session role is admin, show the admin dashboard link, FIX THIS WHEN AUTH IS USING A CLASS OBJECT WITH AN ARRAY OF ROLES AS AN ATTRIBUTE
+                    else if (isset($_SESSION['user']) && $accessLevel == 2) {
+                        if($activatedPage == "Statistics" || $activatedPage == "Student Management" || $activatedPage == "Test Management" || $activatedPage == "Lecturer Management"){
+                            $adminActive = " active";
+                        }
+                        else{
+                            $adminActive = "";
+                        }
+                        echo(
+                        <<<HEREDOC
+                        <li class="nav-item dropdown bgColour">
+                            <a class="nav-link dropdown-toggle$adminActive" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                Admin Dashboard
+                            </a>
+                            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <li><a class="dropdown-item" href="/student-management">Student Management</a></li>
+                                <li><a class="dropdown-item" href="/test-management">Test Management</a></li>
+                                <li><a class="dropdown-item" href="/statistics">Statistics</a></li>
+                                <li><a class="dropdown-item" href="/lecturer-management">Lecturer Management</a></li>
+                            </ul>
+                        </li>
+                        HEREDOC
+                        );
+                    }
+                    ?>
 
                     <li class="nav-item">
                         <?php //if the session loggedin is set, show the logout button
@@ -76,5 +118,4 @@
     <!-- End Navbar -->
 </head>
 
-<?php
 

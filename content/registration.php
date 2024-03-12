@@ -1,6 +1,6 @@
 <?php
 //include the header
-$activatedPage = "Registration Page";
+$activatedPage = "Registration";
 include($_SERVER['DOCUMENT_ROOT'] . '/content/partials/header.php');
 ?>
 

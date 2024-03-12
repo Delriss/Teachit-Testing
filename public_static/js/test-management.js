@@ -490,7 +490,8 @@ $(document).on("click", ".deleteTestButton", function() {
         confirmButtonColor: '#d33',
         cancelButtonColor: '#3085d6',
         confirmButtonText: 'Yes, Delete',
-        reverseButtons: true
+        reverseButtons: true,
+        heightAuto: false
     }).then((result) => {
         //If the user confirms they want to delete the test
         if (result.isConfirmed) {

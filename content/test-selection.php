@@ -1,11 +1,10 @@
 <?php
-if ($_SESSION['LoggedIn'] == false) {
-    header("Location: /login");
+//session has a user object, we need to access the loggedIn attribute within the object which is a boolean to check if it is true
+if ($_SESSION['user']->loggedIn == false) {
+    header("Location: /");
     die();
 }
-?>
 
-<?php
 $activatedPage = "Test Selection";
 //include the header partial
 include_once($_SERVER['DOCUMENT_ROOT'] . '/content/partials/header.php');
