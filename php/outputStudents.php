@@ -11,7 +11,7 @@ if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
 include_once($_SERVER['DOCUMENT_ROOT'] . '/php/_connect.php');
 
 //Retrieve all Students from database
-$sql = "SELECT `ID`, `firstName`, `lastName`, `email`, `courseTitle`, `accountLock` FROM `users` WHERE 'acccessLevel' = 0";
+$sql = "SELECT `ID`, `firstName`, `lastName`, `email`, `courseTitle`, `accountLock` FROM `users` WHERE `accessLevel` = 0";
 $students = mysqli_query($db_connect, $sql);
 
 //Output the students

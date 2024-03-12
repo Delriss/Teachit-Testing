@@ -121,6 +121,7 @@ $(document).ready(function () {
   //
   //STUDENT MANAGEMENT PAGE
   //
+
   //Fill the student management table
   if (window.location.href.includes("student-management") == true) {
     //Run the student management display script
@@ -132,6 +133,11 @@ $(document).ready(function () {
       success: function (data) {
         //Inject custom HTML into the page
         $("#studentTable").html(data);
+
+        //Init Datatable
+        $("#studentTable").DataTable({
+          responsive: true,
+        });
       },
     });
   }

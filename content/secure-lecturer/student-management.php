@@ -21,7 +21,7 @@ include($_SERVER['DOCUMENT_ROOT'] . '/content/partials/header.php');
 
         <!--Implement DataTables-->
         <div class="container-fluid">
-            <table id="studentTable" class="w-100 table table-striped table-hover dataTable">
+            <table id="studentTable" class="w-100 table table-striped table-hover">
                 <!-- Fullfill with AJAX -->
             </table>
         </div>
