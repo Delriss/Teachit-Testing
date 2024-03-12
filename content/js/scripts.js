@@ -226,7 +226,62 @@ $("#loginForm").submit(function (e) {
   });
 });
 
-//Student Management - Fulfil Datatable
-$(document).ready(function () {
-  
+//Student Management - Delete Student
+$(document).on('click', '#btnDelete', function (e) {
+  e.preventDefault(); //Prevent the default form submission
+
+  //Send Confirmation SWAL
+  Swal.fire({
+    title: 'Are you sure?',
+    text: "This action cannot be undone!",
+    icon: 'warning',
+    showCancelButton: true,
+    confirmButtonColor: '#3085d6',
+    cancelButtonColor: '#d33',
+    confirmButtonText: 'Yes, delete it!',
+    cancelButtonText: 'No, cancel!',
+    heightAuto: false
+  }).then((result) => {
+    if (result.isConfirmed) {
+      //Ajax request to the server for asynchronous processing
+      $.ajax({
+        type: "POST",
+        url: "/php/deleteUser",
+        data: {
+          UID: $(this).data('id')
+        },
+        success: function (data) {
+          if (data.includes("User deleted")) {
+            //OUTPUT
+            Swal.fire({
+              //Alert the user with a success message
+              title: "Student Deleted",
+              text: "The student has been successfully deleted.",
+              icon: "success",
+              showCancelButton: false,
+              confirmButtonColor: "#3085d6",
+              confirmButtonText: "Continue",
+              heightAuto: false
+            }).then((result) => {
+              if (result.isConfirmed) {
+                window.location = "/student-management";
+              }
+            });
+          } else {
+            //OUTPUT
+            Swal.fire({
+              //Alert the user with an error message
+              title: "Error",
+              text: "An error has occurred. Please try again.",
+              icon: "error",
+              showCancelButton: false,
+              confirmButtonColor: "#3085d6",
+              confirmButtonText: "Continue",
+              heightAuto: false
+            });
+          }
+        },
+      });
+    }
+  });
 });

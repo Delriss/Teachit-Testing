@@ -72,5 +72,8 @@ $jRoute->Route(["post"], "/php/deleteTest", "php/deleteTest.php", requiredRole: 
 //Create outputStudents route
 $jRoute->Route(["post"], "/php/outputStudents", "php/outputStudents.php");
 
+//Create deleteUser route
+$jRoute->Route(["post"], "/php/deleteUser", "php/deleteUser.php");
+
 //Dispatch the route
 echo $jRoute->Dispatch($_SERVER['REQUEST_METHOD'], $_SERVER['REQUEST_URI']);
