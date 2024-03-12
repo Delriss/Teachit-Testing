@@ -23,6 +23,9 @@ $jRoute->Route(["get"], "/test-selection", "content/test-selection.php");
 //(fix) NEEDS AUTH WHEN IT HAS BEEN BUILT
 $jRoute->Route(["get"], "/test-management", "content/secure-lecturer/test-management.php");
 
+//Create Student Management Route
+$jRoute->Route(["get"], "/student-management", "content/secure-lecturer/student-management.php");
+
 //
 //PRIVATE PHP ROUTES
 //
