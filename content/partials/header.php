@@ -47,10 +47,28 @@ if (isset($_SESSION['user'])) {
                     <li class="nav-item">
                         <a class="nav-link<?php if($activatedPage == "Home"){echo(" active");}?>" aria-current="page" href="/">Home</a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link<?php if($activatedPage == "Test Selection"){echo(" active");}?>" href="/test-selection">Test Selection</a>
-                    </li>
-                    <?php
+                    <?php 
+                    //if user is logged in show the test selection link
+                    if (isset($_SESSION['user'])) {
+                        if($activatedPage == "Test Selection"){
+                            echo(
+                            <<<HERE
+                            <li class="nav-item">
+                                <a class="nav-link active" href="/test-selection">Test Selection</a>
+                            </li>
+                            HERE
+                            );
+                        }
+                        else{
+                            echo(
+                            <<<HERE
+                            <li class="nav-item">
+                                <a class="nav-link" href="/test-selection">Test Selection</a>
+                            </li>
+                            HERE
+                            );
+                        }
+                    }
                     //if the session role is lecturer, show the lecturer dashboard link
                     //THIS NEEDS TO BE UPDATED WHEN AUTH IS USING A CLASS OBJECT WITH AN ARRAY OF ROLES AS AN ATTRIBUTE (FIX)
                     if (isset($_SESSION['user']) && $accessLevel == 1) {
@@ -106,7 +124,13 @@ if (isset($_SESSION['user'])) {
                         if (isset($_SESSION['LoggedIn'])) {
                             echo '<a class="nav-link" href="/logout">Logout</a>';
                         } else {
-                            echo '<a class="nav-link" href="/login">Login</a>';
+                            //if current page is login, make login active
+                            if($activatedPage == "Login"){
+                                echo '<a class="nav-link active" href="/login">Login</a>';
+                            }
+                            else{
+                                echo '<a class="nav-link" href="/login">Login</a>';
+                            }
                         }
                         ?>
                     </li>

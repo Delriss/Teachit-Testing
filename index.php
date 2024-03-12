@@ -14,28 +14,32 @@ $jRoute->Route(["get"], "/", "content/index.php");
 //Create login Route
 $jRoute->Route(["get"], "/login", "content/login.php");
 
+//only logged in users can access logout
 //Create Logout Route
-$jRoute->Route(["get"], "/logout", "php/logout.php");
+$jRoute->Route(["get"], "/logout", "php/logout.php", [0,1,2]);
 
 //Create register Route
 $jRoute->Route(["get"], "/register", "content/registration.php");
 
+//all logged in users can access test selection
 //Create Test Selection Route
-$jRoute->Route(["get"], "/test-selection", "content/test-selection.php");
+$jRoute->Route(["get"], "/test-selection", "content/test-selection.php", [0,1,2]);
 
-$TMAllowedRoles = [1, 2];
-
+//lecturer and admin can access test management
 //Create Test Management Route
-$jRoute->Route(["get"], "/test-management", "content/secure-lecturer/test-management.php", $TMAllowedRoles);
+$jRoute->Route(["get"], "/test-management", "content/secure-lecturer/test-management.php", [1,2]);
 
+//all logged in users can access the leaderboard
 //Create Leaderboard Route
-$jRoute->Route(["get"], "/leaderboard", "content/leaderboard.php");
+$jRoute->Route(["get"], "/leaderboard", "content/leaderboard.php", [0,1,2]);
 
-//Theo Pages (lol)
-$jRoute->Route(["get"], "/student-management", "content/placeholder.php");
-$jRoute->Route(["get"], "/lecturer-management", "content/placeholder.php");
-$jRoute->Route(["get"], "/statistics", "content/placeholder.php");
-
+//Theo Pages
+//lecturers and admins can access student management
+$jRoute->Route(["get"], "/student-management", "content/placeholder.php", [1,2]);
+//only admins can access lecturer management
+$jRoute->Route(["get"], "/lecturer-management", "content/placeholder.php", [2]);
+//admins and lecturers can access statistics
+$jRoute->Route(["get"], "/statistics", "content/placeholder.php", [1,2]);
 
 //
 //PRIVATE PHP ROUTES
