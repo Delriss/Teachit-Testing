@@ -67,22 +67,36 @@ if ($_SESSION['LoggedIn'] == false) {
 
     <!-- Main Content -->
     <div class="col-lg-6 mt-auto mx-auto p-3 py-md-3 text-center rounded bgColourFaded">
-        <div class="text-center">
-            <div class="testingQuestion">
+        <div class="text-center" id="testingInterface">
+
+            <!-- <div class="testingQuestion" id="question-text">
                 <h3>Temporary question text which is an example on how a question will look like on the testing page.</h3>
             </div>
             <hr>
-            <p class="testingOption">Option 1:</p>
-            <button type="submit" class="btn btn-dark rounded-pill">This is an example of how an answer to a question will look on the testing page.</button>
-            <hr>
-            <p class="testingOption">Option 2:</p>
-            <button type="submit" class="btn btn-dark rounded-pill">This is an example of how a very answer to a question will look on the testing page. This answer is very long and complex, and it shows how much text can possibly be in the answer box compared to really short answers like the one below.</button>
-            <hr>
-            <p class="testingOption">Option 3:</p>
-            <button type="submit" class="btn btn-dark rounded-pill">Short answer.</button>
-            <hr>
-            <p class="testingOption">Option 4:</p>
-            <button type="submit" class="btn btn-dark rounded-pill">This is an example of how an answer to a question will look on the testing page.</button>
+            <form id="testingForm">
+                <div id="testingOption1">
+                    <p class="testingOption">Option 1:</p>
+                    <button type="submit" class="btn btn-dark rounded-pill" id="option1">This is an example of how an answer to a question will look on the testing page.</button>
+                    <hr>
+                </div>
+                <div id="testingOption2">
+                    <p class="testingOption">Option 2:</p>
+                    <button type="submit" class="btn btn-dark rounded-pill" id="option2">This is an example of how a very answer to a question will look on the testing page. This answer is very long and complex, and it shows how much text can possibly be in the answer box compared to really short answers like the one below.</button>
+                    <hr>
+                </div>
+                <div id="testingOption3">
+                    <p class="testingOption">Option 3:</p>
+                    <button type="submit" class="btn btn-dark rounded-pill" id="option3">Short answer.</button>
+                    <hr>
+                </div>
+                <div id="testingOption4">
+                    <p class="testingOption">Option 4:</p>
+                    <button type="submit" class="btn btn-dark rounded-pill" id="option4">This is an example of how an answer to a question will look on the testing page.</button>
+                    <hr>
+                </div>
+                <p>Click on a button to submit your answer.</p>
+                <button type="submit" class="btn btn-primary rounded-pill">Submit</button>
+            </form> -->
         </div>
     </div>
     <!-- End Main Content -->

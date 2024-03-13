@@ -110,6 +110,19 @@ $(document).ready(function () {
   // else {
   //   console.log("Not on registration page");
   // }
+
+  if(window.location.href.includes("testing") == true){
+    $.ajax({
+      type: "POST",
+      url: "/php/initialiseQuestions",
+      data: $("#testContainer").serialize(),
+
+      success: function (data) {
+        $("#testingInterface").html(data);
+        
+      },
+    });
+  }
 });
 
 //

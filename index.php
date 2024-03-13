@@ -65,8 +65,11 @@ $jRoute->Route(["post"], "/php/createUser", "php/createUser.php");
 //Create deleteTest route
 $jRoute->Route(["post"], "/php/deleteTest", "php/deleteTest.php", requiredRole: "admin");
 
-//Create deleteTest route
+//Create assignTestID route
 $jRoute->Route(["post"], "/php/assignTestID", "php/assignTestID.php");
+
+//Create initialiseQuestions route
+$jRoute->Route(["post"], "/php/initialiseQuestions", "php/initialiseQuestions.php");
 
 //Dispatch the route
 
