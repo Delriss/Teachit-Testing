@@ -63,7 +63,7 @@ foreach ($tests as $test) {
     $testObject->subject = mysqli_fetch_assoc($result)['subjectName'];
 
     //Get the questions belonging to the test
-    $sql = "SELECT questionID, testID, questionText, correctAnswerID FROM questions WHERE testID = " . $test['testID'];
+    $sql = "SELECT questionID, relativeQuestionID, testID, questionText, correctAnswerID FROM questions WHERE testID = " . $test['testID'];
     $questions = mysqli_query($db_connect, $sql);
 
     foreach ($questions as $question) {
@@ -71,21 +71,21 @@ foreach ($tests as $test) {
 
         //Define the question object's attributes
         $questionObject->questionID = $question['questionID'];
+        $questionObject->relativeQuestionID = $question['relativeQuestionID'];
         $questionObject->testID = $question['testID'];
         $questionObject->questionText = $question['questionText'];
         $questionObject->correctAnswerID = $question['correctAnswerID'];
 
         //Get the answers for the question
-        $sql = "SELECT answerID, questionID, answerText, isCorrect FROM answers WHERE questionID = " . $question['questionID'];
+        $sql = "SELECT answerID, relativeAnswerID, questionID, answerText, isCorrect FROM answers WHERE questionID = " . $question['questionID'];
         $answers = mysqli_query($db_connect, $sql);
 
         foreach ($answers as $answer) {
             $answerObject = new answer;
-            
-            //(FIX) needs relative answer id in context of the range of answers for the questions, etc 1-4. This needs to be done in the database as well
 
             //Define the answer object's attributes
             $answerObject->answerID = $answer['answerID'];
+            $answerObject->relativeAnswerID = $answer['relativeAnswerID'];
             $answerObject->questionID = $answer['questionID'];
             $answerObject->answerText = $answer['answerText'];
             $answerObject->isCorrect = $answer['isCorrect'];
