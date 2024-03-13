@@ -111,6 +111,8 @@ $(document).ready(function () {
   //   console.log("Not on registration page");
   // }
 
+  //TESTING PAGE
+  //This code will load initialiseQuestions.php when testing.php is loaded
   if(window.location.href.includes("testing") == true){
     $.ajax({
       type: "POST",
@@ -119,14 +121,13 @@ $(document).ready(function () {
 
       success: function (data) {
         $("#testingInterface").html(data);
-
       },
     });
   }
 });
 
 //
-//TESTING PAGE - Test Selection
+//TEST SELECTION -> TESTING PAGE
 //
 $(document).on("click", ".btn.btn-primary", function (e) {
   e.preventDefault();
@@ -141,6 +142,21 @@ $(document).on("click", ".btn.btn-primary", function (e) {
 
     success: function (data) {
       window.location.href = "/testing";
+    },
+  });
+});
+
+//TESTING PAGE RECIEVING USER INPUT
+$(document).on("click", ".btn.btn-dark.rounded-pill", function (e) {
+  e.preventDefault();
+  let userAnswered = $(this).data("id");
+  $.ajax({
+    type: "POST",
+    url: "/php/validateAnswer",
+    data: { userAnswered: userAnswered },
+
+    success: function (data) {
+      console.log(data);
     },
   });
 });

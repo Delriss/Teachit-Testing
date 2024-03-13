@@ -18,6 +18,7 @@ include_once($_SERVER['DOCUMENT_ROOT'] . '/php/retrieveTests.php');
 $_SESSION['questionsAnswered'] = 0;
 $_SESSION['currentScore'] = 0;
 $_SESSION['correctAnswer'] = 999;
+$subject = "blank";
 $option1 = "blank";
 $option2 = "blank";
 $option3 = "blank";
@@ -27,6 +28,8 @@ foreach ($testArray as $test) {
     if ($test->testID == $_SESSION["testID"]) {
         $questionCount = count($test->questions);
         $questionText = $test->questions[$_SESSION['questionsAnswered']]->questionText;
+        $subject = $test->subject;
+        $_SESSION['correctAnswer'] = $test->questions[$_SESSION['questionsAnswered']]->correctAnswerID;
         $option1 = $test->questions[$_SESSION['questionsAnswered']]->answers[0]->answerText;
         $option2 = $test->questions[$_SESSION['questionsAnswered']]->answers[1]->answerText;
         $option3 = $test->questions[$_SESSION['questionsAnswered']]->answers[2]->answerText;
@@ -42,35 +45,33 @@ foreach ($testArray as $test) {
     // }
 };
 
-//echo $questionCount;
 echo ('<div class="testingQuestion" id="question-text">
-                <h3>' . $questionText . '</h3>
-            </div>
+            <h5>Question: ' . ($_SESSION['questionsAnswered'] + 1) . ' of ' . $questionCount . ' | Subject: ' . $subject . '</h5>
             <hr>
-            <form id="testingForm">
-                <div id="testingOption1">
-                    <p class="testingOption">Option 1:</p>
-                    <button type="submit" class="btn btn-dark rounded-pill" id="option1">' . $option1 . '</button>
-                    <hr>
-                </div>
-                <div id="testingOption2">
-                    <p class="testingOption">Option 2:</p>
-                    <button type="submit" class="btn btn-dark rounded-pill" id="option2">' . $option2 . '</button>
-                    <hr>
-                </div>
-                <div id="testingOption3">
-                    <p class="testingOption">Option 3:</p>
-                    <button type="submit" class="btn btn-dark rounded-pill" id="option3">' . $option3 . '</button>
-                    <hr>
-                </div>
-                <div id="testingOption4">
-                    <p class="testingOption">Option 4:</p>
-                    <button type="submit" class="btn btn-dark rounded-pill" id="option4">' . $option4 . '</button>
-                    <hr>
-                </div>
-                <p>Click on a button to submit your answer.</p>
-                <button type="submit" class="btn btn-primary rounded-pill">Submit</button>
-            </form>
+            <h3>' . $questionText . '</h3>
         </div>
+        <hr>
+        <div id="testingOption1">
+            <p class="testingOption">Option 1:</p>
+            <button type="submit" class="btn btn-dark rounded-pill" id="option1" data-id=0>' . $option1 . '</button>
+            <hr>
+        </div>
+        <div id="testingOption2">
+            <p class="testingOption">Option 2:</p>
+            <button type="submit" class="btn btn-dark rounded-pill" id="option2" data-id=1>' . $option2 . '</button>
+            <hr>
+        </div>
+        <div id="testingOption3">
+            <p class="testingOption">Option 3:</p>
+            <button type="submit" class="btn btn-dark rounded-pill" id="option3" data-id=2>' . $option3 . '</button>
+            <hr>
+        </div>
+        <div id="testingOption4">
+            <p class="testingOption">Option 4:</p>
+            <button type="submit" class="btn btn-dark rounded-pill" id="option4" data-id=3>' . $option4 . '</button>
+            <hr>
+        </div>
+        <p>Click on a button to submit your answer.</p>
+    </div>
     ');
 ?>
