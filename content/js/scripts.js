@@ -114,13 +114,18 @@ $(document).ready(function () {
   //TESTING PAGE
   //This code will load nextQuestion.php when testing.php is loaded
   if(window.location.href.includes("testing") == true){
+    //while the page is loading, this will hide the blank background
+    $("#testingBackground").hide();
     $.ajax({
       type: "POST",
       url: "/php/nextQuestion",
       data: $("#testingInterface").serialize(),
 
       success: function (data) {
+        //inserting the data from nextQuestion.php into the testingInterface div
         $("#testingInterface").html(data);
+        //this will make the interface reappear
+        $("#testingBackground").show();
       },
     });
   }
@@ -163,10 +168,13 @@ $(document).on("click", "#option", function (e) {
       //If the answer is correct
       if (data === "e1") {
         //resets the testing interface to avoid complications like the user pressing the same button twice
+        //the background is also hidden while loading the question
+        $("#testingBackground").hide();
         $("#testingInterface").html("");
 
         //OUTPUT SWEET ALERT
         Swal.fire({
+          //Alert the user with a success message
           title: "Correct",
           text: "You have earned 30 points.",
           icon: "success",
@@ -181,7 +189,9 @@ $(document).on("click", "#option", function (e) {
               url: "/php/nextQuestion",
 
               success: function (data) {
+                //inserting the data and making the interface reappear
                 $("#testingInterface").html(data);
+                $("#testingBackground").show();
               },
             });
           }
@@ -189,6 +199,7 @@ $(document).on("click", "#option", function (e) {
 
       } else { //if the answer is incorrect
         //resets the testing interface to avoid complications like the user pressing the same button twice
+        $("#testingBackground").hide();
         $("#testingInterface").html("");
 
         //OUTPUT SWEET ALERT
@@ -208,7 +219,9 @@ $(document).on("click", "#option", function (e) {
               url: "/php/nextQuestion",
 
               success: function (data) {
+                //inserting the data and making the interface reappear
                 $("#testingInterface").html(data);
+                $("#testingBackground").show();
               },
             });
           }
