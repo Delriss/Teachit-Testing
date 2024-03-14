@@ -226,7 +226,14 @@ $(document).on("click", "#option", function (e) {
             }).then((result) => {
               //upload and reset the session variables used in the exam
               if (result.isConfirmed) {
-                window.location = "/test-selection";
+                $.ajax({
+                  type: "POST",
+                  url: "/php/finaliseTest",
+    
+                  success: function (data) {
+                    window.location = "/test-selection";
+                  },
+                });
               }
             });
           }
@@ -259,7 +266,14 @@ $(document).on("click", "#option", function (e) {
             }).then((result) => {
               //upload and reset the session variables used in the exam
               if (result.isConfirmed) {
-                window.location = "/test-selection";
+                $.ajax({
+                  type: "POST",
+                  url: "/php/finaliseTest",
+    
+                  success: function (data) {
+                    window.location = "/test-selection";
+                  },
+                });
               }
             });
           }
