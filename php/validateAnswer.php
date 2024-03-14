@@ -11,16 +11,15 @@ if (!isset($_SESSION)) {
     die('<p class="lead">User is not logged in.</p>');
 }
 
-$userAnswered = $_POST['userAnswered'];
-
-if ($userAnswered == $_SESSION['correctAnswer']) {
+//This code checks the user's answer against the correct answer, if the
+//  answer is correct, 30 points are added. If the answer is incorrect,
+//  10 points are deducted. The echo assists with the Sweet Alerts.
+if ($_POST['userAnswered'] == $_SESSION['correctAnswerID']) {
     $_SESSION['currentScore'] = $_SESSION['currentScore'] + 30;
-    echo "Correct, your score is now " . $_SESSION['currentScore'];
+    echo "e1";
 }
 else {
-    echo "Incorrect, your score is still " . $_SESSION['currentScore'];
+    $_SESSION['currentScore'] = $_SESSION['currentScore'] - 10;
+    echo $_SESSION['correctAnswerText'];
 }
-//echo $userAnswered;
-
-
 ?>

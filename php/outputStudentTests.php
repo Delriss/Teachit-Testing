@@ -25,7 +25,7 @@ foreach ($testArray as $test) {
                     <p class="card-text">' . $test->testDesc . '</p>
                 </div>
                 <div class="card-footer">                  
-                    <button class="btn btn-primary testIDButton" data-id='. $test->testID .'>Start Test</button>
+                    <button id="startTestButton" class="btn btn-primary testIDButton" data-id='. $test->testID .'>Start Test</button>
                 </div>
             </div>
         </div>

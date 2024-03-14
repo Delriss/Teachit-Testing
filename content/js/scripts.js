@@ -117,7 +117,7 @@ $(document).ready(function () {
     $.ajax({
       type: "POST",
       url: "/php/initialiseQuestions",
-      data: $("#testContainer").serialize(),
+      data: $("#testingInterface").serialize(),
 
       success: function (data) {
         $("#testingInterface").html(data);
@@ -129,7 +129,7 @@ $(document).ready(function () {
 //
 //TEST SELECTION -> TESTING PAGE
 //
-$(document).on("click", ".btn.btn-primary", function (e) {
+$(document).on("click", "#startTestButton", function (e) {
   e.preventDefault();
   let testID = $(this).data("id");
   //AJAX request to set the testID in a SESSION variable to access on testing.php.
@@ -147,7 +147,7 @@ $(document).on("click", ".btn.btn-primary", function (e) {
 });
 
 //TESTING PAGE RECIEVING USER INPUT
-$(document).on("click", ".btn.btn-dark.rounded-pill", function (e) {
+$(document).on("click", "#option", function (e) {
   e.preventDefault();
   let userAnswered = $(this).data("id");
   $.ajax({
@@ -156,7 +156,27 @@ $(document).on("click", ".btn.btn-dark.rounded-pill", function (e) {
     data: { userAnswered: userAnswered },
 
     success: function (data) {
-      console.log(data);
+      if (data === "e1") {
+        Swal.fire({
+          title: "Correct",
+          text: "You have earned 30 points.",
+          icon: "success",
+          showCancelButton: false,
+          confirmButtonColor: "#3085d6",
+          confirmButtonText: "Next Question",
+        });
+      } else {
+        //OUTPUT
+        Swal.fire({
+          //Alert the user with an error message
+          title: "Incorrect",
+          text: "You have been deducted 10 points. The correct answer is: " + data,
+          icon: "error",
+          showCancelButton: false,
+          confirmButtonColor: "#3085d6",
+          confirmButtonText: "Next Question",
+        });
+      }
     },
   });
 });
@@ -179,7 +199,6 @@ $("#loginForm").submit(function (e) {
 
           success: function (data) {
             if (data.includes("e1") || data.includes("e2")) {
-              console.log(data);
               //OUTPUT
               Swal.fire({
                 //Alert the user with an error message
@@ -191,7 +210,6 @@ $("#loginForm").submit(function (e) {
                 confirmButtonText: "Continue",
               });
             } else if (data.includes("e3")) {
-              console.log(data);
               //OUTPUT
               Swal.fire({
                 //Alert the user with an error message
@@ -207,7 +225,6 @@ $("#loginForm").submit(function (e) {
                 }
               });
             } else if (data.includes("e4")) {
-              console.log(data);
               //OUTPUT
               Swal.fire({
                 //Alert the user with an error message
