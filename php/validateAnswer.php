@@ -11,17 +11,50 @@ if (!isset($_SESSION)) {
     die('<p class="lead">User is not logged in.</p>');
 }
 
+//This code is ran when the question is answered, the questionsAnswered variable is incremented by 1
+$_SESSION['questionsAnswered'] = $_SESSION['questionsAnswered'] + 1;
+
 //This code checks the user's answer against the correct answer, if the
 //  answer is correct, 30 points are added. If the answer is incorrect,
 //  10 points are deducted. The echo assists with the Sweet Alerts.
 if ($_POST['userAnswered'] == $_SESSION['correctAnswerID']) {
+    //correct
     $_SESSION['currentScore'] = $_SESSION['currentScore'] + 30;
-    $_SESSION['questionsAnswered']++;
-    echo "e1";
+
+    if ($_SESSION['questionsAnswered'] == $_SESSION['totalQuestions']) {
+        //this path is used if the user has answered all questions
+        $response = [
+            "status" => "e2",
+            "points" => $_SESSION['currentScore']
+        ];
+        echo json_encode($response);
+
+    } else {
+        //this path is used to continue the test
+        echo json_encode(["status" => "e1"]);
+    }
+    
 }
 else {
+    //incorrect
     $_SESSION['currentScore'] = $_SESSION['currentScore'] - 10;
-    $_SESSION['questionsAnswered']++;
-    echo $_SESSION['correctAnswerText'];
+    if ($_SESSION['questionsAnswered'] == $_SESSION['totalQuestions']) {
+        //this path is used if the user has answered all questions
+        $response = [
+            "status" => "e3",
+            "correctAnswerText" => $_SESSION['correctAnswerText'],
+            "points" => $_SESSION['currentScore']
+        ];
+        echo json_encode($response);
+
+    } else {
+        //this path is used to continue the test
+        $response = [
+            "status" => "e4",
+            "correctAnswerText" => $_SESSION['correctAnswerText']
+        ];
+        echo json_encode($response);
+        //echo $_SESSION['correctAnswerText'];
+    }
 }
 ?>

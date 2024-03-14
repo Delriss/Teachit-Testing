@@ -163,10 +163,11 @@ $(document).on("click", "#option", function (e) {
     type: "POST",
     url: "/php/validateAnswer",
     data: { userAnswered: userAnswered },
+    dataType: "json",
 
     success: function (data) {
       //If the answer is correct
-      if (data === "e1") {
+      if (data.status === "e1") {
         //resets the testing interface to avoid complications like the user pressing the same button twice
         //the background is also hidden while loading the question
         $("#testingBackground").hide();
@@ -198,6 +199,72 @@ $(document).on("click", "#option", function (e) {
           }
         });
 
+      } else if (data.status === "e2") { //if the test is completed
+        //OUTPUT SWEET ALERT
+        Swal.fire({
+          //Alert the user with a success message
+          title: "Correct",
+          text: "You have earned 30 points.",
+          icon: "success",
+          showCancelButton: false,
+          confirmButtonColor: "#3085d6",
+          confirmButtonText: "Next Question",
+          allowOutsideClick: false,
+          heightAuto: false
+        }).then((result) => { //After the user clicks the button
+          if (result.isConfirmed) {
+            Swal.fire({
+              //Alert the user to inform them that the test is completed and show overall score
+              title: "Congratulations!",
+              text: "You have completed the test. You have earned " + data.points + " points.",
+              icon: "success",
+              showCancelButton: false,
+              confirmButtonColor: "#3085d6",
+              confirmButtonText: "Finish Test",
+              allowOutsideClick: false,
+              heightAuto: false
+            }).then((result) => {
+              //upload and reset the session variables used in the exam
+              if (result.isConfirmed) {
+                window.location = "/test-selection";
+              }
+            });
+          }
+        });
+        
+      } else if (data.status === "e3") {
+        //OUTPUT SWEET ALERT
+        Swal.fire({
+          //Alert the user with an error message
+          title: "Incorrect",
+          text: "You have been deducted 10 points. The correct answer is: " + data.correctAnswerText + ".",
+          icon: "error",
+          showCancelButton: false,
+          confirmButtonColor: "#3085d6",
+          confirmButtonText: "Next Question",
+          allowOutsideClick: false,
+          heightAuto: false
+        }).then((result) => { //After the user clicks the button
+          if (result.isConfirmed) {
+            Swal.fire({
+              //Alert the user to inform them that the test is completed and show overall score
+              title: "Congratulations!",
+              text: "You have completed the test. You have earned " + data.points + " points.",
+              icon: "success",
+              showCancelButton: false,
+              confirmButtonColor: "#3085d6",
+              confirmButtonText: "Finish Test",
+              allowOutsideClick: false,
+              heightAuto: false
+            }).then((result) => {
+              //upload and reset the session variables used in the exam
+              if (result.isConfirmed) {
+                window.location = "/test-selection";
+              }
+            });
+          }
+        });
+
       } else { //if the answer is incorrect
         //resets the testing interface to avoid complications like the user pressing the same button twice
         $("#testingBackground").hide();
@@ -207,7 +274,7 @@ $(document).on("click", "#option", function (e) {
         Swal.fire({
           //Alert the user with an error message
           title: "Incorrect",
-          text: "You have been deducted 10 points. The correct answer is: " + data,
+          text: "You have been deducted 10 points. The correct answer is: " + data.correctAnswerText + ".",
           icon: "error",
           showCancelButton: false,
           confirmButtonColor: "#3085d6",
