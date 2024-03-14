@@ -54,7 +54,6 @@ else {
             "correctAnswerText" => $_SESSION['correctAnswerText']
         ];
         echo json_encode($response);
-        //echo $_SESSION['correctAnswerText'];
     }
 }
 ?>

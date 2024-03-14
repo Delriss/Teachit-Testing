@@ -51,16 +51,9 @@ foreach ($testArray as $test) {
                 break;
         }
     }
-    
-    //temporary code to assist with the hierarchy of the test object, will be removed once the hierarchy is finalised
-    // foreach ($test->questions as $question) {
-    //     //echo $question->relativeQuestionID;
-    //     foreach ($question->answers as $answer) {
-    //         //echo $answer->relativeAnswerID;
-    //     }
-    // }
 };
 
+//This is the html code which will be sent to #testingInterface in testing.php, this is the frontend of the program
 echo ('<div class="testingQuestion" id="question-text">
             <h5>Question: ' . ($_SESSION['questionsAnswered'] + 1) . ' of ' . $_SESSION['totalQuestions'] . ' | Subject: ' . $subject . '</h5>
             <hr>

@@ -11,7 +11,9 @@ if (!isset($_SESSION)) {
     die('<p class="lead">User is not logged in.</p>');
 }
 
+//Setting the testID to be used throughout testing.php
 $_SESSION["testID"] = $_POST['testID'];
+//these variables are being initialised so the program can keep track of the user's progress
 $_SESSION['questionsAnswered'] = 0;
 $_SESSION['currentScore'] = 0;
 
