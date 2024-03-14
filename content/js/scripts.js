@@ -147,6 +147,10 @@ $(document).on("click", "#startTestButton", function (e) {
 });
 
 //TESTING PAGE RECIEVING USER INPUT
+//The code below will run when the user clicks one of the buttons on the testing page.
+//  The code will validate the user's answer and add/deduct points accordingly.
+//  Based on the result, the user will be presented with a sweet alert, if the answer is
+//  incorrect, the correct answer will be displayed. The next question will be loaded afterwards.
 $(document).on("click", "#option", function (e) {
   e.preventDefault();
   let userAnswered = $(this).data("id");
@@ -156,7 +160,12 @@ $(document).on("click", "#option", function (e) {
     data: { userAnswered: userAnswered },
 
     success: function (data) {
+      //If the answer is correct
       if (data === "e1") {
+        //resets the testing interface to avoid complications like the user pressing the same button twice
+        $("#testingInterface").html("");
+
+        //OUTPUT SWEET ALERT
         Swal.fire({
           title: "Correct",
           text: "You have earned 30 points.",
@@ -164,9 +173,25 @@ $(document).on("click", "#option", function (e) {
           showCancelButton: false,
           confirmButtonColor: "#3085d6",
           confirmButtonText: "Next Question",
+          heightAuto: false
+        }).then((result) => { //After the user clicks the button
+          if (result.isConfirmed) {
+            $.ajax({
+              type: "POST",
+              url: "/php/nextQuestion",
+
+              success: function (data) {
+                $("#testingInterface").html(data);
+              },
+            });
+          }
         });
-      } else {
-        //OUTPUT
+
+      } else { //if the answer is incorrect
+        //resets the testing interface to avoid complications like the user pressing the same button twice
+        $("#testingInterface").html("");
+
+        //OUTPUT SWEET ALERT
         Swal.fire({
           //Alert the user with an error message
           title: "Incorrect",
@@ -175,6 +200,18 @@ $(document).on("click", "#option", function (e) {
           showCancelButton: false,
           confirmButtonColor: "#3085d6",
           confirmButtonText: "Next Question",
+          heightAuto: false
+        }).then((result) => { //After the user clicks the button
+          if (result.isConfirmed) {
+            $.ajax({
+              type: "POST",
+              url: "/php/nextQuestion",
+
+              success: function (data) {
+                $("#testingInterface").html(data);
+              },
+            });
+          }
         });
       }
     },

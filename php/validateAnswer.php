@@ -16,10 +16,12 @@ if (!isset($_SESSION)) {
 //  10 points are deducted. The echo assists with the Sweet Alerts.
 if ($_POST['userAnswered'] == $_SESSION['correctAnswerID']) {
     $_SESSION['currentScore'] = $_SESSION['currentScore'] + 30;
+    $_SESSION['questionsAnswered']++;
     echo "e1";
 }
 else {
     $_SESSION['currentScore'] = $_SESSION['currentScore'] - 10;
+    $_SESSION['questionsAnswered']++;
     echo $_SESSION['correctAnswerText'];
 }
 ?>

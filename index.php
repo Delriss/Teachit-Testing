@@ -71,6 +71,9 @@ $jRoute->Route(["post"], "/php/assignTestID", "php/assignTestID.php");
 //Create initialiseQuestions route
 $jRoute->Route(["post"], "/php/initialiseQuestions", "php/initialiseQuestions.php");
 
+//Create nextQuestion route
+$jRoute->Route(["post"], "/php/nextQuestion", "php/nextQuestion.php");
+
 //Create validateAnswer route
 $jRoute->Route(["post"], "/php/validateAnswer", "php/validateAnswer.php");
 

@@ -66,7 +66,7 @@ if ($_SESSION['LoggedIn'] == false) {
     <!-- End Navbar -->
 
     <!-- Main Content -->
-    <div class="col-lg-6 mt-auto mx-auto p-3 py-md-3 text-center rounded bgColourFaded">
+    <div class="col-lg-10 mt-auto mx-auto p-3 py-md-3 text-center rounded bgColourFaded">
         <div class="text-center" id="testingInterface">
 
             <!-- <div class="testingQuestion" id="question-text">
