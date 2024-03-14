@@ -18,7 +18,7 @@ $jRoute->Route(["get"], "/login", "content/login.php");
 
 //only logged in users can access logout
 //Create Logout Route
-$jRoute->Route(["get"], "/logout", "php/logout.php", [0,1,2]);
+$jRoute->Route(["get"], "/logout", "php/logout.php");
 
 //Create register Route
 $jRoute->Route(["get"], "/register", "content/registration.php");
@@ -71,7 +71,7 @@ $jRoute->Route(["post"], "/includes/retrieveTests", "php/retrieveTests.php", [0,
 $jRoute->Route(["post"], "/includes/retrieveTestData", "php/retrieveTestData.php", [0,1,2]);
 
 //Create retrieveSubjects route
-$jRoute->Route(["post"], "/includes/retrieveSubjects", "php/retrieveSubjects.php", [0,1,2]);
+$jRoute->Route(["post"], "/includes/retrieveSubjects", "php/retrieveSubjects.php");
 
 //Create createTest route
 $jRoute->Route(["post"], "/includes/createTest", "php/createTest.php", [1,2]);
@@ -80,7 +80,7 @@ $jRoute->Route(["post"], "/includes/createTest", "php/createTest.php", [1,2]);
 $jRoute->Route(["post"], "/includes/modifyTest", "php/modifyTest.php", [1,2]);
 
 //Create createUser route
-$jRoute->Route(["post"], "/includes/createUser", "php/createUser.php", [1,2]);
+$jRoute->Route(["post"], "/includes/createUser", "php/createUser.php");
 
 //Create deleteTest route
 $jRoute->Route(["post"], "/includes/deleteTest", "php/deleteTest.php", [1,2]);

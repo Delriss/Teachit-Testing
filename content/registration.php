@@ -1,4 +1,9 @@
 <?php
+//if there is a current user session, redirect to the test selection page
+if (isset($_SESSION['user'])){
+    header("Location: /test-selection");
+}
+
 //include the header
 $activatedPage = "Registration";
 include($_SERVER['DOCUMENT_ROOT'] . '/content/partials/header.php');

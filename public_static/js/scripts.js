@@ -17,7 +17,6 @@ $("#registrationForm").submit(function (e) {
           //If the request is successful
           success: function (data) {
             if (data.includes("Registration successful")) {
-              console.log(data);
               //Output
               Swal.fire({
                 //Alert the user with a success message
@@ -28,10 +27,12 @@ $("#registrationForm").submit(function (e) {
                 confirmButtonColor: "#3085d6",
                 cancelButtonColor: "#d33",
                 confirmButtonText: "Continue",
-                heightAuto: false
+                heightAuto: false,
+                allowOutsideClick: false
               }).then((result) => {
-                if (result.isConfirmed) {
-                  window.location = "/test-selection";
+                //redirect to login page
+                if (result.value) {
+                  window.location = "/login";
                 }
               });
               //If the request is not successful
@@ -129,7 +130,6 @@ $("#testSelectionModal").on("hidden.bs.modal", function () {
   });
 });
 
-
 // Login Form
 $("#loginForm").submit(function (e) {
   e.preventDefault(); //Prevent the default form submission
@@ -161,22 +161,8 @@ $("#loginForm").submit(function (e) {
                 heightAuto: false
               });
             } else if (data.includes("e3")) {
-              console.log(data);
               //OUTPUT
-              Swal.fire({
-                //Alert the user with an error message
-                title: "Successfully Logged In",
-                text: "Please click continue to proceed to the testing page.",
-                icon: "success",
-                showCancelButton: false,
-                confirmButtonColor: "#3085d6",
-                confirmButtonText: "Continue",
-                heightAuto: false
-              }).then((result) => {
-                if (result.isConfirmed) {
-                  window.location = "/test-selection";
-                }
-              });
+              window.location = "/test-selection";
             } else if (data.includes("e4")) {
               console.log(data);
               //OUTPUT

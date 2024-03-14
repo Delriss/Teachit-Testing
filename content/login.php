@@ -1,4 +1,9 @@
 <?php 
+//is there already a user session? if yes we don't want to show the login page and redirect to the test-selection page.
+if (isset($_SESSION['user'])){
+    header("Location: /test-selection");
+}
+
 //include the header
 $activatedPage = "Login";
 include($_SERVER['DOCUMENT_ROOT'] . '/content/partials/header.php');
