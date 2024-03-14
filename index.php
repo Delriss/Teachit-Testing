@@ -47,8 +47,7 @@ $jRoute->Route(["get"], "/statistics", "content/placeholder.php", [1,2]);
 //PRIVATE PHP ROUTES
 //
 
-//Create readEnvVars route
-$jRoute->Route(["post"], "/includes/readEnvVars", "php/readEnvVars.php");
+//removed readEnvVars route as this poses an enormous security risk and is never POSTed to from the client side, only used in the backend
 
 //Create connect file route
 $jRoute->Route(["post"], "/includes/connect", "php/_connect.php");
@@ -57,34 +56,34 @@ $jRoute->Route(["post"], "/includes/connect", "php/_connect.php");
 $jRoute->Route(["post"], "/includes/auth", "php/auth.php");
 
 //Create outputStudentsTests route
-$jRoute->Route(["post"], "/includes/outputStudentTests", "php/outputStudentTests.php");
+$jRoute->Route(["post"], "/includes/outputStudentTests", "php/outputStudentTests.php", [0,1,2]);
 
 //Create outputCompletedStudentsTests route
-$jRoute->Route(["post"], "/includes/outputCompletedStudentTests", "php/outputCompletedStudentTests.php");
+$jRoute->Route(["post"], "/includes/outputCompletedStudentTests", "php/outputCompletedStudentTests.php", [0,1,2]);
 
 //Create outputTests route
-$jRoute->Route(["post"], "/includes/outputTests", "php/outputTests.php");
+$jRoute->Route(["post"], "/includes/outputTests", "php/outputTests.php", [1,2]);
 
 //Create retrieveTests route
-$jRoute->Route(["post"], "/includes/retrieveTests", "php/retrieveTests.php");
+$jRoute->Route(["post"], "/includes/retrieveTests", "php/retrieveTests.php", [0,1,2]);
 
 //Create retrieveTestData route
-$jRoute->Route(["post"], "/includes/retrieveTestData", "php/retrieveTestData.php");
+$jRoute->Route(["post"], "/includes/retrieveTestData", "php/retrieveTestData.php", [0,1,2]);
 
 //Create retrieveSubjects route
-$jRoute->Route(["post"], "/includes/retrieveSubjects", "php/retrieveSubjects.php");
+$jRoute->Route(["post"], "/includes/retrieveSubjects", "php/retrieveSubjects.php", [0,1,2]);
 
 //Create createTest route
-$jRoute->Route(["post"], "/includes/createTest", "php/createTest.php");
+$jRoute->Route(["post"], "/includes/createTest", "php/createTest.php", [1,2]);
 
 //Create modifyTest route
-$jRoute->Route(["post"], "/includes/modifyTest", "php/modifyTest.php");
+$jRoute->Route(["post"], "/includes/modifyTest", "php/modifyTest.php", [1,2]);
 
 //Create createUser route
-$jRoute->Route(["post"], "/includes/createUser", "php/createUser.php");
+$jRoute->Route(["post"], "/includes/createUser", "php/createUser.php", [1,2]);
 
 //Create deleteTest route
-$jRoute->Route(["post"], "/includes/deleteTest", "php/deleteTest.php");
+$jRoute->Route(["post"], "/includes/deleteTest", "php/deleteTest.php", [1,2]);
 
 //Dispatch the route
 echo $jRoute->Dispatch($_SERVER['REQUEST_METHOD'], $_SERVER['REQUEST_URI']);

@@ -28,6 +28,7 @@
 
 <!-- JS -->
 <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+<!-- only include script if the page is the login or registration page -->
 <?php if($activatedPage == "Login" || $activatedPage == "Registration") {
     echo('<script src="https://www.google.com/recaptcha/api.js?render=6LdzWYIpAAAAABoryfzQlrNtF24Jd9FB2EGlHdUX"></script>');
 } 
@@ -36,5 +37,9 @@
 <script src="https://unpkg.com/flickity@2/dist/flickity.pkgd.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <!-- JS using routing -->
-<script src="/public_static/js/test-management.js"></script>
-<script src="/public_static/js/scripts.js"></script>
+<!-- only include script if the page is the test selection or test management page -->
+<?php if($activatedPage == "Test Selection" || $activatedPage == "Test Management") {
+    echo('<script src="/public/js/test-management.js"></script>');
+}
+?>
+<script src="/public/js/scripts.js"></script>

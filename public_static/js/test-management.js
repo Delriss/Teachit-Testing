@@ -12,6 +12,8 @@ var $testsCarousel = $('.tests-carousel').flickity({
 
 //on document ready, get the subjects for the dropdown
 $(document).ready(function() {
+    //this is causing problems as this script is run when users aren't logged in, and they don't have the required permissions to access the subjects through the route wrapper.
+    //I am going to fix by checking what page footer.php is being included in, and only running this code if it is being included in pages that need the subjects retrieved.
     getSubjects();
 });
 
