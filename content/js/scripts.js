@@ -181,6 +181,7 @@ $(document).on("click", "#option", function (e) {
           showCancelButton: false,
           confirmButtonColor: "#3085d6",
           confirmButtonText: "Next Question",
+          allowOutsideClick: false,
           heightAuto: false
         }).then((result) => { //After the user clicks the button
           if (result.isConfirmed) {
@@ -211,6 +212,7 @@ $(document).on("click", "#option", function (e) {
           showCancelButton: false,
           confirmButtonColor: "#3085d6",
           confirmButtonText: "Next Question",
+          allowOutsideClick: false,
           heightAuto: false
         }).then((result) => { //After the user clicks the button
           if (result.isConfirmed) {
