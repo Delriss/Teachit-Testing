@@ -112,11 +112,11 @@ $(document).ready(function () {
   // }
 
   //TESTING PAGE
-  //This code will load initialiseQuestions.php when testing.php is loaded
+  //This code will load nextQuestion.php when testing.php is loaded
   if(window.location.href.includes("testing") == true){
     $.ajax({
       type: "POST",
-      url: "/php/initialiseQuestions",
+      url: "/php/nextQuestion",
       data: $("#testingInterface").serialize(),
 
       success: function (data) {
@@ -132,12 +132,12 @@ $(document).ready(function () {
 $(document).on("click", "#startTestButton", function (e) {
   e.preventDefault();
   let testID = $(this).data("id");
-  //AJAX request to set the testID in a SESSION variable to access on testing.php.
-  //This will allow the user to return to the test if they have not completed it.
+  //AJAX request to set the testID and other important variables in a SESSION variable to access
+  //on testing.php. This will allow the user to return to the test if they have not completed it.
   //Furthermore the testID will be wiped once the test is completed or the user logs out.
   $.ajax({
     type: "POST",
-    url: "/php/assignTestID",
+    url: "/php/initialiseTest",
     data: { testID: testID },
 
     success: function (data) {

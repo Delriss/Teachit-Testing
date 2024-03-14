@@ -14,20 +14,28 @@ if (!isset($_SESSION)) {
 include_once($_SERVER['DOCUMENT_ROOT'] . '/php/_connect.php');
 include_once($_SERVER['DOCUMENT_ROOT'] . '/php/retrieveTests.php');
 
+//Initialising variables to store useful test information.
+//Once the test has finished, these will be wiped using unset()
+
 foreach ($testArray as $test) {
     if ($test->testID == $_SESSION["testID"]) {
+        //This is for the content at the top of the form. These variables need to be defined so 
+        //  that the question number, subject and question can be displayed.
         $_SESSION['totalQuestions'] = count($test->questions);
         $subject = $test->subject;
         $questionText = $test->questions[$_SESSION['questionsAnswered']]->questionText;
+        
 
         //This is for use with answer validation
         $_SESSION['correctAnswerID'] = $test->questions[$_SESSION['questionsAnswered']]->correctAnswerID;
 
+        //storing the options to output to the user in the echo
         $option1 = $test->questions[$_SESSION['questionsAnswered']]->answers[0]->answerText;
         $option2 = $test->questions[$_SESSION['questionsAnswered']]->answers[1]->answerText;
         $option3 = $test->questions[$_SESSION['questionsAnswered']]->answers[2]->answerText;
         $option4 = $test->questions[$_SESSION['questionsAnswered']]->answers[3]->answerText;
 
+        //This code is to assist the Sweet Alerts so that the correct answer can be displayed to the user if they got the question wrong
         switch ($_SESSION['correctAnswerID']) {
             case 0:
                 $_SESSION['correctAnswerText'] = $option1;
@@ -43,6 +51,14 @@ foreach ($testArray as $test) {
                 break;
         }
     }
+    
+    //temporary code to assist with the hierarchy of the test object, will be removed once the hierarchy is finalised
+    // foreach ($test->questions as $question) {
+    //     //echo $question->relativeQuestionID;
+    //     foreach ($question->answers as $answer) {
+    //         //echo $answer->relativeAnswerID;
+    //     }
+    // }
 };
 
 echo ('<div class="testingQuestion" id="question-text">
@@ -74,6 +90,4 @@ echo ('<div class="testingQuestion" id="question-text">
         <p>Click on a button to submit your answer.</p>
     </div>
     ');
-
-
 ?>

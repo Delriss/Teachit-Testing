@@ -12,5 +12,7 @@ if (!isset($_SESSION)) {
 }
 
 $_SESSION["testID"] = $_POST['testID'];
+$_SESSION['questionsAnswered'] = 0;
+$_SESSION['currentScore'] = 0;
 
 ?>
