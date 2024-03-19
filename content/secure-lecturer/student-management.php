@@ -14,6 +14,7 @@ include($_SERVER['DOCUMENT_ROOT'] . '/content/partials/header.php');
             <div class="col-12">
                 <h1 class="display-4 mt-5">Student Management</h1>
                 <p class="lead">Please select a test to take or create a test</p>
+                <button type="button" class="btn btn-primary" id="btnCreateStudent">Create Student</button>
             </div>
         </div>
 

@@ -28,7 +28,7 @@ $("#registrationForm").submit(function (e) {
                 confirmButtonColor: "#3085d6",
                 cancelButtonColor: "#d33",
                 confirmButtonText: "Continue",
-                heightAuto: false
+                heightAuto: false,
               }).then((result) => {
                 if (result.isConfirmed) {
                   window.location = "/test-selection";
@@ -41,7 +41,7 @@ $("#registrationForm").submit(function (e) {
                 title: "Registration Failed",
                 text: data,
                 icon: "error",
-                heightAuto: false
+                heightAuto: false,
               });
             }
           },
@@ -158,7 +158,6 @@ $("#testSelectionModal").on("hidden.bs.modal", function () {
   });
 });
 
-
 // Login Form
 $("#loginForm").submit(function (e) {
   e.preventDefault(); //Prevent the default form submission
@@ -187,7 +186,7 @@ $("#loginForm").submit(function (e) {
                 showCancelButton: false,
                 confirmButtonColor: "#3085d6",
                 confirmButtonText: "Continue",
-                heightAuto: false
+                heightAuto: false,
               });
             } else if (data.includes("e3")) {
               console.log(data);
@@ -200,7 +199,7 @@ $("#loginForm").submit(function (e) {
                 showCancelButton: false,
                 confirmButtonColor: "#3085d6",
                 confirmButtonText: "Continue",
-                heightAuto: false
+                heightAuto: false,
               }).then((result) => {
                 if (result.isConfirmed) {
                   window.location = "/test-selection";
@@ -217,7 +216,7 @@ $("#loginForm").submit(function (e) {
                 showCancelButton: false,
                 confirmButtonColor: "#3085d6",
                 confirmButtonText: "Continue",
-                heightAuto: false
+                heightAuto: false,
               });
             } else if (data.includes("e5")) {
               console.log(data);
@@ -230,7 +229,7 @@ $("#loginForm").submit(function (e) {
                 showCancelButton: false,
                 confirmButtonColor: "#3085d6",
                 confirmButtonText: "Continue",
-                heightAuto: false
+                heightAuto: false,
               });
             }
           },
@@ -240,20 +239,20 @@ $("#loginForm").submit(function (e) {
 });
 
 //Student Management - Delete Student
-$(document).on('click', '#btnDelete', function (e) {
+$(document).on("click", "#btnDelete", function (e) {
   e.preventDefault(); //Prevent the default form submission
 
   //Send Confirmation SWAL
   Swal.fire({
-    title: 'Are you sure?',
+    title: "Are you sure?",
     text: "This action cannot be undone!",
-    icon: 'warning',
+    icon: "warning",
     showCancelButton: true,
-    confirmButtonColor: '#3085d6',
-    cancelButtonColor: '#d33',
-    confirmButtonText: 'Yes, delete it!',
-    cancelButtonText: 'No, cancel!',
-    heightAuto: false
+    confirmButtonColor: "#3085d6",
+    cancelButtonColor: "#d33",
+    confirmButtonText: "Yes, delete it!",
+    cancelButtonText: "No, cancel!",
+    heightAuto: false,
   }).then((result) => {
     if (result.isConfirmed) {
       //Ajax request to the server for asynchronous processing
@@ -261,7 +260,7 @@ $(document).on('click', '#btnDelete', function (e) {
         type: "POST",
         url: "/php/deleteUser",
         data: {
-          UID: $(this).data('id')
+          UID: $(this).data("id"),
         },
         success: function (data) {
           if (data.includes("User deleted")) {
@@ -274,7 +273,7 @@ $(document).on('click', '#btnDelete', function (e) {
               showCancelButton: false,
               confirmButtonColor: "#3085d6",
               confirmButtonText: "Continue",
-              heightAuto: false
+              heightAuto: false,
             }).then((result) => {
               if (result.isConfirmed) {
                 window.location = "/student-management";
@@ -290,7 +289,7 @@ $(document).on('click', '#btnDelete', function (e) {
               showCancelButton: false,
               confirmButtonColor: "#3085d6",
               confirmButtonText: "Continue",
-              heightAuto: false
+              heightAuto: false,
             });
           }
         },
@@ -300,20 +299,20 @@ $(document).on('click', '#btnDelete', function (e) {
 });
 
 //Student Management - Lock Student
-$(document).on('click', '#btnLock', function (e) {
+$(document).on("click", "#btnLock", function (e) {
   e.preventDefault(); //Prevent the default form submission
 
   //Send Confirmation SWAL
   Swal.fire({
-    title: 'Are you sure?',
+    title: "Are you sure?",
     text: "This will lock the user's account. They will not be able to log in.",
-    icon: 'warning',
+    icon: "warning",
     showCancelButton: true,
-    confirmButtonColor: '#3085d6',
-    cancelButtonColor: '#d33',
-    confirmButtonText: 'Yes, lock it!',
-    cancelButtonText: 'No, cancel!',
-    heightAuto: false
+    confirmButtonColor: "#3085d6",
+    cancelButtonColor: "#d33",
+    confirmButtonText: "Yes, lock it!",
+    cancelButtonText: "No, cancel!",
+    heightAuto: false,
   }).then((result) => {
     if (result.isConfirmed) {
       //Ajax request to the server for asynchronous processing
@@ -321,8 +320,8 @@ $(document).on('click', '#btnLock', function (e) {
         type: "POST",
         url: "/php/lockUser",
         data: {
-          UID: $(this).data('id'),
-          lock: $(this).data('lock')
+          UID: $(this).data("id"),
+          lock: $(this).data("lock"),
         },
         success: function (data) {
           if (data.includes("User lock changed")) {
@@ -335,7 +334,7 @@ $(document).on('click', '#btnLock', function (e) {
               showCancelButton: false,
               confirmButtonColor: "#3085d6",
               confirmButtonText: "Continue",
-              heightAuto: false
+              heightAuto: false,
             }).then((result) => {
               if (result.isConfirmed) {
                 window.location = "/student-management";
@@ -351,7 +350,7 @@ $(document).on('click', '#btnLock', function (e) {
               showCancelButton: false,
               confirmButtonColor: "#3085d6",
               confirmButtonText: "Continue",
-              heightAuto: false
+              heightAuto: false,
             });
           }
         },
@@ -361,20 +360,20 @@ $(document).on('click', '#btnLock', function (e) {
 });
 
 //Student Management - Unlock Student
-$(document).on('click', '#btnUnlock', function (e) {
+$(document).on("click", "#btnUnlock", function (e) {
   e.preventDefault(); //Prevent the default form submission
 
   //Send Confirmation SWAL
   Swal.fire({
-    title: 'Are you sure?',
+    title: "Are you sure?",
     text: "This will unlock the user's account. They will be able to log in.",
-    icon: 'warning',
+    icon: "warning",
     showCancelButton: true,
-    confirmButtonColor: '#3085d6',
-    cancelButtonColor: '#d33',
-    confirmButtonText: 'Yes, unlock it!',
-    cancelButtonText: 'No, cancel!',
-    heightAuto: false
+    confirmButtonColor: "#3085d6",
+    cancelButtonColor: "#d33",
+    confirmButtonText: "Yes, unlock it!",
+    cancelButtonText: "No, cancel!",
+    heightAuto: false,
   }).then((result) => {
     if (result.isConfirmed) {
       //Ajax request to the server for asynchronous processing
@@ -382,8 +381,8 @@ $(document).on('click', '#btnUnlock', function (e) {
         type: "POST",
         url: "/php/lockUser",
         data: {
-          UID: $(this).data('id'),
-          lock: $(this).data('lock')
+          UID: $(this).data("id"),
+          lock: $(this).data("lock"),
         },
         success: function (data) {
           if (data.includes("User lock changed")) {
@@ -396,7 +395,7 @@ $(document).on('click', '#btnUnlock', function (e) {
               showCancelButton: false,
               confirmButtonColor: "#3085d6",
               confirmButtonText: "Continue",
-              heightAuto: false
+              heightAuto: false,
             }).then((result) => {
               if (result.isConfirmed) {
                 window.location = "/student-management";
@@ -412,7 +411,108 @@ $(document).on('click', '#btnUnlock', function (e) {
               showCancelButton: false,
               confirmButtonColor: "#3085d6",
               confirmButtonText: "Continue",
-              heightAuto: false
+              heightAuto: false,
+            });
+          }
+        },
+      });
+    }
+  });
+});
+
+//Student Management - Add Student
+$("#btnCreateStudent").click(function (e) {
+  e.preventDefault();
+
+  //Custom SWAL Form to accept Student Data
+  Swal.fire({
+    title: "Add Student",
+    html: `
+          <form id="addStudentForm">
+            <div class="mb-2 d-flex">
+                <input type="text" class="form-control m-1" id="studentNum" name="studentNum" placeholder="Student Number (Numbers Only)" required>
+                <input type="email" class="form-control m-1" id="email" name="email" placeholder="Email" required>
+            </div>
+            <div class="mb-2 d-flex">
+                <input type="text" class="form-control m-1" id="firstName" name="firstName" placeholder="First Name" required>
+                <input type="text" class="form-control m-1" id="lastName" name="lastName" placeholder="Last Name" required>
+            </div>
+            <div class="mb-2">
+                <select class="form-select m-1" id="courseTitle" name="courseTitle" placeholder="Select Course" required>
+                    <!-- <option value="1">Fill this with PHP/JS</option> -->
+                </select>
+            </div>
+            <div class="mb-2">
+                <input type="password" class="form-control m-1" id="password" name="password" placeholder="Password" required>
+            </div>
+            <div class="form-text">
+                Password must be at least 8 characters long and contain at least one number and one special character.
+            </div>
+            <div class="mb-2">
+                <input type="password" class="form-control m-1" id="confirmPassword" name="confirmPassword" placeholder="Confirm Password" required>
+            </div>
+          </form>
+        `,
+    input: "checkbox",
+    inputValue: 0,
+    inputPlaceholder: `Lock Account?`,
+    willOpen: () => {
+      //Runs function on SWAL opening to load course data
+      //Ensure registration form is loaded
+      if ($("#courseTitle").length > 0) {
+        //Send AJAX request to the server for asynchronous processing
+        $.ajax({
+          type: "POST",
+          url: "/php/retrieveSubjects",
+          dataType: "json",
+
+          //If the request is successful
+          success: function (data) {
+            //Output
+            for (var i = 0; i < data.length; i++) {
+              $("#courseTitle").append(
+                "<option value=" +
+                  data[i].SID +
+                  ">" +
+                  data[i].subjectName +
+                  "</option>"
+              );
+            }
+          },
+          //Debugging - If the request is not successful
+          error: function (data) {
+            //If the request is not successful
+            console.log("Error: " + data);
+          },
+        });
+      }
+    }
+  }).then((result) => {
+    if (result.isConfirmed) {
+      $.ajax({
+        type: "POST",
+        url: "/php/addUser",
+        data: $("#addStudentForm").serialize(),
+        success: function (data) {
+          if (data.includes("User added successfully.")) {
+            Swal.fire({
+              title: "User Added",
+              text: "User successfully added.",
+              icon: "success",
+              showCancelButton: false,
+              confirmButtonColor: "#3085d6",
+              cancelButtonColor: "#d33",
+              confirmButtonText: "Continue",
+            }).then((result) => {
+              if (result.isConfirmed) {
+                window.location = "./admin";
+              }
+            });
+          } else {
+            Swal.fire({
+              title: "Student Creation Failed",
+              text: data,
+              icon: "error",
             });
           }
         },
