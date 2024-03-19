@@ -87,5 +87,8 @@ $jRoute->Route(["post"], "/php/editStudent", "php/editStudent.php");
 //Create retrieveStudentData route
 $jRoute->Route(["post"], "/php/retrieveStudentData", "php/retrieveStudentData.php");
 
+//Create resetPassword route
+$jRoute->Route(["post"], "/php/resetPassword", "php/resetPassword.php");
+
 //Dispatch the route
 echo $jRoute->Dispatch($_SERVER['REQUEST_METHOD'], $_SERVER['REQUEST_URI']);

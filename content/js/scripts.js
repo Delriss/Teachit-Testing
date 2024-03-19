@@ -637,4 +637,55 @@ $(document).on("click", "#btnEdit", function (e) {
 });
 
 //Student Management - Reset Student Password
-
+$("#btnResetPassword").click(function (e) {
+  e.preventDefault();
+  
+  //Custom SWAL Form to accept Student Data
+  Swal.fire({
+    title: "Reset Student Password",
+    html: `
+          <form id="resetPasswordForm">
+            <div class="mb-2">
+                <input type="text" class="form-control m-1" id="studentNum" name="studentNum" placeholder="Student Number (Numbers Only)" required>
+            </div>
+            <div class="mb-2 d-flex">
+                <input type="password" class="form-control m-1" id="password" name="password" placeholder="Password" required>
+            </div>
+            <div class="mb-2">
+                <input type="password" class="form-control m-1" id="confirmPassword" name="confirmPassword" placeholder="Confirm Password" required>
+            </div>
+            <div class="form-text">
+                Password must be at least 8 characters long and contain at least one number and one special character.
+            </div>
+          </form>
+        `,
+    showCancelButton: true,
+  }).then((result) => {
+    if (result.isConfirmed) {
+      $.ajax({
+        type: "POST",
+        url: "/php/resetPassword",
+        data: $("#resetPasswordForm").serialize(),
+        success: function (data) {
+          if (data.includes("Password reset")) {
+            Swal.fire({
+              title: "Password Reset",
+              text: "Password successfully reset.",
+              icon: "success",
+              showCancelButton: false,
+              confirmButtonColor: "#3085d6",
+              cancelButtonColor: "#d33",
+              confirmButtonText: "Continue",
+            });
+          } else {
+            Swal.fire({
+              title: "Password Reset Failed",
+              text: data,
+              icon: "error",
+            });
+          }
+        },
+      });
+    }
+  })
+});
