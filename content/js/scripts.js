@@ -544,15 +544,6 @@ $(document).on("click", "#btnEdit", function (e) {
                     <!-- <option value="1">Fill this with PHP/JS</option> -->
                 </select>
             </div>
-            <div class="mb-2">
-                <input type="password" class="form-control m-1" id="password" name="password" placeholder="Password" required>
-            </div>
-            <div class="form-text">
-                Password must be at least 8 characters long and contain at least one number and one special character.
-            </div>
-            <div class="mb-2">
-                <input type="password" class="form-control m-1" id="confirmPassword" name="confirmPassword" placeholder="Confirm Password" required>
-            </div>
             <div class="mb-2 w-100 d-flex justify-content-center">
                 <input type="checkbox" class="form-check-input m-1" id="accountLock" name="accountLock">
                 <label class="form-check label" for="accountLock">Lock Account</label>
@@ -561,22 +552,50 @@ $(document).on("click", "#btnEdit", function (e) {
         `,
     showCancelButton: true,
     willOpen: () => {
+      //Runs function on SWAL opening to load course data
+      //Ensure registration form is loaded
+      if ($("#courseTitle").length > 0) {
+        //Send AJAX request to the server for asynchronous processing
+        $.ajax({
+          type: "POST",
+          url: "/php/retrieveSubjects",
+          dataType: "json",
+
+          //If the request is successful
+          success: function (data) {
+            //Output
+            for (var i = 0; i < data.length; i++) {
+              $("#courseTitle").append(
+                "<option value=" +
+                  data[i].SID +
+                  ">" +
+                  data[i].subjectName +
+                  "</option>"
+              );
+            }
+          },
+          //Debugging - If the request is not successful
+          error: function (data) {
+            //If the request is not successful
+            console.log("Error: " + data);
+          },
+        });
+      }
+
       //Runs function on SWAL opening to load student data into form
       $.ajax({
         type: "POST",
-        url: "/php/retrieveStudent",
+        url: "/php/retrieveStudentData",
         data: {
           UID: $(this).data("id"),
         },
         dataType: "json",
         success: function (data) {
-          $("#studentNum").val(data.studentNum);
+          $("#studentNum").val(data.ID);
           $("#email").val(data.email);
           $("#firstName").val(data.firstName);
           $("#lastName").val(data.lastName);
           $("#courseTitle").val(data.courseTitle);
-          $("#password").val(data.password);
-          $("#confirmPassword").val(data.password);
           if (data.accountLock == 1) {
             $("#accountLock").prop("checked", true);
           }
@@ -616,3 +635,6 @@ $(document).on("click", "#btnEdit", function (e) {
     }
   });
 });
+
+//Student Management - Reset Student Password
+

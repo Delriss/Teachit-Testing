@@ -81,5 +81,11 @@ $jRoute->Route(["post"], "/php/lockUser", "php/lockUser.php");
 //Create addStudent route
 $jRoute->Route(["post"], "/php/addStudent", "php/addStudent.php");
 
+//Create editStudent route
+$jRoute->Route(["post"], "/php/editStudent", "php/editStudent.php");
+
+//Create retrieveStudentData route
+$jRoute->Route(["post"], "/php/retrieveStudentData", "php/retrieveStudentData.php");
+
 //Dispatch the route
 echo $jRoute->Dispatch($_SERVER['REQUEST_METHOD'], $_SERVER['REQUEST_URI']);
