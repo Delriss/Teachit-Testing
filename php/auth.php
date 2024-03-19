@@ -1,4 +1,7 @@
 <?php
+//create user class with properties
+require_once("php/userClass.php");
+
 session_start();
 
 //If not accessed via POST, refuse access - POST will only be via router/JS
@@ -44,6 +47,16 @@ if (isset($_POST["email"]) and isset($_POST["password"])) { //if username and pa
 
 		if (password_verify($password, $result["password"])) {
 			//if the password is verified then the details will be stored in the database and the user will be logged in
+			//create a new user object
+			$user = new User();
+			$user->ID = $result["ID"];
+			$user->email = $result["email"];
+			$user->accessLevel = $result["accessLevel"];
+			$user->loggedIn = true;
+
+			//store the user object in the session
+			$_SESSION["user"] = serialize($user);
+			
 			$_SESSION["ID"] = $result["ID"];
 			$_SESSION["auth"] = $result["accessLevel"];
 			$_SESSION["LoggedIn"] = true;

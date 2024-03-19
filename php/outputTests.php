@@ -1,5 +1,11 @@
 <?php
 
+//check if there is user session
+if (!isset($_SESSION['user'])){
+    //if not, return to the login page
+    header("Location: /login");
+}
+
 include_once($_SERVER['DOCUMENT_ROOT'].'/php/retrieveTests.php');
 
 //Function to display the tests in the database as cards{

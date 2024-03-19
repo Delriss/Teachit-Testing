@@ -1,4 +1,9 @@
 <?php 
+//is there already a user session? if yes we don't want to show the login page and redirect to the test-selection page.
+if (isset($_SESSION['user'])){
+    header("Location: /test-selection");
+}
+
 //include the header
 $activatedPage = "Login";
 include($_SERVER['DOCUMENT_ROOT'] . '/content/partials/header.php');
@@ -8,7 +13,7 @@ include($_SERVER['DOCUMENT_ROOT'] . '/content/partials/header.php');
     <!-- Main Content -->
     <div class="col-lg-6 mt-auto mx-auto p-3 py-md-3 text-center rounded bgColourFaded">
         <div class="text-center">
-            <img src="../content/imgs/logo-transparent.png" alt="TeachIt Testing" width="150" height="150">
+            <img src="../public_static/imgs/logo-transparent.png" alt="TeachIt Testing" width="150" height="150">
             <h1 class="display-5 fw-bold">TeachIt Login</h1>
         </div>
         <form id="loginForm">

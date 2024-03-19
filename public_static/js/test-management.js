@@ -12,6 +12,8 @@ var $testsCarousel = $('.tests-carousel').flickity({
 
 //on document ready, get the subjects for the dropdown
 $(document).ready(function() {
+    //this is causing problems as this script is run when users aren't logged in, and they don't have the required permissions to access the subjects through the route wrapper.
+    //I am going to fix by checking what page footer.php is being included in, and only running this code if it is being included in pages that need the subjects retrieved.
     getSubjects();
 });
 
@@ -46,7 +48,7 @@ function getSubjects() {
     //get the subjects from the database
     $.ajax({
         type: "POST",
-        url: "/php/retrieveSubjects",
+        url: "/includes/retrieveSubjects",
         dataType: 'json',
         success: function(data) {
             //populate the dropdown with the subjects
@@ -404,7 +406,7 @@ $("#submitForm").click(function(e) {
 
             //update the test in the database
             $.ajax({
-                url: "/php/modifyTest",
+                url: "/includes/modifyTest",
                 type: "POST",
                 data: {
                     testID: testID,
@@ -439,7 +441,7 @@ $("#submitForm").click(function(e) {
         else{
             //create the test in the database
             $.ajax({
-                url: "/php/createTest",
+                url: "/includes/createTest",
                 type: "POST",
                 data: {
                     testTitle: testTitle,
@@ -490,7 +492,8 @@ $(document).on("click", ".deleteTestButton", function() {
         confirmButtonColor: '#d33',
         cancelButtonColor: '#3085d6',
         confirmButtonText: 'Yes, Delete',
-        reverseButtons: true
+        reverseButtons: true,
+        heightAuto: false
     }).then((result) => {
         //If the user confirms they want to delete the test
         if (result.isConfirmed) {
@@ -501,7 +504,7 @@ $(document).on("click", ".deleteTestButton", function() {
             //Delete the test from the database
             $.ajax({
                 type: "POST",
-                url: "/php/deleteTest",
+                url: "/includes/deleteTest",
                 data: {
                     testID: id
                 },
@@ -546,7 +549,7 @@ $(document).on('show.bs.modal', '#createTestModal', function(e) {
         //get the test information from the database
         $.ajax({
             type: "POST",
-            url: "/php/retrieveTestData",
+            url: "/includes/retrieveTestData",
             data: {
                 testID: testID
             },
@@ -625,7 +628,7 @@ $(document).on('show.bs.modal', '#createTestModal', function(e) {
 function updateTestCarousel() {
     $.ajax({
         type: "POST",
-        url: "/php/outputTests",
+        url: "/includes/outputTests",
         dataType: 'html',
 
         success: function(data) {

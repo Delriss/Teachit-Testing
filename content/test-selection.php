@@ -1,11 +1,4 @@
 <?php
-if ($_SESSION['LoggedIn'] == false) {
-    header("Location: /login");
-    die();
-}
-?>
-
-<?php
 $activatedPage = "Test Selection";
 //include the header partial
 include_once($_SERVER['DOCUMENT_ROOT'] . '/content/partials/header.php');
