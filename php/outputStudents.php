@@ -31,6 +31,12 @@ echo ('
     ');
 
 foreach ($students as $student) {
+    //Get the course title
+    $courseTitle = mysqli_query($db_connect, "SELECT `subjectName` FROM `subjects` WHERE `SID` = " . $student['courseTitle']);
+    $courseTitle = mysqli_fetch_assoc($courseTitle);
+
+    $student['courseTitle'] = $courseTitle['subjectName'];
+
     echo ('
             <tr>
                 <td>' . $student['ID'] . '</td>
