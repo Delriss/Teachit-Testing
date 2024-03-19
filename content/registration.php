@@ -13,7 +13,7 @@ include($_SERVER['DOCUMENT_ROOT'] . '/content/partials/header.php');
     <!-- Main Content -->
     <div class="col-lg-6 mt-auto mx-auto p-3 py-md-3 text-center rounded bgColourFaded">
         <div class="text-center">
-            <img src="../public_static/imgs/logo-transparent.png" alt="TeachIt Testing" width="150" height="150">
+            <img src="./public_static/imgs/logo-transparent.png" alt="TeachIt Testing" width="150" height="150">
             <h1 class="display-5 fw-bold">TeachIt Registration</h1>
         </div>
         <form id="registrationForm">

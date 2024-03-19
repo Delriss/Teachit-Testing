@@ -39,7 +39,7 @@
 <!-- JS using routing -->
 <!-- only include script if the page is the test selection or test management page -->
 <?php if($activatedPage == "Test Selection" || $activatedPage == "Test Management") {
-    echo('<script src="/public/js/test-management.js"></script>');
+    echo('<script src="/public_static/js/test-management.js"></script>');
 }
 ?>
-<script src="/public/js/scripts.js"></script>
+<script src="/public_static/js/scripts.js"></script>

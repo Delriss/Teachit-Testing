@@ -7,9 +7,6 @@ require_once("jRoute/_load.php");
 //Create jRoute instance
 $jRoute = new jRoute();
 
-//add public directory for static files
-$jRoute->AddDir("/public", __DIR__ . "./public_static/");
-
 //Add index route
 $jRoute->Route(["get"], "/", "content/index.php");
 
