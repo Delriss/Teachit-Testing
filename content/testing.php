@@ -69,7 +69,7 @@ if ($_SESSION['LoggedIn'] == false) {
     <div class="col-lg-10 mt-auto mx-auto p-3 py-md-3 text-center rounded bgColourFaded" id="testingBackground">
         <div class="text-center" id="testingInterface">
 
-            <!-- Code will be added here from a different php file. -->
+            <!-- Code will be added here from a different php file through the script file -->
 
         </div>
     </div>

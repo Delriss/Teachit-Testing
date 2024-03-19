@@ -8,6 +8,7 @@ if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
 
 class Answer {
     public $answerID;
+    public $relativeQuestionID;
     public $questionID;
     public $answerText;
     public $isCorrect;
@@ -16,6 +17,7 @@ class Answer {
 
 class Question {
     public $questionID;
+    public $relativeQuestionID;
     public $testID;
     public $questionText;
     public $correctAnswerID;
