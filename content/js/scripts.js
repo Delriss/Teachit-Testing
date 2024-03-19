@@ -423,7 +423,6 @@ $(document).on("click", "#btnUnlock", function (e) {
 //Student Management - Add Student
 $("#btnCreateStudent").click(function (e) {
   e.preventDefault();
-
   //Custom SWAL Form to accept Student Data
   Swal.fire({
     title: "Add Student",
@@ -451,11 +450,13 @@ $("#btnCreateStudent").click(function (e) {
             <div class="mb-2">
                 <input type="password" class="form-control m-1" id="confirmPassword" name="confirmPassword" placeholder="Confirm Password" required>
             </div>
+            <div class="mb-2 w-100 d-flex justify-content-center">
+                <input type="checkbox" class="form-check-input m-1" id="accountLock" name="accountLock">
+                <label class="form-check label" for="accountLock">Lock Account</label>
+            </div>
           </form>
         `,
-    input: "checkbox",
-    inputValue: 0,
-    inputPlaceholder: `Lock Account?`,
+    showCancelButton: true,
     willOpen: () => {
       //Runs function on SWAL opening to load course data
       //Ensure registration form is loaded
@@ -491,13 +492,13 @@ $("#btnCreateStudent").click(function (e) {
     if (result.isConfirmed) {
       $.ajax({
         type: "POST",
-        url: "/php/addUser",
+        url: "/php/addStudent",
         data: $("#addStudentForm").serialize(),
         success: function (data) {
-          if (data.includes("User added successfully.")) {
+          if (data.includes("Registration successful")) {
             Swal.fire({
-              title: "User Added",
-              text: "User successfully added.",
+              title: "Student Added",
+              text: "Student successfully added.",
               icon: "success",
               showCancelButton: false,
               confirmButtonColor: "#3085d6",
@@ -505,12 +506,107 @@ $("#btnCreateStudent").click(function (e) {
               confirmButtonText: "Continue",
             }).then((result) => {
               if (result.isConfirmed) {
-                window.location = "./admin";
+                window.location.href = "/student-management";
               }
             });
           } else {
             Swal.fire({
               title: "Student Creation Failed",
+              text: data,
+              icon: "error",
+            });
+          }
+        },
+      });
+    }
+  });
+});
+
+
+//Student Management - Edit Student
+$(document).on("click", "#btnEdit", function (e) {
+  e.preventDefault();
+  //Custom SWAL Form to accept Student Data
+  Swal.fire({
+    title: "Edit Student",
+    html: `
+          <form id="editStudentForm">
+            <div class="mb-2 d-flex">
+                <input type="text" class="form-control m-1" id="studentNum" name="studentNum" placeholder="Student Number (Numbers Only)" required>
+                <input type="email" class="form-control m-1" id="email" name="email" placeholder="Email" required>
+            </div>
+            <div class="mb-2 d-flex">
+                <input type="text" class="form-control m-1" id="firstName" name="firstName" placeholder="First Name" required>
+                <input type="text" class="form-control m-1" id="lastName" name="lastName" placeholder="Last Name" required>
+            </div>
+            <div class="mb-2">
+                <select class="form-select m-1" id="courseTitle" name="courseTitle" placeholder="Select Course" required>
+                    <!-- <option value="1">Fill this with PHP/JS</option> -->
+                </select>
+            </div>
+            <div class="mb-2">
+                <input type="password" class="form-control m-1" id="password" name="password" placeholder="Password" required>
+            </div>
+            <div class="form-text">
+                Password must be at least 8 characters long and contain at least one number and one special character.
+            </div>
+            <div class="mb-2">
+                <input type="password" class="form-control m-1" id="confirmPassword" name="confirmPassword" placeholder="Confirm Password" required>
+            </div>
+            <div class="mb-2 w-100 d-flex justify-content-center">
+                <input type="checkbox" class="form-check-input m-1" id="accountLock" name="accountLock">
+                <label class="form-check label" for="accountLock">Lock Account</label>
+            </div>
+          </form>
+        `,
+    showCancelButton: true,
+    willOpen: () => {
+      //Runs function on SWAL opening to load student data into form
+      $.ajax({
+        type: "POST",
+        url: "/php/retrieveStudent",
+        data: {
+          UID: $(this).data("id"),
+        },
+        dataType: "json",
+        success: function (data) {
+          $("#studentNum").val(data.studentNum);
+          $("#email").val(data.email);
+          $("#firstName").val(data.firstName);
+          $("#lastName").val(data.lastName);
+          $("#courseTitle").val(data.courseTitle);
+          $("#password").val(data.password);
+          $("#confirmPassword").val(data.password);
+          if (data.accountLock == 1) {
+            $("#accountLock").prop("checked", true);
+          }
+        },
+      });
+    }
+  }).then((result) => {
+    if (result.isConfirmed) {
+      $.ajax({
+        type: "POST",
+        url: "/php/editStudent",
+        data: $("#editStudentForm").serialize(),
+        success: function (data) {
+          if (data.includes("Update successful")) {
+            Swal.fire({
+              title: "Student Account Edited",
+              text: "Student successfully Edited.",
+              icon: "success",
+              showCancelButton: false,
+              confirmButtonColor: "#3085d6",
+              cancelButtonColor: "#d33",
+              confirmButtonText: "Continue",
+            }).then((result) => {
+              if (result.isConfirmed) {
+                window.location.href = "/student-management";
+              }
+            });
+          } else {
+            Swal.fire({
+              title: "Student Edit Failed",
               text: data,
               icon: "error",
             });

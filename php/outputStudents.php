@@ -40,7 +40,7 @@ foreach ($students as $student) {
                 <td>' . $student['courseTitle'] . '</td>'
         . ($student['accountLock'] == 0 ? '<td>No</td>' : '<td>Yes</td>') .
         '<td>
-                <button type="button" id="btnView" class="btn btn-primary mx-1" data-id="'. $student['ID'] .'">View</button>'.
+                <button type="button" id="btnEdit" class="btn btn-primary mx-1" data-id="'. $student['ID'] .'">Edit</button>'.
                 '<button type="button" id="btnDelete" class="btn btn-danger mx-1" data-id="'. $student['ID'] .'">Delete</button>'
         . ($student['accountLock'] == 0 ? '<button type="button" id="btnLock" class="btn btn-warning mx-1" data-id="'. $student['ID'] .'" data-lock="'. $student['accountLock'] .'">Lock</button>' : '<button type="button" id="btnUnlock" class="btn btn-success" data-id="'. $student['ID'] .'" data-lock="'. $student['accountLock'] .'">Unlock</button>') .
         '</td>

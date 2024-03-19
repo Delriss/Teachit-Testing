@@ -92,7 +92,7 @@ if (mysqli_num_rows($result) > 0) {
     die("Email already in use");
 }
 
-//Create Database User
+//Edit Database User
 $accessLevel = "0"; //0 = Student, 1 = Teacher, 2 = Admin
 
 if ($accountLock == "on") { //FALSE = Account is not locked, TRUE = Account is locked
@@ -101,24 +101,13 @@ if ($accountLock == "on") { //FALSE = Account is not locked, TRUE = Account is l
     $accountLock = "0";
 }
 
-$sql = "INSERT INTO `users` (`ID`, 
-                           `firstName`, 
-                           `lastName`, 
-                           `email`, 
-                           `password`,
-                           `courseTitle`,
-                           `accessLevel`,
-                           `accountLock`,
-                           `TIMESTAMP`)
-        VALUES (?, ?, ?, ?, ?, ?, ?, ?, CURRENT_TIMESTAMP);";
-
+$sql = "UPDATE `users` SET `firstName` = ?, `lastName` = ?, `email` = ?, `courseTitle` = ?, `password` = ?, `accountLock` = ? WHERE `ID` = ?";
 $stmt = mysqli_prepare($db_connect, $sql); //Prepare SQL statement
 mysqli_stmt_bind_param($stmt, "ssssssii", $studentNum, $firstName, $lastName, $email, $password, $courseTitle, $accessLevel, $accountLock); //Bind parameters
 
 if (mysqli_stmt_execute($stmt)) //Execute prepared statement
 {
-    echo "Registration successful";
+    echo "Update successful";
 } else {
-    echo "Registration failed:" . mysqli_error($db_connect);
+    echo "Update failed:" . mysqli_error($db_connect);
 }
-
