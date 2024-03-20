@@ -45,6 +45,13 @@ if (isset($_POST["email"]) and isset($_POST["password"])) { //if username and pa
 		//If the email does match a user in the database
 		$result = mysqli_fetch_assoc($run);
 
+		//Check if account is locked
+		if ($result["accountLock"] == 1) {
+			//If the account is locked, sends a sweet alert to inform the user
+			echo "e5";
+			exit();
+		}
+
 		if (password_verify($password, $result["password"])) {
 			//if the password is verified then the details will be stored in the database and the user will be logged in
 			//create a new user object

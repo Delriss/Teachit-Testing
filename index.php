@@ -40,6 +40,9 @@ $jRoute->Route(["get"], "/lecturer-management", "content/placeholder.php", [2]);
 //admins and lecturers can access statistics
 $jRoute->Route(["get"], "/statistics", "content/placeholder.php", [1,2]);
 
+//Create Student Management Route
+$jRoute->Route(["get"], "/student-management", "content/secure-lecturer/student-management.php");
+
 //
 //PRIVATE PHP ROUTES
 //
@@ -81,6 +84,27 @@ $jRoute->Route(["post"], "/includes/createUser", "php/createUser.php");
 
 //Create deleteTest route
 $jRoute->Route(["post"], "/includes/deleteTest", "php/deleteTest.php", [1,2]);
+
+//Create outputStudents route
+$jRoute->Route(["post"], "/php/outputStudents", "php/outputStudents.php");
+
+//Create deleteUser route
+$jRoute->Route(["post"], "/php/deleteUser", "php/deleteUser.php");
+
+//Create lockUser route
+$jRoute->Route(["post"], "/php/lockUser", "php/lockUser.php");
+
+//Create addStudent route
+$jRoute->Route(["post"], "/php/addStudent", "php/addStudent.php");
+
+//Create editStudent route
+$jRoute->Route(["post"], "/php/editStudent", "php/editStudent.php");
+
+//Create retrieveStudentData route
+$jRoute->Route(["post"], "/php/retrieveStudentData", "php/retrieveStudentData.php");
+
+//Create resetPassword route
+$jRoute->Route(["post"], "/php/resetPassword", "php/resetPassword.php");
 
 //Dispatch the route
 echo $jRoute->Dispatch($_SERVER['REQUEST_METHOD'], $_SERVER['REQUEST_URI']);
