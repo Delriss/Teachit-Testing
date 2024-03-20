@@ -122,19 +122,7 @@ mysqli_stmt_bind_param($stmt, "ssssssis", $studentNum, $firstName, $lastName, $e
 if (mysqli_stmt_execute($stmt)) //Execute prepared statement
 {
     echo "Registration successful";
-
-    //Create a session for the user
-    session_start();
-    $_SESSION["ID"] = $studentNum;
-    $_SESSION["auth"] = $accessLevel;
-    $_SESSION["LoggedIn"] = true;
-
-    //Adds the user's role to the session for use in routing
-    if ($_SESSION["auth"] >= 1) {
-        $_SESSION["role"] = "authorisedUser";
-    } else {
-        $_SESSION["role"] = "student";
-    }
+    //session is not being created here as it is better to redirect to the login page and have the user log in after registration to ensure the user is not a bot
     
 } else {
     echo "Registration failed:" . mysqli_error($db_connect);

@@ -1,5 +1,11 @@
 <?php
 
+//check if there is user session
+if (!isset($_SESSION['user'])){
+    //if not, return to the login page
+    header("Location: /login");
+}
+
 class Answer {
     public $answerID;
     public $questionID;

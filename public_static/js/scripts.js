@@ -11,13 +11,12 @@ $("#registrationForm").submit(function (e) {
         //Ajax request to the server for asynchronous processing
         $.ajax({
           type: "POST",
-          url: "/php/createUser",
+          url: "/includes/createUser",
           data: $("#registrationForm").serialize(),
 
           //If the request is successful
           success: function (data) {
             if (data.includes("Registration successful")) {
-              console.log(data);
               //Output
               Swal.fire({
                 //Alert the user with a success message
@@ -29,9 +28,11 @@ $("#registrationForm").submit(function (e) {
                 cancelButtonColor: "#d33",
                 confirmButtonText: "Continue",
                 heightAuto: false,
+                allowOutsideClick: false
               }).then((result) => {
-                if (result.isConfirmed) {
-                  window.location = "/test-selection";
+                //redirect to login page
+                if (result.value) {
+                  window.location = "/login";
                 }
               });
               //If the request is not successful
@@ -59,7 +60,7 @@ $(document).ready(function () {
     //Run the test selection display script
     $.ajax({
       type: "POST",
-      url: "/php/outputStudentTests",
+      url: "/includes/outputStudentTests",
       data: $("#testContainer").serialize(),
 
       success: function (data) {
@@ -70,7 +71,7 @@ $(document).ready(function () {
 
     $.ajax({
       type: "POST",
-      url: "/php/outputCompletedStudentTests",
+      url: "/includes/outputCompletedStudentTests",
       data: $("#completedTestContainer").serialize(),
 
       success: function (data) {
@@ -91,7 +92,7 @@ $(document).ready(function () {
     //Send AJAX request to the server for asynchronous processing
     $.ajax({
       type: "POST",
-      url: "/php/retrieveSubjects",
+      url: "/includes/retrieveSubjects",
       dataType: "json",
 
       //If the request is successful
@@ -148,7 +149,7 @@ $("#testSelectionModal").on("hidden.bs.modal", function () {
   //Run the test selection display script
   $.ajax({
     type: "POST",
-    url: "/php/outputStudentTests",
+    url: "/includes/outputStudentTests",
     data: $("#testContainer").serialize(),
 
     success: function (data) {
@@ -171,7 +172,7 @@ $("#loginForm").submit(function (e) {
         //Ajax request to the server for asynchronous processing
         $.ajax({
           type: "POST",
-          url: "/php/auth",
+          url: "/includes/auth",
           data: $("#loginForm").serialize(),
 
           success: function (data) {
@@ -189,22 +190,8 @@ $("#loginForm").submit(function (e) {
                 heightAuto: false,
               });
             } else if (data.includes("e3")) {
-              console.log(data);
               //OUTPUT
-              Swal.fire({
-                //Alert the user with an error message
-                title: "Successfully Logged In",
-                text: "Please click continue to proceed to the testing page.",
-                icon: "success",
-                showCancelButton: false,
-                confirmButtonColor: "#3085d6",
-                confirmButtonText: "Continue",
-                heightAuto: false,
-              }).then((result) => {
-                if (result.isConfirmed) {
-                  window.location = "/test-selection";
-                }
-              });
+              window.location = "/test-selection";
             } else if (data.includes("e4")) {
               console.log(data);
               //OUTPUT

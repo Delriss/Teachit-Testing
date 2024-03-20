@@ -5,12 +5,11 @@
 //it will then update the test with the old testID
 //this is not the best way to do this, but we are under time constraints and this is the best way to do it with the time we have.
 
-//exit if the user is not authorised
-if ($_SESSION["role"] !== "authorisedUser") {
-    echo "Error: User not authorised";
-    exit();
+//check if there is user session
+if (!isset($_SESSION['user'])){
+    //if not, return to the login page
+    header("Location: /login");
 }
-
 //check if all needed post data is set
 //validate post data
 if (!isset($_POST['testID']) || !isset($_POST['testTitle']) || !isset($_POST['testDescription']) || !isset($_POST['testSubject']) || !isset($_POST['questions'])) {

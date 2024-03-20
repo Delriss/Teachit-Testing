@@ -1,5 +1,11 @@
 <?php
 
+//check if there is user session
+if (!isset($_SESSION['user'])){
+    //if not, return to the login page
+    header("Location: /login");
+}
+
 //this is going to create a new test in the database. It will use lastInsertID to get the testID of the test that was just created, and create the questions for it.
 //it will then use lastInsertID again to get the questionID of the question that was just created, and create the answers for it.
 
