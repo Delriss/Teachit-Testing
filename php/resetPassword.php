@@ -22,6 +22,10 @@ if ($_POST['password'] != $_POST['confirmPassword']) {
     die("Passwords do not match");
 }
 
+//Retrieve info from POST
+$studentNum = $_POST['studentNum'];
+$password = $_POST['password'];
+
 //Check if password is at least 8 characters long and contains at least one number and one special character
 if (!preg_match('/^(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{8,}$/', $password)) {
     die("Password must be at least 8 characters long and contain at least one number and one special character.");
@@ -29,10 +33,6 @@ if (!preg_match('/^(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{8,}$/', $passw
 
 //Connect to DB
 include_once($_SERVER['DOCUMENT_ROOT'] . '/php/_connect.php');
-
-//Retrieve info from POST
-$studentNum = $_POST['studentNum'];
-$password = $_POST['password'];
 
 //Encrypt password
 $password = password_hash($password, PASSWORD_BCRYPT);
