@@ -128,7 +128,7 @@ $(document).ready(function () {
     //Run the student management display script
     $.ajax({
       type: "POST",
-      url: "/php/outputStudents",
+      url: "/includes/outputStudents",
       data: $("#studentTable").serialize(),
 
       success: function (data) {
@@ -245,7 +245,7 @@ $(document).on("click", "#btnDelete", function (e) {
       //Ajax request to the server for asynchronous processing
       $.ajax({
         type: "POST",
-        url: "/php/deleteUser",
+        url: "/includes/deleteUser",
         data: {
           UID: $(this).data("id"),
         },
@@ -305,7 +305,7 @@ $(document).on("click", "#btnLock", function (e) {
       //Ajax request to the server for asynchronous processing
       $.ajax({
         type: "POST",
-        url: "/php/lockUser",
+        url: "/includes/lockUser",
         data: {
           UID: $(this).data("id"),
           lock: $(this).data("lock"),
@@ -366,7 +366,7 @@ $(document).on("click", "#btnUnlock", function (e) {
       //Ajax request to the server for asynchronous processing
       $.ajax({
         type: "POST",
-        url: "/php/lockUser",
+        url: "/includes/lockUser",
         data: {
           UID: $(this).data("id"),
           lock: $(this).data("lock"),
@@ -444,6 +444,7 @@ $("#btnCreateStudent").click(function (e) {
           </form>
         `,
     showCancelButton: true,
+    heightAuto: false,
     willOpen: () => {
       //Runs function on SWAL opening to load course data
       //Ensure registration form is loaded
@@ -451,7 +452,7 @@ $("#btnCreateStudent").click(function (e) {
         //Send AJAX request to the server for asynchronous processing
         $.ajax({
           type: "POST",
-          url: "/php/retrieveSubjects",
+          url: "/includes/retrieveSubjects",
           dataType: "json",
 
           //If the request is successful
@@ -479,7 +480,7 @@ $("#btnCreateStudent").click(function (e) {
     if (result.isConfirmed) {
       $.ajax({
         type: "POST",
-        url: "/php/addStudent",
+        url: "/includes/addStudent",
         data: $("#addStudentForm").serialize(),
         success: function (data) {
           if (data.includes("Registration successful")) {
@@ -491,6 +492,7 @@ $("#btnCreateStudent").click(function (e) {
               confirmButtonColor: "#3085d6",
               cancelButtonColor: "#d33",
               confirmButtonText: "Continue",
+              heightAuto: false,
             }).then((result) => {
               if (result.isConfirmed) {
                 window.location.href = "/student-management";
@@ -538,6 +540,7 @@ $(document).on("click", "#btnEdit", function (e) {
           </form>
         `,
     showCancelButton: true,
+    heightAuto: false,
     willOpen: () => {
       //Runs function on SWAL opening to load course data
       //Ensure registration form is loaded
@@ -545,7 +548,7 @@ $(document).on("click", "#btnEdit", function (e) {
         //Send AJAX request to the server for asynchronous processing
         $.ajax({
           type: "POST",
-          url: "/php/retrieveSubjects",
+          url: "/includes/retrieveSubjects",
           dataType: "json",
 
           //If the request is successful
@@ -572,7 +575,7 @@ $(document).on("click", "#btnEdit", function (e) {
       //Runs function on SWAL opening to load student data into form
       $.ajax({
         type: "POST",
-        url: "/php/retrieveStudentData",
+        url: "/includes/retrieveStudentData",
         data: {
           UID: $(this).data("id"),
         },
@@ -593,7 +596,7 @@ $(document).on("click", "#btnEdit", function (e) {
     if (result.isConfirmed) {
       $.ajax({
         type: "POST",
-        url: "/php/editStudent",
+        url: "/includes/editStudent",
         data: $("#editStudentForm").serialize(),
         success: function (data) {
           if (data.includes("Update successful")) {
@@ -605,6 +608,7 @@ $(document).on("click", "#btnEdit", function (e) {
               confirmButtonColor: "#3085d6",
               cancelButtonColor: "#d33",
               confirmButtonText: "Continue",
+              heightAuto: false,
             }).then((result) => {
               if (result.isConfirmed) {
                 window.location.href = "/student-management";
@@ -647,11 +651,12 @@ $("#btnResetPassword").click(function (e) {
           </form>
         `,
     showCancelButton: true,
+    heightAuto: false,
   }).then((result) => {
     if (result.isConfirmed) {
       $.ajax({
         type: "POST",
-        url: "/php/resetPassword",
+        url: "/includes/resetPassword",
         data: $("#resetPasswordForm").serialize(),
         success: function (data) {
           if (data.includes("Password reset")) {
