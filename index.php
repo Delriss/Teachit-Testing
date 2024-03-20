@@ -24,6 +24,9 @@ $jRoute->Route(["get"], "/register", "content/registration.php");
 //Create Test Selection Route
 $jRoute->Route(["get"], "/test-selection", "content/test-selection.php", [0,1,2]);
 
+//Create Testing Page Route
+$jRoute->Route(["get"], "/testing", "content/testing.php", [0,1,2]);
+
 //lecturer and admin can access test management
 //Create Test Management Route
 $jRoute->Route(["get"], "/test-management", "content/secure-lecturer/test-management.php", [1,2]);
@@ -81,6 +84,18 @@ $jRoute->Route(["post"], "/includes/createUser", "php/createUser.php");
 
 //Create deleteTest route
 $jRoute->Route(["post"], "/includes/deleteTest", "php/deleteTest.php", [1,2]);
+
+//Create initialiseTest route
+$jRoute->Route(["post"], "/php/initialiseTest", "php/initialiseTest.php");
+
+//Create nextQuestion route
+$jRoute->Route(["post"], "/php/nextQuestion", "php/nextQuestion.php");
+
+//Create validateAnswer route
+$jRoute->Route(["post"], "/php/validateAnswer", "php/validateAnswer.php");
+
+//Create finaliseTest route
+$jRoute->Route(["post"], "/php/finaliseTest", "php/finaliseTest.php");
 
 //Dispatch the route
 echo $jRoute->Dispatch($_SERVER['REQUEST_METHOD'], $_SERVER['REQUEST_URI']);
