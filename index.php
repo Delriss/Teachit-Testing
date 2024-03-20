@@ -86,28 +86,16 @@ $jRoute->Route(["post"], "/includes/createUser", "php/createUser.php");
 $jRoute->Route(["post"], "/includes/deleteTest", "php/deleteTest.php", [1,2]);
 
 //Create initialiseTest route
-$jRoute->Route(["post"], "/php/initialiseTest", "php/initialiseTest.php");
+$jRoute->Route(["post"], "/includes/initialiseTest", "php/initialiseTest.php");
 
 //Create nextQuestion route
-$jRoute->Route(["post"], "/php/nextQuestion", "php/nextQuestion.php");
+$jRoute->Route(["post"], "/includes/nextQuestion", "php/nextQuestion.php");
 
 //Create validateAnswer route
-$jRoute->Route(["post"], "/php/validateAnswer", "php/validateAnswer.php");
+$jRoute->Route(["post"], "/includes/validateAnswer", "php/validateAnswer.php");
 
 //Create finaliseTest route
-$jRoute->Route(["post"], "/php/finaliseTest", "php/finaliseTest.php");
-
-//Create initialiseTest route
-$jRoute->Route(["post"], "/php/initialiseTest", "php/initialiseTest.php");
-
-//Create nextQuestion route
-$jRoute->Route(["post"], "/php/nextQuestion", "php/nextQuestion.php");
-
-//Create validateAnswer route
-$jRoute->Route(["post"], "/php/validateAnswer", "php/validateAnswer.php");
-
-//Create finaliseTest route
-$jRoute->Route(["post"], "/php/finaliseTest", "php/finaliseTest.php");
+$jRoute->Route(["post"], "/includes/finaliseTest", "php/finaliseTest.php");
 
 //Dispatch the route
 echo $jRoute->Dispatch($_SERVER['REQUEST_METHOD'], $_SERVER['REQUEST_URI']);

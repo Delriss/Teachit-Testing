@@ -23,6 +23,7 @@ foreach ($testArray as $test) {
         //  that the question number, subject and question can be displayed.
         $_SESSION['totalQuestions'] = count($test->questions);
         $subject = $test->subject;
+        $_SESSION['subjectID'] = $test->subjectID;
         $questionText = $test->questions[$_SESSION['questionsAnswered']]->questionText;
         
 

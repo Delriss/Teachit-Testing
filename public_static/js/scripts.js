@@ -121,7 +121,7 @@ $(document).ready(function () {
     $("#testingBackground").hide();
     $.ajax({
       type: "POST",
-      url: "/php/nextQuestion",
+      url: "/includes/nextQuestion",
       data: $("#testingInterface").serialize(),
 
       success: function (data) {
@@ -145,7 +145,7 @@ $(document).on("click", "#startTestButton", function (e) {
   //Furthermore the testID will be wiped once the test is completed or the user logs out.
   $.ajax({
     type: "POST",
-    url: "/php/initialiseTest",
+    url: "/includes/initialiseTest",
     data: { testID: testID },
 
     success: function (data) {
@@ -164,7 +164,7 @@ $(document).on("click", "#option", function (e) {
   let userAnswered = $(this).data("id");
   $.ajax({
     type: "POST",
-    url: "/php/validateAnswer",
+    url: "/includes/validateAnswer",
     data: { userAnswered: userAnswered },
     dataType: "json",
 
@@ -191,7 +191,7 @@ $(document).on("click", "#option", function (e) {
           if (result.isConfirmed) {
             $.ajax({
               type: "POST",
-              url: "/php/nextQuestion",
+              url: "/includes/nextQuestion",
 
               success: function (data) {
                 //inserting the data and making the interface reappear
@@ -231,7 +231,7 @@ $(document).on("click", "#option", function (e) {
               if (result.isConfirmed) {
                 $.ajax({
                   type: "POST",
-                  url: "/php/finaliseTest",
+                  url: "/includes/finaliseTest",
     
                   success: function (data) {
                     window.location = "/test-selection";
@@ -271,7 +271,7 @@ $(document).on("click", "#option", function (e) {
               if (result.isConfirmed) {
                 $.ajax({
                   type: "POST",
-                  url: "/php/finaliseTest",
+                  url: "/includes/finaliseTest",
     
                   success: function (data) {
                     window.location = "/test-selection";
@@ -302,7 +302,7 @@ $(document).on("click", "#option", function (e) {
           if (result.isConfirmed) {
             $.ajax({
               type: "POST",
-              url: "/php/nextQuestion",
+              url: "/includes/nextQuestion",
 
               success: function (data) {
                 //inserting the data and making the interface reappear
