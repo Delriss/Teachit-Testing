@@ -8,7 +8,6 @@ if (!isset($_SESSION['user'])){
 
 class Answer {
     public $answerID;
-    public $relativeQuestionID;
     public $questionID;
     public $relativeAnswerID;
     public $answerText;
