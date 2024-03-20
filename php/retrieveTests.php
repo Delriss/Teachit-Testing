@@ -8,6 +8,7 @@ if (!isset($_SESSION['user'])){
 
 class Answer {
     public $answerID;
+    public $relativeQuestionID;
     public $questionID;
     public $relativeAnswerID;
     public $answerText;
@@ -17,6 +18,7 @@ class Answer {
 
 class Question {
     public $questionID;
+    public $relativeQuestionID;
     public $testID;
     public $questionText;
     public $correctAnswerID;
@@ -69,7 +71,7 @@ foreach ($tests as $test) {
     $testObject->subject = mysqli_fetch_assoc($result)['subjectName'];
 
     //Get the questions belonging to the test
-    $sql = "SELECT questionID, testID, questionText, correctAnswerID FROM questions WHERE testID = " . $test['testID'];
+    $sql = "SELECT questionID, relativeQuestionID, testID, questionText, correctAnswerID FROM questions WHERE testID = " . $test['testID'];
     $questions = mysqli_query($db_connect, $sql);
 
     foreach ($questions as $question) {
@@ -78,6 +80,7 @@ foreach ($tests as $test) {
 
         //Define the question object's attributes
         $questionObject->questionID = $question['questionID'];
+        $questionObject->relativeQuestionID = $question['relativeQuestionID'];
         $questionObject->testID = $question['testID'];
         $questionObject->questionText = $question['questionText'];
         $questionObject->correctAnswerID = $question['correctAnswerID'];
@@ -88,8 +91,6 @@ foreach ($tests as $test) {
 
         foreach ($answers as $answer) {
             $answerObject = new answer;
-            
-            //(FIX) needs relative answer id in context of the range of answers for the questions, etc 1-4. This needs to be done in the database as well
 
             //Define the answer object's attributes
             $answerObject->answerID = $answer['answerID'];

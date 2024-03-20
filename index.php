@@ -97,5 +97,17 @@ $jRoute->Route(["post"], "/php/validateAnswer", "php/validateAnswer.php");
 //Create finaliseTest route
 $jRoute->Route(["post"], "/php/finaliseTest", "php/finaliseTest.php");
 
+//Create initialiseTest route
+$jRoute->Route(["post"], "/php/initialiseTest", "php/initialiseTest.php");
+
+//Create nextQuestion route
+$jRoute->Route(["post"], "/php/nextQuestion", "php/nextQuestion.php");
+
+//Create validateAnswer route
+$jRoute->Route(["post"], "/php/validateAnswer", "php/validateAnswer.php");
+
+//Create finaliseTest route
+$jRoute->Route(["post"], "/php/finaliseTest", "php/finaliseTest.php");
+
 //Dispatch the route
 echo $jRoute->Dispatch($_SERVER['REQUEST_METHOD'], $_SERVER['REQUEST_URI']);
