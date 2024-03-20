@@ -69,8 +69,27 @@ if (isset($_SESSION['user'])) {
                             );
                         }
                     }
+                    if (isset($_SESSION['user'])) {
+                        if($activatedPage == "Leaderboard"){
+                            echo(
+                            <<<HERE
+                            <li class="nav-item">
+                                <a class="nav-link active" href="/leaderboard">Leaderboard</a>
+                            </li>
+                            HERE
+                            );
+                        }
+                        else{
+                            echo(
+                            <<<HERE
+                            <li class="nav-item">
+                                <a class="nav-link" href="/leaderboard">Leaderboard</a>
+                            </li>
+                            HERE
+                            );
+                        }
+                    }
                     //if the session role is lecturer, show the lecturer dashboard link
-                    //THIS NEEDS TO BE UPDATED WHEN AUTH IS USING A CLASS OBJECT WITH AN ARRAY OF ROLES AS AN ATTRIBUTE (FIX)
                     if (isset($_SESSION['user']) && $accessLevel == 1) {
                         if($activatedPage == "Statistics" || $activatedPage == "Student Management" || $activatedPage == "Test Management"){
                             $lecturerActive = " active";
