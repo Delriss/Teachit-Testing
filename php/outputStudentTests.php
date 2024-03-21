@@ -50,7 +50,7 @@ foreach ($testArray as $test) {
                         <p class="card-text">' . $test->testDesc . '</p>
                     </div>
                     <div class="card-footer">
-                        <a href="test.php" class="btn btn-primary">Start Test</a>
+                        <button id="startTestButton" class="btn btn-primary testIDButton" data-id='. $test->testID .'>Start Test</button>
                     </div>
                     </div>
                 </div>
