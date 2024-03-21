@@ -40,8 +40,12 @@ class LeaderboardData{
                             $this->computing[$userExists]['score'] += $row['score'];
                         }
                         else{
-                            //the user doesn't exist in the array, add the score to the array
-                            $this->computing[] = array("userID" => $row['UID'], "score" => $row['score']);
+                            //we need to hit the users table with the row UID to get the user's first and last name.
+                            //we should append the last name to the first name and add it to the array
+                            $userQuery = "SELECT * FROM users WHERE ID = " . $row['UID'];
+                            $userResult = mysqli_query($db_connect, $userQuery);
+                            $userRow = mysqli_fetch_assoc($userResult);
+                            $this->computing[] = array("userID" => $row['UID'], "score" => $row['score'], "name" => $userRow['firstName'] . " " . $userRow['lastName']);
                         }
                         break;
                     case "2":

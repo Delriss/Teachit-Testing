@@ -243,8 +243,26 @@ body
   }
 }
 
+/*END BACKGROUND ANIMATION*/
+
 #score-progress{
   background-color: #f79f79;
 }
 
-/*END BACKGROUND ANIMATION*/
+.progress{
+  height:50px !important;
+}
+
+.leaderboardHead{
+  text-align: center;
+}
+
+.leaderboardRow {
+  line-height: 80px;
+  text-align:center;
+}
+
+.leaderboardRow td{
+  vertical-align: middle;
+}
+

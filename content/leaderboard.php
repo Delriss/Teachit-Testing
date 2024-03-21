@@ -36,14 +36,14 @@ include($_SERVER['DOCUMENT_ROOT'] . '/php/retrieveLeaderboardData.php');
                 <div class="row">
                     <div class="table-responsive">
                         <table class="table table-hover leaderboard-table mt-3">
-                        <thead>
-                            <tr>
-                                <th>Rank</th>
-                                <th>Student ID</th>
-                                <th>Score</th>
-                                <th>Competetive Progress</th>
-                            </tr>
-                        </thead>
+                            <thead class="leaderboardHead">
+                                <tr>
+                                    <th>Rank</th>
+                                    <th>Student</th>
+                                    <th>Score</th>
+                                    <th>Competitive Progress</th>
+                                </tr>
+                            </thead>
                         <tbody>
                             <?php
                             //if the leaderboardData object exists but the computing array is empty, we should display a message to the user that no users have taken the test yet
@@ -58,17 +58,22 @@ include($_SERVER['DOCUMENT_ROOT'] . '/php/retrieveLeaderboardData.php');
                                     if(array_key_exists($i, $leaderboardData->computing)){
                                         //retrieve the user data
                                         $user = $leaderboardData->computing[$i];
-                                        echo "<tr>";
+                                        echo "<tr class='leaderboardRow fs-3'>";
                                         echo "<td>" . ($i + 1) . "</td>";
-                                        echo "<td>" . $user['userID'] . "</td>";
+                                        echo "<td>" . $user['name'] . "</td>";
                                         echo "<td>";
                                         echo $user['score'];
                                         echo "</td>";
                                         echo "<td>";
                                         // Calculate the progress percentage against the highest score
                                         $progress = ($user['score'] / $leaderboardData->computing[0]['score']) * 100;
-                                        echo "<div class='progress'><div id='score-progress' class='progress-bar' role='progressbar' style='width: " . $progress . "%' aria-valuenow='" . $progress . "' aria-valuemin='0' aria-valuemax='100'></div></div>";
+                                        //if the progress is less than 5%, we should display the progress bar at 5% so that it is visible
+                                        if($progress < 5){
+                                            $progress = 5;
+                                        }
+                                        echo "<div class='progress'><div id='score-progress' class='progress-bar leaderboardProgress' role='progressbar' aria-valuenow='" . $progress . "' aria-valuemin='0' aria-valuemax='100'></div></div>";
                                         echo "</td>";
+                                        echo "</tr>";
                                     }
                                     else if(!array_key_exists($i, $leaderboardData->computing)){
                                         //if we have less than 5 users, we should break out of the loop as we have displayed all the users
