@@ -137,7 +137,33 @@ $(document).ready(function () {
       },
     });
   }
+
+  //
+  //STUDENT MANAGEMENT PAGE
+  //
+
+  //Fill the student management table
+  if (window.location.href.includes("student-management") == true) {
+    //Run the student management display script
+    $.ajax({
+      type: "POST",
+      url: "/includes/outputStudents",
+      data: $("#studentTable").serialize(),
+
+      success: function (data) {
+        //Inject custom HTML into the page
+        $("#studentTable").html(data);
+
+        //Init Datatable
+        $("#studentTable").DataTable({
+          responsive: true,
+        });
+      },
+    });
+  }
 });
+
+
 
 //
 //TEST SELECTION -> TESTING PAGE
@@ -870,6 +896,7 @@ $("#btnResetPassword").click(function (e) {
               confirmButtonColor: "#3085d6",
               cancelButtonColor: "#d33",
               confirmButtonText: "Continue",
+              heightAuto: false,
             });
           } else {
             Swal.fire({
