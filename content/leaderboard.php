@@ -44,63 +44,323 @@ include($_SERVER['DOCUMENT_ROOT'] . '/php/retrieveLeaderboardData.php');
                                     <th>Competitive Progress</th>
                                 </tr>
                             </thead>
-                        <tbody>
-                            <?php
-                            //if the leaderboardData object exists but the computing array is empty, we should display a message to the user that no users have taken the test yet
-                            if(empty($leaderboardData->computing)){
-                                echo "<tr><td colspan='3'>No users have taken the test yet</td></tr>";
-                            }
-                            else{
-                                
-                                //within the leaderboardData object, we should have the arrays for each subject. We should loop through the computing array and display the top 5 scores
-                                for($i = 0; $i < 5; $i++){
-                                    //check if the array key exists
-                                    if(array_key_exists($i, $leaderboardData->computing)){
-                                        //retrieve the user data
-                                        $user = $leaderboardData->computing[$i];
-                                        echo "<tr class='leaderboardRow fs-3'>";
-                                        echo "<td>" . ($i + 1) . "</td>";
-                                        echo "<td>" . $user['name'] . "</td>";
-                                        echo "<td>";
-                                        echo $user['score'];
-                                        echo "</td>";
-                                        echo "<td>";
-                                        // Calculate the progress percentage against the highest score
-                                        $progress = ($user['score'] / $leaderboardData->computing[0]['score']) * 100;
-                                        //if the progress is less than 5%, we should display the progress bar at 5% so that it is visible
-                                        if($progress < 5){
-                                            $progress = 5;
+                            <tbody>
+                                <?php
+                                //if the leaderboardData object exists but the computing array is empty, we should display a message to the user that no users have taken the test yet
+                                if(empty($leaderboardData->computing)){
+                                    echo "<tr><td colspan='4'>No users have taken the test yet</td></tr>";
+                                }
+                                else{
+  
+                                    //within the leaderboardData object, we should have the arrays for each subject. We should loop through the computing array and display the top 5 scores
+                                    for($i = 0; $i < 5; $i++){
+                                        //check if the array key exists
+                                        if(array_key_exists($i, $leaderboardData->computing)){
+                                            //retrieve the user data
+                                            $user = $leaderboardData->computing[$i];
+                                            echo "<tr class='leaderboardRow fs-3'>";
+                                            echo "<td>" . ($i + 1) . "</td>";
+                                            echo "<td>" . $user['name'] . "</td>";
+                                            echo "<td>";
+                                            echo $user['score'];
+                                            echo "</td>";
+                                            echo "<td>";
+                                            // Calculate the progress percentage against the highest score
+                                            $progress = ($user['score'] / $leaderboardData->computing[0]['score']) * 100;
+                                            //if the progress is less than 5%, we should display the progress bar at 5% so that it is visible
+                                            if($progress < 5){
+                                                $progress = 5;
+                                            }
+                                            echo "<div class='progress'><div id='score-progress' class='progress-bar leaderboardProgress' role='progressbar' aria-valuenow='" . $progress . "' aria-valuemin='0' aria-valuemax='100'></div></div>";
+                                            echo "</td>";
+                                            echo "</tr>";
                                         }
-                                        echo "<div class='progress'><div id='score-progress' class='progress-bar leaderboardProgress' role='progressbar' aria-valuenow='" . $progress . "' aria-valuemin='0' aria-valuemax='100'></div></div>";
-                                        echo "</td>";
-                                        echo "</tr>";
-                                    }
-                                    else if(!array_key_exists($i, $leaderboardData->computing)){
-                                        //if we have less than 5 users, we should break out of the loop as we have displayed all the users
-                                        break;
+                                        else if(!array_key_exists($i, $leaderboardData->computing)){
+                                            //if we have less than 5 users, we should break out of the loop as we have displayed all the users
+                                            break;
+                                        }
                                     }
                                 }
-                            }
-                            ?>
-                        </tbody>
+                                ?>
+                            </tbody>
                         </table>
                     </div>
                 </div>
             </div>
             <div class="tab-pane fade" id="botany" role="tabpanel" aria-labelledby="botany-tab">
-                Botany
+                <!--include botany table-->
+                <div class="row">
+                    <div class="table-responsive">
+                        <table class="table table-hover leaderboard-table mt-3">
+                            <thead class="leaderboardHead">
+                                <tr>
+                                    <th>Rank</th>
+                                    <th>Student</th>
+                                    <th>Score</th>
+                                    <th>Competitive Progress</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <?php
+                                //if the leaderboardData object exists but the botany array is empty, we should display a message to the user that no users have taken the test yet
+                                if(empty($leaderboardData->botany)){
+                                    echo "<tr><td colspan='4'>No users have taken the test yet</td></tr>";
+                                }
+                                else{
+                                    //within the leaderboardData object, we should have the arrays for each subject. We should loop through the botany array and display the top 5 scores
+                                    for($i = 0; $i < 5; $i++){
+                                        //check if the array key exists
+                                        if(array_key_exists($i, $leaderboardData->botany)){
+                                            //retrieve the user data
+                                            $user = $leaderboardData->botany[$i];
+                                            echo "<tr class='leaderboardRow fs-3'>";
+                                            echo "<td>" . ($i + 1) . "</td>";
+                                            echo "<td>" . $user['name'] . "</td>";
+                                            echo "<td>";
+                                            echo $user['score'];
+                                            echo "</td>";
+                                            echo "<td>";
+                                            // Calculate the progress percentage against the highest score
+                                            $progress = ($user['score'] / $leaderboardData->botany[0]['score']) * 100;
+                                            //if the progress is less than 5%, we should display the progress bar at 5% so that it is visible
+                                            if($progress < 5){
+                                                $progress = 5;
+                                            }
+                                            echo "<div class='progress'><div id='score-progress' class='progress-bar leaderboardProgress' role='progressbar' aria-valuenow='" . $progress . "' aria-valuemin='0' aria-valuemax='100'></div></div>";
+                                            echo "</td>";
+                                            echo "</tr>";
+                                        }
+                                        else if(!array_key_exists($i, $leaderboardData->botany)){
+                                            //if we have less than 5 users, we should break out of the loop as we have displayed all the users
+                                            break;
+                                        }
+                                    }
+                                }
+                                ?>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>     
             </div>
             <div class="tab-pane fade" id="economics" role="tabpanel" aria-labelledby="economics-tab">
-                Economics
+                <!--display economics table-->
+                <div class="row">
+                    <div class="table-responsive">
+                        <table class="table table-hover leaderboard-table mt-3">
+                            <thead class="leaderboardHead">
+                                <tr>
+                                    <th>Rank</th>
+                                    <th>Student</th>
+                                    <th>Score</th>
+                                    <th>Competitive Progress</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <?php
+                                //if the leaderboardData object exists but the economics array is empty, we should display a message to the user that no users have taken the test yet
+                                if(empty($leaderboardData->economics)){
+                                    echo "<tr><td colspan='4'>No users have taken the test yet</td></tr>";
+                                }
+                                else{
+                                    //within the leaderboardData object, we should have the arrays for each subject. We should loop through the economics array and display the top 5 scores
+                                    for($i = 0; $i < 5; $i++){
+                                        //check if the array key exists
+                                        if(array_key_exists($i, $leaderboardData->economics)){
+                                            //retrieve the user data
+                                            $user = $leaderboardData->economics[$i];
+                                            echo "<tr class='leaderboardRow fs-3'>";
+                                            echo "<td>" . ($i + 1) . "</td>";
+                                            echo "<td>" . $user['name'] . "</td>";
+                                            echo "<td>";
+                                            echo $user['score'];
+                                            echo "</td>";
+                                            echo "<td>";
+                                            // Calculate the progress percentage against the highest score
+                                            $progress = ($user['score'] / $leaderboardData->economics[0]['score']) * 100;
+                                            //if the progress is less than 5%, we should display the progress bar at 5% so that it is visible
+                                            if($progress < 5){
+                                                $progress = 5;
+                                            }
+                                            echo "<div class='progress'><div id='score-progress' class='progress-bar leaderboardProgress' role='progressbar' aria-valuenow='" . $progress . "' aria-valuemin='0' aria-valuemax='100'></div></div>";
+                                            echo "</td>";
+                                            echo "</tr>";
+                                        }
+                                        else if(!array_key_exists($i, $leaderboardData->economics)){
+                                            //if we have less than 5 users, we should break out of the loop as we have displayed all the users
+                                            break;
+                                        }
+                                    }
+                                }
+                                ?>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
             </div>
             <div class="tab-pane fade" id="creativeArts" role="tabpanel" aria-labelledby="creativeArts-tab">
-                Creative Arts
+                <!--display leaderboard for creative arts-->
+                <div class="row">
+                    <div class="table-responsive">
+                        <table class="table table-hover leaderboard-table mt-3">
+                            <thead class="leaderboardHead">
+                                <tr>
+                                    <th>Rank</th>
+                                    <th>Student</th>
+                                    <th>Score</th>
+                                    <th>Competitive Progress</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <?php
+                                //if the leaderboardData object exists but the creativeArts array is empty, we should display a message to the user that no users have taken the test yet
+                                if(empty($leaderboardData->creativeArts)){
+                                    echo "<tr><td colspan='4'>No users have taken the test yet</td></tr>";
+                                }
+                                else{
+                                    //within the leaderboardData object, we should have the arrays for each subject. We should loop through the creativeArts array and display the top 5 scores
+                                    for($i = 0; $i < 5; $i++){
+                                        //check if the array key exists
+                                        if(array_key_exists($i, $leaderboardData->creativeArts)){
+                                            //retrieve the user data
+                                            $user = $leaderboardData->creativeArts[$i];
+                                            echo "<tr class='leaderboardRow fs-3'>";
+                                            echo "<td>" . ($i + 1) . "</td>";
+                                            echo "<td>" . $user['name'] . "</td>";
+                                            echo "<td>";
+                                            echo $user['score'];
+                                            echo "</td>";
+                                            echo "<td>";
+                                            // Calculate the progress percentage against the highest score
+                                            $progress = ($user['score'] / $leaderboardData->creativeArts[0]['score']) * 100;
+                                            //if the progress is less than 5%, we should display the progress bar at 5% so that it is visible
+                                            if($progress < 5){
+                                                $progress = 5;
+                                            }
+                                            echo "<div class='progress'><div id='score-progress' class='progress-bar leaderboardProgress' role='progressbar' aria-valuenow='" . $progress . "' aria-valuemin='0' aria-valuemax='100'></div></div>";
+                                            echo "</td>";
+                                            echo "</tr>";
+                                        }
+                                        else if(!array_key_exists($i, $leaderboardData->creativeArts)){
+                                            //if we have less than 5 users, we should break out of the loop as we have displayed all the users
+                                            break;
+                                        }
+                                    }
+                                }
+                                ?>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
             </div>
             <div class="tab-pane fade" id="business" role="tabpanel" aria-labelledby="business-tab">
-                Business
+                <!--display leaderboard for business-->
+                <div class="row">
+                    <div class="table-responsive">
+                        <table class="table table-hover leaderboard-table mt-3">
+                            <thead class="leaderboardHead">
+                                <tr>
+                                    <th>Rank</th>
+                                    <th>Student</th>
+                                    <th>Score</th>
+                                    <th>Competitive Progress</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <?php
+                                //if the leaderboardData object exists but the business array is empty, we should display a message to the user that no users have taken the test yet
+                                if(empty($leaderboardData->business)){
+                                    echo "<tr><td colspan='4'>No users have taken the test yet</td></tr>";
+                                }
+                                else{
+                                    //within the leaderboardData object, we should have the arrays for each subject. We should loop through the business array and display the top 5 scores
+                                    for($i = 0; $i < 5; $i++){
+                                        //check if the array key exists
+                                        if(array_key_exists($i, $leaderboardData->business)){
+                                            //retrieve the user data
+                                            $user = $leaderboardData->business[$i];
+                                            echo "<tr class='leaderboardRow fs-3'>";
+                                            echo "<td>" . ($i + 1) . "</td>";
+                                            echo "<td>" . $user['name'] . "</td>";
+                                            echo "<td>";
+                                            echo $user['score'];
+                                            echo "</td>";
+                                            echo "<td>";
+                                            // Calculate the progress percentage against the highest score
+                                            $progress = ($user['score'] / $leaderboardData->business[0]['score']) * 100;
+                                            //if the progress is less than 5%, we should display the progress bar at 5% so that it is visible
+                                            if($progress < 5){
+                                                $progress = 5;
+                                            }
+                                            echo "<div class='progress'><div id='score-progress' class='progress-bar leaderboardProgress' role='progressbar' aria-valuenow='" . $progress . "' aria-valuemin='0' aria-valuemax='100'></div></div>";
+                                            echo "</td>";
+                                            echo "</tr>";
+                                        }
+                                        else if(!array_key_exists($i, $leaderboardData->business)){
+                                            //if we have less than 5 users, we should break out of the loop as we have displayed all the users
+                                            break;
+                                        }
+                                    }
+                                }
+                                ?>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
             </div>
             <div class="tab-pane fade" id="development" role="tabpanel" aria-labelledby="development-tab">
-                Development
+                <!-- display leaderboard for development -->
+                <div class="row">
+                    <div class="table-responsive">
+                        <table class="table table-hover leaderboard-table mt-3">
+                            <thead class="leaderboardHead">
+                                <tr>
+                                    <th>Rank</th>
+                                    <th>Student</th>
+                                    <th>Score</th>
+                                    <th>Competitive Progress</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <?php
+                                //if the leaderboardData object exists but the development array is empty, we should display a message to the user that no users have taken the test yet
+                                if(empty($leaderboardData->development)){
+                                    echo "<tr><td colspan='4'>No users have taken the test yet</td></tr>";
+                                }
+                                else{
+                                    //within the leaderboardData object, we should have the arrays for each subject. We should loop through the development array and display the top 5 scores
+                                    for($i = 0; $i < 5; $i++){
+                                        //check if the array key exists
+                                        if(array_key_exists($i, $leaderboardData->development)){
+                                            //retrieve the user data
+                                            $user = $leaderboardData->development[$i];
+                                            echo "<tr class='leaderboardRow fs-3'>";
+                                            echo "<td>" . ($i + 1) . "</td>";
+                                            echo "<td>" . $user['name'] . "</td>";
+                                            echo "<td>";
+                                            echo $user['score'];
+                                            echo "</td>";
+                                            echo "<td>";
+                                            // Calculate the progress percentage against the highest score
+                                            $progress = ($user['score'] / $leaderboardData->development[0]['score']) * 100;
+                                            //if the progress is less than 5%, we should display the progress bar at 5% so that it is visible
+                                            if($progress < 5){
+                                                $progress = 5;
+                                            }
+                                            echo "<div class='progress'><div id='score-progress' class='progress-bar leaderboardProgress' role='progressbar' aria-valuenow='" . $progress . "' aria-valuemin='0' aria-valuemax='100'></div></div>";
+                                            echo "</td>";
+                                            echo "</tr>";
+                                        }
+                                        else if(!array_key_exists($i, $leaderboardData->development)){
+                                            //if we have less than 5 users, we should break out of the loop as we have displayed all the users
+                                            break;
+                                        }
+                                    }
+                                }
+                                ?>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
             </div>
         </div>
 

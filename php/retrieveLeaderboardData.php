@@ -40,6 +40,8 @@ class LeaderboardData{
                             $this->computing[$userExists]['score'] += $row['score'];
                         }
                         else{
+                            //the user doesn't exist so they must be added to the array
+
                             //we need to hit the users table with the row UID to get the user's first and last name.
                             //we should append the last name to the first name and add it to the array
                             $userQuery = "SELECT * FROM users WHERE ID = " . $row['UID'];
@@ -57,8 +59,14 @@ class LeaderboardData{
                             $this->botany[$userExists]['score'] += $row['score'];
                         }
                         else{
-                            //the user doesn't exist in the array, add the score to the array
-                            $this->botany[] = array("userID" => $row['UID'], "score" => $row['score']);
+                            //the user doesn't exist so they must be added to the array
+                            
+                            //we need to hit the users table with the row UID to get the user's first and last name.
+                            //we should append the last name to the first name and add it to the array
+                            $userQuery = "SELECT * FROM users WHERE ID = " . $row['UID'];
+                            $userResult = mysqli_query($db_connect, $userQuery);
+                            $userRow = mysqli_fetch_assoc($userResult);
+                            $this->botany[] = array("userID" => $row['UID'], "score" => $row['score'], "name" => $userRow['firstName'] . " " . $userRow['lastName']);
                         }
                         break;
                     case "3":
@@ -70,8 +78,14 @@ class LeaderboardData{
                             $this->economics[$userExists]['score'] += $row['score'];
                         }
                         else{
-                            //the user doesn't exist in the array, add the score to the array
-                            $this->economics[] = array("userID" => $row['UID'], "score" => $row['score']);
+                            //the user doesn't exist so they must be added to the array
+                            
+                            //we need to hit the users table with the row UID to get the user's first and last name.
+                            //we should append the last name to the first name and add it to the array
+                            $userQuery = "SELECT * FROM users WHERE ID = " . $row['UID'];
+                            $userResult = mysqli_query($db_connect, $userQuery);
+                            $userRow = mysqli_fetch_assoc($userResult);
+                            $this->economics[] = array("userID" => $row['UID'], "score" => $row['score'], "name" => $userRow['firstName'] . " " . $userRow['lastName']);
                         }
                         break;
                     case "4":
@@ -83,8 +97,14 @@ class LeaderboardData{
                             $this->creativeArts[$userExists]['score'] += $row['score'];
                         }
                         else{
-                            //the user doesn't exist in the array, add the score to the array
-                            $this->creativeArts[] = array("userID" => $row['UID'], "score" => $row['score']);
+                            //the user doesn't exist so they must be added to the array
+                            
+                            //we need to hit the users table with the row UID to get the user's first and last name.
+                            //we should append the last name to the first name and add it to the array
+                            $userQuery = "SELECT * FROM users WHERE ID = " . $row['UID'];
+                            $userResult = mysqli_query($db_connect, $userQuery);
+                            $userRow = mysqli_fetch_assoc($userResult);
+                            $this->creativeArts[] = array("userID" => $row['UID'], "score" => $row['score'], "name" => $userRow['firstName'] . " " . $userRow['lastName']);
                         }
                         break;
                     case "5":
@@ -96,8 +116,14 @@ class LeaderboardData{
                             $this->business[$userExists]['score'] += $row['score'];
                         }
                         else{
-                            //the user doesn't exist in the array, add the score to the array
-                            $this->business[] = array("userID" => $row['UID'], "score" => $row['score']);
+                            //the user doesn't exist so they must be added to the array
+                            
+                            //we need to hit the users table with the row UID to get the user's first and last name.
+                            //we should append the last name to the first name and add it to the array
+                            $userQuery = "SELECT * FROM users WHERE ID = " . $row['UID'];
+                            $userResult = mysqli_query($db_connect, $userQuery);
+                            $userRow = mysqli_fetch_assoc($userResult);
+                            $this->business[] = array("userID" => $row['UID'], "score" => $row['score'], "name" => $userRow['firstName'] . " " . $userRow['lastName']);
                         }
                         break;
                     case "6":
@@ -109,8 +135,14 @@ class LeaderboardData{
                             $this->development[$userExists]['score'] += $row['score'];
                         }
                         else{
-                            //the user doesn't exist in the array, add the score to the array
-                            $this->development[] = array("userID" => $row['UID'], "score" => $row['score']);
+                            //the user doesn't exist so they must be added to the array
+                            
+                            //we need to hit the users table with the row UID to get the user's first and last name.
+                            //we should append the last name to the first name and add it to the array
+                            $userQuery = "SELECT * FROM users WHERE ID = " . $row['UID'];
+                            $userResult = mysqli_query($db_connect, $userQuery);
+                            $userRow = mysqli_fetch_assoc($userResult);
+                            $this->development[] = array("userID" => $row['UID'], "score" => $row['score'], "name" => $userRow['firstName'] . " " . $userRow['lastName']);
                         }
                         break;
                 }
