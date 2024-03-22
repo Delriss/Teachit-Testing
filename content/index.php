@@ -17,9 +17,11 @@ include($_SERVER['DOCUMENT_ROOT'] . '/content/partials/header.php');
 
         <div class="row">
             <div class="col-12">
-                <div class="d-flex flex-column align-items-center justify-content-end indexScrollDown">
-                    <p>Scroll Down</p>
-                    <i class="fas fa-chevron-down fa-2x"></i>
+                <div class="d-flex flex-column align-items-center justify-content-end">
+                    <div class="indexScrollDown">
+                        <p>Scroll Down</p>
+                        <i class="fas fa-chevron-down fa-2x"></i>
+                    </div>
                 </div>
             </div>
         </div>
