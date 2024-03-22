@@ -9,7 +9,7 @@ include($_SERVER['DOCUMENT_ROOT'] . '/php/retrieveLeaderboardData.php');
 
 <body class="d-flex flex-column h-100">
 
-    <div class="w-75 h-75 mx-auto mt-5" id="leaderboardContainer">
+    <div class="w-75 mx-auto mt-5 mb-5" id="leaderboardContainer">
 
         <ul class="nav nav-tabs" id="myTab" role="tablist">
             <li class="nav-item" role="presentation">
@@ -41,7 +41,7 @@ include($_SERVER['DOCUMENT_ROOT'] . '/php/retrieveLeaderboardData.php');
                                     <th>Rank</th>
                                     <th>Student</th>
                                     <th>Score</th>
-                                    <th>Competitive Progress</th>
+                                    <th>Progress</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -50,8 +50,7 @@ include($_SERVER['DOCUMENT_ROOT'] . '/php/retrieveLeaderboardData.php');
                                 if(empty($leaderboardData->computing)){
                                     echo "<tr><td colspan='4'>No users have taken the test yet</td></tr>";
                                 }
-                                else{
-  
+                                else{ 
                                     //within the leaderboardData object, we should have the arrays for each subject. We should loop through the computing array and display the top 5 scores
                                     for($i = 0; $i < 5; $i++){
                                         //check if the array key exists
@@ -88,7 +87,6 @@ include($_SERVER['DOCUMENT_ROOT'] . '/php/retrieveLeaderboardData.php');
                 </div>
             </div>
             <div class="tab-pane fade" id="botany" role="tabpanel" aria-labelledby="botany-tab">
-                <!--include botany table-->
                 <div class="row">
                     <div class="table-responsive">
                         <table class="table table-hover leaderboard-table mt-3">
@@ -97,7 +95,7 @@ include($_SERVER['DOCUMENT_ROOT'] . '/php/retrieveLeaderboardData.php');
                                     <th>Rank</th>
                                     <th>Student</th>
                                     <th>Score</th>
-                                    <th>Competitive Progress</th>
+                                    <th>Progress</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -106,7 +104,7 @@ include($_SERVER['DOCUMENT_ROOT'] . '/php/retrieveLeaderboardData.php');
                                 if(empty($leaderboardData->botany)){
                                     echo "<tr><td colspan='4'>No users have taken the test yet</td></tr>";
                                 }
-                                else{
+                                else{ 
                                     //within the leaderboardData object, we should have the arrays for each subject. We should loop through the botany array and display the top 5 scores
                                     for($i = 0; $i < 5; $i++){
                                         //check if the array key exists
@@ -140,10 +138,9 @@ include($_SERVER['DOCUMENT_ROOT'] . '/php/retrieveLeaderboardData.php');
                             </tbody>
                         </table>
                     </div>
-                </div>     
+                </div>
             </div>
             <div class="tab-pane fade" id="economics" role="tabpanel" aria-labelledby="economics-tab">
-                <!--display economics table-->
                 <div class="row">
                     <div class="table-responsive">
                         <table class="table table-hover leaderboard-table mt-3">
@@ -152,7 +149,7 @@ include($_SERVER['DOCUMENT_ROOT'] . '/php/retrieveLeaderboardData.php');
                                     <th>Rank</th>
                                     <th>Student</th>
                                     <th>Score</th>
-                                    <th>Competitive Progress</th>
+                                    <th>Progress</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -161,7 +158,7 @@ include($_SERVER['DOCUMENT_ROOT'] . '/php/retrieveLeaderboardData.php');
                                 if(empty($leaderboardData->economics)){
                                     echo "<tr><td colspan='4'>No users have taken the test yet</td></tr>";
                                 }
-                                else{
+                                else{ 
                                     //within the leaderboardData object, we should have the arrays for each subject. We should loop through the economics array and display the top 5 scores
                                     for($i = 0; $i < 5; $i++){
                                         //check if the array key exists
@@ -198,7 +195,6 @@ include($_SERVER['DOCUMENT_ROOT'] . '/php/retrieveLeaderboardData.php');
                 </div>
             </div>
             <div class="tab-pane fade" id="creativeArts" role="tabpanel" aria-labelledby="creativeArts-tab">
-                <!--display leaderboard for creative arts-->
                 <div class="row">
                     <div class="table-responsive">
                         <table class="table table-hover leaderboard-table mt-3">
@@ -207,7 +203,7 @@ include($_SERVER['DOCUMENT_ROOT'] . '/php/retrieveLeaderboardData.php');
                                     <th>Rank</th>
                                     <th>Student</th>
                                     <th>Score</th>
-                                    <th>Competitive Progress</th>
+                                    <th>Progress</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -216,7 +212,7 @@ include($_SERVER['DOCUMENT_ROOT'] . '/php/retrieveLeaderboardData.php');
                                 if(empty($leaderboardData->creativeArts)){
                                     echo "<tr><td colspan='4'>No users have taken the test yet</td></tr>";
                                 }
-                                else{
+                                else{ 
                                     //within the leaderboardData object, we should have the arrays for each subject. We should loop through the creativeArts array and display the top 5 scores
                                     for($i = 0; $i < 5; $i++){
                                         //check if the array key exists
@@ -253,7 +249,6 @@ include($_SERVER['DOCUMENT_ROOT'] . '/php/retrieveLeaderboardData.php');
                 </div>
             </div>
             <div class="tab-pane fade" id="business" role="tabpanel" aria-labelledby="business-tab">
-                <!--display leaderboard for business-->
                 <div class="row">
                     <div class="table-responsive">
                         <table class="table table-hover leaderboard-table mt-3">
@@ -262,7 +257,7 @@ include($_SERVER['DOCUMENT_ROOT'] . '/php/retrieveLeaderboardData.php');
                                     <th>Rank</th>
                                     <th>Student</th>
                                     <th>Score</th>
-                                    <th>Competitive Progress</th>
+                                    <th>Progress</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -271,7 +266,7 @@ include($_SERVER['DOCUMENT_ROOT'] . '/php/retrieveLeaderboardData.php');
                                 if(empty($leaderboardData->business)){
                                     echo "<tr><td colspan='4'>No users have taken the test yet</td></tr>";
                                 }
-                                else{
+                                else{ 
                                     //within the leaderboardData object, we should have the arrays for each subject. We should loop through the business array and display the top 5 scores
                                     for($i = 0; $i < 5; $i++){
                                         //check if the array key exists
@@ -308,7 +303,6 @@ include($_SERVER['DOCUMENT_ROOT'] . '/php/retrieveLeaderboardData.php');
                 </div>
             </div>
             <div class="tab-pane fade" id="development" role="tabpanel" aria-labelledby="development-tab">
-                <!-- display leaderboard for development -->
                 <div class="row">
                     <div class="table-responsive">
                         <table class="table table-hover leaderboard-table mt-3">
@@ -317,7 +311,7 @@ include($_SERVER['DOCUMENT_ROOT'] . '/php/retrieveLeaderboardData.php');
                                     <th>Rank</th>
                                     <th>Student</th>
                                     <th>Score</th>
-                                    <th>Competitive Progress</th>
+                                    <th>Progress</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -326,7 +320,7 @@ include($_SERVER['DOCUMENT_ROOT'] . '/php/retrieveLeaderboardData.php');
                                 if(empty($leaderboardData->development)){
                                     echo "<tr><td colspan='4'>No users have taken the test yet</td></tr>";
                                 }
-                                else{
+                                else{ 
                                     //within the leaderboardData object, we should have the arrays for each subject. We should loop through the development array and display the top 5 scores
                                     for($i = 0; $i < 5; $i++){
                                         //check if the array key exists
@@ -363,11 +357,7 @@ include($_SERVER['DOCUMENT_ROOT'] . '/php/retrieveLeaderboardData.php');
                 </div>
             </div>
         </div>
-
     </div>
-
-
-
 <?php
 //include the footer
 include($_SERVER['DOCUMENT_ROOT'] . '/content/partials/footer.php');

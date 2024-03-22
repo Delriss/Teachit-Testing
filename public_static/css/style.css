@@ -266,3 +266,20 @@ body
   vertical-align: middle;
 }
 
+/* mobile media queries */
+@media only screen and (max-width: 600px) {
+  /*we need to scale the leaderboard line height down for mobile*/
+  .leaderboardRow {
+    line-height: 30px;
+  }
+  /*scale leaderboard font size down for mobile*/
+  .leaderboardRow td {
+    font-size: 20px;
+  }
+  /*reduce height and width of progress bar for mobile*/
+  .progress {
+    height: 30px !important;
+    width:80%;
+  }
+
+}

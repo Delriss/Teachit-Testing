@@ -184,8 +184,7 @@ $leaderboardData = new LeaderboardData($db_connect);
 //close the connection
 mysqli_close($db_connect);
 
-//we should now have the data in the arrays, we can now display the data in the leaderboard table.
-//this is done in the outputLeaderboard.php file
+//we now have the data in the arrays, we can now display the data in the leaderboard table in the leaderboard.php file.
 ?>
 
 
