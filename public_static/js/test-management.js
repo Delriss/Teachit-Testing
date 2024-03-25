@@ -4,7 +4,7 @@ var $testsCarousel = $('.tests-carousel').flickity({
     contain: true,
     wrapAround: true,
     draggable: true,
-    freeScroll: true,
+    freeScroll: false,
     groupCells: '80%',
     adaptiveHeight: false,
     friction: 0.5
