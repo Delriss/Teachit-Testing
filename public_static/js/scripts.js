@@ -453,6 +453,11 @@ $("#loginForm").submit(function (e) {
   });
 });
 
+//animating the progress bars on the leaderboard page
+$(".leaderboardProgress").each(function(i){
+  $(this).delay( 500*i ).animate( { width: $(this).attr('aria-valuenow') + '%' }, 500 );
+});
+
 //Student Management - Delete Student
 $(document).on("click", "#btnDelete", function (e) {
   e.preventDefault(); //Prevent the default form submission
