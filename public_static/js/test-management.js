@@ -284,6 +284,30 @@ function validateForm(form) {
                 valid = false;
             }
         }
+
+        //for each input in the form with the name "question", check if it is empty
+        form.find("input[name='question']").each(function() {
+            if($(this).val() === "") {
+                //if it is empty, fire an error message with heightAuto set to false
+                Swal.fire({
+                    title: "Error",
+                    text: "Please fill in all the questions",
+                    icon: "error",
+                    heightAuto: false
+                });
+                valid = false;
+            }
+            else if($(this).val().length > 255) {
+                //if the question is longer than supported in the database, fire an error message
+                Swal.fire({
+                    title: "Error",
+                    text: "Question must be less than 255 characters",
+                    icon: "error",
+                    heightAuto: false
+                });
+                return false;
+            }
+        });
     
         //for each input in the form with name "answer", check if it is empty
         form.find("input[name='answer']").each(function() {
@@ -357,7 +381,6 @@ $("#submitForm").click(function(e) {
             var testDateTime = $("#testDateTime").val();
         }
 
-        
         //define an array to store questions
         var questions = [];
 
@@ -399,7 +422,7 @@ $("#submitForm").click(function(e) {
             });
         });
 
-        //if the form is in create mode, we are creating a test.
+        //if the form is in edit mode, we are modifying a test.
         if(form.attr("data-mode") == "edit") {
             //get the test id from the modal
             var testID = form.attr("data-test-id");
