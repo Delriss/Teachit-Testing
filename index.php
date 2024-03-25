@@ -24,6 +24,9 @@ $jRoute->Route(["get"], "/register", "content/registration.php");
 //Create Test Selection Route
 $jRoute->Route(["get"], "/test-selection", "content/test-selection.php", [0,1,2]);
 
+//Create Testing Page Route
+$jRoute->Route(["get"], "/testing", "content/testing.php", [0,1,2]);
+
 //lecturer and admin can access test management
 //Create Test Management Route
 $jRoute->Route(["get"], "/test-management", "content/secure-lecturer/test-management.php", [1,2]);
@@ -39,6 +42,9 @@ $jRoute->Route(["get"], "/student-management", "content/placeholder.php", [1,2])
 $jRoute->Route(["get"], "/lecturer-management", "content/placeholder.php", [2]);
 //admins and lecturers can access statistics
 $jRoute->Route(["get"], "/statistics", "content/placeholder.php", [1,2]);
+
+//Create Student Management Route
+$jRoute->Route(["get"], "/student-management", "content/secure-lecturer/student-management.php");
 
 //
 //PRIVATE PHP ROUTES
@@ -81,6 +87,39 @@ $jRoute->Route(["post"], "/includes/createUser", "php/createUser.php");
 
 //Create deleteTest route
 $jRoute->Route(["post"], "/includes/deleteTest", "php/deleteTest.php", [1,2]);
+
+//Create initialiseTest route
+$jRoute->Route(["post"], "/includes/initialiseTest", "php/initialiseTest.php");
+
+//Create nextQuestion route
+$jRoute->Route(["post"], "/includes/nextQuestion", "php/nextQuestion.php");
+
+//Create validateAnswer route
+$jRoute->Route(["post"], "/includes/validateAnswer", "php/validateAnswer.php");
+
+//Create finaliseTest route
+$jRoute->Route(["post"], "/includes/finaliseTest", "php/finaliseTest.php");
+
+//Create outputStudents route
+$jRoute->Route(["post"], "/includes/outputStudents", "php/outputStudents.php");
+
+//Create deleteUser route
+$jRoute->Route(["post"], "/includes/deleteUser", "php/deleteUser.php");
+
+//Create lockUser route
+$jRoute->Route(["post"], "/includes/lockUser", "php/lockUser.php");
+
+//Create addStudent route
+$jRoute->Route(["post"], "/includes/addStudent", "php/addStudent.php");
+
+//Create editStudent route
+$jRoute->Route(["post"], "/includes/editStudent", "php/editStudent.php");
+
+//Create retrieveStudentData route
+$jRoute->Route(["post"], "/includes/retrieveStudentData", "php/retrieveStudentData.php");
+
+//Create resetPassword route
+$jRoute->Route(["post"], "/includes/resetPassword", "php/resetPassword.php");
 
 //Dispatch the route
 echo $jRoute->Dispatch($_SERVER['REQUEST_METHOD'], $_SERVER['REQUEST_URI']);
