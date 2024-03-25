@@ -20,6 +20,8 @@ if (isset($_SESSION['user'])) {
     <title><?php echo($activatedPage)?></title>
 
     <!-- Stylesheets -->
+    <link rel="shortcut icon" href="/public_static/imgs/favicon.ico" type="image/x-icon">
+
     <!-- linking css using routing wrapper -->
     <link rel="stylesheet" href="/public_static/css/style.css">
     <link rel="stylesheet" href="/public_static/css/testManagement.css">
