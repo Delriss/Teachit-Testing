@@ -10,7 +10,7 @@ include_once($_SERVER['DOCUMENT_ROOT'] . '/php/_connect.php');
 //Get Completed Tests for current user
 $sql = "SELECT `TID`, `score`, `timestamp` FROM `userTests` WHERE `UID` = ?";
 $stmt = mysqli_prepare($db_connect, $sql);
-mysqli_stmt_bind_param($stmt, "i", $_SESSION['UID']);
+mysqli_stmt_bind_param($stmt, "i", $_SESSION['ID']);
 mysqli_stmt_execute($stmt);
 $result = mysqli_stmt_get_result($stmt);
 
@@ -54,7 +54,7 @@ if (mysqli_num_rows($result) == 0) {
     }
 
     //Output the completed tests
-    foreach ($completedTests as $test) {
+    foreach ($completedTests as &$test) {
         echo ('<div class="col-sm-4 mb-4">
             <div class="card h-100">
                 <div class="card-body">
