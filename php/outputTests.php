@@ -45,11 +45,11 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/php/retrieveTests.php');
 
         if($upcoming)
         {
-            echo "<div id='card' class='upcomingTest card'>";
+            echo "<div id='card' class='upcomingTest card testCards'>";
         }
         else
         {
-            echo "<div id='card' class='activeTest card'>";
+            echo "<div id='card' class='activeTest card testCards'>";
         }
 
         echo "<div id='card-body' class='card-body'>";
@@ -67,7 +67,11 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/php/retrieveTests.php');
         echo "<p class='card-text'>Subject: " . $test->subject . "</p>";
 
         //Shows the Description of the test
-        echo "<p class='card-text'>" . $test->testDesc . "</p>";
+        echo "<div class='card-text testDescriptionWrap'>";
+
+        echo "<p class='testDescription'>" . $test->testDesc . "</p>";
+        
+        echo "</div>";
     
         //Shows the number of questions in the test
         echo "<p class='card-text'>Number of Questions: " . sizeof($test->questions) . "</p>";

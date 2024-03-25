@@ -298,3 +298,101 @@ body
   }
 
 }
+
+.tableWrap{
+  display: block;
+  width:100%;
+  margin-top:40px;
+  margin-bottom:40px;
+}
+
+.testDescriptionWrap{
+  /* make the contents of this div scrollable */
+  overflow-y: auto;
+  height: 200px;
+  /*custom scrollbar styling */
+  scrollbar-width: thin;
+}
+
+/* custom scrollbar styling */
+.testDescriptionWrap::-webkit-scrollbar {
+  width: 8px;
+}
+
+.testDescriptionWrap::-webkit-scrollbar-thumb{
+  background-color:gray;
+  border-radius: 5px;
+}
+
+
+.testCards{
+  width: 40%;
+  min-height: 60vh;
+  max-height: 60vh !important;
+  padding:25px;
+  border-radius: 15px !important;
+  margin-right:25px;
+  margin-left:25px;
+  color:white !important;
+}
+
+.titleWrapper{
+  margin-top:30px;
+  text-align: center;
+  color:black;
+}
+
+.flickity-button {
+  /*display: none !important;*/
+}
+
+.card-text{
+  padding:10px;
+}
+
+.card-description{
+  height:100px;
+  overflow-y: scroll; 
+}
+
+.card-description::-webkit-scrollbar {
+  width: 8px;
+}
+
+.card-description::-webkit-scrollbar-thumb{
+  height:10%;
+  background-color:gray;
+  border-radius: 5px;
+}
+
+
+@media only screen and (max-width: 800px) {
+  .flickity-cell {
+    width: 90%;
+    padding:10px;
+    padding-bottom: 20px;
+  }
+  .card-text{
+    padding:7px;
+  }
+
+}
+
+.activeTest{
+  background-color: #F79F79 !important;
+}
+
+.upcomingTest{
+
+  background-color: #686963 !important;
+
+}
+
+/* testCards media query for mobile */
+@media only screen and (max-width: 800px) {
+  .testCards{
+    width: 90%;
+    margin-right:5%;
+    margin-left:5%;
+  }
+}
