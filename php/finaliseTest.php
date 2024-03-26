@@ -15,16 +15,10 @@ if (!isset($_SESSION)) {
 include_once($_SERVER['DOCUMENT_ROOT'] . '/php/_connect.php');
 
 //creating the sql query
-$sql = "INSERT INTO `userTests` (`UID`, 
-                                `TID`, 
-                                `score`, 
-                                `timestamp`, 
-                                `SID`) 
-        VALUES (?, ?, ?, CURRENT_TIMESTAMP, ?);";
-
-$stmt = mysqli_prepare($db_connect, $sql); //preparing the sql statement
-mysqli_stmt_bind_param($stmt, "iiii", $_SESSION['ID'], $_SESSION['testID'], $_SESSION['currentScore'], $_SESSION['subjectID']); //binding parameters
-mysqli_stmt_execute($stmt); //Execute prepared statement
+$stmt = $db_connect->prepare("CALL finaliseTest(?, ?, ?, ?)");
+$stmt->bind_param('iiii', $_SESSION['ID'], $_SESSION['testID'], $_SESSION['currentScore'], $_SESSION['subjectID']);
+$stmt->execute();
+$stmt->close();
 
 echo("data inserted"); //this is for testing purposes. This will not be visible unless there is an issue
 
