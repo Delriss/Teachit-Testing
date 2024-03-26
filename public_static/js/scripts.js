@@ -50,7 +50,7 @@ $("#registrationForm").submit(function (e) {
               Swal.fire({
                 //Alert the user with a success message
                 title: "Registration Successful",
-                text: "You have successfully registered.",
+                text: "You have successfully registered. Please wait for an administrator to approve your account. You will be notified via email once your account has been approved.",
                 icon: "success",
                 showCancelButton: false,
                 confirmButtonColor: "#3085d6",
