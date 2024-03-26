@@ -14,7 +14,7 @@ include_once($_SERVER['DOCUMENT_ROOT'] . '/php/_connect.php');
 $studentNum = $_POST['UID'];
 
 //Get the student's data
-$sql = "SELECT `ID`, `firstName`, `lastName`, `email`, `courseTitle`, `accountLock` FROM `users` WHERE `ID` = ?";
+$sql = "CALL selectUserFromID(?)";
 $stmt = mysqli_stmt_init($db_connect);
 mysqli_stmt_prepare($stmt, $sql);
 mysqli_stmt_bind_param($stmt, "s", $studentNum);
