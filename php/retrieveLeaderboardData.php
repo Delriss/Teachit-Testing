@@ -42,11 +42,14 @@ class LeaderboardData{
                         else{
                             //the user doesn't exist so they must be added to the array
 
-                            //we need to hit the users table with the row UID to get the user's first and last name.
-                            //we should append the last name to the first name and add it to the array
-                            $userQuery = "SELECT * FROM users WHERE ID = " . $row['UID'];
-                            $userResult = mysqli_query($db_connect, $userQuery);
+                            //we should use a stored procedure to get the user's first and last name from the users table whilst clearing the stored result so we can execute another query
+                            $userQuery = "CALL selectUserFromID(?);";
+                            $stmt = mysqli_prepare($db_connect, $userQuery);
+                            $stmt->bind_param("i", $row['UID']);
+                            $stmt->execute();
+                            $userResult = $stmt->get_result();
                             $userRow = mysqli_fetch_assoc($userResult);
+                            $stmt->close();
                             $this->computing[] = array("userID" => $row['UID'], "score" => $row['score'], "name" => $userRow['firstName'] . " " . $userRow['lastName']);
                         }
                         break;
@@ -62,10 +65,14 @@ class LeaderboardData{
                             //the user doesn't exist so they must be added to the array
                             
                             //we need to hit the users table with the row UID to get the user's first and last name.
-                            //we should append the last name to the first name and add it to the array
-                            $userQuery = "SELECT * FROM users WHERE ID = " . $row['UID'];
-                            $userResult = mysqli_query($db_connect, $userQuery);
+                            //we should use a stored procedure to get the user's first and last name from the users table whilst clearing the stored result so we can execute another query
+                            $userQuery = "CALL selectUserFromID(?);";
+                            $stmt = mysqli_prepare($db_connect, $userQuery);
+                            $stmt->bind_param("i", $row['UID']);
+                            $stmt->execute();
+                            $userResult = $stmt->get_result();
                             $userRow = mysqli_fetch_assoc($userResult);
+                            $stmt->close();
                             $this->botany[] = array("userID" => $row['UID'], "score" => $row['score'], "name" => $userRow['firstName'] . " " . $userRow['lastName']);
                         }
                         break;
@@ -81,11 +88,16 @@ class LeaderboardData{
                             //the user doesn't exist so they must be added to the array
                             
                             //we need to hit the users table with the row UID to get the user's first and last name.
-                            //we should append the last name to the first name and add it to the array
-                            $userQuery = "SELECT * FROM users WHERE ID = " . $row['UID'];
-                            $userResult = mysqli_query($db_connect, $userQuery);
+                            //we should use a stored procedure to get the user's first and last name from the users table whilst clearing the stored result so we can execute another query
+                            $userQuery = "CALL selectUserFromID(?);";
+                            $stmt = mysqli_prepare($db_connect, $userQuery);
+                            $stmt->bind_param("i", $row['UID']);
+                            $stmt->execute();
+                            $userResult = $stmt->get_result();
                             $userRow = mysqli_fetch_assoc($userResult);
+                            $stmt->close();
                             $this->economics[] = array("userID" => $row['UID'], "score" => $row['score'], "name" => $userRow['firstName'] . " " . $userRow['lastName']);
+
                         }
                         break;
                     case "4":
@@ -100,10 +112,14 @@ class LeaderboardData{
                             //the user doesn't exist so they must be added to the array
                             
                             //we need to hit the users table with the row UID to get the user's first and last name.
-                            //we should append the last name to the first name and add it to the array
-                            $userQuery = "SELECT * FROM users WHERE ID = " . $row['UID'];
-                            $userResult = mysqli_query($db_connect, $userQuery);
+                            //we should use a stored procedure to get the user's first and last name from the users table whilst clearing the stored result so we can execute another query
+                            $userQuery = "CALL selectUserFromID(?);";
+                            $stmt = mysqli_prepare($db_connect, $userQuery);
+                            $stmt->bind_param("i", $row['UID']);
+                            $stmt->execute();
+                            $userResult = $stmt->get_result();
                             $userRow = mysqli_fetch_assoc($userResult);
+                            $stmt->close();
                             $this->creativeArts[] = array("userID" => $row['UID'], "score" => $row['score'], "name" => $userRow['firstName'] . " " . $userRow['lastName']);
                         }
                         break;
@@ -119,10 +135,14 @@ class LeaderboardData{
                             //the user doesn't exist so they must be added to the array
                             
                             //we need to hit the users table with the row UID to get the user's first and last name.
-                            //we should append the last name to the first name and add it to the array
-                            $userQuery = "SELECT * FROM users WHERE ID = " . $row['UID'];
-                            $userResult = mysqli_query($db_connect, $userQuery);
+                            //we should use a stored procedure to get the user's first and last name from the users table whilst clearing the stored result so we can execute another query
+                            $userQuery = "CALL selectUserFromID(?);";
+                            $stmt = mysqli_prepare($db_connect, $userQuery);
+                            $stmt->bind_param("i", $row['UID']);
+                            $stmt->execute();
+                            $userResult = $stmt->get_result();
                             $userRow = mysqli_fetch_assoc($userResult);
+                            $stmt->close();
                             $this->business[] = array("userID" => $row['UID'], "score" => $row['score'], "name" => $userRow['firstName'] . " " . $userRow['lastName']);
                         }
                         break;
@@ -138,10 +158,14 @@ class LeaderboardData{
                             //the user doesn't exist so they must be added to the array
                             
                             //we need to hit the users table with the row UID to get the user's first and last name.
-                            //we should append the last name to the first name and add it to the array
-                            $userQuery = "SELECT * FROM users WHERE ID = " . $row['UID'];
-                            $userResult = mysqli_query($db_connect, $userQuery);
+                            //we should use a stored procedure to get the user's first and last name from the users table whilst clearing the stored result so we can execute another query
+                            $userQuery = "CALL selectUserFromID(?);";
+                            $stmt = mysqli_prepare($db_connect, $userQuery);
+                            $stmt->bind_param("i", $row['UID']);
+                            $stmt->execute();
+                            $userResult = $stmt->get_result();
                             $userRow = mysqli_fetch_assoc($userResult);
+                            $stmt->close();
                             $this->development[] = array("userID" => $row['UID'], "score" => $row['score'], "name" => $userRow['firstName'] . " " . $userRow['lastName']);
                         }
                         break;
