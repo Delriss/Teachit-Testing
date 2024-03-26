@@ -103,7 +103,7 @@ if (mysqli_num_rows($result) > 0) {
 
 //Create Database User
 $accessLevel = "0"; //0 = Student, 1 = Teacher, 2 = Admin
-$accountLock = "FALSE"; //FALSE = Account is not locked, TRUE = Account is locked
+$accountLock = "TRUE"; //FALSE = Account is not locked, TRUE = Account is locked
 
 $sql = "INSERT INTO `users` (`ID`, 
                            `firstName`, 
