@@ -80,7 +80,7 @@ $email = mysqli_real_escape_string($db_connect, $email);
 $password = mysqli_real_escape_string($db_connect, $password);
 
 //Check to see if Student ID is already in use
-$sql = "SELECT * FROM `users` WHERE `ID` = ?";
+$sql = "CALL selectUserFromID(?)";
 $stmt = mysqli_prepare($db_connect, $sql); //Prepare SQL statement
 mysqli_stmt_bind_param($stmt, "s", $studentNum); //Bind parameters
 mysqli_stmt_execute($stmt); //Execute prepared statement
@@ -91,7 +91,7 @@ if (mysqli_num_rows($result) > 0) {
 }
 
 //Check to see if email is already in use
-$sql = "SELECT * FROM `users` WHERE `email` = ?";
+$sql = "CALL selectUserFromEmail(?)";
 $stmt = mysqli_prepare($db_connect, $sql); //Prepare SQL statement
 mysqli_stmt_bind_param($stmt, "s", $email); //Bind parameters
 mysqli_stmt_execute($stmt); //Execute prepared statement
@@ -103,21 +103,12 @@ if (mysqli_num_rows($result) > 0) {
 
 //Create Database User
 $accessLevel = "0"; //0 = Student, 1 = Teacher, 2 = Admin
-$accountLock = "FALSE"; //FALSE = Account is not locked, TRUE = Account is locked
+$accountLock = "0"; //FALSE = Account is not locked, TRUE = Account is locked
 
-$sql = "INSERT INTO `users` (`ID`, 
-                           `firstName`, 
-                           `lastName`, 
-                           `email`, 
-                           `password`,
-                           `courseTitle`,
-                           `accessLevel`,
-                           `accountLock`,
-                           `TIMESTAMP`)
-        VALUES (?, ?, ?, ?, ?, ?, ?, ?, CURRENT_TIMESTAMP);";
+$sql = "CALL createUser(?, ?, ?, ?, ?, ?, ?, ?)";
 
 $stmt = mysqli_prepare($db_connect, $sql); //Prepare SQL statement
-mysqli_stmt_bind_param($stmt, "ssssssis", $studentNum, $firstName, $lastName, $email, $password, $courseTitle, $accessLevel, $accountLock); //Bind parameters
+mysqli_stmt_bind_param($stmt, "ssssssii", $studentNum, $firstName, $lastName, $email, $password, $courseTitle, $accessLevel, $accountLock); //Bind parameters
 
 if (mysqli_stmt_execute($stmt)) //Execute prepared statement
 {

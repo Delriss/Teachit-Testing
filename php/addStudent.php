@@ -101,7 +101,7 @@ if ($accountLock == "on") { //FALSE = Account is not locked, TRUE = Account is l
     $accountLock = "0";
 }
 
-$sql = "CALL addStudent(?, ?, ?, ?, ?, ?, ?, ?)";
+$sql = "CALL createUser(?, ?, ?, ?, ?, ?, ?, ?)";
 
 $stmt = mysqli_prepare($db_connect, $sql); //Prepare SQL statement
 mysqli_stmt_bind_param($stmt, "ssssssii", $studentNum, $firstName, $lastName, $email, $password, $courseTitle, $accessLevel, $accountLock); //Bind parameters
