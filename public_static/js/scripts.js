@@ -783,7 +783,6 @@ $(document).on("click", "#btnEdit", function (e) {
     html: `
           <form id="editStudentForm">
             <div class="mb-2 d-flex">
-                <input type="text" class="form-control m-1" id="studentNum" name="studentNum" placeholder="Student Number (Numbers Only)" required>
                 <input type="email" class="form-control m-1" id="email" name="email" placeholder="Email" required>
             </div>
             <div class="mb-2 d-flex">
