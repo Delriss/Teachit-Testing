@@ -1,3 +1,32 @@
+//Logout Button
+$(".btnLogout").click(function (e) {
+  e.preventDefault(); //Prevent the default form submission
+  //Ajax request to the server for asynchronous processing
+  $.ajax({
+    type: "GET",
+    url: "/logout",
+    success: function (data) {
+      if (data.includes("Logout successful")) {
+        //OUTPUT
+        Swal.fire({
+          //Alert the user with a success message
+          title: "Logout Successful",
+          text: "You have successfully logged out.",
+          icon: "success",
+          showCancelButton: false,
+          confirmButtonColor: "#3085d6",
+          confirmButtonText: "Continue",
+          heightAuto: false,
+        }).then((result) => {
+          if (result.isConfirmed) {
+            window.location.href = "/";
+          }
+        });
+      }
+    },
+  });
+});
+
 // Registration Form - User Registration
 $("#registrationForm").submit(function (e) {
   e.preventDefault(); //Prevent the default form submission

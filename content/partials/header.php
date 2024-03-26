@@ -144,7 +144,7 @@ if (isset($_SESSION['user'])) {
                     <li class="nav-item">
                         <?php //if the session loggedin is set, show the logout button
                         if (isset($_SESSION['LoggedIn'])) {
-                            echo '<a class="nav-link" href="/logout">Logout</a>';
+                            echo '<button class="nav-link btnLogout">Logout</button>';
                         } else {
                             //if current page is login, make login active
                             if($activatedPage == "Login"){
