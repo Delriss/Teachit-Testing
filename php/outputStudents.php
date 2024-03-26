@@ -32,7 +32,9 @@ echo ('
 
 foreach ($students as $student) {
     //Get the course title
-    $courseTitle = mysqli_query($db_connect, "SELECT `subjectName` FROM `subjects` WHERE `SID` = " . $student['courseTitle']);
+    $db_connect -> next_result();
+    $sql = "CALL selectSubjectTitleFromSID(" . $student['courseTitle'] . ")";
+    $courseTitle = mysqli_query($db_connect, $sql);
     $courseTitle = mysqli_fetch_assoc($courseTitle);
 
     $student['courseTitle'] = $courseTitle['subjectName'];
