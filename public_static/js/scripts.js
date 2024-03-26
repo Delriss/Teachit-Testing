@@ -375,32 +375,6 @@ $(document).on("click", "#option", function (e) {
       }
     },
   });
-
-
-  //
-  //STUDENT MANAGEMENT PAGE
-  //
-
-  //Fill the student management table
-  if (window.location.href.includes("student-management") == true) {
-    //Run the student management display script
-    $.ajax({
-      type: "POST",
-      url: "/includes/outputStudents",
-      data: $("#studentTable").serialize(),
-
-      success: function (data) {
-        //Inject custom HTML into the page
-        $("#studentTable").html(data);
-
-        //Init Datatable
-        $("#studentTable").DataTable({
-          responsive: true,
-        });
-      },
-    });
-  }
-
 });
 
 //Rerun test selection display script on modal close
