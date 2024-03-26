@@ -94,22 +94,12 @@ foreach($question as $q){
 
 //if userID is set, we need to insert the test into the database with the userID
 if($userID != null){
-    $sql = "INSERT INTO `tests` (`title`, 
-                        `testDesc`, 
-                        `subject`,
-                        `assignedID`,
-                        `testDateTime`)
-    VALUES (?, ?, ?, ?, ?);";
-
+    $sql = "CALL createTestForUser(?, ?, ?, ?, ?);";
     $stmt = mysqli_prepare($db_connect, $sql); //Prepare SQL statement
     mysqli_stmt_bind_param($stmt, "ssiis", $testTitle, $testDescription, $subject, $userID, $dateTime); //Bind parameters
 }
 else{
-    $sql = "INSERT INTO `tests` (`title`, 
-                           `testDesc`, 
-                           `subject`,
-                           `testDateTime`)
-        VALUES (?, ?, ?, ?);";
+    $sql = "CALL createTest(?, ?, ?, ?);";
 
     $stmt = mysqli_prepare($db_connect, $sql); //Prepare SQL statement
     mysqli_stmt_bind_param($stmt, "ssis", $testTitle, $testDescription, $subject, $dateTime); //Bind parameters 
@@ -120,8 +110,13 @@ if(!mysqli_stmt_execute($stmt)) //Execute prepared statement
     echo "Test Creation Failed:" . mysqli_error($db_connect);
 }
 
-//Get the testID of the test that was just created
-$testID = mysqli_insert_id($db_connect);
+//Get the testID of the test that was just created with sql
+$sql = "SELECT LAST_INSERT_ID();";
+$result = mysqli_query($db_connect, $sql);
+$row = mysqli_fetch_array($result);
+$testID = $row[0];
+
+//echo how many questions there are
 
 //loop through each question in the array allowing us to treat each one as a separate question
 foreach($question as $q){
@@ -129,10 +124,7 @@ foreach($question as $q){
     $questionNumber = array_search($q, $question);
 
     //Create the question in the database using a prepared statement, inserting the relativeQuestionID, the testID, the questionText
-    $sql = "INSERT INTO `questions` (`relativeQuestionID`, 
-                           `testID`, 
-                           `questionText`)
-        VALUES (?, ?, ?);";
+    $sql = "CALL createQuestion(?, ?, ?);";
 
     $stmt = mysqli_prepare($db_connect, $sql); //Prepare SQL statement
     mysqli_stmt_bind_param($stmt, "iis", $questionNumber, $testID, $q['questionText']); //Bind parameters
@@ -142,8 +134,11 @@ foreach($question as $q){
         echo "Test Creation Failed:" . mysqli_error($db_connect);
     }
 
-    //Get the questionID of the question that was just created
-    $questionID = mysqli_insert_id($db_connect);
+    //Get the questionID of the question that was just created with sql
+    $sql = "SELECT LAST_INSERT_ID();";
+    $result = mysqli_query($db_connect, $sql);
+    $row = mysqli_fetch_array($result);
+    $questionID = $row[0];
 
     //for size of the answers array, create the answers in the database using a prepared statement, inserting the relativeAnswerID, the questionID, the answerText
     for($i = 0; $i < sizeof($q['answers']); $i++){
@@ -155,15 +150,10 @@ foreach($question as $q){
             $correct = 0;
         }
 
-        //Create the question in the database using a prepared statement, inserting the relativeQuestionID, the testID, the questionText
-        $sql = "INSERT INTO `answers` (`relativeAnswerID`, 
-                            `questionID`, 
-                            `answerText`,
-                            `isCorrect`)
-            VALUES (?, ?, ?, ?);";
-
+        //Create the Answer in the database using a prepared statement, inserting the relativeQuestionID, the testID, the questionText
+        $sql = "CALL createAnswer(?, ?, ?, ?);";
         $stmt = mysqli_prepare($db_connect, $sql); //Prepare SQL statement
-        mysqli_stmt_bind_param($stmt, "iisi", $i, $questionID, $q['answers'][$i] ,$correct); //Bind parameters
+        mysqli_stmt_bind_param($stmt, "iisi", $i, $questionID, $q['answers'][$i], $correct); //Bind parameters
 
         if(!mysqli_stmt_execute($stmt)) //Execute prepared statement
         {
@@ -172,10 +162,7 @@ foreach($question as $q){
 
         //if the answer is correct, update the correctAnswerID in the questions table to the answerID of the correct answer
         if($correct == 1){
-            $sql = "UPDATE `questions` 
-                    SET `correctAnswerID` = ?
-                    WHERE `questionID` = ?;";
-
+            $sql = "CALL updateCorrectAnswerID(?, ?);";
             $stmt = mysqli_prepare($db_connect, $sql); //Prepare SQL statement
             mysqli_stmt_bind_param($stmt, "ii", $i, $questionID); //Bind parameters
 

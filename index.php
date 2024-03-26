@@ -77,7 +77,7 @@ $jRoute->Route(["post"], "/includes/retrieveTestData", "php/retrieveTestData.php
 $jRoute->Route(["post"], "/includes/retrieveSubjects", "php/retrieveSubjects.php");
 
 //Create createTest route
-$jRoute->Route(["post"], "/includes/createTest", "php/createTest.php", [1,2]);
+$jRoute->Route(["post"], "/includes/createTest", "php/createTest.php", [0,1,2]);
 
 //Create modifyTest route
 $jRoute->Route(["post"], "/includes/modifyTest", "php/modifyTest.php", [1,2]);
