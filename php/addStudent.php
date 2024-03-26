@@ -71,7 +71,7 @@ $password = mysqli_real_escape_string($db_connect, $password);
 $accountLock = mysqli_real_escape_string($db_connect, $accountLock);
 
 //Check to see if Student ID is already in use
-$sql = "SELECT * FROM `users` WHERE `ID` = ?";
+$sql = "CALL selectUserFromID(?)";
 $stmt = mysqli_prepare($db_connect, $sql); //Prepare SQL statement
 mysqli_stmt_bind_param($stmt, "s", $studentNum); //Bind parameters
 mysqli_stmt_execute($stmt); //Execute prepared statement
@@ -82,7 +82,7 @@ if (mysqli_num_rows($result) > 0) {
 }
 
 //Check to see if email is already in use
-$sql = "SELECT * FROM `users` WHERE `email` = ?";
+$sql = "CALL selectUserFromEmail(?)";
 $stmt = mysqli_prepare($db_connect, $sql); //Prepare SQL statement
 mysqli_stmt_bind_param($stmt, "s", $email); //Bind parameters
 mysqli_stmt_execute($stmt); //Execute prepared statement
@@ -101,16 +101,7 @@ if ($accountLock == "on") { //FALSE = Account is not locked, TRUE = Account is l
     $accountLock = "0";
 }
 
-$sql = "INSERT INTO `users` (`ID`, 
-                           `firstName`, 
-                           `lastName`, 
-                           `email`, 
-                           `password`,
-                           `courseTitle`,
-                           `accessLevel`,
-                           `accountLock`,
-                           `TIMESTAMP`)
-        VALUES (?, ?, ?, ?, ?, ?, ?, ?, CURRENT_TIMESTAMP);";
+$sql = "CALL createUser(?, ?, ?, ?, ?, ?, ?, ?)";
 
 $stmt = mysqli_prepare($db_connect, $sql); //Prepare SQL statement
 mysqli_stmt_bind_param($stmt, "ssssssii", $studentNum, $firstName, $lastName, $email, $password, $courseTitle, $accessLevel, $accountLock); //Bind parameters

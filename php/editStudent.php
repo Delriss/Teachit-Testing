@@ -63,7 +63,7 @@ if ($accountLock == "on") { //FALSE = Account is not locked, TRUE = Account is l
     $accountLock = "0";
 }
 
-$sql = "UPDATE `users` SET `firstName` = ?, `lastName` = ?, `email` = ?, `courseTitle` = ?, `accountLock` = ? WHERE `ID` = ?";
+$sql = "CALL editUser(?, ?, ?, ?, ?, ?)";
 $stmt = mysqli_prepare($db_connect, $sql); //Prepare SQL statement
 mysqli_stmt_bind_param($stmt, "ssssss", $firstName, $lastName, $email, $courseTitle, $accountLock, $studentNum); //Bind parameters
 
