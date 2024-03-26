@@ -76,6 +76,12 @@ if (isset($_POST["email"]) and isset($_POST["password"])) { //if username and pa
 				$_SESSION["role"] = "student";
 			}
 
+			//Updates DB for last login time
+			$currentTime = date("Y-m-d H:i:s");
+			$stmt = mysqli_prepare($db_connect, "UPDATE `users` SET `lastLogin` = ? WHERE `ID` = ?");
+			mysqli_stmt_bind_param($stmt, "si", $currentTime, $user->ID);
+			mysqli_stmt_execute($stmt);
+
 			//sends a sweet alert to the user to let them know they have logged in
 			echo "e3";
 		} else {
