@@ -8,7 +8,7 @@ if (!isset($_SESSION['user'])){
 include_once($_SERVER['DOCUMENT_ROOT'] . '/php/_connect.php');
 
 //Get Completed Tests for current user
-$sql = "SELECT `TID`, `score`, `timestamp` FROM `userTests` WHERE `UID` = ?";
+$sql = "CALL selectUserTestsFromUID(?)";
 $stmt = mysqli_prepare($db_connect, $sql);
 mysqli_stmt_bind_param($stmt, "i", $_SESSION['ID']);
 mysqli_stmt_execute($stmt);
@@ -27,6 +27,7 @@ if (mysqli_num_rows($result) == 0) {
 
     //Get the test details for each test
     foreach ($completedTests as &$test) {
+        $db_connect -> next_result(); //Move to the next result set
         $sql = "CALL selectTestFromTID(?)";
         $stmt = mysqli_prepare($db_connect, $sql);
         mysqli_stmt_bind_param($stmt, "i", $test['TID']);
@@ -42,6 +43,7 @@ if (mysqli_num_rows($result) == 0) {
 
     //Get the subject names for each test
     foreach ($completedTests as &$test) {
+        $db_connect -> next_result(); //Move to the next result set
         $sql = "CALL selectSubjectFromSID(?)";
         $stmt = mysqli_prepare($db_connect, $sql);
         mysqli_stmt_bind_param($stmt, "i", $test['subjectID']);
