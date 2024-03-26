@@ -82,6 +82,7 @@ if (mysqli_num_rows($result) > 0) {
 }
 
 //Check to see if email is already in use
+$db_connect -> next_result();
 $sql = "CALL selectUserFromEmail(?)";
 $stmt = mysqli_prepare($db_connect, $sql); //Prepare SQL statement
 mysqli_stmt_bind_param($stmt, "s", $email); //Bind parameters
@@ -101,6 +102,7 @@ if ($accountLock == "on") { //FALSE = Account is not locked, TRUE = Account is l
     $accountLock = "0";
 }
 
+$db_connect -> next_result();
 $sql = "CALL createUser(?, ?, ?, ?, ?, ?, ?, ?)";
 
 $stmt = mysqli_prepare($db_connect, $sql); //Prepare SQL statement
