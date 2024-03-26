@@ -27,7 +27,7 @@ if (mysqli_num_rows($result) == 0) {
 
     //Get the test details for each test
     foreach ($completedTests as &$test) {
-        $sql = "SELECT `title`, `testDesc`, `subject` FROM `tests` WHERE `testID` = ?";
+        $sql = "CALL selectTestFromTID(?)";
         $stmt = mysqli_prepare($db_connect, $sql);
         mysqli_stmt_bind_param($stmt, "i", $test['TID']);
         mysqli_stmt_execute($stmt);
@@ -42,7 +42,7 @@ if (mysqli_num_rows($result) == 0) {
 
     //Get the subject names for each test
     foreach ($completedTests as &$test) {
-        $sql = "SELECT `subjectName` FROM `subjects` WHERE `SID` = ?";
+        $sql = "CALL selectSubjectFromSID(?)";
         $stmt = mysqli_prepare($db_connect, $sql);
         mysqli_stmt_bind_param($stmt, "i", $test['subjectID']);
         mysqli_stmt_execute($stmt);
