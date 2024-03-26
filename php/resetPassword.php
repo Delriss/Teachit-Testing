@@ -38,7 +38,7 @@ include_once($_SERVER['DOCUMENT_ROOT'] . '/php/_connect.php');
 $password = password_hash($password, PASSWORD_BCRYPT);
 
 //Edit Database User
-$sql = "UPDATE users SET password = ? WHERE ID = ?";
+$sql = "CALL editPassword(?, ?)";
 $stmt = $db_connect->prepare($sql);
 $stmt->bind_param("ss", $password, $studentNum);
 
