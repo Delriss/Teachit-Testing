@@ -45,9 +45,12 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/php/_connect.php');
 
 $testArray = array();
 
-//Get all tests from the database
-$sql = "SELECT `testID`, `title`, `testDesc`, `subject`, `assignedID` , `testDateTime` FROM tests";
-$tests = mysqli_query($db_connect, $sql);
+//Get all tests from the database and clear the stored result so we can execute another query
+$sql = "CALL selectTests()";
+$stmt = mysqli_prepare($db_connect, $sql);
+$stmt->execute();
+$tests = $stmt->get_result();
+$stmt->close();
 
 //loop through each test in the database
 foreach ($tests as $test) {
