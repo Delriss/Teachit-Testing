@@ -103,7 +103,7 @@ if (mysqli_num_rows($result) > 0) {
 
 //Create Database User
 $accessLevel = "0"; //0 = Student, 1 = Teacher, 2 = Admin
-$accountLock = "FALSE"; //FALSE = Account is not locked, TRUE = Account is locked
+$accountLock = "1"; //0 = Account is not locked, 1 = Account is locked
 
 $sql = "INSERT INTO `users` (`ID`, 
                            `firstName`, 
@@ -117,7 +117,7 @@ $sql = "INSERT INTO `users` (`ID`,
         VALUES (?, ?, ?, ?, ?, ?, ?, ?, CURRENT_TIMESTAMP);";
 
 $stmt = mysqli_prepare($db_connect, $sql); //Prepare SQL statement
-mysqli_stmt_bind_param($stmt, "ssssssis", $studentNum, $firstName, $lastName, $email, $password, $courseTitle, $accessLevel, $accountLock); //Bind parameters
+mysqli_stmt_bind_param($stmt, "ssssssii", $studentNum, $firstName, $lastName, $email, $password, $courseTitle, $accessLevel, $accountLock); //Bind parameters
 
 if (mysqli_stmt_execute($stmt)) //Execute prepared statement
 {

@@ -11,7 +11,7 @@ if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
 include_once($_SERVER['DOCUMENT_ROOT'] . '/php/_connect.php');
 
 //Retrieve all Students from database
-$sql = "SELECT `ID`, `firstName`, `lastName`, `email`, `courseTitle`, `accountLock` FROM `users` WHERE `accessLevel` = 0";
+$sql = "SELECT `ID`, `firstName`, `lastName`, `email`, `courseTitle`, `accountLock`, `lastLogin` FROM `users` WHERE `accessLevel` = 0";
 $students = mysqli_query($db_connect, $sql);
 
 //Output the students
@@ -24,6 +24,7 @@ echo ('
                 <th>Email</th>
                 <th>Course</th>
                 <th>Locked</th>
+                <th>Last Login</th>
                 <th>Actions</th>
             </tr>
         </thead>
@@ -44,12 +45,13 @@ foreach ($students as $student) {
                 <td>' . $student['lastName'] . '</td>
                 <td>' . $student['email'] . '</td>
                 <td>' . $student['courseTitle'] . '</td>'
-        . ($student['accountLock'] == 0 ? '<td>No</td>' : '<td>Yes</td>') .
-        '<td>
-                <button type="button" id="btnEdit" class="btn btn-primary mx-1" data-id="'. $student['ID'] .'">Edit</button>'.
-                '<button type="button" id="btnDelete" class="btn btn-danger mx-1" data-id="'. $student['ID'] .'">Delete</button>'
-        . ($student['accountLock'] == 0 ? '<button type="button" id="btnLock" class="btn btn-warning mx-1" data-id="'. $student['ID'] .'" data-lock="'. $student['accountLock'] .'">Lock</button>' : '<button type="button" id="btnUnlock" class="btn btn-success" data-id="'. $student['ID'] .'" data-lock="'. $student['accountLock'] .'">Unlock</button>') .
-        '</td>
+                . ($student['accountLock'] == 0 ? '<td>No</td>' : '<td>Yes</td>') .
+                '<td>'. $student['lastLogin'] .'</td>
+                <td>
+                    <button type="button" id="btnEdit" class="btn btn-primary mx-1" data-id="' . $student['ID'] . '">Edit</button>' .
+                    '<button type="button" id="btnDelete" class="btn btn-danger mx-1" data-id="' . $student['ID'] . '">Delete</button>'
+                    . ($student['accountLock'] == 0 ? '<button type="button" id="btnLock" class="btn btn-warning mx-1" data-id="' . $student['ID'] . '" data-lock="' . $student['accountLock'] . '">Lock</button>' : '<button type="button" id="btnUnlock" class="btn btn-success" data-id="' . $student['ID'] . '" data-lock="' . $student['accountLock'] . '">Unlock</button>') .
+                '</td>
             </tr>
         ');
 }
