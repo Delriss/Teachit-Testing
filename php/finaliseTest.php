@@ -14,13 +14,38 @@ if (!isset($_SESSION)) {
 //this file is uploading data to the database so it needs to connect to the _connect file
 include_once($_SERVER['DOCUMENT_ROOT'] . '/php/_connect.php');
 
-//creating the sql query
-$stmt = $db_connect->prepare("CALL finaliseTest(?, ?, ?, ?)");
-$stmt->bind_param('iiii', $_SESSION['ID'], $_SESSION['testID'], $_SESSION['currentScore'], $_SESSION['subjectID']);
+//stored procedure to check if the test has been completed before
+$stmt = $db_connect->prepare("CALL checkPreviousTests(?, ?)");
+$stmt->bind_param('ii', $_SESSION['ID'], $_SESSION['testID']);
 $stmt->execute();
+$run = $stmt->get_result();
 $stmt->close();
 
-echo("data inserted"); //this is for testing purposes. This will not be visible unless there is an issue
+$count = mysqli_num_rows($run);
+
+if ($count === 0) { //if the test has not been completed before
+	
+	//stored procedure to insert the test results into the database
+	$stmt = $db_connect->prepare("CALL finaliseTest(?, ?, ?, ?)");
+	$stmt->bind_param('iiii', $_SESSION['ID'], $_SESSION['testID'], $_SESSION['currentScore'], $_SESSION['subjectID']);
+	$stmt->execute();
+	$stmt->close();
+
+	echo("data inserted"); //this is for testing purposes. This will not be visible unless there is an issue
+
+} else if ($count === 1) { //if the test has been completed before
+
+	//stored procedure to update the test results in the database if the test has previously been completed
+	$stmt = $db_connect->prepare("CALL updateTestScore(?, ?, ?)");
+	$stmt->bind_param('iii', $_SESSION['ID'], $_SESSION['testID'], $_SESSION['currentScore']);
+	$stmt->execute();
+	$stmt->close();
+
+	echo("data updated"); //this is for testing purposes. This will not be visible unless there is an issue
+
+} else {
+	echo("error");
+}
 
 //clearing the session variables which were used so the next test will be unaffected and to reduce the amount stored in $_SESSION
 unset($_SESSION['testID']);
