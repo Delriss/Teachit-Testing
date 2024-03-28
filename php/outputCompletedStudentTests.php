@@ -57,6 +57,10 @@ if (mysqli_num_rows($result) == 0) {
 
     //Output the completed tests
     foreach ($completedTests as &$test) {
+        //Calculate the percentage of questions correct rounded to whole number
+        $testPercentage = ($test['correctQuestions'] / $test['totalQuestions']) * 100; //Calculate the percentage of questions correct
+        $testPercentage = round($testPercentage); //Round the percentage to a whole number
+
         echo ('<div class="col-sm-4 mb-4">
             <div class="card h-100">
                 <div class="card-body">
