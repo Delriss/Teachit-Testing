@@ -505,7 +505,6 @@ $("#submitForm").click(function(e) {
 });
 
 function deleteTest(id) {
-    console.log("deleting test of id: " + id);
         //Delete the test from the database
         $.ajax({
             type: "POST",
@@ -550,7 +549,6 @@ $(document).on("click", ".deleteTestButton", function() {
         },
         success: function(data) {
             //if the test has been completed, we need additional confirmation from the user before deleting the test
-            console.log(data);
             if(data == "true") {
                 Swal.fire({
                     title: 'WARNING',
@@ -565,9 +563,6 @@ $(document).on("click", ".deleteTestButton", function() {
                 }).then((result) => {
                     //If the user confirms they want to delete the test
                     if (result.isConfirmed) {
-                        //Get the test id from the button
-                        console.log(id);
-
                         //Delete the test from the database
                         deleteTest(id);
                     }
@@ -628,7 +623,6 @@ $(document).on('show.bs.modal', '#createTestModal', function(e) {
                 $("#testDescription").val(test.testDesc);
                 $("#testSubject").val(test.subjectID);
                 if(test.testDateTime != null) {
-                    console.log("running");
                     $("#testDateTime").val(test.testDateTime);
                     $("#testDateTime").prop("disabled", false);
                     $("#enableDateTime").prop("checked", true);
