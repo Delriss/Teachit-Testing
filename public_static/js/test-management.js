@@ -504,54 +504,96 @@ $("#submitForm").click(function(e) {
     }
 });
 
+function deleteTest(id) {
+    console.log("deleting test of id: " + id);
+        //Delete the test from the database
+        $.ajax({
+            type: "POST",
+            url: "/includes/deleteTest",
+            data: {
+                testID: id
+            },
+            success: function() {
+                //Update the DOM asynchronously so it reflects the change
+                updateTestCarousel();
+                //fire success message with heightAuto set to false
+                Swal.fire({
+                    title: "Success",
+                    text: "Test Deleted Successfully",
+                    icon: "success",
+                    heightAuto: false
+                });
+            },
+            error: function() {
+                Swal.fire({
+                    title: "Error",
+                    text: "There was an error deleting the test",
+                    icon: "error",
+                    heightAuto: false
+                });
+            }
+        });
+}
+
 //When Delete Test button is clicked, delete the test from the database, update the DOM asynchronously so it reflects the change
 $(document).on("click", ".deleteTestButton", function() {
-    //Ask the user if they are sure they want to delete the test using sweetalert
-    Swal.fire({
-        title: 'Are you sure?',
-        text: "You won't be able to recover this Test!",
-        icon: 'warning',
-        showCancelButton: true,
-        confirmButtonColor: '#d33',
-        cancelButtonColor: '#3085d6',
-        confirmButtonText: 'Yes, Delete',
-        reverseButtons: true,
-        heightAuto: false
-    }).then((result) => {
-        //If the user confirms they want to delete the test
-        if (result.isConfirmed) {
-            //Get the test id from the button
-            var thisObject = this;
-            var id = this.id;
 
-            //Delete the test from the database
-            $.ajax({
-                type: "POST",
-                url: "/includes/deleteTest",
-                data: {
-                    testID: id
-                },
-                success: function() {
-                    //Update the DOM asynchronously so it reflects the change
-                    updateTestCarousel();
-                    //fire success message with heightAuto set to false
-                    Swal.fire({
-                        title: "Success",
-                        text: "Test Deleted Successfully",
-                        icon: "success",
-                        heightAuto: false
-                    });
-                },
-                error: function() {
-                    Swal.fire({
-                        title: "Error",
-                        text: "There was an error deleting the test",
-                        icon: "error",
-                        heightAuto: false
-                    });
-                }
-            });
-        }
+    //store the id of the test in a variable
+    var id = this.id;
+
+    //hit checkForTestCompletion file with ajax to check if the test has been completed by any users
+    $.ajax({
+        type: "POST",
+        url: "/includes/checkTestCompletion",
+        data: {
+            testID: id
+        },
+        success: function(data) {
+            //if the test has been completed, we need additional confirmation from the user before deleting the test
+            console.log(data);
+            if(data == "true") {
+                Swal.fire({
+                    title: 'WARNING',
+                    text: "This test has been completed by students, are you sure you want to delete it?",
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#d33',
+                    cancelButtonColor: '#3085d6',
+                    confirmButtonText: 'Yes, Delete',
+                    reverseButtons: true,
+                    heightAuto: false
+                }).then((result) => {
+                    //If the user confirms they want to delete the test
+                    if (result.isConfirmed) {
+                        //Get the test id from the button
+                        console.log(id);
+
+                        //Delete the test from the database
+                        deleteTest(id);
+                    }
+                });
+            }
+            else {
+                //if the test has not been completed, delete the test from the database after the user confirms they want to delete it
+                Swal.fire({
+                    title: 'Are you sure?',
+                    text: "You won't be able to recover this test!",
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#d33',
+                    cancelButtonColor: '#3085d6',
+                    confirmButtonText: 'Yes, Delete',
+                    reverseButtons: true,
+                    heightAuto: false
+                }).then((result) => {
+                    //If the user confirms they want to delete the test
+                    if (result.isConfirmed) {
+                        //Delete the test from the database
+                        deleteTest(id);
+                    }
+                });
+            }
+        },
     });
 });
 
