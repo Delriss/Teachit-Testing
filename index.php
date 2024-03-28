@@ -27,6 +27,9 @@ $jRoute->Route(["get"], "/test-selection", "content/test-selection.php", [0,1,2]
 //Create Testing Page Route
 $jRoute->Route(["get"], "/testing", "content/testing.php", [0,1,2]);
 
+//Create Privacy Policy Route
+$jRoute->Route(["get"], "/privacy-policy", "content/privacy-policy.php");
+
 //lecturer and admin can access test management
 //Create Test Management Route
 $jRoute->Route(["get"], "/test-management", "content/secure-lecturer/test-management.php", [1,2]);
