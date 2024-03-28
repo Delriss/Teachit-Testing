@@ -38,6 +38,11 @@ foreach ($students as $student) {
     $courseTitle = mysqli_query($db_connect, $sql);
     $courseTitle = mysqli_fetch_assoc($courseTitle);
 
+    //Set message if last login is null
+    if ($student['lastLogin'] == NULL) {
+        $student['lastLogin'] = "Never";
+    }
+
     $student['courseTitle'] = $courseTitle['subjectName'];
 
     echo ('
