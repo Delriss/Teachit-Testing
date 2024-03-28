@@ -101,25 +101,25 @@ $jRoute->Route(["post"], "/includes/validateAnswer", "php/validateAnswer.php", [
 $jRoute->Route(["post"], "/includes/finaliseTest", "php/finaliseTest.php", [0,1,2]);
 
 //Create outputStudents route
-$jRoute->Route(["post"], "/includes/outputStudents", "php/outputStudents.php");
+$jRoute->Route(["post"], "/includes/outputStudents", "php/outputStudents.php", [0,1,2]);
 
 //Create deleteUser route
-$jRoute->Route(["post"], "/includes/deleteUser", "php/deleteUser.php");
+$jRoute->Route(["post"], "/includes/deleteUser", "php/deleteUser.php", [1,2]);
 
 //Create lockUser route
-$jRoute->Route(["post"], "/includes/lockUser", "php/lockUser.php");
+$jRoute->Route(["post"], "/includes/lockUser", "php/lockUser.php", [1,2]);
 
 //Create addStudent route
-$jRoute->Route(["post"], "/includes/addStudent", "php/addStudent.php");
+$jRoute->Route(["post"], "/includes/addStudent", "php/addStudent.php", [1,2]);
 
 //Create editStudent route
-$jRoute->Route(["post"], "/includes/editStudent", "php/editStudent.php");
+$jRoute->Route(["post"], "/includes/editStudent", "php/editStudent.php", [1,2]);
 
 //Create retrieveStudentData route
-$jRoute->Route(["post"], "/includes/retrieveStudentData", "php/retrieveStudentData.php");
+$jRoute->Route(["post"], "/includes/retrieveStudentData", "php/retrieveStudentData.php" , [1,2]);
 
 //Create resetPassword route
-$jRoute->Route(["post"], "/includes/resetPassword", "php/resetPassword.php");
+$jRoute->Route(["post"], "/includes/resetPassword", "php/resetPassword.php", [1,2]);
 
 //Dispatch the route
 echo $jRoute->Dispatch($_SERVER['REQUEST_METHOD'], $_SERVER['REQUEST_URI']);
