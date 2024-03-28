@@ -85,6 +85,9 @@ $jRoute->Route(["post"], "/includes/modifyTest", "php/modifyTest.php", [1,2]);
 //Create createUser route
 $jRoute->Route(["post"], "/includes/createUser", "php/createUser.php");
 
+//create checkTestCompletion route
+$jRoute->Route(["post"], "/includes/checkTestCompletion", "php/checkTestCompletion.php", [0,1,2]);
+
 //Create deleteTest route
 $jRoute->Route(["post"], "/includes/deleteTest", "php/deleteTest.php", [1,2]);
 
