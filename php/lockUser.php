@@ -17,11 +17,11 @@ $lockStatus = mysqli_real_escape_string($db_connect, $_POST["lock"]);
 //Change Lock Status
 if($lockStatus == 0)
 {
-    $lockStatus = 1;
+    $lockStatus = 1; //Lock User
 }
 else
 {
-    $lockStatus = 0;
+    $lockStatus = 0; //Unlock User
 }
 
 //Lock/Unlock User
@@ -36,5 +36,23 @@ if ($stmt->affected_rows === 0) {
 }
 else
 {
+    //Get Lastlogin to see if they have ever logged in
+    $sql = "SELECT `lastLogin`, `email` FROM `users` WHERE `ID` = ?";
+    $stmt = $db_connect->prepare($sql);
+    $stmt->bind_param("i", $userID);
+    $stmt->execute();
+    $result = $stmt->get_result();
+    $result = $result->fetch_assoc();
+
+    if($result["lastLogin"] == NULL && $lockStatus == 0)
+    {
+        //If the user has never logged in and the account is being unlocked, send an email to the user
+        $to = $result["email"];
+        $subject = "Account Unlocked";
+        $message = "Your account has been unlocked. Please login to your account to continue.";
+        $headers = "From: noreply@localhost";
+        mail($to, $subject, $message, $headers);
+    }
+
     echo "User lock changed";
 }

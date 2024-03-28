@@ -1,3 +1,32 @@
+//Logout Button
+$(".btnLogout").click(function (e) {
+  e.preventDefault(); //Prevent the default form submission
+  //Ajax request to the server for asynchronous processing
+  $.ajax({
+    type: "GET",
+    url: "/logout",
+    success: function (data) {
+      if (data.includes("Logout successful")) {
+        //OUTPUT
+        Swal.fire({
+          //Alert the user with a success message
+          title: "Logout Successful",
+          text: "You have successfully logged out.",
+          icon: "success",
+          showCancelButton: false,
+          confirmButtonColor: "#3085d6",
+          confirmButtonText: "Continue",
+          heightAuto: false,
+        }).then((result) => {
+          if (result.isConfirmed) {
+            window.location.href = "/";
+          }
+        });
+      }
+    },
+  });
+});
+
 // Registration Form - User Registration
 $("#registrationForm").submit(function (e) {
   e.preventDefault(); //Prevent the default form submission
@@ -21,7 +50,7 @@ $("#registrationForm").submit(function (e) {
               Swal.fire({
                 //Alert the user with a success message
                 title: "Registration Successful",
-                text: "You have successfully registered.",
+                text: "You have successfully registered. Please wait for an administrator to approve your account. You will be notified via email once your account has been approved.",
                 icon: "success",
                 showCancelButton: false,
                 confirmButtonColor: "#3085d6",
@@ -346,32 +375,6 @@ $(document).on("click", "#option", function (e) {
       }
     },
   });
-
-
-  //
-  //STUDENT MANAGEMENT PAGE
-  //
-
-  //Fill the student management table
-  if (window.location.href.includes("student-management") == true) {
-    //Run the student management display script
-    $.ajax({
-      type: "POST",
-      url: "/includes/outputStudents",
-      data: $("#studentTable").serialize(),
-
-      success: function (data) {
-        //Inject custom HTML into the page
-        $("#studentTable").html(data);
-
-        //Init Datatable
-        $("#studentTable").DataTable({
-          responsive: true,
-        });
-      },
-    });
-  }
-
 });
 
 //Rerun test selection display script on modal close
@@ -754,7 +757,6 @@ $(document).on("click", "#btnEdit", function (e) {
     html: `
           <form id="editStudentForm">
             <div class="mb-2 d-flex">
-                <input type="text" class="form-control m-1" id="studentNum" name="studentNum" placeholder="Student Number (Numbers Only)" required>
                 <input type="email" class="form-control m-1" id="email" name="email" placeholder="Email" required>
             </div>
             <div class="mb-2 d-flex">
