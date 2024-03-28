@@ -54,31 +54,37 @@ foreach ($testArray as $test) {
     }
 };
 
+$questionText_sanitized = htmlspecialchars($questionText, ENT_QUOTES, 'UTF-8');
+$option1_sanitized = htmlspecialchars($option1, ENT_QUOTES, 'UTF-8');
+$option2_sanitized = htmlspecialchars($option2, ENT_QUOTES, 'UTF-8');
+$option3_sanitized = htmlspecialchars($option3, ENT_QUOTES, 'UTF-8');
+$option4_sanitized = htmlspecialchars($option4, ENT_QUOTES, 'UTF-8');
+
 //This is the html code which will be sent to #testingInterface in testing.php, this is the frontend of the program
 echo ('<div class="testingQuestion" id="question-text">
             <h5>Question: ' . ($_SESSION['questionsAnswered'] + 1) . ' of ' . $_SESSION['totalQuestions'] . ' | Subject: ' . $subject . '</h5>
             <hr>
-            <h3>' . $questionText . '</h3>
+            <h3>' . $questionText_sanitized . '</h3>
         </div>
         <hr>
         <div id="testingOption1">
             <p class="testingOption">Option 1:</p>
-            <button type="submit" class="btn btn-dark rounded-pill" id="option" data-id=0>' . $option1 . '</button>
+            <button type="submit" class="btn btn-dark rounded-pill" id="option" data-id=0>' . $option1_sanitized . '</button>
             <hr>
         </div>
         <div id="testingOption2">
             <p class="testingOption">Option 2:</p>
-            <button type="submit" class="btn btn-dark rounded-pill" id="option" data-id=1>' . $option2 . '</button>
+            <button type="submit" class="btn btn-dark rounded-pill" id="option" data-id=1>' . $option2_sanitized . '</button>
             <hr>
         </div>
         <div id="testingOption3">
             <p class="testingOption">Option 3:</p>
-            <button type="submit" class="btn btn-dark rounded-pill" id="option" data-id=2>' . $option3 . '</button>
+            <button type="submit" class="btn btn-dark rounded-pill" id="option" data-id=2>' . $option3_sanitized . '</button>
             <hr>
         </div>
         <div id="testingOption4">
             <p class="testingOption">Option 4:</p>
-            <button type="submit" class="btn btn-dark rounded-pill" id="option" data-id=3>' . $option4 . '</button>
+            <button type="submit" class="btn btn-dark rounded-pill" id="option" data-id=3>' . $option4_sanitized . '</button>
             <hr>
         </div>
         <p>Click on a button to submit your answer.</p>

@@ -20,6 +20,7 @@ $_SESSION['questionsAnswered'] = $_SESSION['questionsAnswered'] + 1;
 if ($_POST['userAnswered'] == $_SESSION['correctAnswerID']) {
     //correct
     $_SESSION['currentScore'] = $_SESSION['currentScore'] + 30;
+    $_SESSION['questionsCorrect'] = $_SESSION['questionsCorrect'] + 1;
 
     if ($_SESSION['questionsAnswered'] == $_SESSION['totalQuestions']) {
         //this path is used if the user has answered all questions
