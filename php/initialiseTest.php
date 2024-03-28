@@ -18,4 +18,7 @@ $_SESSION['questionsAnswered'] = 0;
 $_SESSION['questionsCorrect'] = 0;
 $_SESSION['currentScore'] = 0;
 
+//set the randomOrder to null so that it can be created in nextQuestion.php
+unset($_SESSION['randomOrder']);
+
 ?>
