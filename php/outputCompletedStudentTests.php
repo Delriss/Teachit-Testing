@@ -66,7 +66,7 @@ if (mysqli_num_rows($result) == 0) {
                 <div class="card-body">
                     <h5 class="card-title">' . $test['title'] . '</h5>
                     <p class="card-text">' . $test['subject'] . ' - ' . $test['timestamp'] . '</p>
-                    <p>Questions Correct: '. ($test['correctQuestions'] / $test['totalQuestions']) * 100 .'%</p>
+                    <p>Questions Correct: '. $testPercentage .'%</p>
                     <hr>
                     <p class="card-text">' . $test['testDesc'] . '</p>
                 </div>
