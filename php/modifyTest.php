@@ -30,7 +30,7 @@ if (!$oldTestID) {
 }
 
 //delete all questions associated with the test, this will also delete all answers associated with the questions as they have a foreign key constraint
-$sql = "DELETE FROM tests WHERE testID = ?";
+$sql = "CALL deleteTest(?)";
 $stmt = $db_connect->prepare($sql);
 $stmt->bind_param("i", $oldTestID);
 if (!$stmt->execute()) {
@@ -44,7 +44,7 @@ include_once($_SERVER['DOCUMENT_ROOT'] . '/php/createTest.php');
 $newTestID = mysqli_insert_id($db_connect);
 
 //update the test with the old testID
-$sql = "UPDATE tests SET testID = ? WHERE testID = ?";
+$sql = "CALL updateTestID(?, ?)";
 $stmt = $db_connect->prepare($sql);
 $stmt->bind_param("ii", $oldTestID, $testID);
 if (!$stmt->execute()) {

@@ -31,11 +31,15 @@ if (isset($_POST["email"]) and isset($_POST["password"])) { //if username and pa
 	$email = $_POST["email"];
 	$password = $_POST["password"];
 
-	$stmt = mysqli_prepare($db_connect, "SELECT * FROM `users` WHERE `email` = ?");
-	mysqli_stmt_bind_param($stmt, "s", $email);
-	mysqli_stmt_execute($stmt);
-	$run = mysqli_stmt_get_result($stmt);
-
+	//USING STORED PROCEDURES
+	//	I am unable to test at uni so this code is commented out until I can test on my computer
+	
+	$stmt = $db_connect->prepare("CALL loginAuth(?)");
+	$stmt->bind_param('s', $email);
+	$stmt->execute();
+	$run = $stmt->get_result();
+	$stmt->close();
+	
 	$count = mysqli_num_rows($run);
 
 	if ($count === 0) {

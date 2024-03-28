@@ -10,7 +10,7 @@ if (!isset($_SESSION['user'])){
         include_once($_SERVER['DOCUMENT_ROOT'].'/php/_connect.php'); 
         $testID = mysqli_real_escape_string($db_connect,$_POST["testID"]);
 
-        $sql = "DELETE FROM tests WHERE testID = ?";
+        $sql = "CALL deleteTest(?)";
 
         $stmt = $db_connect->prepare($sql); 
         $stmt->bind_param("i", $testID);

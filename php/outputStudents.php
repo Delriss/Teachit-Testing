@@ -11,7 +11,7 @@ if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
 include_once($_SERVER['DOCUMENT_ROOT'] . '/php/_connect.php');
 
 //Retrieve all Students from database
-$sql = "SELECT `ID`, `firstName`, `lastName`, `email`, `courseTitle`, `accountLock`, `lastLogin` FROM `users` WHERE `accessLevel` = 0";
+$sql = "CALL selectStudentAccounts()";
 $students = mysqli_query($db_connect, $sql);
 
 //Output the students
@@ -33,7 +33,9 @@ echo ('
 
 foreach ($students as $student) {
     //Get the course title
-    $courseTitle = mysqli_query($db_connect, "SELECT `subjectName` FROM `subjects` WHERE `SID` = " . $student['courseTitle']);
+    $db_connect -> next_result();
+    $sql = "CALL selectSubjectTitleFromSID(" . $student['courseTitle'] . ")";
+    $courseTitle = mysqli_query($db_connect, $sql);
     $courseTitle = mysqli_fetch_assoc($courseTitle);
 
     $student['courseTitle'] = $courseTitle['subjectName'];

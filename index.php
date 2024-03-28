@@ -77,7 +77,7 @@ $jRoute->Route(["post"], "/includes/retrieveTestData", "php/retrieveTestData.php
 $jRoute->Route(["post"], "/includes/retrieveSubjects", "php/retrieveSubjects.php");
 
 //Create createTest route
-$jRoute->Route(["post"], "/includes/createTest", "php/createTest.php", [1,2]);
+$jRoute->Route(["post"], "/includes/createTest", "php/createTest.php", [0,1,2]);
 
 //Create modifyTest route
 $jRoute->Route(["post"], "/includes/modifyTest", "php/modifyTest.php", [1,2]);
@@ -89,16 +89,16 @@ $jRoute->Route(["post"], "/includes/createUser", "php/createUser.php");
 $jRoute->Route(["post"], "/includes/deleteTest", "php/deleteTest.php", [1,2]);
 
 //Create initialiseTest route
-$jRoute->Route(["post"], "/includes/initialiseTest", "php/initialiseTest.php");
+$jRoute->Route(["post"], "/includes/initialiseTest", "php/initialiseTest.php", [0,1,2]);
 
 //Create nextQuestion route
-$jRoute->Route(["post"], "/includes/nextQuestion", "php/nextQuestion.php");
+$jRoute->Route(["post"], "/includes/nextQuestion", "php/nextQuestion.php", [0,1,2]);
 
 //Create validateAnswer route
-$jRoute->Route(["post"], "/includes/validateAnswer", "php/validateAnswer.php");
+$jRoute->Route(["post"], "/includes/validateAnswer", "php/validateAnswer.php", [0,1,2]);
 
 //Create finaliseTest route
-$jRoute->Route(["post"], "/includes/finaliseTest", "php/finaliseTest.php");
+$jRoute->Route(["post"], "/includes/finaliseTest", "php/finaliseTest.php", [0,1,2]);
 
 //Create outputStudents route
 $jRoute->Route(["post"], "/includes/outputStudents", "php/outputStudents.php");

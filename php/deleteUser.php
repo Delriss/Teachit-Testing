@@ -14,7 +14,7 @@ include_once($_SERVER['DOCUMENT_ROOT'] . '/php/_connect.php');
 $userID = mysqli_real_escape_string($db_connect, $_POST["UID"]);
 
 //Delete User
-$sql = "DELETE FROM users WHERE ID = ?";
+$sql = "CALL deleteUser(?)";
 $stmt = $db_connect->prepare($sql);
 $stmt->bind_param("i", $userID);
 $stmt->execute();

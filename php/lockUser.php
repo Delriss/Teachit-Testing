@@ -25,9 +25,9 @@ else
 }
 
 //Lock/Unlock User
-$sql = "UPDATE users SET accountLock = ? WHERE ID = ?";
+$sql = "CALL editLock(?, ?)";
 $stmt = $db_connect->prepare($sql);
-$stmt->bind_param("ii", $lockStatus, $userID);
+$stmt->bind_param("ii", $userID, $lockStatus);
 $stmt->execute();
 
 if ($stmt->affected_rows === 0) {

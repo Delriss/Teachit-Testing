@@ -45,9 +45,12 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/php/_connect.php');
 
 $testArray = array();
 
-//Get all tests from the database
-$sql = "SELECT `testID`, `title`, `testDesc`, `subject`, `assignedID` , `testDateTime` FROM tests";
-$tests = mysqli_query($db_connect, $sql);
+//Get all tests from the database and clear the stored result so we can execute another query
+$sql = "CALL selectTests()";
+$stmt = mysqli_prepare($db_connect, $sql);
+$stmt->execute();
+$tests = $stmt->get_result();
+$stmt->close();
 
 //loop through each test in the database
 foreach ($tests as $test) {
@@ -61,17 +64,22 @@ foreach ($tests as $test) {
     $testObject->assignedID = $test['assignedID'];
     $testObject->testDateTime = $test['testDateTime'];
 
-    //Get the subjects belonging to the test
-    $sql = "SELECT `subjectName` FROM `subjects` WHERE `SID` = ?";
+    //Get the subjects belonging to the test using a stored procedure and clear the stored result so we can execute another query
+    $sql = "CALL selectSubjectFromSID(?)";
     $stmt = mysqli_prepare($db_connect, $sql);
-    mysqli_stmt_bind_param($stmt, "i", $test['subject']);
-    mysqli_stmt_execute($stmt);
-    $result = mysqli_stmt_get_result($stmt);
+    $stmt->bind_param("i", $test['subject']);
+    $stmt->execute();
+    $result = $stmt->get_result();
     $testObject->subject = mysqli_fetch_assoc($result)['subjectName'];
+    $stmt->close();
 
-    //Get the questions belonging to the test
-    $sql = "SELECT questionID, relativeQuestionID, testID, questionText, correctAnswerID FROM questions WHERE testID = " . $test['testID'];
-    $questions = mysqli_query($db_connect, $sql);
+    //Get the questions belonging to the test using stored procedure. store all rows in $questions. clear the stored result so we can execute another query
+    $sql = "CALL selectQuestionsForTest(?)";
+    $stmt = mysqli_prepare($db_connect, $sql);
+    $stmt->bind_param("i", $test['testID']);
+    $stmt->execute();
+    $questions = $stmt->get_result();
+    $stmt->close();
 
     foreach ($questions as $question) {
         //Create a question object
@@ -84,9 +92,13 @@ foreach ($tests as $test) {
         $questionObject->questionText = $question['questionText'];
         $questionObject->correctAnswerID = $question['correctAnswerID'];
 
-        //Get the answers for the question
-        $sql = "SELECT answerID, relativeAnswerID, questionID, answerText, isCorrect FROM answers WHERE questionID = " . $question['questionID'];
-        $answers = mysqli_query($db_connect, $sql);
+        //Get the answers for the question using a stored procedure and clear the stored result so we can execute another query
+        $sql = "CALL selectAnswersForQuestion(?)";
+        $stmt = mysqli_prepare($db_connect, $sql);
+        $stmt->bind_param("i", $question['questionID']);
+        $stmt->execute();
+        $answers = $stmt->get_result();
+        $stmt->close();
 
         foreach ($answers as $answer) {
             $answerObject = new answer;
