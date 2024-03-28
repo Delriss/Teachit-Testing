@@ -19,23 +19,33 @@ include_once($_SERVER['DOCUMENT_ROOT'] . '/php/retrieveTests.php');
 
 foreach ($testArray as $test) {
     if ($test->testID == $_SESSION["testID"]) {
+
+        //does randomOrder exist? If not, create it
+        if (!isset($_SESSION['randomOrder'])) {
+            $_SESSION['randomOrder'] = range(0, count($test->questions) - 1);
+            shuffle($_SESSION['randomOrder']);
+        }
+
+        //access the index of the randomOrder array to get the next question using questionsAnswered
+        $currentQuestion = $_SESSION['randomOrder'][$_SESSION['questionsAnswered']];
+
         //This is for the content at the top of the form. These variables need to be defined so 
         //  that the question number, subject and question can be displayed.
         $_SESSION['totalQuestions'] = count($test->questions);
         $subject = $test->subject;
         $title = $test->title;
         $_SESSION['subjectID'] = $test->subjectID;
-        $questionText = $test->questions[$_SESSION['questionsAnswered']]->questionText;
+        $questionText = $test->questions[$currentQuestion]->questionText;
         
 
         //This is for use with answer validation
-        $_SESSION['correctAnswerID'] = $test->questions[$_SESSION['questionsAnswered']]->correctAnswerID;
+        $_SESSION['correctAnswerID'] = $test->questions[$currentQuestion]->correctAnswerID;
 
         //storing the options to output to the user in the echo
-        $option1 = $test->questions[$_SESSION['questionsAnswered']]->answers[0]->answerText;
-        $option2 = $test->questions[$_SESSION['questionsAnswered']]->answers[1]->answerText;
-        $option3 = $test->questions[$_SESSION['questionsAnswered']]->answers[2]->answerText;
-        $option4 = $test->questions[$_SESSION['questionsAnswered']]->answers[3]->answerText;
+        $option1 = $test->questions[$currentQuestion]->answers[0]->answerText;
+        $option2 = $test->questions[$currentQuestion]->answers[1]->answerText;
+        $option3 = $test->questions[$currentQuestion]->answers[2]->answerText;
+        $option4 = $test->questions[$currentQuestion]->answers[3]->answerText;
 
         //This code is to assist the Sweet Alerts so that the correct answer can be displayed to the user if they got the question wrong
         switch ($_SESSION['correctAnswerID']) {
