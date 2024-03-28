@@ -47,7 +47,7 @@ $jRoute->Route(["get"], "/lecturer-management", "content/placeholder.php", [2]);
 $jRoute->Route(["get"], "/statistics", "content/placeholder.php", [1,2]);
 
 //Create Student Management Route
-$jRoute->Route(["get"], "/student-management", "content/secure-lecturer/student-management.php");
+$jRoute->Route(["get"], "/student-management", "content/secure-lecturer/student-management.php", [1,2]);
 
 //
 //PRIVATE PHP ROUTES
