@@ -57,7 +57,7 @@ $("#registrationForm").submit(function (e) {
                 cancelButtonColor: "#d33",
                 confirmButtonText: "Continue",
                 heightAuto: false,
-                allowOutsideClick: false
+                allowOutsideClick: false,
               }).then((result) => {
                 //redirect to login page
                 if (result.value) {
@@ -150,7 +150,7 @@ $(document).ready(function () {
 
   //TESTING PAGE
   //This code will load nextQuestion.php when testing.php is loaded
-  if(window.location.href.includes("testing") == true){
+  if (window.location.href.includes("testing") == true) {
     //while the page is loading, this will hide the blank background
     $("#testingBackground").hide();
     $.ajax({
@@ -191,8 +191,6 @@ $(document).ready(function () {
     });
   }
 });
-
-
 
 //
 //TEST SELECTION -> TESTING PAGE
@@ -246,8 +244,9 @@ $(document).on("click", "#option", function (e) {
           confirmButtonColor: "#3085d6",
           confirmButtonText: "Next Question",
           allowOutsideClick: false,
-          heightAuto: false
-        }).then((result) => { //After the user clicks the button
+          heightAuto: false,
+        }).then((result) => {
+          //After the user clicks the button
           if (result.isConfirmed) {
             $.ajax({
               type: "POST",
@@ -261,8 +260,8 @@ $(document).on("click", "#option", function (e) {
             });
           }
         });
-
-      } else if (data.status === "e2") { //if the test is completed
+      } else if (data.status === "e2") {
+        //if the test is completed
         //OUTPUT SWEET ALERT
         Swal.fire({
           //Alert the user with a success message
@@ -273,26 +272,30 @@ $(document).on("click", "#option", function (e) {
           confirmButtonColor: "#3085d6",
           confirmButtonText: "Next Question",
           allowOutsideClick: false,
-          heightAuto: false
-        }).then((result) => { //After the user clicks the button
+          heightAuto: false,
+        }).then((result) => {
+          //After the user clicks the button
           if (result.isConfirmed) {
             Swal.fire({
               //Alert the user to inform them that the test is completed and show overall score
               title: "Congratulations!",
-              text: "You have completed the test. You have earned " + data.points + " points.",
+              text:
+                "You have completed the test. You have earned " +
+                data.points +
+                " points.",
               icon: "success",
               showCancelButton: false,
               confirmButtonColor: "#3085d6",
               confirmButtonText: "Finish Test",
               allowOutsideClick: false,
-              heightAuto: false
+              heightAuto: false,
             }).then((result) => {
               //upload and reset the session variables used in the exam
               if (result.isConfirmed) {
                 $.ajax({
                   type: "POST",
                   url: "/includes/finaliseTest",
-    
+
                   success: function (data) {
                     window.location = "/test-selection";
                   },
@@ -301,38 +304,44 @@ $(document).on("click", "#option", function (e) {
             });
           }
         });
-        
       } else if (data.status === "e3") {
         //OUTPUT SWEET ALERT
         Swal.fire({
           //Alert the user with an error message
           title: "Incorrect",
-          text: "You have been deducted 10 points. The correct answer is: " + data.correctAnswerText + ".",
+          text:
+            "You have been deducted 10 points. The correct answer is: " +
+            data.correctAnswerText +
+            ".",
           icon: "error",
           showCancelButton: false,
           confirmButtonColor: "#3085d6",
           confirmButtonText: "Next Question",
           allowOutsideClick: false,
-          heightAuto: false
-        }).then((result) => { //After the user clicks the button
+          heightAuto: false,
+        }).then((result) => {
+          //After the user clicks the button
           if (result.isConfirmed) {
             Swal.fire({
               //Alert the user to inform them that the test is completed and show overall score
               title: "Congratulations!",
-              text: "You have completed the test. You have earned " + data.points + " points.",
+              text:
+                "You have completed the test. You have earned " +
+                data.points +
+                " points.",
               icon: "success",
               showCancelButton: false,
               confirmButtonColor: "#3085d6",
               confirmButtonText: "Finish Test",
               allowOutsideClick: false,
-              heightAuto: false
+              heightAuto: false,
             }).then((result) => {
               //upload and reset the session variables used in the exam
               if (result.isConfirmed) {
                 $.ajax({
                   type: "POST",
                   url: "/includes/finaliseTest",
-    
+
                   success: function (data) {
                     window.location = "/test-selection";
                   },
@@ -341,8 +350,8 @@ $(document).on("click", "#option", function (e) {
             });
           }
         });
-
-      } else { //if the answer is incorrect
+      } else {
+        //if the answer is incorrect
         //resets the testing interface to avoid complications like the user pressing the same button twice
         $("#testingBackground").hide();
         $("#testingInterface").html("");
@@ -351,14 +360,18 @@ $(document).on("click", "#option", function (e) {
         Swal.fire({
           //Alert the user with an error message
           title: "Incorrect",
-          text: "You have been deducted 10 points. The correct answer is: " + data.correctAnswerText + ".",
+          text:
+            "You have been deducted 10 points. The correct answer is: " +
+            data.correctAnswerText +
+            ".",
           icon: "error",
           showCancelButton: false,
           confirmButtonColor: "#3085d6",
           confirmButtonText: "Next Question",
           allowOutsideClick: false,
-          heightAuto: false
-        }).then((result) => { //After the user clicks the button
+          heightAuto: false,
+        }).then((result) => {
+          //After the user clicks the button
           if (result.isConfirmed) {
             $.ajax({
               type: "POST",
@@ -377,19 +390,9 @@ $(document).on("click", "#option", function (e) {
   });
 });
 
-//Rerun test selection display script on modal close
-$("#testSelectionModal").on("hidden.bs.modal", function () {
-  //Run the test selection display script
-  $.ajax({
-    type: "POST",
-    url: "/includes/outputStudentTests",
-    data: $("#testContainer").serialize(),
-
-    success: function (data) {
-      //Inject custom HTML into the page
-      $("#testContainer").html(data);
-    },
-  });
+//Refresh page when Create Test modal is closed
+$("#createTestModal").on("hidden.bs.modal", function () {
+  location.reload();
 });
 
 // Login Form
@@ -457,8 +460,10 @@ $("#loginForm").submit(function (e) {
 });
 
 //animating the progress bars on the leaderboard page
-$(".leaderboardProgress").each(function(i){
-  $(this).delay( 500*i ).animate( { width: $(this).attr('aria-valuenow') + '%' }, 500 );
+$(".leaderboardProgress").each(function (i) {
+  $(this)
+    .delay(500 * i)
+    .animate({ width: $(this).attr("aria-valuenow") + "%" }, 500);
 });
 
 //Student Management - Delete Student
@@ -711,7 +716,7 @@ $("#btnCreateStudent").click(function (e) {
           },
         });
       }
-    }
+    },
   }).then((result) => {
     if (result.isConfirmed) {
       $.ajax({
@@ -747,7 +752,6 @@ $("#btnCreateStudent").click(function (e) {
     }
   });
 });
-
 
 //Student Management - Edit Student
 $(document).on("click", "#btnEdit", function (e) {
@@ -828,7 +832,7 @@ $(document).on("click", "#btnEdit", function (e) {
           }
         },
       });
-    }
+    },
   }).then((result) => {
     if (result.isConfirmed) {
       $.ajax({
@@ -868,7 +872,7 @@ $(document).on("click", "#btnEdit", function (e) {
 //Student Management - Reset Student Password
 $("#btnResetPassword").click(function (e) {
   e.preventDefault();
-  
+
   //Custom SWAL Form to accept Student Data
   Swal.fire({
     title: "Reset Student Password",
@@ -919,5 +923,5 @@ $("#btnResetPassword").click(function (e) {
         },
       });
     }
-  })
+  });
 });
