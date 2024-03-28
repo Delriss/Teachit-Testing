@@ -40,7 +40,7 @@ $password = password_hash($password, PASSWORD_BCRYPT);
 //Edit Database User
 $sql = "CALL editPassword(?, ?)";
 $stmt = $db_connect->prepare($sql);
-$stmt->bind_param("ss", $password, $studentNum);
+$stmt->bind_param("ss", $studentNum, $password);
 
 //Return Status
 if ($stmt->execute()) {
