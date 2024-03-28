@@ -56,6 +56,7 @@ unset($_SESSION['correctAnswerID']);
 unset($_SESSION['correctAnswerText']);
 unset($_SESSION['subjectID']);
 unset($_SESSION['questionsCorrect']);
+unset($_SESSION['randomOrder']);
 
 echo ("sessions removed"); //this is for testing purposes. This will not be visible unless there is an issue
 
