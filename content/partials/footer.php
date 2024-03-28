@@ -5,6 +5,7 @@
                 <span class="text-muted">Contact us at: SEF@ucw.ac.uk - 07123 123123</span> <br>
             <?php } ?>
             <span class="text-muted">TeachIt Testing &copy; 2021</span>
+            <span class="text-muted"><a href="/privacy-policy">Privacy Policy</a></span>
         </div>
     </footer>
     <!-- End Footer -->
