@@ -26,8 +26,8 @@ $count = mysqli_num_rows($run);
 if ($count === 0) { //if the test has not been completed before
 	
 	//stored procedure to insert the test results into the database
-	$stmt = $db_connect->prepare("CALL finaliseTest(?, ?, ?, ?)");
-	$stmt->bind_param('iiii', $_SESSION['ID'], $_SESSION['testID'], $_SESSION['currentScore'], $_SESSION['subjectID']);
+	$stmt = $db_connect->prepare("CALL finaliseTest(?, ?, ?, ?, ?)");
+	$stmt->bind_param('iiiii', $_SESSION['ID'], $_SESSION['testID'], $_SESSION['currentScore'], $_SESSION['subjectID'], $_SESSION['questionsCorrect']);
 	$stmt->execute();
 	$stmt->close();
 
@@ -36,8 +36,8 @@ if ($count === 0) { //if the test has not been completed before
 } else if ($count === 1) { //if the test has been completed before
 
 	//stored procedure to update the test results in the database if the test has previously been completed
-	$stmt = $db_connect->prepare("CALL updateTestScore(?, ?, ?)");
-	$stmt->bind_param('iii', $_SESSION['ID'], $_SESSION['testID'], $_SESSION['currentScore']);
+	$stmt = $db_connect->prepare("CALL updateTestScore(?, ?, ?, ?)");
+	$stmt->bind_param('iiii', $_SESSION['ID'], $_SESSION['testID'], $_SESSION['currentScore'], $_SESSION['questionsCorrect']);
 	$stmt->execute();
 	$stmt->close();
 
@@ -55,6 +55,7 @@ unset($_SESSION['currentScore']);
 unset($_SESSION['correctAnswerID']);
 unset($_SESSION['correctAnswerText']);
 unset($_SESSION['subjectID']);
+unset($_SESSION['questionsCorrect']);
 
 echo ("sessions removed"); //this is for testing purposes. This will not be visible unless there is an issue
 

@@ -15,6 +15,7 @@ if (!isset($_SESSION)) {
 $_SESSION["testID"] = $_POST['testID'];
 //these variables are being initialised so the program can keep track of the user's progress
 $_SESSION['questionsAnswered'] = 0;
+$_SESSION['questionsCorrect'] = 0;
 $_SESSION['currentScore'] = 0;
 
 ?>
