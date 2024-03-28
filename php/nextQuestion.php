@@ -72,7 +72,7 @@ $option4_sanitized = htmlspecialchars($option4, ENT_QUOTES, 'UTF-8');
 
 //This is the html code which will be sent to #testingInterface in testing.php, this is the frontend of the program
 echo ('<div class="testingQuestion" id="question-text">
-            <h5>Question: ' . ($currentQuestion + 1) . ' of ' . $_SESSION['totalQuestions'] . ' | Subject: ' . $subject . '</h5>
+            <h5>Question: ' . ($_SESSION['questionsAnswered'] + 1) . ' of ' . $_SESSION['totalQuestions'] . ' | Subject: ' . $subject . '</h5>
             <hr>
             <h3>' . $questionText_sanitized . '</h3>
         </div>
