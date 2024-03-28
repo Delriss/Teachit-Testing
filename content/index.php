@@ -17,9 +17,11 @@ include($_SERVER['DOCUMENT_ROOT'] . '/content/partials/header.php');
 
         <div class="row">
             <div class="col-12">
-                <div class="d-flex flex-column align-items-center justify-content-end indexScrollDown">
-                    <p>Scroll Down</p>
-                    <i class="fas fa-chevron-down fa-2x"></i>
+                <div class="d-flex flex-column align-items-center justify-content-end">
+                    <div class="indexScrollDown">
+                        <p>Scroll Down</p>
+                        <i class="fas fa-chevron-down fa-2x"></i>
+                    </div>
                 </div>
             </div>
         </div>
@@ -32,28 +34,40 @@ include($_SERVER['DOCUMENT_ROOT'] . '/content/partials/header.php');
             <div class="col-sm-6 mb-5">
                 <div class="homeFeature">
                     <h3>Track Your Progress</h3>
-                    <p>You can track your progress on the different subjects since all test results are saved to the student dashboard. This can help students figure out what they need to revise.</p>
+                    <div class="col-12">
+                        <p>All test results are tracked on the student dashboard. This will help students keep track of the subjects they need to work on!</p>
+                        <img src="../public_static/imgs/screenshot1.png" alt="Progress" class="img-fluid" width="50%">
+                    </div>
                 </div>
             </div>
 
             <div class="col-sm-6 mb-5">
                 <div class="homeFeature">
                     <h3>Support For Additional Subjects</h3>
-                    <p>Lecturers can add additional subjects to TeachIT Testing, as well as adding questions onto previous subjects. This will keep each topic up to date and allow students to further test their knowledge.</p>
+                    <div class="col-12">
+                        <p>Lecturers can add additional subjects to TeachIT Testing, as well as adding questions onto previous subjects. This will keep each topic up to date and allow students to further test their knowledge.</p>
+                        <img src="../public_static/imgs/screenshot2.png" alt="Subjects" class="img-fluid" width="50%">
+                    </div>
                 </div>
             </div>
 
             <div class="col-sm-6 mb-5">
                 <div class="homeFeature">
                     <h3>Leaderboards For Each Subject</h3>
-                    <p>Each subject has a leaderboard which will show the top 5 students. Excel in your learning and aim for the top!</p>
+                    <div class="col-12">
+                        <p>Each subject has a leaderboard which will show the top 5 students. Excel in your learning and aim for the top!</p>
+                        <img src="../public_static/imgs/screenshot3.png" alt="Leaderboard" class="img-fluid" width="50%">
+                    </div>
                 </div>
             </div>
 
             <div class="col-sm-6 mb-5">
                 <div class="homeFeature">
                     <h3>Instant Results</h3>
-                    <p>You will recieve your test results as soon as you have finished the test, it does not require lecturers to mark it. You will be able to see which questions you got right or wrong to help you revise for that topic.</p>
+                    <div class="col-12">
+                        <p>You will recieve your test results as soon as you have finished the test, it does not require lecturers to mark it. You will be able to see which questions you got right or wrong to help you revise for that topic.</p>
+                        <img src="../public_static/imgs/screenshot4.png" alt="Results" class="img-fluid" width="65%">
+                    </div>
                 </div>
             </div>
         </div>
