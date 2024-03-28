@@ -739,6 +739,7 @@ $("#btnCreateStudent").click(function (e) {
               title: "Student Creation Failed",
               text: data,
               icon: "error",
+              heightAuto: false,
             });
           }
         },
@@ -854,6 +855,7 @@ $(document).on("click", "#btnEdit", function (e) {
               title: "Student Edit Failed",
               text: data,
               icon: "error",
+              heightAuto: false,
             });
           }
         },
@@ -910,6 +912,7 @@ $("#btnResetPassword").click(function (e) {
               title: "Password Reset Failed",
               text: data,
               icon: "error",
+              heightAuto: false,
             });
           }
         },
