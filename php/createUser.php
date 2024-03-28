@@ -104,7 +104,7 @@ if (mysqli_num_rows($result) > 0) {
 
 //Create Database User
 $accessLevel = "0"; //0 = Student, 1 = Teacher, 2 = Admin
-$accountLock = "0"; //FALSE = Account is not locked, TRUE = Account is locked
+$accountLock = "1"; //FALSE = Account is not locked, TRUE = Account is locked
 
 $db_connect -> next_result();
 $sql = "CALL createUser(?, ?, ?, ?, ?, ?, ?, ?)";
