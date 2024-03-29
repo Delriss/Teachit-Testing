@@ -1,0 +1,396 @@
+body
+{
+  font-family: "Montserrat", sans-serif !important;
+}
+
+.bgColour {
+  background-color: #f79f79;
+}
+
+.bgColourFaded {
+  background-color: #f79f7934;
+}
+
+#loginText {
+  color: black;
+}
+
+/* HOME PAGE CSS */
+
+.homeContainer {
+  min-height:85vh;
+  overflow: hidden;
+}
+
+.indexDescription{
+  font-family: 'Roboto', sans-serif;
+}
+
+.indexScrollDown {
+  margin: 0;
+  top: 93%;
+  color: black;
+  font-family: 'Roboto', sans-serif;
+  font-weight: 500;
+  font-size: 20px;
+  letter-spacing: 3px;
+  animation: fadeInScrollDown 3s, pulse 3s infinite;
+  position: absolute;
+  text-align: center;
+  z-index: -1;
+}
+
+.indexScrollDown p {
+  margin-bottom: 0;
+  overflow: hidden;
+}
+
+@keyframes fadeInScrollDown {
+  from {
+      top: 120%;
+      opacity: 0;
+  }
+  to {
+      top: 93%;
+      opacity: 1;
+  }
+}
+
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.2);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+.homeFeaturesContainer {
+  background-image: url('/public_static/imgs/indexBackground.jpg');
+  background-repeat: no-repeat;
+  background-size: cover;
+  color: white;
+}
+
+.homeFeature {
+  background-color: #E3F2FD;
+  border-radius: 20px;
+  color: black;
+  padding: 15px;
+  text-wrap: balance;
+  text-align: center;
+  height: 100%;
+}
+
+/* END OF HOME PAGE CSS */
+
+/* TESTING PAGE CSS */
+
+.testingQuestion {
+  background-color: #E3F2FD;
+  border-radius: 20px;
+  color: black;
+  padding: 15px;
+  text-wrap: balance;
+  text-align: center;
+}
+
+.testingOption {
+  margin: 10px 0px;
+}
+
+/* END OF TESTING PAGE CSS */
+
+/*BACKGROUND ANIMATION*/
+.circles {
+  position: fixed;
+  pointer-events: none;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+  overflow: hidden;
+  margin: 0;
+  padding: 0;
+}
+
+.circles li {
+  position: absolute;
+  display: block;
+  list-style: none;
+  width: 20px;
+  height: 20px;
+  background: #f79f7926;
+  -webkit-animation: animate 20s linear infinite;
+  animation: animate 20s linear infinite;
+  bottom: -200px;
+}
+
+.circles li:nth-child(1) {
+  background: #f79f7926;
+  left: 25%;
+  width: 80px;
+  height: 80px;
+  -webkit-animation-delay: 0s;
+  animation-delay: 0s;
+}
+
+.circles li:nth-child(2) {
+  background: #f79f7926;
+  left: 10%;
+  width: 20px;
+  height: 20px;
+  -webkit-animation-delay: 2s;
+  animation-delay: 2s;
+  -webkit-animation-duration: 12s;
+  animation-duration: 12s;
+}
+
+.circles li:nth-child(3) {
+  background: #f79f7926;
+  left: 70%;
+  width: 20px;
+  height: 20px;
+  -webkit-animation-delay: 4s;
+  animation-delay: 4s;
+}
+
+.circles li:nth-child(4) {
+  background: #f79f7926;
+  left: 40%;
+  width: 60px;
+  height: 60px;
+  -webkit-animation-delay: 0s;
+  animation-delay: 0s;
+  -webkit-animation-duration: 18s;
+  animation-duration: 18s;
+}
+
+.circles li:nth-child(5) {
+  background: #f79f7926;
+  left: 65%;
+  width: 20px;
+  height: 20px;
+  -webkit-animation-delay: 0s;
+  animation-delay: 0s;
+}
+
+.circles li:nth-child(6) {
+  background: #f79f7926;
+  left: 75%;
+  width: 110px;
+  height: 110px;
+  -webkit-animation-delay: 3s;
+  animation-delay: 3s;
+}
+
+.circles li:nth-child(7) {
+  background: #f79f7926;
+  left: 35%;
+  width: 150px;
+  height: 150px;
+  -webkit-animation-delay: 7s;
+  animation-delay: 7s;
+}
+
+.circles li:nth-child(8) {
+  background: #f79f7926;
+  left: 50%;
+  width: 25px;
+  height: 25px;
+  -webkit-animation-delay: 15s;
+  animation-delay: 15s;
+  -webkit-animation-duration: 45s;
+  animation-duration: 45s;
+}
+
+.circles li:nth-child(9) {
+  background: #f79f7926;
+  left: 20%;
+  width: 15px;
+  height: 15px;
+  -webkit-animation-delay: 2s;
+  animation-delay: 2s;
+  -webkit-animation-duration: 35s;
+  animation-duration: 35s;
+}
+
+.circles li:nth-child(10) {
+  background: #f79f7926;
+  left: 85%;
+  width: 150px;
+  height: 150px;
+  -webkit-animation-delay: 0s;
+  animation-delay: 0s;
+  -webkit-animation-duration: 11s;
+  animation-duration: 11s;
+}
+
+@-webkit-keyframes animate {
+  0% {
+    transform: translateY(0) rotate(0deg);
+    opacity: 1;
+    border-radius: 0;
+  }
+  100% {
+    transform: translateY(-1000px) rotate(720deg);
+    opacity: 0;
+    border-radius: 50%;
+  }
+}
+@keyframes animate {
+  0% {
+    transform: translateY(0) rotate(0deg);
+    opacity: 1;
+    border-radius: 0;
+  }
+  100% {
+    transform: translateY(-1000px) rotate(720deg);
+    opacity: 0;
+    border-radius: 50%;
+  }
+}
+
+/*END BACKGROUND ANIMATION*/
+
+#score-progress{
+  background-color: #f79f79;
+}
+
+.progress{
+  height:50px !important;
+}
+
+.leaderboardHead{
+  text-align: center;
+}
+
+.leaderboardRow {
+  line-height: 80px;
+  text-align:center;
+}
+
+.leaderboardRow td{
+  vertical-align: middle;
+}
+
+/* mobile media queries */
+@media only screen and (max-width: 600px) {
+  /*we need to scale the leaderboard line height down for mobile*/
+  .leaderboardRow {
+    line-height: 30px;
+  }
+  /*scale leaderboard font size down for mobile*/
+  .leaderboardRow td {
+    font-size: 20px;
+  }
+  /*reduce height and width of progress bar for mobile*/
+  .progress {
+    height: 30px !important;
+    width:80%;
+  }
+
+}
+
+.tableWrap{
+  display: block;
+  width:100%;
+  margin-top:40px;
+  margin-bottom:40px;
+}
+
+.testDescriptionWrap{
+  /* make the contents of this div scrollable */
+  overflow-y: auto;
+  height: 200px;
+  /*custom scrollbar styling */
+  scrollbar-width: thin;
+}
+
+/* custom scrollbar styling */
+.testDescriptionWrap::-webkit-scrollbar {
+  width: 8px;
+}
+
+.testDescriptionWrap::-webkit-scrollbar-thumb{
+  background-color:gray;
+  border-radius: 5px;
+}
+
+
+.testCards{
+  width: 40%;
+  min-height: 60vh;
+  max-height: 60vh !important;
+  padding:25px;
+  border-radius: 15px !important;
+  margin-right:25px;
+  margin-left:25px;
+  color:white !important;
+}
+
+.titleWrapper{
+  margin-top:30px;
+  text-align: center;
+  color:black;
+}
+
+.flickity-button {
+  /*display: none !important;*/
+}
+
+.card-text{
+  padding:10px;
+}
+
+.card-description{
+  height:100px;
+  overflow-y: scroll; 
+}
+
+.card-description::-webkit-scrollbar {
+  width: 8px;
+}
+
+.card-description::-webkit-scrollbar-thumb{
+  height:10%;
+  background-color:gray;
+  border-radius: 5px;
+}
+
+
+@media only screen and (max-width: 800px) {
+  .flickity-cell {
+    width: 90%;
+    padding:10px;
+    padding-bottom: 20px;
+  }
+  .card-text{
+    padding:7px;
+  }
+
+}
+
+.activeTest{
+  background-color: #F79F79 !important;
+}
+
+.upcomingTest{
+
+  background-color: #686963 !important;
+
+}
+
+/* testCards media query for mobile */
+@media only screen and (max-width: 800px) {
+  .testCards{
+    width: 90%;
+    margin-right:5%;
+    margin-left:5%;
+  }
+}
