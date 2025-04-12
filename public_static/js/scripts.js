@@ -392,7 +392,9 @@ $(document).on("click", "#option", function (e) {
 
 //Refresh page when Create Test modal is closed
 $("#createTestModal").on("hidden.bs.modal", function () {
-  location.href.reload();
+  if (window.location.href.includes("test-selection") === true){
+    location.reload();
+  }
 });
 
 // Login Form
